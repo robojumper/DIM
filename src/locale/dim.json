@@ -455,6 +455,7 @@
     "NoBuildsFoundWithReasons": "No builds found. This is typically because DIM could not assign all selected mods to any armor set.",
     "NoComparableItems": "This loadout has no comparable items. Saving the Optimizer Set will add the items to this loadout.",
     "NoLoadoutsToCompare": "No loadouts to compare",
+    "NoPointsWasted": "Require no points waste",
     "NoUpgrades": "No Upgrades",
     "NoUpgradesDetails": "The current stats, energy level, and element of your items will be used when determining totals and assigning mods.",
     "NotExotics": "{{material}} (Not Exotics)",

@@ -32,6 +32,7 @@ export interface LoadoutBuilderState {
   lockedExoticHash?: number;
   selectedStoreId?: string;
   statFilters: Readonly<StatFilters>;
+  noPointsWasted: boolean;
   modPicker: {
     open: boolean;
     initialQuery?: string;
@@ -122,6 +123,7 @@ const lbStateInit = ({
     lockedMods,
     lockedExoticHash,
     selectedStoreId,
+    noPointsWasted: false,
     modPicker: {
       open: false,
     },
@@ -137,6 +139,7 @@ export type LoadoutBuilderAction =
       lockItemEnergyType: LoadoutBuilderState['lockItemEnergyType'];
     }
   | { type: 'upgradeSpendTierChanged'; upgradeSpendTier: LoadoutBuilderState['upgradeSpendTier'] }
+  | { type: 'pointsWasteChanged'; noPointsWasted: boolean }
   | { type: 'pinItem'; item: DimItem }
   | { type: 'setPinnedItems'; items: DimItem[] }
   | { type: 'unpinItem'; item: DimItem }
@@ -171,6 +174,8 @@ function lbStateReducer(
       };
     case 'statFiltersChanged':
       return { ...state, statFilters: action.statFilters };
+    case 'pointsWasteChanged':
+      return { ...state, noPointsWasted: action.noPointsWasted };
     case 'pinItem': {
       const { item } = action;
       const bucketHash = item.bucket.hash;

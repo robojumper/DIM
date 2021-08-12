@@ -113,7 +113,8 @@ export function process(
   /** The user's chosen stat order, including disabled stats */
   statOrder: ArmorStatHashes[],
   statFilters: StatFilters,
-  onProgress: (remainingTime: number) => void
+  onProgress: (remainingTime: number) => void,
+  noPointsWasted: boolean
 ): {
   sets: ProcessArmorSet[];
   combos: number;
@@ -326,13 +327,25 @@ export function process(
               // itemStats are already in the user's chosen stat order
               for (const statHash of statOrder) {
                 stats[statHash] = stats[statHash] + itemStats[index];
-                // Stats can't exceed 100 even with mods. At least, today they
-                // can't - we *could* pass the max value in from the stat def.
-                // Math.min is slow.
-                if (stats[statHash] > 100) {
-                  stats[statHash] = 100;
-                }
                 index++;
+              }
+            }
+
+            let wastedStats = false;
+            for (const statKey of orderedConsideredStatHashes) {
+              if (noPointsWasted && stats[statKey] % 10 !== 0 && stats[statKey] % 10 !== 5) {
+                wastedStats = true;
+                break;
+              }
+            }
+
+            if (wastedStats) {
+              continue;
+            }
+
+            for (const statKey of statOrder) {
+              if (stats[statKey] > 100) {
+                stats[statKey] = 100;
               }
             }
 

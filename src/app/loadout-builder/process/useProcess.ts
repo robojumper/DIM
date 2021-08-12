@@ -48,6 +48,7 @@ export function useProcess(
   lockedMods: PluggableInventoryItemDefinition[],
   upgradeSpendTier: UpgradeSpendTier,
   lockItemEnergyType: boolean,
+  noPointsWasted: boolean,
   statOrder: number[],
   statFilters: StatFilters
 ) {
@@ -149,7 +150,8 @@ export function useProcess(
         lockedProcessMods,
         statOrder,
         statFilters,
-        proxy(setRemainingTime)
+        proxy(setRemainingTime),
+        noPointsWasted
       )
       .then(({ sets, combos, combosWithoutCaps, statRanges, statRangesFiltered }) => {
         infoLog(
@@ -184,6 +186,7 @@ export function useProcess(
     lockedMods,
     selectedStore.classType,
     selectedStore.id,
+    noPointsWasted,
     statFilters,
     statOrder,
     upgradeSpendTier,

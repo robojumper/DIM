@@ -4,6 +4,7 @@ import CharacterSelect from 'app/dim-ui/CharacterSelect';
 import CollapsibleTitle from 'app/dim-ui/CollapsibleTitle';
 import PageWithMenu from 'app/dim-ui/PageWithMenu';
 import UserGuideLink from 'app/dim-ui/UserGuideLink';
+import Switch from 'app/dim-ui/Switch';
 import { t } from 'app/i18next-t';
 import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { isPluggableItem } from 'app/inventory/store/sockets';
@@ -177,6 +178,7 @@ function LoadoutBuilder({
       statFilters,
       modPicker,
       compareSet,
+      noPointsWasted,
     },
     lbDispatch,
   ] = useLbState(stores, preloadedLoadout, initialClassType, initialLoadoutParameters, defs);
@@ -252,6 +254,7 @@ function LoadoutBuilder({
     lockedMods,
     upgradeSpendTier,
     lockItemEnergyType,
+    noPointsWasted,
     statOrder,
     statFilters
   );
@@ -327,6 +330,19 @@ function LoadoutBuilder({
         lockedExoticHash={lockedExoticHash}
         lbDispatch={lbDispatch}
       />
+      <div className="setting horizontal">
+        <label htmlFor="noPointsWasted" title={t('LoadoutBuilder.NoPointsWasted')}>
+          {t('LoadoutBuilder.NoPointsWasted')}
+        </label>
+
+        <Switch
+          name="noPointsWasted"
+          checked={noPointsWasted}
+          onChange={(noPointsWasted, _name) =>
+            lbDispatch({ type: 'pointsWasteChanged', noPointsWasted })
+          }
+        />
+      </div>
     </>
   );
 
