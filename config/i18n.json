@@ -164,6 +164,7 @@
     "Dupe": "Shows duplicate items, including reissues",
     "DupeCount": "Items that have the specified number of duplicates.",
     "DupeLower": "Duplicate items, including reissues, that are not the highest power dupe.",
+    "DupeStrictlyWorse": "Legendary 2.0 armor in the same slot as a piece with strictly better stats, or exotic 2.0 armor with a duplicate with strictly better stats.",
     "Energy": "Shows items that have energy capacity (Armor 2.0).",
     "Engrams": "Shows engrams.",
     "Equipment": "Items that can be equipped.",

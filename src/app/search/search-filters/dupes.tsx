@@ -17,6 +17,13 @@ export const makeDupeID = (item: DimItem) =>
   (item.classified && `${item.hash}`) ||
   `${item.name}${item.classType}${item.tier}${item.itemCategoryHashes.join('.')}`;
 
+/** outputs a string combination of the identifying features of an armor piece for pareto comparison
+ * (same exotic piece, or same legendary/blue in slot) */
+export const makeParetoID = (item: DimItem) =>
+  (item.classified && `${item.hash}`) ||
+  (item.isExotic && `${item.hash}`) ||
+  `${item.classType}-${item.bucket.hash}`;
+
 // so, duplicate detection has gotten complicated in season 8. same items can have different hashes.
 // we use enough values to ensure this item is intended to be the same, as the index for looking up dupes
 export const makeSeasonalDupeID = (item: DimItem) =>
@@ -77,6 +84,12 @@ const computeDupesByIdFn = (allItems: DimItem[], makeDupeIdFn: (item: DimItem) =
  * A memoized function to find a map of duplicate items using the makeDupeID function.
  */
 export const computeDupes = (allItems: DimItem[]) => computeDupesByIdFn(allItems, makeDupeID);
+
+/**
+ * A memoized function to find a map of competitors for pareto optimality.
+ */
+export const computeParetoCompetitors = (allItems: DimItem[]) =>
+  computeDupesByIdFn(allItems, makeParetoID);
 
 /**
  * A memoized function to find a map of duplicate items using the makeSeasonalDupeID function.
@@ -152,6 +165,41 @@ const dupeFilters: FilterDefinition[] = [
         return duplicates[item.hash.toString()]?.some((i) => i.basePower < item.basePower);
       };
     },
+  },
+  {
+    keywords: 'statlower',
+    description: tl('Filter.DupeStrictlyWorse'),
+    filter: ({ allItems, filterValue }) => {
+      const competitorsMap = computeParetoCompetitors(
+        allItems.filter((item) => item.bucket.inArmor && !item.notransfer)
+      );
+      const indexList = (() => {
+        if (filterValue !== 'statlower') {
+          return [...filterValue].map((s) => parseInt(s) - 1);
+        } else {
+          return [0, 1, 2, 3, 4, 5, 6];
+        }
+      })();
+      return (item) => {
+        const paretoID = makeParetoID(item);
+        const competitors = competitorsMap[paretoID];
+        if (competitors === undefined) {
+          return false;
+        }
+        const baseStats = item.stats?.map((s) => s.base) || [];
+
+        // Is there a competitor that pareto-dominates this item?
+        return competitors.some((competingItem) => {
+          const compBaseStats = competingItem.stats?.map((s) => s.base) || [];
+          const statDiffs = baseStats
+            .map((s, i) => s - compBaseStats[i])
+            .filter((_, idx) => indexList.includes(idx));
+
+          return statDiffs.some((d) => d < 0) && statDiffs.every((d) => d <= 0);
+        });
+      };
+    },
+    suggestionsGenerator: () => ['statlower:1234567'],
   },
   {
     keywords: 'count',
