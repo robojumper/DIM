@@ -2,6 +2,7 @@ import { tl } from 'app/i18next-t';
 import { DimItem, DimStat } from 'app/inventory/item-types';
 import { DimStore } from 'app/inventory/store-types';
 import { maxLightItemSet, maxStatLoadout } from 'app/loadout-drawer/auto-loadouts';
+import { StatHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { FilterDefinition } from '../filter-types';
 import {
@@ -29,6 +30,18 @@ const statFilters: FilterDefinition[] = [
     format: 'range',
     suggestions: searchableArmorStatNames,
     filter: ({ filterValue }) => statFilterFromString(filterValue, true),
+  },
+  {
+    keywords: 'badstats',
+    description: tl('Filter.BadStats'),
+    destinyVersion: 2,
+    filter: () => (item: DimItem) => item.bucket.inArmor && badStats(item, false),
+  },
+  {
+    keywords: 'terriblestats',
+    description: tl('Filter.TerribleStats'),
+    destinyVersion: 2,
+    filter: () => (item: DimItem) => item.bucket.inArmor && badStats(item, true),
   },
   {
     // looks for a loadout (simultaneously equippable) maximized for this stat
@@ -244,6 +257,34 @@ function gatherHighestStats(allItems: DimItem[]) {
     }
   }
   return maxStatValues;
+}
+
+function badStats(item: DimItem, sum: boolean): boolean {
+  if (item.stats) {
+    const mob = item.stats.find((s) => s.statHash === StatHashes.Mobility)?.base;
+    const res = item.stats.find((s) => s.statHash === StatHashes.Resilience)?.base;
+    const rec = item.stats.find((s) => s.statHash === StatHashes.Recovery)?.base;
+    const dis = item.stats.find((s) => s.statHash === StatHashes.Discipline)?.base;
+    const int = item.stats.find((s) => s.statHash === StatHashes.Intellect)?.base;
+    const str = item.stats.find((s) => s.statHash === StatHashes.Strength)?.base;
+
+    if (!mob || !res || !rec || !dis || !int || !str) {
+      return false;
+    }
+
+    const total = mob + res + rec + dis + int + str;
+    const spike = Math.max(...[mob, res, rec, dis, int, str]);
+    if (total >= 65 || spike >= 24) {
+      return false;
+    }
+
+    if (sum) {
+      return res > mob + rec || str > dis + int || (rec < res && rec < mob);
+    } else {
+      return (res > mob && res > rec) || (str > dis && str > int) || (rec < res && rec < mob);
+    }
+  }
+  return false;
 }
 
 function calculateMaxPowerLoadoutItems(stores: DimStore[], allItems: DimItem[]) {
