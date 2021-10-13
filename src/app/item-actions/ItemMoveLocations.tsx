@@ -194,20 +194,24 @@ function PullButtons({
 }) {
   const showAmounts = item.maxStackSize > 1 || item.bucket.hash === BucketHashes.Consumables;
   const moveAllLabel = showAmounts ? t('MovePopup.All') : undefined;
+  const amounts = [1, 68, 74, 75];
 
   return (
     <div className={clsx(styles.moveLocations, styles.moveLocationPadding)}>
       {t('MovePopup.PullPostmaster')}
       <div className={styles.moveLocationIcons}>
-        {showAmounts && (
-          <div
-            className={styles.move}
-            onClick={() => submitMoveTo(itemOwner, false, 1)}
-            {...sharedButtonProps}
-          >
-            <StoreIcon store={itemOwner} useBackground={true} label="1" />
-          </div>
-        )}
+        {showAmounts &&
+          amounts.map((amt) => (
+            <div
+              key={amt}
+              className={styles.move}
+              onClick={() => submitMoveTo(itemOwner, false, amt)}
+              {...sharedButtonProps}
+            >
+              <StoreIcon store={itemOwner} useBackground={true} label={amt.toLocaleString()} />
+            </div>
+          ))}
+
         <div
           className={styles.move}
           onClick={() => submitMoveTo(itemOwner, false, item.amount)}
