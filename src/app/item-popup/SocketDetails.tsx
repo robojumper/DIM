@@ -16,12 +16,7 @@ import { SearchInput } from 'app/search/SearchInput';
 import { RootState } from 'app/store/types';
 import { chainComparator, compareBy, reverseComparator } from 'app/utils/comparators';
 import { emptySet } from 'app/utils/empty';
-import {
-  DestinyEnergyType,
-  DestinyItemPlug,
-  DestinyItemPlugBase,
-  SocketPlugSources,
-} from 'bungie-api-ts/destiny2';
+import { DestinyEnergyType, SocketPlugSources } from 'bungie-api-ts/destiny2';
 import clsx from 'clsx';
 import { BucketHashes, PlugCategoryHashes } from 'data/d2/generated-enums';
 import React, { useState } from 'react';
@@ -128,16 +123,6 @@ function mapStateToProps() {
 
 type Props = ProvidedProps & StoreProps;
 
-/**
- * This is needed because canInsert is false if an items socket already contains the plug. In this
- * event insertFailIndexes will contain an index that comes from the Plug Definitions, indicating
- * that a similar mod is already inserted. Unfortunately these only have a message, which varies
- * based on region, and no hash or id.
- */
-export function plugIsInsertable(plug: DestinyItemPlug | DestinyItemPlugBase) {
-  return plug.canInsert || plug.insertFailIndexes.length;
-}
-
 export const SocketDetailsMod = React.memo(
   ({
     itemDef,
@@ -197,15 +182,10 @@ function SocketDetails({
     modHashes.add(initialPlugHash);
   }
 
-  if (
-    socket.socketDefinition.plugSources & SocketPlugSources.ReusablePlugItems &&
-    socket.reusablePlugItems?.length
-  ) {
+  if (socket.reusablePlugItems?.length) {
     for (const plugItem of socket.reusablePlugItems) {
       modHashes.add(plugItem.plugItemHash);
-      if (plugIsInsertable(plugItem)) {
-        otherUnlockedPlugs.add(plugItem.plugItemHash);
-      }
+      otherUnlockedPlugs.add(plugItem.plugItemHash);
     }
   }
 
