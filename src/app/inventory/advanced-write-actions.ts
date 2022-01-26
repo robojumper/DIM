@@ -24,8 +24,10 @@ import { requestAdvancedWriteActionToken } from '../bungie-api/destiny2-api';
 import { showNotification } from '../notifications/notifications';
 import { awaItemChanged } from './actions';
 import { DimItem, DimSocket } from './item-types';
-import { currentStoreSelector, d2BucketsSelector, storesSelector } from './selectors';
+import { d2BucketsSelector, storesSelector } from './selectors';
+import { DimStore } from './store-types';
 import { makeItemSingle } from './store/d2-item-factory';
+import { getCurrentStore, getStore } from './stores-helpers';
 
 let awaCache: {
   [key: number]: AwaAuthorizationResult & { used: number };
@@ -84,12 +86,34 @@ function canInsertForFree(
 }
 
 /**
+ * Figure out which store we should consult when checking whether a plug is unlocked,
+ * and which store we should give to the API when requesting the plugging action.
+ * If it's vaulted, we find any store the item canonically belongs to, otherwise
+ * we just use the current store.
+ */
+export function getPlugApplicationStore(item: DimItem, stores: DimStore[]) {
+  const owningStore = getStore(stores, item.owner)!;
+
+  if (owningStore.isVault) {
+    const preferredStore = stores.find(
+      (store) => !store.isVault && store.classType === item.classType
+    );
+    return preferredStore || getCurrentStore(stores)!;
+  } else {
+    // If an item is on a character, it's not possible to provide
+    // a different character to the API.
+    return owningStore;
+  }
+}
+
+/**
  * Modify an item to insert a new plug into one of its socket.
  */
 export function insertPlug(item: DimItem, socket: DimSocket, plugItemHash: number): ThunkResult {
   return async (dispatch, getState) => {
     const account = currentAccountSelector(getState())!;
     const defs = d2ManifestSelector(getState())!;
+    const stores = storesSelector(getState())!;
     const coreSettings = getState().manifest.destiny2CoreSettings!;
 
     // This is a special case for transmog ornaments - you can't apply a
@@ -103,15 +127,10 @@ export function insertPlug(item: DimItem, socket: DimSocket, plugItemHash: numbe
 
     const free = canInsertForFree(socket, plugItemHash, coreSettings, defs);
 
-    // TODO: if applying to the vault, choose a character that has the mod unlocked rather than current store
-    // look at all plugsets on all characters to find one that's unlocked?
-    // memoize that index probably
-
     // TODO: if applying a mod with a seasonal variant, use the seasonal variant instead (may need d2ai power)
 
-    // The API requires either the ID of the character that owns the item, or
-    // the current character ID if the item is in the vault.
-    const storeId = item.owner === 'vault' ? currentStoreSelector(getState())!.id : item.owner;
+    // The API requires the ID of a store that should be consulted when validating the plugging action.
+    const storeId = getPlugApplicationStore(item, stores).id;
 
     const insertFn = free ? awaInsertSocketPlugFree : awaInsertSocketPlug;
     const response = await insertFn(account, storeId, item, socket, plugItemHash);

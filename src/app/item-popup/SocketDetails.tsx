@@ -3,9 +3,10 @@ import BungieImage from 'app/dim-ui/BungieImage';
 import ElementIcon from 'app/dim-ui/ElementIcon';
 import Sheet from 'app/dim-ui/Sheet';
 import { t } from 'app/i18next-t';
+import { getPlugApplicationStore } from 'app/inventory/advanced-write-actions';
 import { DimItem, DimSocket, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { DefItemIcon } from 'app/inventory/ItemIcon';
-import { allItemsSelector, profileResponseSelector } from 'app/inventory/selectors';
+import { allItemsSelector, profileResponseSelector, storesSelector } from 'app/inventory/selectors';
 import { isPluggableItem } from 'app/inventory/store/sockets';
 import { d2ManifestSelector, useD2Definitions } from 'app/manifest/selectors';
 import { unlockedItemsForCharacterOrProfilePlugSet } from 'app/records/plugset-helpers';
@@ -53,14 +54,17 @@ function mapStateToProps() {
    */
   const unlockedPlugsSelector = createSelector(
     profileResponseSelector,
-    (_state: RootState, { item }: ProvidedProps) => item.owner,
+    storesSelector,
+    (_state: RootState, { item }: ProvidedProps) => item,
     (_state: RootState, { socket }: ProvidedProps) =>
       socket.socketDefinition.reusablePlugSetHash || socket.socketDefinition.randomizedPlugSetHash,
-    (profileResponse, owner, plugSetHash) => {
+    (profileResponse, stores, item, plugSetHash) => {
       if (!plugSetHash || !profileResponse) {
         return emptySet<number>();
       }
-      return unlockedItemsForCharacterOrProfilePlugSet(profileResponse, plugSetHash, owner);
+
+      const store = getPlugApplicationStore(item, stores).id;
+      return unlockedItemsForCharacterOrProfilePlugSet(profileResponse, plugSetHash, store);
     }
   );
 
