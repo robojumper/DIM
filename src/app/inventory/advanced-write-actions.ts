@@ -55,7 +55,7 @@ function hasInsertionCost(defs: D2ManifestDefinitions, plug: DestinyInventoryIte
       plug.plug?.insertionMaterialRequirementHash
     );
     // There are some items that explicitly point to a definition that says it costs 0 glimmer:
-    return requirements.materials.some((m) => m.count !== 0);
+    return requirements.materials.some((m) => m.count !== 0 && m.countIsConstant);
   }
   return false;
 }

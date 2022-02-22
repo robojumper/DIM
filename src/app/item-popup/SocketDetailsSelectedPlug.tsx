@@ -195,10 +195,10 @@ export default function SocketDetailsSelectedPlug({
     const materialDef = defs.InventoryItem.get(material.itemHash);
     return (
       materialDef &&
-      material.count > 0 &&
+      (material.count > 0 || !material.countIsConstant) &&
       !material.omitFromRequirements && (
         <div className={styles.material} key={material.itemHash}>
-          {material.count.toLocaleString()}
+          {material.countIsConstant ? material.count.toLocaleString() : '???'}
           <BungieImage
             src={materialDef.displayProperties.icon}
             title={materialDef.displayProperties.name}
