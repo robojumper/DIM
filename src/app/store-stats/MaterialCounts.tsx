@@ -11,7 +11,8 @@ import styles from './MaterialCounts.m.scss';
 const retiredMats = [31293053, 49145143, 1305274547, 2014411539];
 const showMats = spiderMats.filter((m) => !retiredMats.includes(m));
 const goodMats = [2979281381, 4257549984, 3853748946, 4257549985, 3702027555];
-const seasonal = [1425776985, 1776857076];
+const craftingMats = [2497395625, 353704689];
+const seasonal = [747321467, 178490507];
 
 export function MaterialCounts() {
   const allMats = useSelector(materialsSelector);
@@ -24,7 +25,7 @@ export function MaterialCounts() {
       {consumablesLabel}
       <hr />
       <div className={styles.materialCounts}>
-        {[showMats, seasonal, goodMats].map((matgroup, i) => (
+        {[showMats, seasonal, craftingMats, goodMats].map((matgroup, i) => (
           <React.Fragment key={matgroup[0]}>
             {i > 0 && (
               <span className={styles.spanGrid}>
