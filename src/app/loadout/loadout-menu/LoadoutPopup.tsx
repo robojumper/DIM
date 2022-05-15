@@ -346,7 +346,7 @@ function LoadoutPopup({
               {(dimStore.isVault || loadout.classType === DestinyClass.Unknown) && (
                 <ClassIcon className={styles.loadoutTypeIcon} classType={loadout.classType} />
               )}
-              {isMissingItems(defs, allItems, dimStore.id, loadout) && (
+              {!dimStore.isVault && isMissingItems(defs, allItems, dimStore.id, loadout) && (
                 <AlertIcon
                   className={styles.warningIcon}
                   title={t('Loadouts.MissingItemsWarning')}
