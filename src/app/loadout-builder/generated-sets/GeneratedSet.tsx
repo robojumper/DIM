@@ -80,13 +80,14 @@ function GeneratedSet({
   }
 
   let itemModAssignments = useMemo(() => {
+    const allMods = [...lockedMods, ...set.mods];
     const { itemModAssignments } = fitMostMods({
       items: displayedItems,
-      plannedMods: lockedMods,
+      plannedMods: allMods,
       armorEnergyRules,
     });
     return itemModAssignments;
-  }, [displayedItems, lockedMods, armorEnergyRules]);
+  }, [lockedMods, set.mods, displayedItems, armorEnergyRules]);
 
   if (!existingLoadout) {
     itemModAssignments = { ...itemModAssignments };

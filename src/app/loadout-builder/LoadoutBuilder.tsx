@@ -47,7 +47,6 @@ import LockArmorAndPerks from './filter/LockArmorAndPerks';
 import TierSelect from './filter/TierSelect';
 import CompareDrawer from './generated-sets/CompareDrawer';
 import GeneratedSets from './generated-sets/GeneratedSets';
-import { sortGeneratedSets } from './generated-sets/utils';
 import { filterItems } from './item-filter';
 import { useLbState } from './loadout-builder-reducer';
 import { buildLoadoutParams } from './loadout-params';
@@ -317,10 +316,7 @@ function LoadoutBuilder({
 
   const sets = result?.sets;
 
-  const filteredSets = useMemo(
-    () => sortGeneratedSets(statOrder, enabledStats, sets),
-    [statOrder, enabledStats, sets]
-  );
+  const filteredSets = useMemo(() => sets, [sets]);
 
   const shareBuild = async (notes?: string) => {
     // TODO: replace this with a new share tool
@@ -361,7 +357,7 @@ function LoadoutBuilder({
       )}
       <TierSelect
         stats={statFilters}
-        statRangesFiltered={result?.statRangesFiltered}
+        statRangesFiltered={result?.statRanges}
         order={statOrder}
         onStatFiltersChanged={(statFilters) =>
           lbDispatch({ type: 'statFiltersChanged', statFilters })

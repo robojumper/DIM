@@ -21,13 +21,21 @@ import {
 import { infoLog } from 'app/utils/log';
 import { getSocketsByCategoryHash, plugFitsIntoSocket } from 'app/utils/socket-utils';
 import { DestinyEnergyType } from 'bungie-api-ts/destiny2';
-import { proxy, releaseProxy, wrap } from 'comlink';
-import { BucketHashes, SocketCategoryHashes } from 'data/d2/generated-enums';
+import { releaseProxy, wrap } from 'comlink';
+import { SocketCategoryHashes } from 'data/d2/generated-enums';
+import { StatHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { StatsSet } from '../process-worker/stats-set';
-import { ProcessItemsByBucket } from '../process-worker/types';
-import { ArmorEnergyRules, ArmorSet, ItemsByBucket, StatFilters, StatRanges } from '../types';
+import { EnergyType } from '../process-worker/types';
+import {
+  ArmorEnergyRules,
+  ArmorSet,
+  ItemsByBucket,
+  LockableBucketHashes,
+  StatFilters,
+  StatRanges,
+} from '../types';
 import {
   getTotalModStatChanges,
   hydrateArmorSet,
@@ -42,7 +50,7 @@ interface ProcessState {
     sets: ArmorSet[];
     combos: number;
     processTime: number;
-    statRangesFiltered?: StatRanges;
+    statRanges: StatRanges | undefined;
   } | null;
 }
 
@@ -124,6 +132,7 @@ export function useProcess({
           sets: [],
           combos: 0,
           processTime: 0,
+          statRanges: undefined,
         },
       }));
       return;
@@ -138,13 +147,7 @@ export function useProcess({
       mods && activityModPlugCategoryHashes.includes(Number(plugCategoryHash)) ? mods : []
     );
 
-    const processItems: ProcessItemsByBucket = {
-      [BucketHashes.Helmet]: [],
-      [BucketHashes.Gauntlets]: [],
-      [BucketHashes.ChestArmor]: [],
-      [BucketHashes.LegArmor]: [],
-      [BucketHashes.ClassArmor]: [],
-    };
+    const processItems = {};
     const itemsById = new Map<string, DimItem[]>();
 
     for (const [bucketHash, items] of Object.entries(filteredItems)) {
@@ -167,6 +170,7 @@ export function useProcess({
             mapDimItemToProcessItem({
               dimItem: item,
               armorEnergyRules,
+              statOrder,
               modsForSlot: lockedModMap[bucketHashToPlugCategoryHash[item.bucket.hash]],
             })
           );
@@ -175,34 +179,77 @@ export function useProcess({
       }
     }
 
-    const lockedProcessMods = _.mapValues(lockedModMap, (mods) =>
-      mods.map(mapArmor2ModToProcessMod)
-    );
-
     const subclassPlugs = subclass?.loadoutItem.socketOverrides
       ? Object.values(subclass.loadoutItem.socketOverrides)
-          .map((hash) => defs.InventoryItem.get(hash))
-          .filter(isPluggableItem)
+        .map((hash) => defs.InventoryItem.get(hash))
+        .filter(isPluggableItem)
       : emptyArray<PluggableInventoryItemDefinition>();
 
+    const stats = getTotalModStatChanges(lockedMods, subclassPlugs, selectedStore.classType);
+    const modStatsInStatOrder = statOrder.map((h) => stats[h]);
+    const statFiltersInStatOrder = statOrder.map((h) => statFilters[h]);
+
+    const largeStatMods: { statHash: number; hash: number; cost: number }[] = [
+      { statHash: StatHashes.Mobility, hash: 3961599962, cost: 3 },
+      { statHash: StatHashes.Resilience, hash: 2850583378, cost: 3 },
+      { statHash: StatHashes.Recovery, hash: 2645858828, cost: 4 },
+      { statHash: StatHashes.Discipline, hash: 4048838440, cost: 3 },
+      { statHash: StatHashes.Intellect, hash: 3355995799, cost: 5 },
+      { statHash: StatHashes.Strength, hash: 3253038666, cost: 3 },
+    ];
+
+    // Minor stat mods add 5
+    const minorStatMods: { statHash: number; hash: number; cost: number }[] = [
+      { statHash: StatHashes.Mobility, hash: 204137529, cost: 1 },
+      { statHash: StatHashes.Resilience, hash: 3682186345, cost: 1 },
+      { statHash: StatHashes.Recovery, hash: 555005975, cost: 2 },
+      { statHash: StatHashes.Discipline, hash: 2623485440, cost: 1 },
+      { statHash: StatHashes.Intellect, hash: 1227870362, cost: 2 },
+      { statHash: StatHashes.Strength, hash: 3699676109, cost: 1 },
+    ];
+
+    const autoStatMods = [...largeStatMods, ...minorStatMods].map((m) => {
+      const stats = [0, 0, 0, 0, 0, 0];
+      stats[statOrder.indexOf(m.statHash)] = m.cost < 3 ? 5 : 10;
+      return {
+        hash: m.hash,
+        energy: {
+          type: EnergyType.Any,
+          val: m.cost,
+        },
+        investmentStats: stats,
+      };
+    });
+
+    const modsByType = {
+      generalMods: generalMods.map((m) => mapArmor2ModToProcessMod(m, statOrder)),
+      activityMods: activityMods.map((m) => mapArmor2ModToProcessMod(m, statOrder)),
+      combatMods: combatMods.map((m) => mapArmor2ModToProcessMod(m, statOrder)),
+    };
+
+    const groupedItems = LockableBucketHashes.map((h) => processItems[h]);
     // TODO: could potentially partition the problem (split the largest item category maybe) to spread across more cores
     const workerStart = performance.now();
     worker
       .process(
-        processItems,
-        getTotalModStatChanges(lockedMods, subclassPlugs, selectedStore.classType),
-        lockedProcessMods,
-        statOrder,
-        statFilters,
-        anyExotic,
-        proxy(setRemainingTime)
+        groupedItems,
+        modStatsInStatOrder,
+        modsByType,
+        autoStatMods,
+        statFiltersInStatOrder,
+        anyExotic
       )
-      .then(({ sets, combos, statRangesFiltered }) => {
+      .then(({ sets, combos, statRanges }) => {
         infoLog(
           'loadout optimizer',
           `useProcess: worker time ${performance.now() - workerStart}ms`
         );
-        const hydratedSets = sets.map((set) => hydrateArmorSet(set, itemsById));
+        const hydratedSets = sets.map((set) => hydrateArmorSet(defs, set, statOrder, itemsById));
+
+        const mappedStatRanges = statRanges && statOrder.reduce((statObj, statHash, i) => {
+          statObj[statHash] = statRanges[i];
+          return statObj;
+        }, {}) as StatFilters;
 
         setState((oldState) => ({
           ...oldState,
@@ -211,7 +258,7 @@ export function useProcess({
             sets: hydratedSets,
             combos,
             processTime: performance.now() - processStart,
-            statRangesFiltered,
+            statRanges: mappedStatRanges,
           },
         }));
 

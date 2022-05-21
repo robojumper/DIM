@@ -1,13 +1,18 @@
-import { DestinyEnergyType } from 'bungie-api-ts/destiny2';
-import { ArmorStats, LockableBucketHash } from '../types';
+export const enum EnergyType {
+  Any = 0,
+  Arc = 1,
+  Solar = 2,
+  Void = 3,
+  Stasis = 4,
+}
 
 export interface ProcessItem {
   id: string;
   hash: number;
   name: string;
   isExotic: boolean;
-  energy?: {
-    type: DestinyEnergyType;
+  energy: {
+    type: EnergyType;
     /** The maximum energy capacity for the item, e.g. if masterworked this will be 10. */
     capacity: number;
     /**
@@ -17,19 +22,29 @@ export interface ProcessItem {
     val: number;
   };
   power: number;
-  stats: { [statHash: number]: number };
+  stats: number[];
   compatibleModSeasons?: string[];
 }
 
-export type ProcessItemsByBucket = {
-  [bucketHash in LockableBucketHash]: ProcessItem[];
-};
+export interface StatFilter {
+  min: number;
+  max: number;
+  ignored?: boolean;
+}
+
+export interface LockedProcessMods {
+  generalMods: readonly ProcessMod[];
+  combatMods: readonly ProcessMod[];
+  activityMods: readonly ProcessMod[];
+}
 
 export interface ProcessArmorSet {
   /** The overall stats for the loadout as a whole. */
-  readonly stats: Readonly<ArmorStats>;
+  readonly stats: readonly number[];
   /** For each armor type (see LockableBuckets), this is the list of items that could interchangeably be put into this loadout. */
   readonly armor: readonly string[];
+
+  readonly mods: readonly number[];
 }
 
 export interface IntermediateProcessArmorSet {
@@ -39,24 +54,14 @@ export interface IntermediateProcessArmorSet {
   armor: ProcessItem[];
 }
 
-interface ProcessStat {
-  statTypeHash: number;
-  value: number;
-}
-
 export interface ProcessMod {
   hash: number;
-  plugCategoryHash: number;
-  energy?: {
-    type: DestinyEnergyType;
+  energy: {
+    type: EnergyType;
     /** The energy cost of the mod. */
     val: number;
   };
-  investmentStats: ProcessStat[];
+  investmentStats: number[];
   /** This should only be available in legacy, combat and raid mods */
   tag?: string;
 }
-
-export type LockedProcessMods = {
-  [plugCategoryHash: number]: ProcessMod[];
-};

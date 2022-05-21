@@ -1,350 +1,263 @@
-import _ from 'lodash';
-import {
-  activityModPlugCategoryHashes,
-  knownModPlugCategoryHashes,
-} from '../../loadout/known-values';
-import { armor2PlugCategoryHashesByName } from '../../search/d2-known-values';
-import { infoLog } from '../../utils/log';
-import {
-  ArmorStatHashes,
-  ArmorStats,
-  LockableBucketHashes,
-  LockableBuckets,
-  StatFilters,
-  StatRanges,
-} from '../types';
-import {
-  canTakeSlotIndependentMods,
-  generateProcessModPermutations,
-  sortProcessModsOrItems,
-} from './process-utils';
-import { SetTracker } from './set-tracker';
-import {
-  LockedProcessMods,
-  ProcessArmorSet,
-  ProcessItem,
-  ProcessItemsByBucket,
-  ProcessMod,
-} from './types';
+import { infoLog } from 'app/utils/log';
+import { LockedProcessMods, ProcessArmorSet, ProcessItem, ProcessMod, StatFilter } from './types';
+import { InitOutput } from './wasm';
 
-/** Caps the maximum number of total armor sets that'll be returned */
-const RETURNED_ARMOR_SETS = 200;
-
-/**
- * This processes all permutations of armor to build sets
- * @param filteredItems pared down list of items to process sets from
- * @param modStatTotals Stats that are applied to final stat totals, think general and other mod stats
- */
-export function process(
-  filteredItems: ProcessItemsByBucket,
+export function wasmProcess(
+  wasm: InitOutput,
+  filteredItems: ProcessItem[][],
   /** Selected mods' total contribution to each stat */
-  modStatTotals: ArmorStats,
+  modStatTotals: number[],
   /** Mods to add onto the sets */
-  lockedModMap: LockedProcessMods,
-  /** The user's chosen stat order, including disabled stats */
-  statOrder: ArmorStatHashes[],
-  statFilters: StatFilters,
+  lockedMods: LockedProcessMods,
+  autoStatMods: ProcessMod[],
+  statFilters: StatFilter[],
   /** Ensure every set includes one exotic */
-  anyExotic: boolean,
-  onProgress: (remainingTime: number) => void
+  anyExotic: boolean
 ): {
   sets: ProcessArmorSet[];
   combos: number;
   /** The stat ranges of all sets that matched our filters & mod selection. */
-  statRangesFiltered?: StatRanges;
+  statRanges?: StatFilter[];
 } {
-  const pstart = performance.now();
-
-  const modStatsInStatOrder = statOrder.map((h) => modStatTotals[h]);
-  const statFiltersInStatOrder = statOrder.map((h) => statFilters[h]);
-
-  // This stores the computed min and max value for each stat as we process all sets, so we
-  // can display it on the stat filter dropdowns
-  const statRangesFiltered: StatRanges = _.mapValues(statFilters, () => ({
-    min: 100,
-    max: 0,
-  }));
-  const statRangesFilteredInStatOrder = statOrder.map((h) => statRangesFiltered[h]);
-
-  // Store stat arrays for each items in stat order
-  const statsCacheInStatOrder: Map<ProcessItem, number[]> = new Map();
-
-  // Precompute the stats of each item in stat order
-  for (const item of LockableBucketHashes.flatMap((h) => filteredItems[h])) {
-    statsCacheInStatOrder.set(
-      item,
-      statOrder.map((statHash) => Math.max(item.stats[statHash], 0))
-    );
+  if (filteredItems.length !== 5) {
+    throw new Error('must have 5 slots');
   }
 
-  // Each of these groups has already been reduced (in useProcess.ts) to the
-  // minimum number of examples that are worth considering.
-  const helms = filteredItems[LockableBuckets.helmet];
-  const gauntlets = filteredItems[LockableBuckets.gauntlets];
-  const chests = filteredItems[LockableBuckets.chest];
-  const legs = filteredItems[LockableBuckets.leg];
-  const classItems = filteredItems[LockableBuckets.classitem];
-
-  // The maximum possible combos we could have
-  const combos = helms.length * gauntlets.length * chests.length * legs.length * classItems.length;
-  const numItems =
-    helms.length + gauntlets.length + chests.length + legs.length + classItems.length;
-
-  infoLog('loadout optimizer', 'Processing', combos, 'combinations from', numItems, 'items', {
-    helms: helms.length,
-    gauntlets: gauntlets.length,
-    chests: chests.length,
-    legs: legs.length,
-    classItems: classItems.length,
-  });
-
+  const combos = filteredItems.reduce((acc, slotPieces) => acc * slotPieces.length, 1);
   if (combos === 0) {
     return { sets: [], combos: 0 };
   }
 
-  const setTracker = new SetTracker(10_000);
-
-  let generalMods: ProcessMod[] = [];
-  let combatMods: ProcessMod[] = [];
-  let activityMods: ProcessMod[] = [];
-
-  for (const [plugCategoryHash, mods] of Object.entries(lockedModMap)) {
-    const pch = Number(plugCategoryHash);
-    if (pch === armor2PlugCategoryHashesByName.general) {
-      generalMods = generalMods.concat(mods);
-    } else if (activityModPlugCategoryHashes.includes(pch)) {
-      activityMods = activityMods.concat(mods);
-    } else if (!knownModPlugCategoryHashes.includes(pch)) {
-      combatMods = combatMods.concat(mods);
-    }
+  if (
+    lockedMods.generalMods.length > 5 ||
+    lockedMods.activityMods.length > 5 ||
+    lockedMods.combatMods.length > 5
+  ) {
+    return { sets: [], combos };
   }
 
-  const generalModsPermutations = generateProcessModPermutations(
-    generalMods.sort(sortProcessModsOrItems)
-  );
-  const combatModPermutations = generateProcessModPermutations(
-    combatMods.sort(sortProcessModsOrItems)
-  );
-  const activityModPermutations = generateProcessModPermutations(
-    activityMods.sort(sortProcessModsOrItems)
-  );
-  const hasMods = Boolean(combatMods.length || activityMods.length || generalMods.length);
+  // This is the really hairy part of exchanging data with the WASM side.
+  // Normally, this is something a bindgen tool should be able to handle,
+  // and `wasm-bindgen` (wb) has three different approaches:
+  //
+  // * We can #[wasm_bindgen] our Rust structs. wb generates a JS class
+  //    that allocates this struct on the Rust side, and all property access
+  //    on the JS side requires a call into WASM. Manual freeing is required.
+  //   * This means we have to allocate hundreds of objects on the WASM heap
+  //     individually and set their properties, every step requiring an FFI call.
+  // * We can expose JSValues to WASM. Access to properties on the Rust side requires
+  //   a JS FFI call.
+  //   * This is totally unacceptable for performance because WASM is meant to do
+  //     the heavy lifting.
+  // * We can serialize all of it to JSON and decode that in WASM.
+  //   * This works but is unsatisfying for our large amounts of data.
+  //
+  // All of these cause code size to really blow up because they require
+  // a lot of FFI glue on the WASM side, which has no runtime and as such
+  // has to pay for everything slightly complex.
+  //
+  // So we don't use any of wasm-bindgen's glue features. Instead, simple
+  // configuration arguments use FFI functions with number arguments, while
+  // large amounts of structs (like items, mods) use a JS declaration that
+  // informs JS about the C struct layout and just writes the numbers itself.
 
-  let numSkippedLowTier = 0;
-  let numStatRangeExceeded = 0;
-  let numCantSlotMods = 0;
-  let numValidSets = 0;
-  let numDoubleExotic = 0;
-  let numNoExotic = 0;
-  let numProcessed = 0;
-  let elapsedSeconds = 0;
+  const totalNumItems = filteredItems.reduce((acc, slotPieces) => acc + slotPieces.length, 0);
 
-  for (const helm of helms) {
-    for (const gaunt of gauntlets) {
-      // For each additional piece, skip the whole branch if we've managed to get 2 exotics
-      if (gaunt.isExotic && helm.isExotic) {
-        numDoubleExotic += chests.length * legs.length * classItems.length;
-        continue;
+  let ctxPtr = 0;
+  let resPtr = 0;
+
+  try {
+    // +1 for the all-zeros empty stat mod
+    ctxPtr = wasm.lo_init(totalNumItems, autoStatMods.length + 1);
+
+    {
+      const ctxBuf = new Uint16Array(wasm.memory.buffer, ctxPtr, 11);
+
+      // Write base stats
+      for (let i = 0; i < modStatTotals.length; i++) {
+        ctxBuf[i] = modStatTotals[i];
       }
-      for (const chest of chests) {
-        if (chest.isExotic && (gaunt.isExotic || helm.isExotic)) {
-          numDoubleExotic += legs.length * classItems.length;
-          continue;
-        }
-        for (const leg of legs) {
-          if (leg.isExotic && (chest.isExotic || gaunt.isExotic || helm.isExotic)) {
-            numDoubleExotic += classItems.length;
-            continue;
-          }
-
-          if (anyExotic && !helm.isExotic && !gaunt.isExotic && !chest.isExotic && !leg.isExotic) {
-            numNoExotic += classItems.length;
-            continue;
-          }
-
-          for (const classItem of classItems) {
-            numProcessed++;
-
-            const helmStats = statsCacheInStatOrder.get(helm)!;
-            const gauntStats = statsCacheInStatOrder.get(gaunt)!;
-            const chestStats = statsCacheInStatOrder.get(chest)!;
-            const legStats = statsCacheInStatOrder.get(leg)!;
-            const classItemStats = statsCacheInStatOrder.get(classItem)!;
-
-            // JavaScript engines apparently don't unroll loops automatically and this makes a big difference in speed.
-            const stats = [
-              modStatsInStatOrder[0] +
-                helmStats[0] +
-                gauntStats[0] +
-                chestStats[0] +
-                legStats[0] +
-                classItemStats[0],
-              modStatsInStatOrder[1] +
-                helmStats[1] +
-                gauntStats[1] +
-                chestStats[1] +
-                legStats[1] +
-                classItemStats[1],
-              modStatsInStatOrder[2] +
-                helmStats[2] +
-                gauntStats[2] +
-                chestStats[2] +
-                legStats[2] +
-                classItemStats[2],
-              modStatsInStatOrder[3] +
-                helmStats[3] +
-                gauntStats[3] +
-                chestStats[3] +
-                legStats[3] +
-                classItemStats[3],
-              modStatsInStatOrder[4] +
-                helmStats[4] +
-                gauntStats[4] +
-                chestStats[4] +
-                legStats[4] +
-                classItemStats[4],
-              modStatsInStatOrder[5] +
-                helmStats[5] +
-                gauntStats[5] +
-                chestStats[5] +
-                legStats[5] +
-                classItemStats[5],
-            ];
-
-            // TODO: avoid min/max?
-            const tiers = [
-              Math.min(Math.max(Math.floor(stats[0] / 10), 0), 10),
-              Math.min(Math.max(Math.floor(stats[1] / 10), 0), 10),
-              Math.min(Math.max(Math.floor(stats[2] / 10), 0), 10),
-              Math.min(Math.max(Math.floor(stats[3] / 10), 0), 10),
-              Math.min(Math.max(Math.floor(stats[4] / 10), 0), 10),
-              Math.min(Math.max(Math.floor(stats[5] / 10), 0), 10),
-            ];
-
-            // Check whether the set exceeds our stat constraints
-            let totalTier = 0;
-            let statRangeExceeded = false;
-            for (let index = 0; index < 6; index++) {
-              const tier = tiers[index];
-              const filter = statFiltersInStatOrder[index];
-              if (!filter.ignored) {
-                if (tier > filter.max || tier < filter.min) {
-                  statRangeExceeded = true;
-                }
-                totalTier += tier;
-              }
-            }
-
-            if (statRangeExceeded) {
-              numStatRangeExceeded++;
-              continue;
-            }
-
-            // Drop this set if it could never make it
-            if (!setTracker.couldInsert(totalTier)) {
-              numSkippedLowTier++;
-              continue;
-            }
-
-            const armor = [helm, gaunt, chest, leg, classItem];
-
-            // For armour 2 mods we ignore slot specific mods as we prefilter items based on energy requirements
-            // TODO: this isn't a big part of the overall cost of the loop, but we could consider trying to slot
-            // mods at every level (e.g. just helmet, just helmet+arms) and skipping this if they already fit.
-            if (
-              hasMods &&
-              !canTakeSlotIndependentMods(
-                generalModsPermutations,
-                combatModPermutations,
-                activityModPermutations,
-                armor
-              )
-            ) {
-              numCantSlotMods++;
-              continue;
-            }
-
-            // Calculate the "tiers string" here, since most sets don't make it this far
-            // A string version of the tier-level of each stat, must be lexically comparable
-            // TODO: It seems like constructing and comparing tiersString would be expensive but it's less so
-            // than comparing stat arrays element by element
-            let tiersString = '';
-            for (let index = 0; index < 6; index++) {
-              const value = Math.min(Math.max(stats[index], 0), 100);
-              const tier = tiers[index];
-              // Make each stat exactly one code unit so the string compares correctly
-              const filter = statFiltersInStatOrder[index];
-              if (!filter.ignored) {
-                // using a power of 2 (16) instead of 11 is faster
-                tiersString += tier.toString(16);
-              }
-
-              // Track the stat ranges of sets that made it through all our filters
-              const range = statRangesFilteredInStatOrder[index];
-              if (value > range.max) {
-                range.max = value;
-              }
-              if (value < range.min) {
-                range.min = value;
-              }
-            }
-
-            numValidSets++;
-            setTracker.insert(totalTier, tiersString, armor, stats);
-          }
-        }
-      }
-
-      // Report speed every so often
-      const totalTime = performance.now() - pstart;
-      const newElapsedSeconds = Math.floor(totalTime / 500);
-
-      if (newElapsedSeconds > elapsedSeconds) {
-        elapsedSeconds = newElapsedSeconds;
-        const speed = (numProcessed * 1000) / totalTime;
-        const remaining = Math.round((combos - numProcessed) / speed);
-        onProgress(remaining);
+      // and number of items per slot
+      for (let i = 0; i < 5; i++) {
+        ctxBuf[i + 6] = filteredItems[i].length;
       }
     }
+
+    {
+      const ctxBuf = new Uint8Array(wasm.memory.buffer, ctxPtr + 22, 14);
+
+      // Write stat ranges and exoticness
+      for (let i = 0; i < statFilters.length; i++) {
+        if (statFilters[i].ignored) {
+          ctxBuf[i] = 255;
+          ctxBuf[i + 6] = 255;
+        } else {
+          ctxBuf[i] = statFilters[i].min;
+          ctxBuf[i + 6] = statFilters[i].max;
+        }
+      }
+      ctxBuf[12] = anyExotic ? 1 : 0;
+      ctxBuf[13] = 5; // Auto stat mods
+      // ctxBuf[13] = 0; // Auto stat mods
+    }
+
+    const modTagToNumber: Record<string, number> = {};
+    const getTagNumber = (tag: string) =>
+      modTagToNumber[tag] ?? (modTagToNumber[tag] = Object.keys(modTagToNumber).length);
+
+    const processItemIds: string[] = [];
+    const getProcessItemNumber = (id: string) => {
+      const index = processItemIds.length;
+      processItemIds.push(id);
+      return index;
+    };
+
+    {
+      const items = filteredItems.flat();
+      const itemsPtr = wasm.lo_items_ptr(ctxPtr);
+
+      for (let i = 0; i < items.length; i++) {
+        const view = new DataView(wasm.memory.buffer, itemsPtr + i * 24, 24);
+        view.setUint16(0, getProcessItemNumber(items[i].id), true);
+        view.setUint16(2, items[i].power, true);
+        view.setUint8(4, items[i].energy.type);
+        view.setUint8(5, items[i].energy.val);
+        view.setUint8(6, items[i].energy.capacity);
+        view.setUint8(7, items[i].isExotic ? 1 : 0);
+        const tagBitmask =
+          items[i].compatibleModSeasons?.reduce(
+            (acc, season) => acc | (1 << getTagNumber(season)),
+            0
+          ) || 0;
+        view.setUint32(8, tagBitmask, true);
+        const stats = items[i].stats;
+        for (let i = 0; i < stats.length; i++) {
+          view.setUint16(12 + 2 * i, stats[i], true);
+        }
+      }
+    }
+
+    {
+      const modsPtr = wasm.lo_mods_ptr(ctxPtr);
+      const serializeMod = (m: ProcessMod | undefined, idx: number) => {
+        const view = new DataView(wasm.memory.buffer, modsPtr + idx * 12, 12);
+        if (m) {
+          view.setUint32(0, m.hash, true);
+          view.setUint32(4, m.tag ? 1 << getTagNumber(m.tag) : 0, true);
+          view.setUint8(8, m.energy.type);
+          view.setUint8(9, m.energy.val);
+        } else {
+          // Clear it out -- all zeros is interpreted as no mod.
+          for (let i = 0; i < 3; i++) {
+            view.setUint32(i * 4, 0);
+          }
+        }
+      };
+
+      for (let i = 0; i < 5; i++) {
+        serializeMod(lockedMods.generalMods[i], i);
+      }
+      for (let i = 0; i < 5; i++) {
+        serializeMod(lockedMods.combatMods[i], i + 5);
+      }
+      for (let i = 0; i < 5; i++) {
+        serializeMod(lockedMods.activityMods[i], i + 10);
+      }
+    }
+
+    {
+      const autoModsPtr = wasm.lo_auto_mods_ptr(ctxPtr);
+      const serializeStatMod = (m: ProcessMod | undefined, idx: number) => {
+        const view = new DataView(wasm.memory.buffer, autoModsPtr + idx * 24, 24);
+        if (m) {
+          view.setUint32(0, m.hash, true);
+          view.setUint32(4, m.tag ? 1 << getTagNumber(m.tag) : 0, true);
+          view.setUint8(8, m.energy.type);
+          view.setUint8(9, m.energy.val);
+          for (let i = 0; i < m.investmentStats.length; i++) {
+            view.setUint16(12 + i * 2, m.investmentStats[i], true);
+          }
+        } else {
+          // Clear it out -- all zeros is interpreted as no mod.
+          for (let i = 0; i < 6; i++) {
+            view.setUint32(i * 4, 0);
+          }
+        }
+      };
+
+      let i = 0;
+      serializeStatMod(undefined, i++);
+      for (const mod of autoStatMods) {
+        serializeStatMod(mod, i++);
+      }
+    }
+
+    // Run it!
+    const start = performance.now();
+    resPtr = wasm.lo_run(ctxPtr);
+    infoLog('loadout optimizer', 'actually took', performance.now() - start);
+
+    // Then copy the results out of WASM linear memory
+    const res = new Uint32Array(wasm.memory.buffer, resPtr, 9);
+    const [setsPtr, numSets] = [res[0], res[1]];
+    const sets: ProcessArmorSet[] = [];
+    for (let setIndex = 0; setIndex < numSets; setIndex++) {
+      // const setBuf = new Uint16Array(wasm.memory.buffer, setsPtr + (26 * setIndex), 12);
+      const setBuf = new Uint16Array(wasm.memory.buffer, setsPtr + 48 * setIndex, 12);
+      const stats = [setBuf[0], setBuf[1], setBuf[2], setBuf[3], setBuf[4], setBuf[5]];
+
+      const armor = [
+        processItemIds[setBuf[6]],
+        processItemIds[setBuf[7]],
+        processItemIds[setBuf[8]],
+        processItemIds[setBuf[9]],
+        processItemIds[setBuf[10]],
+      ];
+
+      const autoModsBuf = new Uint32Array(wasm.memory.buffer, setsPtr + 48 * setIndex + 28, 5);
+
+      const mods = [...autoModsBuf].filter((m) => m !== 0);
+      // const mods: number[] = [];
+
+      sets.push({ stats, armor, mods });
+    }
+
+    // Also get the infos out
+    const [numValid, lowTier, statRange, modsUnfit, doubleExotic, noExotic] = [
+      res[3],
+      res[4],
+      res[5],
+      res[6],
+      res[7],
+      res[8],
+    ];
+
+    infoLog(
+      'loadout optimizer',
+      'stats',
+      'num valid',
+      numValid,
+      'skipped low tier',
+      lowTier,
+      'skipped exceeded stat ranges',
+      statRange,
+      "skipped mods didn't fit",
+      modsUnfit,
+      'skipped double exotic',
+      doubleExotic,
+      'skipped no exotic',
+      noExotic
+    );
+
+    // Finally extract min-max
+    const minMaxBuf = new Uint16Array(wasm.memory.buffer, resPtr + 36, 12);
+    const statRanges: StatFilter[] = [];
+    for (let i = 0; i < 6; i++) {
+      statRanges.push({ min: minMaxBuf[i], max: minMaxBuf[i + 6] });
+    }
+
+    return { sets, combos, statRanges };
+  } finally {
+    wasm.lo_free(ctxPtr, resPtr);
   }
-
-  const finalSets = setTracker.getArmorSets(RETURNED_ARMOR_SETS);
-
-  const totalTime = performance.now() - pstart;
-  infoLog(
-    'loadout optimizer',
-    'found',
-    numValidSets,
-    'stat mixes after processing',
-    combos,
-    'stat combinations in',
-    totalTime,
-    'ms - ',
-    Math.floor((combos * 1000) / totalTime),
-    'combos/s',
-    // Split into two objects so console.log will show them all expanded
-    {
-      numCantSlotMods,
-      numSkippedLowTier,
-      numStatRangeExceeded,
-    },
-    {
-      numDoubleExotic,
-      numNoExotic,
-    }
-  );
-
-  const sets = finalSets.map(({ armor, stats }) => ({
-    armor: armor.map((item) => item.id),
-    stats: statOrder.reduce((statObj, statHash, i) => {
-      statObj[statHash] = stats[i];
-      return statObj;
-    }, {}) as ArmorStats,
-  }));
-
-  return {
-    sets,
-    combos,
-    statRangesFiltered,
-  };
 }

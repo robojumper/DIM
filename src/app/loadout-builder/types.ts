@@ -2,7 +2,7 @@ import { AssumeArmorMasterwork, LockArmorEnergyType } from '@destinyitemmanager/
 import { LoadoutsByItem } from 'app/loadout-drawer/selectors';
 import { armorBuckets } from 'app/search/d2-known-values';
 import { BucketHashes, StatHashes } from 'data/d2/generated-enums';
-import { DimItem } from '../inventory/item-types';
+import { DimItem, PluggableInventoryItemDefinition } from '../inventory/item-types';
 
 export interface MinMax {
   min: number;
@@ -33,6 +33,8 @@ export interface ArmorSet {
   readonly stats: Readonly<ArmorStats>;
   /** For each armor type (see LockableBuckets), this is the list of items that could interchangeably be put into this loadout. */
   readonly armor: readonly DimItem[][];
+
+  mods: PluggableInventoryItemDefinition[];
 }
 
 export type ItemsByBucket = Readonly<{

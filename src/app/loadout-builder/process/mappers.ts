@@ -1,3 +1,4 @@
+import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { calculateAssumedItemEnergy } from 'app/loadout/armor-upgrade-utils';
 import {
   activityModPlugCategoryHashes,
@@ -18,23 +19,45 @@ import {
   getModTypeTagByPlugCategoryHash,
   getSpecialtySocketMetadatas,
 } from '../../utils/item-utils';
-import { ProcessArmorSet, ProcessItem, ProcessMod } from '../process-worker/types';
+import { EnergyType, ProcessArmorSet, ProcessItem, ProcessMod } from '../process-worker/types';
 import { ArmorEnergyRules, ArmorSet, ArmorStats } from '../types';
 
-export function mapArmor2ModToProcessMod(mod: PluggableInventoryItemDefinition): ProcessMod {
+const mapEnergy = {
+  [DestinyEnergyType.Any]: EnergyType.Any,
+  [DestinyEnergyType.Arc]: EnergyType.Arc,
+  [DestinyEnergyType.Void]: EnergyType.Void,
+  [DestinyEnergyType.Thermal]: EnergyType.Solar,
+  [DestinyEnergyType.Stasis]: EnergyType.Stasis,
+};
+
+export function mapArmor2ModToProcessMod(
+  mod: PluggableInventoryItemDefinition,
+  statOrder: number[]
+): ProcessMod {
+  const stats = [0, 0, 0, 0, 0, 0];
+  for (const investmentStat of mod.investmentStats) {
+    const idx = statOrder.indexOf(investmentStat.statTypeHash);
+    if (idx !== -1) {
+      stats[idx] += investmentStat.value;
+    }
+  }
   const processMod: ProcessMod = {
     hash: mod.hash,
-    plugCategoryHash: mod.plug.plugCategoryHash,
-    energy: mod.plug.energyCost && {
-      type: mod.plug.energyCost.energyType,
-      val: mod.plug.energyCost.energyCost,
-    },
-    investmentStats: mod.investmentStats,
+    energy: mod.plug.energyCost
+      ? {
+          type: mapEnergy[mod.plug.energyCost.energyType],
+          val: mod.plug.energyCost.energyCost,
+        }
+      : {
+          type: EnergyType.Any,
+          val: 0,
+        },
+    investmentStats: stats,
   };
 
   if (
-    activityModPlugCategoryHashes.includes(processMod.plugCategoryHash) ||
-    !knownModPlugCategoryHashes.includes(processMod.plugCategoryHash)
+    activityModPlugCategoryHashes.includes(mod.plug.plugCategoryHash) ||
+    !knownModPlugCategoryHashes.includes(mod.plug.plugCategoryHash)
   ) {
     processMod.tag = getModTypeTagByPlugCategoryHash(mod.plug.plugCategoryHash);
   }
@@ -123,10 +146,12 @@ export function mapDimItemToProcessItem({
   dimItem,
   armorEnergyRules,
   modsForSlot,
+  statOrder,
 }: {
   dimItem: DimItem;
   armorEnergyRules: ArmorEnergyRules;
   modsForSlot?: PluggableInventoryItemDefinition[];
+  statOrder: number[];
 }): ProcessItem {
   const { id, hash, name, isExotic, power, stats: dimItemStats, energy } = dimItem;
 
@@ -149,7 +174,10 @@ export function mapDimItemToProcessItem({
     : 0;
 
   // Bucket specific mods have been validated
-  const energyType = getItemEnergyType(dimItem, armorEnergyRules, modsForSlot);
+  const energyType =
+    getItemEnergyType(dimItem, armorEnergyRules, modsForSlot) ?? energy!.energyType;
+
+  const type = mapEnergy[energyType];
 
   return {
     id,
@@ -157,20 +185,20 @@ export function mapDimItemToProcessItem({
     name,
     isExotic,
     power,
-    stats: statMap,
-    energy: energy
-      ? {
-          type: energyType ?? energy.energyType,
-          capacity,
-          val: modsCost,
-        }
-      : undefined,
+    stats: statOrder.map((s) => statMap[s]),
+    energy: {
+      type,
+      capacity,
+      val: modsCost,
+    },
     compatibleModSeasons: modMetadatas?.flatMap((m) => m.compatibleModTags),
   };
 }
 
 export function hydrateArmorSet(
+  defs: D2ManifestDefinitions,
   processed: ProcessArmorSet,
+  statOrder: number[],
   itemsById: Map<string, DimItem[]>
 ): ArmorSet {
   const armor: DimItem[][] = [];
@@ -181,6 +209,10 @@ export function hydrateArmorSet(
 
   return {
     armor,
-    stats: processed.stats,
+    stats: statOrder.reduce((statObj, statHash, i) => {
+      statObj[statHash] = processed.stats[i];
+      return statObj;
+    }, {}) as ArmorStats,
+    mods: processed.mods.map((m) => defs.InventoryItem.get(m) as PluggableInventoryItemDefinition),
   };
 }

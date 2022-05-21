@@ -81,25 +81,25 @@ module.exports = (env) => {
     // Dev server
     devServer: env.dev
       ? {
-          host: process.env.DOCKER ? '0.0.0.0' : 'localhost',
-          allowedHosts: 'all',
-          server: {
-            type: 'https',
-            options: {
-              key: fs.readFileSync('key.pem'), // Private keys in PEM format.
-              cert: fs.readFileSync('cert.pem'), // Cert chains in PEM format.
-            },
+        host: process.env.DOCKER ? '0.0.0.0' : 'localhost',
+        allowedHosts: 'all',
+        server: {
+          type: 'https',
+          options: {
+            key: fs.readFileSync('key.pem'), // Private keys in PEM format.
+            cert: fs.readFileSync('cert.pem'), // Cert chains in PEM format.
           },
-          devMiddleware: {
-            stats: 'errors-only',
-          },
-          client: {
-            overlay: false,
-          },
-          historyApiFallback: true,
-          hot: 'only',
-          liveReload: false,
-        }
+        },
+        devMiddleware: {
+          stats: 'errors-only',
+        },
+        client: {
+          overlay: false,
+        },
+        historyApiFallback: true,
+        hot: 'only',
+        liveReload: false,
+      }
       : undefined,
 
     // Bail and fail hard on first error
@@ -171,10 +171,10 @@ module.exports = (env) => {
           use: env.dev
             ? []
             : [
-                {
-                  loader: 'svgo-loader',
-                },
-              ],
+              {
+                loader: 'svgo-loader',
+              },
+            ],
         },
         {
           test: /\.(jpg|gif|png|eot|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
@@ -248,8 +248,8 @@ module.exports = (env) => {
             env.dev
               ? null
               : {
-                  loader: 'ts-loader',
-                },
+                loader: 'ts-loader',
+              },
           ]),
         },
         // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
@@ -272,7 +272,7 @@ module.exports = (env) => {
           type: 'asset/resource',
         },
         {
-          type: 'javascript/auto',
+          type: 'asset/resource',
           test: /\.wasm/,
         },
         {
@@ -338,14 +338,14 @@ module.exports = (env) => {
         minify: env.dev
           ? false
           : {
-              collapseWhitespace: true,
-              keepClosingSlash: true,
-              removeComments: false,
-              removeRedundantAttributes: true,
-              removeScriptTypeAttributes: true,
-              removeStyleLinkTypeAttributes: true,
-              useShortDoctype: true,
-            },
+            collapseWhitespace: true,
+            keepClosingSlash: true,
+            removeComments: false,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true,
+          },
       }),
 
       new HtmlWebpackPlugin({
