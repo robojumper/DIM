@@ -19,6 +19,19 @@ export function wasmProcess(
   /** The stat ranges of all sets that matched our filters & mod selection. */
   statRanges?: StatFilter[];
 } {
+  if ($DIM_FLAVOR === 'dev') {
+    const exportObj = {
+      filteredItems,
+      modStatTotals,
+      lockedMods,
+      autoStatMods,
+      statFilters,
+      anyExotic,
+    };
+
+    infoLog('lo json', JSON.stringify(exportObj));
+  }
+
   if (filteredItems.length !== 5) {
     throw new Error('must have 5 slots');
   }
@@ -58,8 +71,8 @@ export function wasmProcess(
   //
   // So we don't use any of wasm-bindgen's glue features. Instead, simple
   // configuration arguments use FFI functions with number arguments, while
-  // large amounts of structs (like items, mods) use a JS declaration that
-  // informs JS about the C struct layout and just writes the numbers itself.
+  // large amounts of structs (like items, mods) just use the DataView
+  // to write plain numbers directly.
 
   const totalNumItems = filteredItems.reduce((acc, slotPieces) => acc + slotPieces.length, 0);
 
@@ -67,8 +80,7 @@ export function wasmProcess(
   let resPtr = 0;
 
   try {
-    // +1 for the all-zeros empty stat mod
-    ctxPtr = wasm.lo_init(totalNumItems, autoStatMods.length + 1);
+    ctxPtr = wasm.lo_init(totalNumItems, autoStatMods.length);
 
     {
       const ctxBuf = new Uint16Array(wasm.memory.buffer, ctxPtr, 11);
@@ -186,7 +198,6 @@ export function wasmProcess(
       };
 
       let i = 0;
-      serializeStatMod(undefined, i++);
       for (const mod of autoStatMods) {
         serializeStatMod(mod, i++);
       }

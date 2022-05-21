@@ -2,37 +2,20 @@ import { infoLog } from 'app/utils/log';
 import { expose } from 'comlink';
 import wasmUrl from './lo_web.opt.wasm';
 import { wasmProcess } from './process';
-import { LockedProcessMods, ProcessItem, ProcessMod, StatFilter } from './types';
-import init from './wasm';
+import init, { InitOutput } from './wasm';
 
-const process = async (
-  filteredItems: ProcessItem[][],
-  /** Selected mods' total contribution to each stat */
-  modStatTotals: number[],
-  /** Mods to add onto the sets */
-  lockedMods: LockedProcessMods,
-  autoStatMods: ProcessMod[],
-  statFilters: StatFilter[],
-  /** Ensure every set includes one exotic */
-  anyExotic: boolean
-) => {
+function withWasm<T extends unknown[], U>(fn: (wasm: InitOutput, ...args: T) => U) {
   const start = performance.now();
-  const wasm = await init(wasmUrl);
-  const result = wasmProcess(
-    wasm,
-    filteredItems,
-    modStatTotals,
-    lockedMods,
-    autoStatMods,
-    statFilters,
-    anyExotic
-  );
-  infoLog('loadout optimizer', 'worker side took', performance.now() - start);
-  return result;
-};
+  return async (...args: T) => {
+    const wasm = await init(wasmUrl);
+    const result = fn(wasm, ...args);
+    infoLog('loadout optimizer', 'worker side took', performance.now() - start);
+    return result;
+  };
+}
 
 const exports = {
-  process,
+  process: withWasm(wasmProcess),
 };
 
 export type ProcessWorker = typeof exports;
