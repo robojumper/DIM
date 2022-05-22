@@ -81,36 +81,40 @@ export function wasmProcess(
 
   try {
     ctxPtr = wasm.lo_init(totalNumItems, autoStatMods.length);
+    // Set any exotic setting and number of allowed auto mods
+    wasm.lo_setup_settings(ctxPtr, anyExotic ? 1 : 0, 5);
 
     {
-      const ctxBuf = new Uint16Array(wasm.memory.buffer, ctxPtr, 11);
+      const baseStatsPtr = wasm.lo_setup_base_stats_ptr(ctxPtr);
+      const statsBuf = new Uint16Array(wasm.memory.buffer, baseStatsPtr, 6);
 
       // Write base stats
       for (let i = 0; i < modStatTotals.length; i++) {
-        ctxBuf[i] = modStatTotals[i];
+        statsBuf[i] = modStatTotals[i];
       }
+
+      const itemsPerBucketPtr = wasm.lo_setup_num_items_per_bucket_ptr(ctxPtr);
+      const itemCountsBuf = new Uint16Array(wasm.memory.buffer, itemsPerBucketPtr, 5);
       // and number of items per slot
       for (let i = 0; i < 5; i++) {
-        ctxBuf[i + 6] = filteredItems[i].length;
+        itemCountsBuf[i] = filteredItems[i].length;
       }
     }
 
     {
-      const ctxBuf = new Uint8Array(wasm.memory.buffer, ctxPtr + 22, 14);
+      const boundsPtr = wasm.lo_setup_bounds_ptr(ctxPtr);
+      const boundsBuf = new Uint8Array(wasm.memory.buffer, boundsPtr, 12);
 
-      // Write stat ranges and exoticness
+      // Write stat ranges
       for (let i = 0; i < statFilters.length; i++) {
         if (statFilters[i].ignored) {
-          ctxBuf[i] = 255;
-          ctxBuf[i + 6] = 255;
+          boundsBuf[i] = 255;
+          boundsBuf[i + 6] = 255;
         } else {
-          ctxBuf[i] = statFilters[i].min;
-          ctxBuf[i + 6] = statFilters[i].max;
+          boundsBuf[i] = statFilters[i].min;
+          boundsBuf[i + 6] = statFilters[i].max;
         }
       }
-      ctxBuf[12] = anyExotic ? 1 : 0;
-      ctxBuf[13] = 5; // Auto stat mods
-      // ctxBuf[13] = 0; // Auto stat mods
     }
 
     const modTagToNumber: Record<string, number> = {};
@@ -126,7 +130,7 @@ export function wasmProcess(
 
     {
       const items = filteredItems.flat();
-      const itemsPtr = wasm.lo_items_ptr(ctxPtr);
+      const itemsPtr = wasm.lo_setup_items_ptr(ctxPtr);
 
       for (let i = 0; i < items.length; i++) {
         const view = new DataView(wasm.memory.buffer, itemsPtr + i * 24, 24);
@@ -150,7 +154,7 @@ export function wasmProcess(
     }
 
     {
-      const modsPtr = wasm.lo_mods_ptr(ctxPtr);
+      const modsPtr = wasm.lo_setup_mods_ptr(ctxPtr);
       const serializeMod = (m: ProcessMod | undefined, idx: number) => {
         const view = new DataView(wasm.memory.buffer, modsPtr + idx * 12, 12);
         if (m) {
@@ -178,7 +182,7 @@ export function wasmProcess(
     }
 
     {
-      const autoModsPtr = wasm.lo_auto_mods_ptr(ctxPtr);
+      const autoModsPtr = wasm.lo_setup_auto_mods_ptr(ctxPtr);
       const serializeStatMod = (m: ProcessMod | undefined, idx: number) => {
         const view = new DataView(wasm.memory.buffer, autoModsPtr + idx * 24, 24);
         if (m) {
@@ -209,11 +213,10 @@ export function wasmProcess(
     infoLog('loadout optimizer', 'actually took', performance.now() - start);
 
     // Then copy the results out of WASM linear memory
-    const res = new Uint32Array(wasm.memory.buffer, resPtr, 9);
-    const [setsPtr, numSets] = [res[0], res[1]];
+    const setsPtr = wasm.lo_result_sets_ptr(resPtr);
+    const numSets = wasm.lo_result_num_sets(resPtr);
     const sets: ProcessArmorSet[] = [];
     for (let setIndex = 0; setIndex < numSets; setIndex++) {
-      // const setBuf = new Uint16Array(wasm.memory.buffer, setsPtr + (26 * setIndex), 12);
       const setBuf = new Uint16Array(wasm.memory.buffer, setsPtr + 48 * setIndex, 12);
       const stats = [setBuf[0], setBuf[1], setBuf[2], setBuf[3], setBuf[4], setBuf[5]];
 
@@ -228,20 +231,14 @@ export function wasmProcess(
       const autoModsBuf = new Uint32Array(wasm.memory.buffer, setsPtr + 48 * setIndex + 28, 5);
 
       const mods = [...autoModsBuf].filter((m) => m !== 0);
-      // const mods: number[] = [];
 
       sets.push({ stats, armor, mods });
     }
 
     // Also get the infos out
-    const [numValid, lowTier, statRange, modsUnfit, doubleExotic, noExotic] = [
-      res[3],
-      res[4],
-      res[5],
-      res[6],
-      res[7],
-      res[8],
-    ];
+    const infoPtr = wasm.lo_result_info_ptr(resPtr);
+    const infoBuf = new Uint32Array(wasm.memory.buffer, infoPtr, 6);
+    const [numValid, lowTier, statRange, modsUnfit, doubleExotic, noExotic] = [...infoBuf];
 
     infoLog(
       'loadout optimizer',
@@ -261,7 +258,8 @@ export function wasmProcess(
     );
 
     // Finally extract min-max
-    const minMaxBuf = new Uint16Array(wasm.memory.buffer, resPtr + 36, 12);
+    const minMaxPtr = wasm.lo_result_minmax_ptr(resPtr);
+    const minMaxBuf = new Uint16Array(wasm.memory.buffer, minMaxPtr, 12);
     const statRanges: StatFilter[] = [];
     for (let i = 0; i < 6; i++) {
       statRanges.push({ min: minMaxBuf[i], max: minMaxBuf[i + 6] });

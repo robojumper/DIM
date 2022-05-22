@@ -5,10 +5,26 @@ export type InitInput = RequestInfo | Response | BufferSource | WebAssembly.Modu
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly lo_init: (num_items: number, num_auto_mods: number) => number;
-  readonly lo_items_ptr: (ctx_ptr: number) => number;
-  readonly lo_mods_ptr: (ctx_ptr: number) => number;
-  readonly lo_auto_mods_ptr: (ctx_ptr: number) => number;
+  readonly lo_setup_settings: (
+    ctx_ptr: number,
+    any_exotic: number,
+    allowed_auto_mods: number
+  ) => number;
+
+  readonly lo_setup_base_stats_ptr: (ctx_ptr: number) => number;
+  readonly lo_setup_num_items_per_bucket_ptr: (ctx_ptr: number) => number;
+  readonly lo_setup_bounds_ptr: (ctx_ptr: number) => number;
+  readonly lo_setup_items_ptr: (ctx_ptr: number) => number;
+  readonly lo_setup_mods_ptr: (ctx_ptr: number) => number;
+  readonly lo_setup_auto_mods_ptr: (ctx_ptr: number) => number;
+
   readonly lo_run: (ctx_ptr: number) => number;
+
+  readonly lo_result_num_sets: (results_ptr: number) => number;
+  readonly lo_result_sets_ptr: (results_ptr: number) => number;
+  readonly lo_result_info_ptr: (results_ptr: number) => number;
+  readonly lo_result_minmax_ptr: (results_ptr: number) => number;
+
   readonly lo_free: (ctx_ptr: number, results_ptr: number) => void;
 }
 
@@ -53,7 +69,7 @@ async function init(input: InitInput): Promise<InitOutput> {
   const { instance } = await load(input, {});
 
   // We rely on the wasm blob having these exports...
-  return instance.exports as any;
+  return instance.exports as unknown as InitOutput;
 }
 
 export default init;
