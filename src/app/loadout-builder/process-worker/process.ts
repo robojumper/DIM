@@ -108,8 +108,9 @@ export function wasmProcess(
       // Write stat ranges
       for (let i = 0; i < statFilters.length; i++) {
         if (statFilters[i].ignored) {
-          boundsBuf[i] = 255;
-          boundsBuf[i + 6] = 255;
+          // Min-max of 0 means LO will disregard these stat contributions
+          boundsBuf[i] = 0;
+          boundsBuf[i + 6] = 0;
         } else {
           boundsBuf[i] = statFilters[i].min;
           boundsBuf[i + 6] = statFilters[i].max;
