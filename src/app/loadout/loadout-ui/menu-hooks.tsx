@@ -1,5 +1,6 @@
 import { LoadoutSort } from '@destinyitemmanager/dim-api-types';
 import { AlertIcon } from 'app/dim-ui/AlertIcon';
+import ColorDestinySymbols from 'app/dim-ui/destiny-symbols/ColorDestinySymbols';
 import FilterPills, { Option } from 'app/dim-ui/FilterPills';
 import { t } from 'app/i18next-t';
 import { getHashtagsFromNote } from 'app/inventory/note-hashtags';
@@ -56,8 +57,8 @@ export function useLoadoutFilterPills(
     const loadoutsByHashtag: { [hashtag: string]: Loadout[] } = {};
     for (const loadout of savedLoadouts) {
       const hashtags = [
-        ...getHashtagsFromNote(loadout.name),
-        ...getHashtagsFromNote(loadout.notes),
+        ...getHashtagsFromNote(loadout.name, true),
+        ...getHashtagsFromNote(loadout.notes, true),
       ];
       for (const hashtag of hashtags) {
         (loadoutsByHashtag[hashtag] ??= []).push(loadout);
@@ -69,7 +70,7 @@ export function useLoadoutFilterPills(
   const filterOptions = Object.keys(loadoutsByHashtag).map(
     (hashtag): Option => ({
       key: hashtag,
-      content: hashtag,
+      content: <ColorDestinySymbols text={hashtag} />,
     })
   );
 

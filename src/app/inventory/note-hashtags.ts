@@ -17,6 +17,7 @@ export function collectNotesHashtags(itemInfos: ItemInfos) {
   return uniqBy(hashTags, (t) => t.toLowerCase());
 }
 
-export function getHashtagsFromNote(note?: string | null) {
-  return Array.from(note?.matchAll(/#\w+/g) ?? [], (m) => m[0]);
+export function getHashtagsFromNote(note?: string | null, extended?: boolean) {
+  const re = extended ? /#[\w\uE000-\uF8FF]+/g : /#\w+/g;
+  return Array.from(note?.matchAll(re) ?? [], (m) => m[0]);
 }

@@ -23,6 +23,9 @@
   width: 100%;
   font-size: 18px;
 
+  display: flex;
+  flex-direction: row;
+
   @include phone-portrait {
     height: 32px;
   }
