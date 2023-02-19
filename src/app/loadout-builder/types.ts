@@ -140,6 +140,11 @@ export const LOCKED_EXOTIC_ANY_EXOTIC = -2;
  */
 export const MIN_LO_ITEM_ENERGY = 7;
 /**
+ * The maximum amount of mod energy available to a fully masterworked armor piece.
+ */
+export const MAX_ARMOR_ENERGY_CAPACITY = 10;
+
+/**
  * The armor energy rules that Loadout Optimizer uses by default.
  * Requires a reasonable and inexpensive amount of upgrade materials.
  */

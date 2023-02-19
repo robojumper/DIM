@@ -5,13 +5,11 @@ import {
   currentStoreSelector,
   profileResponseSelector,
 } from 'app/inventory/selectors';
+import { MAX_ARMOR_ENERGY_CAPACITY } from 'app/loadout-builder/types';
 import { ResolvedLoadoutMod } from 'app/loadout-drawer/loadout-types';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { unlockedItemsForCharacterOrProfilePlugSet } from 'app/records/plugset-helpers';
-import {
-  MAX_ARMOR_ENERGY_CAPACITY,
-  armor2PlugCategoryHashesByName,
-} from 'app/search/d2-known-values';
+import { armor2PlugCategoryHashesByName } from 'app/search/d2-known-values';
 import { RootState } from 'app/store/types';
 import { compareBy } from 'app/utils/comparators';
 import { emptyArray } from 'app/utils/empty';

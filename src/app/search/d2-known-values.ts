@@ -29,8 +29,6 @@ export const powerLevelByKeyword = {
   pinnaclecap: D2SeasonInfo[D2CalculatedSeason].pinnacleCap,
 };
 
-export const MAX_ARMOR_ENERGY_CAPACITY = 10;
-
 //
 // SOCKETS KNOWN VALUES
 //
@@ -81,9 +79,9 @@ export const killTrackerObjectivesByHash: HashLookup<'pvp' | 'pve' | 'gambit'> =
   3387796140: 'pve', // Objective "Nightfall combatants defeated" inside 3915764594 "Nightfall Memento Tracker"
   2109364169: 'pvp', // Objective "Trials opponents defeated" inside 3915764595 "Trials Memento Tracker"
 };
-export const killTrackerSocketTypeHash = 1282012138;
+export const killTrackerSocketTypeHash = 1282012138; // SocketType ""
 
-export const weaponMasterworkY2SocketTypeHash = 2218962841;
+export const weaponMasterworkY2SocketTypeHash = 2218962841; // SocketType ""
 //
 // STATS KNOWN VALUES
 //

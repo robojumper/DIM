@@ -2,7 +2,6 @@ import { EnergyIncrementsWithPresstip } from 'app/dim-ui/EnergyIncrements';
 import { t } from 'app/i18next-t';
 import { showItemPicker } from 'app/item-picker/item-picker';
 import Sockets from 'app/loadout/loadout-ui/Sockets';
-import { MAX_ARMOR_ENERGY_CAPACITY } from 'app/search/d2-known-values';
 import { AppIcon, faRandom, lockIcon } from 'app/shell/icons';
 import clsx from 'clsx';
 import { PlugCategoryHashes } from 'data/d2/generated-enums';
@@ -10,6 +9,7 @@ import { Dispatch } from 'react';
 import { DimItem, PluggableInventoryItemDefinition } from '../../inventory/item-types';
 import LoadoutBuilderItem from '../LoadoutBuilderItem';
 import { LoadoutBuilderAction } from '../loadout-builder-reducer';
+import { MAX_ARMOR_ENERGY_CAPACITY } from '../types';
 import styles from './GeneratedSetItem.m.scss';
 
 /**

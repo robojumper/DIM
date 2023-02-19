@@ -6,7 +6,7 @@ import {
   activityModPlugCategoryHashes,
   knownModPlugCategoryHashes,
 } from 'app/loadout/known-values';
-import { MAX_ARMOR_ENERGY_CAPACITY, armorStats } from 'app/search/d2-known-values';
+import { armorStats } from 'app/search/d2-known-values';
 import { compareBy } from 'app/utils/comparators';
 import _ from 'lodash';
 import { DimItem, PluggableInventoryItemDefinition } from '../../inventory/item-types';
@@ -20,6 +20,7 @@ import {
   ArmorSet,
   AutoModDefs,
   ItemGroup,
+  MAX_ARMOR_ENERGY_CAPACITY,
   artificeSocketReusablePlugSetHash,
   artificeStatBoost,
   generalSocketReusablePlugSetHash,
