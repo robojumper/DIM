@@ -179,11 +179,11 @@ export const powerfulSources = [
   4143344829, // InventoryItem "Luminous Engram"
   4039143015, // InventoryItem "Powerful Gear"
   4249081773, // InventoryItem "Powerful Armor"
-  73143230, // Pinnacle
-  3114385605, // Tier 1
-  4039143015, // Powerful
-  3114385606, // Tier 2
-  3114385607, // Tier 3
+  73143230, // InventoryItem "Pinnacle Gear"
+  3114385605, // InventoryItem "Powerful Gear (Tier 1)"
+  4039143015, // InventoryItem "Powerful Gear"
+  3114385606, // InventoryItem "Powerful Gear (Tier 2)"
+  3114385607, // InventoryItem "Powerful Gear (Tier 3)"
 ];
 
 export const pinnacleSources = [
@@ -202,7 +202,7 @@ export const deprecatedPlaceholderArmorModHash = 3947616002;
  *
  * see https://github.com/Bungie-net/api/issues/687
  */
-export const THE_FORBIDDEN_BUCKET = 2422292810;
+export const THE_FORBIDDEN_BUCKET = 2422292810; // InventoryBucket ""
 
 export const armorBuckets = {
   helmet: BucketHashes.Helmet,
@@ -226,18 +226,20 @@ export const uniqueEquipBuckets = [
 // PRESENTATION NODE KNOWN VALUES
 //
 
-export const RAID_NODE = 4025982223;
-export const SHADER_NODE = 1516796296;
+export const RAID_NODE = 4025982223; // PresentationNode "Raids"
+export const SHADER_NODE = 1516796296; // PresentationNode "Shaders"
 
 //
 // MISC KNOWN HASHES / ENUMS
 //
 
-export const ENCOUNTERS_COMPLETED_OBJECTIVE = 1579649637;
+export const WEAPON_PATTERN_DUMMY_ITEM = 3131030715; // InventoryItem "Weapon Pattern"
 
-export const ARMSMASTER_ACTIVITY_MODIFIER = 3704166961;
+export const ENCOUNTERS_COMPLETED_OBJECTIVE = 1579649637; // Objective "Completed"
 
-export const RAID_ACTIVITY_TYPE_HASH = 2043403989;
+export const ARMSMASTER_ACTIVITY_MODIFIER = 3704166961; // This modifier does not exist anymore.
+
+export const RAID_ACTIVITY_TYPE_HASH = 2043403989; // ActivityType "Raid"
 
 // milestones to manually mark as raid, because they don't adequately identify themselves in defs
 export const RAID_MILESTONE_HASHES = [
@@ -247,39 +249,39 @@ export const RAID_MILESTONE_HASHES = [
 export const VENDORS = {
   /** "The Spider", from whom we calculate planetmat info */
   SPIDER: 863940356,
-  EVERVERSE: 3361454721,
-  BENEDICT: 1265988377,
-  BANSHEE: 672118013,
-  DRIFTER: 248695599,
-  ADA_FORGE: 2917531897,
-  ADA_TRANSMOG: 350061650,
+  EVERVERSE: 3361454721, // Vendor "Tess Everis"
+  BENEDICT: 1265988377, // Vendor "Benedict 99-40"
+  BANSHEE: 672118013, // Vendor "Banshee-44"
+  DRIFTER: 248695599, // Vendor "The Drifter"
+  ADA_FORGE: 2917531897, // Vendor "Ada-1"
+  ADA_TRANSMOG: 350061650, // Vendor "Ada-1"
   /** rahool. we override how his vendor FakeItems are displayed */
-  RAHOOL: 2255782930,
-  VAULT: 1037843411,
-  XUR: 2190858386,
-  WAR_TABLE_UPGRADES_RISEN: 3950870173,
-  STAR_CHART_UPGRADES_PLUNDER: 3004285529,
+  RAHOOL: 2255782930, // Vendor "Master Rahool"
+  VAULT: 1037843411, // Vendor "Vault"
+  XUR: 2190858386, // Vendor "Xûr"
+  WAR_TABLE_UPGRADES_RISEN: 3950870173, // Vendor "Upgrades"
+  STAR_CHART_UPGRADES_PLUNDER: 3004285529, // Vendor "Pirate Crew"
   /**
    * this has always been named "The Gate Lord's Eye" from season 8,
    * but every season this vendor is updated with the new contents
    * of that season's artifact
    */
-  ARTIFACT: 2894222926,
-  DEVRIM_KAY: 396892126,
-  FAILSAFE: 1576276905,
+  ARTIFACT: 2894222926, // Vendor "The Gate Lord's Eye"
+  DEVRIM_KAY: 396892126, // Vendor "Devrim Kay"
+  FAILSAFE: 1576276905, // Vendor "Failsafe"
 };
 
 /** used to snag the icon for display */
-export const WELL_RESTED_PERK = 2352765282;
+export const WELL_RESTED_PERK = 2352765282; // SandboxPerk "Well-Rested"
 
 /** this one has a bad icon https://github.com/Bungie-net/api/issues/1832 */
 export const FISHING_BAIT_PERK = 3056678280;
 
 /** an "All" trait we want to filter out of trait lists */
-export const ALL_TRAIT = 1434215347;
+export const ALL_TRAIT = 1434215347; // Trait "All"
 
 /** the trait hash that is used to identify Exotic weapon catalyst plugs */
-export const EXOTIC_CATALYST_TRAIT = 4036726046;
+export const EXOTIC_CATALYST_TRAIT = 1505531793; // Trait ""
 
 /**
  * Maps TierType to tierTypeName in English and vice versa.

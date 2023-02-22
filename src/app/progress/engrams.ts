@@ -15,32 +15,30 @@ const enum PowerCap {
 
 const engrams: HashLookup<{ cap: PowerCap; bonus: number }> = {
   // Pinnacle
-  73143230: {
+  73143230 /* InventoryItem "Pinnacle Gear" */: {
     cap: PowerCap.Pinnacle,
     bonus: 5,
   },
-  // Tier 1
-  3114385605: {
+  3114385605 /* InventoryItem "Powerful Gear (Tier 1)" */: {
     cap: PowerCap.Powerful,
     bonus: 3,
   },
-  // Powerful
-  4039143015: {
+  4039143015 /* InventoryItem "Powerful Gear" */: {
     cap: PowerCap.Powerful,
     bonus: 3,
   },
   // Tier 2
-  3114385606: {
+  3114385606 /* InventoryItem "Powerful Gear (Tier 2)" */: {
     cap: PowerCap.Powerful,
     bonus: 4,
   },
   // Rose (from Competitive)
-  882778888: {
+  882778888 /* InventoryItem "Rose" */: {
     cap: PowerCap.Powerful,
     bonus: 4,
   },
   // Tier 3
-  3114385607: {
+  3114385607 /* InventoryItem "Powerful Gear (Tier 3)" */: {
     cap: PowerCap.Powerful,
     bonus: 5,
   },
@@ -51,8 +49,8 @@ const engrams: HashLookup<{ cap: PowerCap; bonus: number }> = {
  */
 export function getEngramPowerBonus(itemHash: number, maxPower?: number, parentItemHash?: number) {
   // Hawthorne's Clan Rewards gives out a +2 pinnacle even though it's listed as a powerful
-  if (parentItemHash === 3603098564) {
-    itemHash = 73143230;
+  if (parentItemHash === 3603098564 /* Milestone "It's in the Cards" */) {
+    itemHash = 73143230 /* InventoryItem "Pinnacle Gear" */;
   }
 
   const engramInfo = engrams[itemHash];
