@@ -96,9 +96,7 @@ export const getSpecialtySocketMetadatas = (item?: DimItem): ModSocketMetadata[]
  * this focuses on narrower stuff: raid & nightmare modslots
  */
 export const getInterestingSocketMetadatas = (item?: DimItem): ModSocketMetadata[] | undefined => {
-  const specialtySockets = getSpecialtySocketMetadatas(item)?.filter(
-    (m) => m.slotTag !== 'legacy' && m.slotTag !== 'combatstyle'
-  );
+  const specialtySockets = getSpecialtySocketMetadatas(item)?.filter((m) => m.slotTag !== 'legacy');
   if (specialtySockets?.length) {
     return specialtySockets;
   }
