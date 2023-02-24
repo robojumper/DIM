@@ -2,7 +2,6 @@ import {
   AssumeArmorMasterwork,
   defaultLoadoutParameters,
   LoadoutParameters,
-  LockArmorEnergyType,
   StatConstraint,
 } from '@destinyitemmanager/dim-api-types';
 import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
@@ -169,6 +168,7 @@ const lbConfigInit = ({
 
   // FIXME: Always require turning on auto mods explicitly for now...
   loadoutParameters = { ...loadoutParameters, autoStatMods: undefined };
+  delete loadoutParameters.lockArmorEnergyType;
 
   return {
     loadoutParameters,
@@ -193,7 +193,6 @@ type LoadoutBuilderConfigAction =
       type: 'assumeArmorMasterworkChanged';
       assumeArmorMasterwork: AssumeArmorMasterwork | undefined;
     }
-  | { type: 'lockArmorEnergyTypeChanged'; lockArmorEnergyType: LockArmorEnergyType | undefined }
   | { type: 'pinItem'; item: DimItem }
   | { type: 'setPinnedItems'; items: DimItem[] }
   | { type: 'unpinItem'; item: DimItem }
@@ -360,13 +359,6 @@ function lbConfigReducer(defs: D2ManifestDefinitions) {
         return {
           ...state,
           loadoutParameters: { ...state.loadoutParameters, assumeArmorMasterwork },
-        };
-      }
-      case 'lockArmorEnergyTypeChanged': {
-        const { lockArmorEnergyType } = action;
-        return {
-          ...state,
-          loadoutParameters: { ...state.loadoutParameters, lockArmorEnergyType },
         };
       }
       case 'addGeneralMods': {
