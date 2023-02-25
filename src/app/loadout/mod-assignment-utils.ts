@@ -1,5 +1,6 @@
 import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { DimItem, DimSockets, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import { isArtifice } from 'app/item-triage/triage-utils';
 import { ArmorEnergyRules } from 'app/loadout-builder/types';
 import { Assignment, PluggingAction } from 'app/loadout-drawer/loadout-types';
 import {
@@ -22,7 +23,7 @@ import _ from 'lodash';
 import { calculateAssumedItemEnergy } from './armor-upgrade-utils';
 import { activityModPlugCategoryHashes } from './known-values';
 import { generateModPermutations } from './mod-permutations';
-import { plugCategoryHashToBucketHash } from './mod-utils';
+import { isArtificeMod, plugCategoryHashToBucketHash } from './mod-utils';
 
 /**
  * a temporary structure, keyed by item ID,
@@ -46,6 +47,7 @@ export interface ModMap {
   bucketSpecificMods: { [bucketHash: number]: PluggableInventoryItemDefinition[] };
   generalMods: PluggableInventoryItemDefinition[];
   activityMods: PluggableInventoryItemDefinition[];
+  artificeMods: PluggableInventoryItemDefinition[];
 }
 
 /**
@@ -59,6 +61,7 @@ export function categorizeArmorMods(
 ): { modMap: ModMap; unassignedMods: PluggableInventoryItemDefinition[] } {
   const generalMods: PluggableInventoryItemDefinition[] = [];
   const activityMods: PluggableInventoryItemDefinition[] = [];
+  const artificeMods: PluggableInventoryItemDefinition[] = [];
   const bucketSpecificMods: { [plugCategoryHash: number]: PluggableInventoryItemDefinition[] } = {};
 
   const validMods: PluggableInventoryItemDefinition[] = [];
@@ -86,6 +89,9 @@ export function categorizeArmorMods(
     } else if (activityModPlugCategoryHashes.includes(pch)) {
       activityMods.push(plannedMod);
       validMods.push(plannedMod);
+    } else if (isArtificeMod(plannedMod)) {
+      artificeMods.push(plannedMod);
+      validMods.push(plannedMod);
     } else {
       const bucketHash = plugCategoryHashToBucketHash[pch];
       if (bucketHash !== undefined) {
@@ -102,6 +108,7 @@ export function categorizeArmorMods(
       allMods: validMods,
       generalMods,
       activityMods,
+      artificeMods,
       bucketSpecificMods,
     },
     unassignedMods,
@@ -166,7 +173,7 @@ export function fitMostMods({
   );
 
   const {
-    modMap: { activityMods, generalMods, bucketSpecificMods },
+    modMap: { activityMods, generalMods, artificeMods, bucketSpecificMods },
     unassignedMods,
   } = categorizeArmorMods(plannedMods, items);
 
@@ -182,6 +189,17 @@ export function fitMostMods({
       });
     } else {
       unassignedMods.push(...modsToAssign);
+    }
+  }
+
+  // Artifice mods are free and thus can be greedily assigned.
+  const artificeItems = items.filter(isArtifice);
+  for (const artificeMod of artificeMods) {
+    const targetItem = artificeItems.pop();
+    if (targetItem) {
+      bucketSpecificAssignments[targetItem.id].assigned.push(artificeMod);
+    } else {
+      unassignedMods.push(artificeMod);
     }
   }
 
