@@ -12,6 +12,7 @@ import { itemNoteSelector } from './dim-item-info';
 import { DimItem } from './item-types';
 import RatingIcon from './RatingIcon';
 
+// FIXME(Lightfall) add Strand
 const energyTypeStyles: Record<DestinyEnergyType, string> = {
   [DestinyEnergyType.Arc]: styles.arc,
   [DestinyEnergyType.Thermal]: styles.solar,

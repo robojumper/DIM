@@ -18,7 +18,6 @@ import { isEnhancedPerk, isModCostVisible } from 'app/utils/socket-utils';
 import { InventoryWishListRoll } from 'app/wishlists/wishlists';
 import {
   DamageType,
-  DestinyEnergyType,
   DestinyInventoryItemDefinition,
   DestinyObjectiveProgress,
   DestinyPlugItemCraftingRequirements,
@@ -33,6 +32,14 @@ import { DimItem, DimPlug } from '../inventory/item-types';
 import Objective from '../progress/Objective';
 import './ItemSockets.scss';
 import styles from './PlugTooltip.m.scss';
+
+// FIXME(Lightfall) add Strand
+const damageTypeToStyle: Partial<Record<DamageType, string>> = {
+  [DamageType.Arc]: styles.tooltipElementArc,
+  [DamageType.Thermal]: styles.tooltipElementSolar,
+  [DamageType.Void]: styles.tooltipElementVoid,
+  [DamageType.Stasis]: styles.tooltipElementStasis,
+};
 
 // TODO: Connect this to redux
 export function DimPlugTooltip({
@@ -211,21 +218,15 @@ export function PlugTooltip({
         </div>
       );
     }, [def.itemTypeDisplayName, energyCost, defs]),
-    className: clsx(styles.tooltip, {
-      [styles.tooltipExotic]: def.inventory?.tierType === TierType.Exotic,
-      [styles.tooltipEnhanced]:
-        enhancedIntrinsics.has(def.hash) || (isPluggable && isEnhancedPerk(def)),
-      [styles.tooltipElementArc]:
-        energyCost?.energyType === DestinyEnergyType.Arc || subclassDamageType === DamageType.Arc,
-      [styles.tooltipElementSolar]:
-        energyCost?.energyType === DestinyEnergyType.Thermal ||
-        subclassDamageType === DamageType.Thermal,
-      [styles.tooltipElementVoid]:
-        energyCost?.energyType === DestinyEnergyType.Void || subclassDamageType === DamageType.Void,
-      [styles.tooltipElementStasis]:
-        energyCost?.energyType === DestinyEnergyType.Stasis ||
-        subclassDamageType === DamageType.Stasis,
-    }),
+    className: clsx(
+      styles.tooltip,
+      {
+        [styles.tooltipExotic]: def.inventory?.tierType === TierType.Exotic,
+        [styles.tooltipEnhanced]:
+          enhancedIntrinsics.has(def.hash) || (isPluggable && isEnhancedPerk(def)),
+      },
+      subclassDamageType && damageTypeToStyle[subclassDamageType]
+    ),
   });
 
   return (

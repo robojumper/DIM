@@ -1,7 +1,6 @@
 import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { getFirstSocketByCategoryHash } from 'app/utils/socket-utils';
 import {
-  DestinyEnergyType,
   DestinyInventoryItemDefinition,
   DestinyItemQuantity,
   PlugAvailabilityMode,
@@ -19,13 +18,7 @@ import { DimItem } from '../item-types';
  *
  * TODO(ryan): I don't think old energy type and capacity are needed, they can be calculated from the item.
  */
-export function energyUpgrade(
-  item: DimItem,
-  oldEnergyType: DestinyEnergyType,
-  oldEnergyCapacity: number,
-  newEnergyType: DestinyEnergyType,
-  newEnergyCapacity: number
-) {
+export function energyUpgrade(item: DimItem, oldEnergyCapacity: number, newEnergyCapacity: number) {
   const tierSocket =
     item.sockets &&
     (getFirstSocketByCategoryHash(item.sockets, SocketCategoryHashes.ArmorTier) ||
@@ -43,21 +36,12 @@ export function energyUpgrade(
     }
 
     const plugAvailability = dimPlug.plugDef.plug.plugAvailability;
-    if (oldEnergyType === newEnergyType) {
-      // We're looking for all the upgrade mods between here and there
-      if (
-        capacity.energyType === newEnergyType &&
-        capacity.capacityValue > oldEnergyCapacity &&
-        capacity.capacityValue <= newEnergyCapacity &&
-        plugAvailability === PlugAvailabilityMode.AvailableIfSocketContainsMatchingPlugCategory
-      ) {
-        energyMods.push(dimPlug.plugDef);
-      }
-    } else if (
-      // We're looking for the exact capacity at a different energy type
-      capacity.energyType === newEnergyType &&
-      capacity.capacityValue === newEnergyCapacity &&
-      plugAvailability !== PlugAvailabilityMode.AvailableIfSocketContainsMatchingPlugCategory
+    // We're looking for all the upgrade mods between here and there
+    if (
+      capacity.energyType === item.energy!.energyType &&
+      capacity.capacityValue > oldEnergyCapacity &&
+      capacity.capacityValue <= newEnergyCapacity &&
+      plugAvailability === PlugAvailabilityMode.AvailableIfSocketContainsMatchingPlugCategory
     ) {
       energyMods.push(dimPlug.plugDef);
     }

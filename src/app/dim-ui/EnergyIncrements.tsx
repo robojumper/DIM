@@ -5,6 +5,7 @@ import { DestinyEnergyType } from 'bungie-api-ts/destiny2';
 import clsx from 'clsx';
 import { PressTip } from './PressTip';
 
+// FIXME(Lightfall) add Strand
 export const energyStyles: { [energy in DestinyEnergyType]?: string } = {
   [DestinyEnergyType.Arc]: 'arc',
   [DestinyEnergyType.Thermal]: 'solar',

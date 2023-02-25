@@ -41,6 +41,7 @@ const subclassInfoByHash: Record<number, SubclassInfo> = {
   2328211300: subclass(DamageType.Arc, DestinyClass.Hunter), // Arcstrider (v3)
   2932390016: subclass(DamageType.Arc, DestinyClass.Titan), // Striker (v3)
   3168997075: subclass(DamageType.Arc, DestinyClass.Warlock), // Stormcaller (v3)
+  // FIXME(Lightfall) add Strand
 };
 
 interface SubclassPlugCategory {
@@ -100,6 +101,7 @@ export const getSubclassPlugCategories = memoizeOne((defs: D2ManifestDefinitions
   return results;
 });
 
+// FIXME(Lightfall) add Strand
 const baseImagesByDamageType: Partial<Record<DamageType, string>> = {
   [DamageType.Arc]: subclassArc,
   [DamageType.Thermal]: subclassSolar,

@@ -3,6 +3,7 @@ import styles from './ColorDestinySymbols.m.scss';
 
 const iconPlaceholder = /([\uE000-\uF8FF])/g;
 
+// FIXME(Lightfall) add Strand when font is updated
 const styleTable = {
   [String.fromCodePoint(FontGlyphs.thermal)]: styles.thermal,
   [String.fromCodePoint(FontGlyphs.arc)]: styles.arc,

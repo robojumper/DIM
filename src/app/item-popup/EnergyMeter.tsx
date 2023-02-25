@@ -1,7 +1,6 @@
 import ElementIcon from 'app/dim-ui/ElementIcon';
 import { energyStyles } from 'app/dim-ui/EnergyIncrements';
 import 'app/dim-ui/EnergyMeterIncrements.scss';
-import Select, { Option } from 'app/dim-ui/Select';
 import { t } from 'app/i18next-t';
 import { insertPlug } from 'app/inventory/advanced-write-actions';
 import { DimItem } from 'app/inventory/item-types';
@@ -20,6 +19,7 @@ import _ from 'lodash';
 import { useState } from 'react';
 import styles from './EnergyMeter.m.scss';
 
+// FIXME(Lightfall) which element will armor have?
 const swappableEnergyTypes = [
   DestinyEnergyType.Arc,
   DestinyEnergyType.Thermal,
@@ -33,26 +33,19 @@ export default function EnergyMeter({ item }: { item: DimItem }) {
   const energyType = item.energy?.energyType || DestinyEnergyType.Any;
   const [hoverEnergyCapacity, setHoverEnergyCapacity] = useState(0);
   const [previewCapacity, setPreviewCapacity] = useState<number>(energyCapacity);
-  const [previewEnergyType, setPreviewEnergyType] = useState<DestinyEnergyType>(energyType);
   const dispatch = useThunkDispatch();
 
   if (!item.energy) {
     return null;
   }
 
-  const minCapacity = previewEnergyType === energyType ? energyCapacity : 1;
+  const minCapacity = energyCapacity;
 
   // layer in possible total slots, then earned slots, then currently used slots
   const meterIncrements = Array<string>(10)
     .fill('unavailable')
-    .fill(
-      'unused',
-      0,
-      previewEnergyType === energyType
-        ? Math.max(energyCapacity, hoverEnergyCapacity || previewCapacity || 0)
-        : Math.max(1, hoverEnergyCapacity || previewCapacity || 0)
-    )
-    .fill('used', 0, previewEnergyType === energyType ? item.energy.energyUsed : 0);
+    .fill('unused', 0, Math.max(energyCapacity, hoverEnergyCapacity || previewCapacity || 0))
+    .fill('used', 0, item.energy.energyUsed);
 
   const onMouseOver = (i: number) => {
     setHoverEnergyCapacity(i);
@@ -66,12 +59,7 @@ export default function EnergyMeter({ item }: { item: DimItem }) {
     setPreviewCapacity(Math.max(minCapacity, i));
   };
 
-  const onEnergyTypeChange = (value?: DestinyEnergyType | undefined) => {
-    setPreviewEnergyType(value || DestinyEnergyType.Any);
-  };
-
   const resetPreview = () => {
-    setPreviewEnergyType(energyType);
     setPreviewCapacity(energyCapacity);
   };
 
@@ -88,13 +76,7 @@ export default function EnergyMeter({ item }: { item: DimItem }) {
       return;
     }
 
-    const upgradeMods = energyUpgrade(
-      item,
-      item.energy.energyType,
-      item.energy.energyCapacity,
-      previewEnergyType,
-      previewCapacity
-    );
+    const upgradeMods = energyUpgrade(item, item.energy.energyCapacity, previewCapacity);
     const socket = getFirstSocketByCategoryHash(item.sockets, SocketCategoryHashes.ArmorTier)!;
 
     try {
@@ -108,24 +90,6 @@ export default function EnergyMeter({ item }: { item: DimItem }) {
     }
   };
 
-  const energyTypes = Object.values(defs.EnergyType.getAll());
-
-  const energyOptions: Option<DestinyEnergyType>[] = swappableEnergyTypes.map((e) => {
-    const energyDef = energyTypes.find((ed) => ed.enumValue === e)!;
-    return {
-      key: e.toString(),
-      value: e,
-      content: (
-        <span>
-          <ElementIcon className={styles.icon} element={energyDef} />{' '}
-          <span>{energyDef.displayProperties.name}</span>
-        </span>
-      ),
-    };
-  });
-
-  const energyTypeDef = energyTypes.find((ed) => ed.enumValue === previewEnergyType)!;
-
   return (
     defs && (
       <div className={styles.energyMeter}>
@@ -134,18 +98,7 @@ export default function EnergyMeter({ item }: { item: DimItem }) {
             <b>{Math.max(minCapacity, previewCapacity)}</b> <span>{t('EnergyMeter.Energy')}</span>
           </div>
         </div>
-        <div className={clsx('energyMeterIncrements', 'medium', energyStyles[previewEnergyType])}>
-          {swappableEnergyTypes.includes(item.energy.energyType) && (
-            <Select<DestinyEnergyType>
-              options={energyOptions}
-              value={previewEnergyType}
-              onChange={onEnergyTypeChange}
-              hideSelected={true}
-              className={styles.elementSelect}
-            >
-              <ElementIcon className={styles.icon} element={energyTypeDef} />
-            </Select>
-          )}
+        <div className={clsx('energyMeterIncrements', 'medium', energyStyles[energyType])}>
           {meterIncrements.map((incrementStyle, i) => (
             <div
               key={i}
@@ -159,7 +112,7 @@ export default function EnergyMeter({ item }: { item: DimItem }) {
           ))}
         </div>
         <AnimatePresence>
-          {(previewCapacity > minCapacity || previewEnergyType !== energyType) && (
+          {previewCapacity > minCapacity && (
             <motion.div
               className={styles.upgradePreview}
               initial="collapsed"
@@ -174,7 +127,6 @@ export default function EnergyMeter({ item }: { item: DimItem }) {
               <EnergyUpgradePreview
                 item={item}
                 previewCapacity={previewCapacity || energyCapacity}
-                previewEnergyType={previewEnergyType}
               />
               {$featureFlags.awa && (
                 <button type="button" onClick={applyChanges} className={styles.upgradeButton}>
@@ -195,11 +147,9 @@ export default function EnergyMeter({ item }: { item: DimItem }) {
 function EnergyUpgradePreview({
   item,
   previewCapacity,
-  previewEnergyType,
 }: {
   item: DimItem;
   previewCapacity: number;
-  previewEnergyType: DestinyEnergyType;
 }) {
   const defs = useD2Definitions()!;
   // return null if not swappable and not a ghost
@@ -210,13 +160,7 @@ function EnergyUpgradePreview({
     return null;
   }
 
-  const energyModHashes = energyUpgrade(
-    item,
-    item.energy.energyType,
-    item.energy.energyCapacity,
-    previewEnergyType,
-    previewCapacity
-  );
+  const energyModHashes = energyUpgrade(item, item.energy.energyCapacity, previewCapacity);
 
   const costs = sumModCosts(
     defs,
@@ -225,13 +169,12 @@ function EnergyUpgradePreview({
 
   const energyTypes = Object.values(defs.EnergyType.getAll());
   const originalElement = energyTypes.find((ed) => ed.enumValue === item.energy?.energyType)!;
-  const previewElement = energyTypes.find((ed) => ed.enumValue === previewEnergyType)!;
 
   return (
     <>
       <span>
         <ElementIcon element={originalElement} /> {item.energy.energyCapacity} &rarr;{' '}
-        <ElementIcon element={previewElement} /> {previewCapacity}
+        <ElementIcon element={originalElement} /> {previewCapacity}
       </span>
       {_.sortBy(costs, (c) => c.quantity).map((cost) => (
         <Cost key={cost.itemHash} cost={cost} className={styles.cost} />
