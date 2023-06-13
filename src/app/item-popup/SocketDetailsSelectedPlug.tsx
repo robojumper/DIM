@@ -2,6 +2,7 @@ import ClarityDescriptions from 'app/clarity/descriptions/ClarityDescriptions';
 import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import BungieImage from 'app/dim-ui/BungieImage';
 import { t } from 'app/i18next-t';
+import { DefItemIcon } from 'app/inventory/ItemIcon';
 import { canInsertPlug, insertPlug } from 'app/inventory/advanced-write-actions';
 import type {
   DimItem,
@@ -29,7 +30,6 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ItemStats from './ItemStats';
 import { PlugStats } from './PlugTooltip';
-import { SocketDetailsMod } from './SocketDetails';
 import styles from './SocketDetailsSelectedPlug.m.scss';
 
 const costStatHashes = [
@@ -225,7 +225,7 @@ export default function SocketDetailsSelectedPlug({
   return (
     <div className={clsx(styles.selectedPlug, { [styles.hasStats]: stats.length > 0 })}>
       <div className={styles.modIcon}>
-        <SocketDetailsMod itemDef={plug} />
+        <DefItemIcon itemDef={plug} />
       </div>
       <div className={styles.modDescription}>
         <h3>
