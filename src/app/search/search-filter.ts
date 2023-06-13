@@ -24,18 +24,12 @@ import { loadoutsByItemSelector } from '../loadout-drawer/selectors';
 import { querySelector } from '../shell/selectors';
 import { wishListFunctionSelector, wishListsByHashSelector } from '../wishlists/selectors';
 import type { InventoryWishListRoll } from '../wishlists/wishlists';
-import type {
-  FilterContext,
-  FilterDefinition,
-  ItemFilter,
-  SuggestionsContext,
-} from './filter-types';
-import { canonicalFilterFormats } from './filter-types';
+import type { FilterContext, ItemFilter, SuggestionsContext } from './filter-types';
 import type { QueryAST } from './query-parser';
 import { parseQuery } from './query-parser';
 import type { SearchConfig } from './search-config';
 import { searchConfigSelector } from './search-config';
-import { parseAndValidateQuery, rangeStringToComparator } from './search-utils';
+import { matchFilter, parseAndValidateQuery } from './search-utils';
 
 //
 // Selectors
@@ -235,71 +229,4 @@ function makeSearchFilterFactory<I, FilterCtx, SuggestionsCtx>(
     // If our filter has any invalid parts, the search filter should match no items
     return transformAST(parsedQuery) ?? (() => false);
   };
-}
-
-/** Matches a non-`is` filter syntax and returns a way to actually create the matched filter function. */
-export function matchFilter<I, FilterCtx, SuggestionsCtx>(
-  filterDef: FilterDefinition<I, FilterCtx, SuggestionsCtx>,
-  lhs: string,
-  filterValue: string,
-  currentFilterContext?: FilterCtx
-): ((args: FilterCtx) => ItemFilter<I>) | undefined {
-  for (const format of canonicalFilterFormats(filterDef.format)) {
-    switch (format) {
-      case 'simple': {
-        break;
-      }
-      case 'query': {
-        if (filterDef.suggestions!.includes(filterValue)) {
-          return (filterContext) =>
-            filterDef.filter({
-              lhs,
-              filterValue,
-              ...filterContext,
-            });
-        } else {
-          break;
-        }
-      }
-      case 'freeform': {
-        return (filterContext) => filterDef.filter({ lhs, filterValue, ...filterContext });
-      }
-      case 'range': {
-        try {
-          const compare = rangeStringToComparator(filterValue, filterDef.overload);
-          return (filterContext) =>
-            filterDef.filter({
-              lhs,
-              filterValue: '',
-              compare,
-              ...filterContext,
-            });
-        } catch {
-          break;
-        }
-      }
-      case 'stat': {
-        const [stat, rangeString] = filterValue.split(':', 2);
-        try {
-          const compare = rangeStringToComparator(rangeString, filterDef.overload);
-          const validator = filterDef.validateStat?.(currentFilterContext);
-          if (!validator || validator(stat)) {
-            return (filterContext) =>
-              filterDef.filter({
-                lhs,
-                filterValue: stat,
-                compare,
-                ...filterContext,
-              });
-          } else {
-            break;
-          }
-        } catch {
-          break;
-        }
-      }
-      case 'custom':
-        break;
-    }
-  }
 }
