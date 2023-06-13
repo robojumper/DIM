@@ -3,6 +3,11 @@ import { infoLog } from 'app/utils/log';
 import { Observable } from 'app/utils/observable';
 import type { DimItem } from '../inventory/item-types';
 
+export const enum ItemPopupTab {
+  Overview,
+  Triage,
+}
+
 export const showItemPopup$ = new Observable<
   | {
       item?: DimItem;

@@ -5,13 +5,9 @@ import { percent } from 'app/shell/formatters';
 import { clsx } from 'clsx';
 import type { DimItem } from '../inventory/item-types';
 import type { ItemPopupExtraInfo } from './item-popup';
+import { ItemPopupTab } from './item-popup';
 import ItemDetails from './ItemDetails';
 import './ItemPopupBody.scss';
-
-export const enum ItemPopupTab {
-  Overview,
-  Triage,
-}
 
 /** The main portion of the item popup, with pages of info (Actions, Details, Reviews) */
 export default function ItemPopupBody({

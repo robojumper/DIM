@@ -12,10 +12,10 @@ import { useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DesktopItemActions, { menuClassName } from './DesktopItemActions';
 import styles from './ItemPopup.m.scss';
-import ItemPopupBody, { ItemPopupTab } from './ItemPopupBody';
+import ItemPopupBody from './ItemPopupBody';
 import ItemPopupHeader from './ItemPopupHeader';
 import ItemTagHotkeys from './ItemTagHotkeys';
-import type { ItemPopupExtraInfo } from './item-popup';
+import { ItemPopupTab, type ItemPopupExtraInfo } from './item-popup';
 import { buildItemActionsModel } from './item-popup-actions';
 
 const tierClasses: Record<ItemTierName, string> = {

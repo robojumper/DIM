@@ -11,8 +11,7 @@ import ColorDestinySymbols from 'app/dim-ui/destiny-symbols/ColorDestinySymbols'
 import BucketIcon from 'app/dim-ui/svgs/BucketIcon';
 import { t, tl } from 'app/i18next-t';
 import { allItemsSelector } from 'app/inventory/selectors';
-import { ItemPopupTab } from 'app/item-popup/ItemPopupBody';
-import { hideItemPopup } from 'app/item-popup/item-popup';
+import { ItemPopupTab, hideItemPopup } from 'app/item-popup/item-popup';
 import { editLoadout } from 'app/loadout-drawer/loadout-events';
 import { isInGameLoadout } from 'app/loadout-drawer/loadout-types';
 import { loadoutsByItemSelector } from 'app/loadout-drawer/selectors';
