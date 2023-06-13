@@ -7,20 +7,9 @@ import { getItemYear } from 'app/utils/item-utils';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import memoizeOne from 'memoize-one';
-import type { ArmorySearchItem } from './autocomplete';
-import { SearchItemType } from './autocomplete';
+import type { ArmoryEntry, ArmorySearchItem } from './autocomplete-types';
+import { SearchItemType } from './autocomplete-types';
 import { plainString } from './search-filters/freeform';
-
-export interface ArmoryEntry {
-  name: string;
-  /** The plainString'd version (with diacritics removed, if applicable). */
-  plainName: string;
-  icon: string;
-  hash: number;
-  seasonName: string | undefined;
-  season: number;
-  year: number | undefined;
-}
 
 export const buildArmoryIndex = memoizeOne((defs: D2ManifestDefinitions, language: DimLanguage) => {
   const results: ArmoryEntry[] = [];

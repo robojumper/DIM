@@ -49,8 +49,9 @@ import {
 } from '../shell/icons';
 import HighlightedText from './HighlightedText';
 import styles from './SearchBar.m.scss';
-import type { SearchItem } from './autocomplete';
-import createAutocompleter, { SearchItemType } from './autocomplete';
+import createAutocompleter from './autocomplete';
+import type { SearchItem } from './autocomplete-types';
+import { SearchItemType } from './autocomplete-types';
 import { canonicalizeQuery, parseQuery } from './query-parser';
 import { searchConfigSelector } from './search-config';
 import { validateQuerySelector } from './search-filter';
