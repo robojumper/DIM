@@ -12,20 +12,6 @@ import HelpLink from '../dim-ui/HelpLink';
 import { clearWishLists } from '../wishlists/actions';
 import { wishListsLastFetchedSelector, wishListsSelector } from '../wishlists/selectors';
 
-// config/content-security-policy.js must be edited alongside this list
-export const wishListAllowedHosts = ['raw.githubusercontent.com', 'gist.githubusercontent.com'];
-export function isValidWishListUrlDomain(url: string) {
-  try {
-    const parsedUrl = new URL(url); // throws if invalid
-    if (parsedUrl.protocol !== 'https:') {
-      return false;
-    }
-    return wishListAllowedHosts.includes(parsedUrl.host);
-  } catch (e) {
-    return false;
-  }
-}
-
 const voltronLocation =
   'https://raw.githubusercontent.com/48klocs/dim-wish-list-sources/master/voltron.txt';
 const choosyVoltronLocation =

@@ -1,7 +1,6 @@
 import { settingsSelector } from 'app/dim-api/selectors';
 import { t } from 'app/i18next-t';
 import { showNotification } from 'app/notifications/notifications';
-import { isValidWishListUrlDomain, wishListAllowedHosts } from 'app/settings/WishListSettings';
 import { setSettingAction } from 'app/settings/actions';
 import { settingsReady } from 'app/settings/settings';
 import { get } from 'app/storage/idb-keyval';
@@ -12,6 +11,20 @@ import type { WishListsState } from './reducer';
 import { wishListsSelector } from './selectors';
 import type { WishListAndInfo } from './types';
 import { toWishList } from './wishlist-file';
+
+// config/content-security-policy.js must be edited alongside this list
+export const wishListAllowedHosts = ['raw.githubusercontent.com', 'gist.githubusercontent.com'];
+export function isValidWishListUrlDomain(url: string) {
+  try {
+    const parsedUrl = new URL(url); // throws if invalid
+    if (parsedUrl.protocol !== 'https:') {
+      return false;
+    }
+    return wishListAllowedHosts.includes(parsedUrl.host);
+  } catch (e) {
+    return false;
+  }
+}
 
 function hoursAgo(dateToCheck?: Date): number {
   if (!dateToCheck) {
