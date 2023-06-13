@@ -2,49 +2,13 @@ import { EnergyIncrementsWithPresstip } from 'app/dim-ui/EnergyIncrements';
 import { t } from 'app/i18next-t';
 import { showItemPicker } from 'app/item-picker/item-picker';
 import Sockets from 'app/loadout/loadout-ui/Sockets';
-import { MAX_ARMOR_ENERGY_CAPACITY } from 'app/search/d2-known-values';
 import { AppIcon, faRandom, lockIcon } from 'app/shell/icons';
-import { clsx } from 'clsx';
 import { PlugCategoryHashes } from 'data/d2/generated-enums';
 import type { Dispatch } from 'react';
 import type { DimItem, PluggableInventoryItemDefinition } from '../../inventory/item-types';
 import LoadoutBuilderItem from '../LoadoutBuilderItem';
 import type { LoadoutBuilderAction } from '../loadout-builder-reducer';
 import styles from './GeneratedSetItem.m.scss';
-
-/**
- * Shows how we recommend the energy of this armor be changed in order to fit its mods.
- */
-export function EnergySwap({ energy }: { energy: { energyCapacity: number; energyUsed: number } }) {
-  const armorEnergyCapacity = energy.energyCapacity;
-  const resultingEnergyCapacity = Math.max(energy.energyUsed, armorEnergyCapacity);
-
-  const noEnergyChange = resultingEnergyCapacity === armorEnergyCapacity;
-
-  return (
-    <div className={clsx(styles.energySwapContainer, { [styles.energyHidden]: noEnergyChange })}>
-      <div className={styles.energyValue}>
-        <div
-          className={clsx({
-            [styles.masterworked]: armorEnergyCapacity === MAX_ARMOR_ENERGY_CAPACITY,
-          })}
-        >
-          {armorEnergyCapacity}
-        </div>
-      </div>
-      <div className={styles.arrow}>➜</div>
-      <div className={styles.energyValue}>
-        <div
-          className={clsx({
-            [styles.masterworked]: resultingEnergyCapacity === MAX_ARMOR_ENERGY_CAPACITY,
-          })}
-        >
-          {resultingEnergyCapacity}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /**
  * An individual item in a generated set. Includes a perk display and a button for selecting

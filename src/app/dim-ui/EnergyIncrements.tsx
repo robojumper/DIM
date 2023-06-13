@@ -1,9 +1,9 @@
 import 'app/dim-ui/EnergyMeterIncrements.scss';
 import { t } from 'app/i18next-t';
 import type { DimItem } from 'app/inventory/item-types';
-import { EnergySwap } from 'app/loadout-builder/generated-sets/GeneratedSetItem';
 import { MAX_ARMOR_ENERGY_CAPACITY } from 'app/search/d2-known-values';
 import { clsx } from 'clsx';
+import styles from './EnergyIncrements.m.scss';
 import { PressTip } from './PressTip';
 
 /** this accepts either an item, or a partial DimItem.energy */
@@ -74,5 +74,39 @@ export function EnergyIncrementsWithPresstip({
       />
       {energyUsed > energyCapacity && <EnergySwap energy={energy} />}
     </PressTip>
+  );
+}
+
+/**
+ * Shows how we recommend the energy of this armor be changed in order to fit its mods.
+ */
+function EnergySwap({ energy }: { energy: { energyCapacity: number; energyUsed: number } }) {
+  const armorEnergyCapacity = energy.energyCapacity;
+  const resultingEnergyCapacity = Math.max(energy.energyUsed, armorEnergyCapacity);
+
+  const noEnergyChange = resultingEnergyCapacity === armorEnergyCapacity;
+
+  return (
+    <div className={clsx(styles.energySwapContainer, { [styles.energyHidden]: noEnergyChange })}>
+      <div className={styles.energyValue}>
+        <div
+          className={clsx({
+            [styles.masterworked]: armorEnergyCapacity === MAX_ARMOR_ENERGY_CAPACITY,
+          })}
+        >
+          {armorEnergyCapacity}
+        </div>
+      </div>
+      <div className={styles.arrow}>➜</div>
+      <div className={styles.energyValue}>
+        <div
+          className={clsx({
+            [styles.masterworked]: resultingEnergyCapacity === MAX_ARMOR_ENERGY_CAPACITY,
+          })}
+        >
+          {resultingEnergyCapacity}
+        </div>
+      </div>
+    </div>
   );
 }

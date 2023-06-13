@@ -1,0 +1,23 @@
+.energySwapContainer {
+  composes: flexRow from '../../dim-ui/common.m.scss';
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 10px;
+}
+
+.arrow {
+  margin: 0 4px;
+}
+
+.energyValue {
+  composes: flexRow from '../../dim-ui/common.m.scss';
+  align-items: center;
+}
+
+.masterworked {
+  color: $masterwork-border-color;
+}
+
+.energyHidden {
+  visibility: hidden;
+}
