@@ -14,11 +14,11 @@ import styles from './Milestones.m.scss';
 import { PowerCaps } from './PowerCaps';
 import Pursuit from './Pursuit';
 import PursuitGrid from './PursuitGrid';
-import { sortPursuits } from './Pursuits';
 import SeasonalRank from './SeasonalRank';
 import WellRestedPerkIcon from './WellRestedPerkIcon';
 import { getEngramPowerBonus } from './engrams';
 import { milestoneToItems } from './milestone-items';
+import { sortPursuits } from './pursuit-utils';
 import { getCharacterProgressions } from './selectors';
 
 /**

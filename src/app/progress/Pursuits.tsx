@@ -4,27 +4,15 @@ import type { DimItem } from 'app/inventory/item-types';
 import type { DimStore } from 'app/inventory/store-types';
 import { findItemsByBucket } from 'app/inventory/stores-helpers';
 import { useD2Definitions } from 'app/manifest/selectors';
-import { chainComparator, compareBy } from 'app/utils/comparators';
 import { BucketHashes, ItemCategoryHashes } from 'data/d2/generated-enums';
 import pursuitsInfoFile from 'data/d2/pursuits.json';
 import _ from 'lodash';
 import { useState } from 'react';
 import type { BountyFilter, DefType } from './BountyGuide';
 import BountyGuide, { matchBountyFilters } from './BountyGuide';
-import Pursuit, { showPursuitAsExpired } from './Pursuit';
+import Pursuit from './Pursuit';
 import PursuitGrid from './PursuitGrid';
-
-const defaultExpirationDate = new Date(8640000000000000);
-
-export const sortPursuits = chainComparator(
-  compareBy(showPursuitAsExpired),
-  compareBy((item) => !item.tracked),
-  compareBy((item) => item.complete),
-  compareBy((item) => (item.pursuit?.expirationDate || defaultExpirationDate).getTime()),
-  compareBy((item) => item.typeName),
-  compareBy((item) => item.icon),
-  compareBy((item) => item.name)
-);
+import { sortPursuits } from './pursuit-utils';
 
 const pursuitsOrder = ['Bounties', 'Quests', 'Items'];
 

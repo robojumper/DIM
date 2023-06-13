@@ -12,6 +12,7 @@ import { clsx } from 'clsx';
 import { useSelector } from 'react-redux';
 import { ObjectiveValue } from './Objective';
 import PursuitItem from './PursuitItem';
+import { showPursuitAsExpired } from './pursuit-utils';
 
 // Props provided from parents
 interface Props {
@@ -88,20 +89,4 @@ export default function Pursuit({
       )}
     </ItemPopupTrigger>
   );
-}
-
-/**
- * Should this item be displayed as expired (no longer completable)?
- */
-export function showPursuitAsExpired(item: DimItem) {
-  // Suppress description when expiration is shown
-  const suppressExpiration =
-    item.pursuit?.suppressExpirationWhenObjectivesComplete && item.complete;
-
-  const expired =
-    !suppressExpiration && item.pursuit?.expirationDate
-      ? item.pursuit.expirationDate.getTime() < Date.now()
-      : false;
-
-  return expired;
 }

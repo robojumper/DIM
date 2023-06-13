@@ -12,8 +12,8 @@ import { useSelector } from 'react-redux';
 import styles from './Event.m.scss';
 import Pursuit from './Pursuit';
 import PursuitGrid from './PursuitGrid';
-import { sortPursuits } from './Pursuits';
 import { recordToPursuitItem } from './milestone-items';
+import { sortPursuits } from './pursuit-utils';
 
 /**
  * A component for showing objectives of seasonal events v2,
