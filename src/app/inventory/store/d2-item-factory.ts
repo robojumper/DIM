@@ -57,7 +57,7 @@ import { buildMasterwork } from './masterwork';
 import { buildObjectives, isTrialsPassage, isWinsObjective } from './objectives';
 import { buildPatternInfo } from './patterns';
 import { buildSockets } from './sockets';
-import { buildStats } from './stats';
+import { buildStats } from './stats-build';
 
 const collectiblesByItemHash = memoizeOne(
   (Collectible: ReturnType<D2ManifestDefinitions['Collectible']['getAll']>) =>

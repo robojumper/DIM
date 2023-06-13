@@ -7,7 +7,7 @@ import { useCallback, useState } from 'react';
 import type { DimItem, DimPlug, DimSocket } from '../item-types';
 import type { ItemCreationContext } from './d2-item-factory';
 import { buildDefinedPlug } from './sockets';
-import { buildStats } from './stats';
+import { buildStats } from './stats-build';
 
 /**
  * Socket overrides are a map from socket index to plug item hash. The plug item hash
