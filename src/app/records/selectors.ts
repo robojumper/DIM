@@ -1,7 +1,8 @@
 import { profileResponseSelector } from 'app/inventory/selectors';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { SHADER_NODE } from 'app/search/d2-known-values';
-import { DestinyCollectibleState, DestinyPresentationNodeDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyPresentationNodeDefinition } from 'bungie-api-ts/destiny2';
+import { DestinyCollectibleState } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { getCollectibleState } from './presentation-nodes';

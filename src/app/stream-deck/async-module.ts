@@ -2,19 +2,19 @@
 
 // serialize the data and send it if connected
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import {
   allItemsSelector,
   createItemContextSelector,
   currentStoreSelector,
 } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { hideItemPopup } from 'app/item-popup/item-popup';
-import { LoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { LoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { getItemsFromInGameLoadout } from 'app/loadout/ingame/ingame-loadout-utils';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { showNotification } from 'app/notifications/notifications';
-import { RootState, ThunkResult } from 'app/store/types';
+import type { RootState, ThunkResult } from 'app/store/types';
 import {
   streamDeckClearSelection,
   streamDeckConnected,
@@ -22,7 +22,11 @@ import {
   streamDeckUpdatePopupShowed,
 } from 'app/stream-deck/actions';
 import { randomStringToken } from 'app/stream-deck/AuthorizationNotification/AuthorizationNotification';
-import { LoadoutSelection, SelectionArgs, SendToStreamDeckArgs } from 'app/stream-deck/interfaces';
+import type {
+  LoadoutSelection,
+  SelectionArgs,
+  SendToStreamDeckArgs,
+} from 'app/stream-deck/interfaces';
 import { handleStreamDeckMessage, notificationPromise } from 'app/stream-deck/msg-handlers';
 import { streamDeck } from 'app/stream-deck/reducer';
 import { streamDeckUpdatePopupSelector } from 'app/stream-deck/selectors';
@@ -37,7 +41,7 @@ import packager from 'app/stream-deck/util/packager';
 import { infoLog } from 'app/utils/log';
 import { observeStore } from 'app/utils/redux-utils';
 import { DamageType, DestinyClass } from 'bungie-api-ts/destiny2';
-import { DestinyLoadoutItemComponent } from 'bungie-api-ts/destiny2/interfaces';
+import type { DestinyLoadoutItemComponent } from 'bungie-api-ts/destiny2/interfaces';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 

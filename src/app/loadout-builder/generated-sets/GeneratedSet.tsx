@@ -1,8 +1,9 @@
-import { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { DimStore, statSourceOrder } from 'app/inventory/store-types';
+import type { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
+import { statSourceOrder } from 'app/inventory/store-types';
 import { editLoadout } from 'app/loadout-drawer/loadout-events';
-import { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { fitMostMods } from 'app/loadout/mod-assignment-utils';
 import { getTotalModStatChanges } from 'app/loadout/stats';
 import { useD2Definitions } from 'app/manifest/selectors';
@@ -12,9 +13,16 @@ import { errorLog } from 'app/utils/log';
 import { StatHashes } from 'data/d2/generated-enums';
 import { t } from 'i18next';
 import _ from 'lodash';
-import { Dispatch, memo, useMemo } from 'react';
-import { LoadoutBuilderAction } from '../loadout-builder-reducer';
-import { ArmorEnergyRules, ArmorSet, ArmorStatHashes, ModStatChanges, PinnedItems } from '../types';
+import type { Dispatch } from 'react';
+import { memo, useMemo } from 'react';
+import type { LoadoutBuilderAction } from '../loadout-builder-reducer';
+import type {
+  ArmorEnergyRules,
+  ArmorSet,
+  ArmorStatHashes,
+  ModStatChanges,
+  PinnedItems,
+} from '../types';
 import { getPower } from '../utils';
 import styles from './GeneratedSet.m.scss';
 import GeneratedSetButtons from './GeneratedSetButtons';

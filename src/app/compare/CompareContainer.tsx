@@ -1,4 +1,4 @@
-import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import { gaPageView } from 'app/google';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { Suspense, lazy, useEffect } from 'react';

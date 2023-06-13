@@ -1,6 +1,6 @@
 import { currentAccountSelector } from 'app/accounts/selectors';
 import { set } from 'app/storage/idb-keyval';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { errorLog } from 'app/utils/log';
 import { observeStore } from 'app/utils/redux-utils';
 import _ from 'lodash';

@@ -13,10 +13,11 @@ import { destiny2CoreSettingsSelector, useD2Definitions } from 'app/manifest/sel
 import { RAID_NODE } from 'app/search/d2-known-values';
 import { querySelector, useIsPhonePortrait } from 'app/shell/selectors';
 import { usePageTitle } from 'app/utils/hooks';
-import { PanInfo, motion } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { DestinyAccount } from '../accounts/destiny-account';
+import type { DestinyAccount } from '../accounts/destiny-account';
 import CollapsibleTitle from '../dim-ui/CollapsibleTitle';
 import ErrorBoundary from '../dim-ui/ErrorBoundary';
 import '../records/PresentationNode.scss';

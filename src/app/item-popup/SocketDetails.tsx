@@ -1,4 +1,4 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { languageSelector } from 'app/dim-api/selectors';
 import BungieImage from 'app/dim-ui/BungieImage';
 import { EnergyCostIcon } from 'app/dim-ui/ElementIcon';
@@ -6,7 +6,11 @@ import Sheet from 'app/dim-ui/Sheet';
 import { t } from 'app/i18next-t';
 import 'app/inventory-page/StoreBucket.scss';
 import { DefItemIcon } from 'app/inventory/ItemIcon';
-import { DimItem, DimSocket, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type {
+  DimItem,
+  DimSocket,
+  PluggableInventoryItemDefinition,
+} from 'app/inventory/item-types';
 import { allItemsSelector, profileResponseSelector } from 'app/inventory/selectors';
 import { isValidMasterworkStat } from 'app/inventory/store/masterwork';
 import { isPluggableItem } from 'app/inventory/store/sockets';
@@ -19,7 +23,8 @@ import { weaponMasterworkY2SocketTypeHash } from 'app/search/d2-known-values';
 import { createPlugSearchPredicate } from 'app/search/plug-search';
 import { chainComparator, compareBy, reverseComparator } from 'app/utils/comparators';
 import { emptySet } from 'app/utils/empty';
-import { DestinyProfileResponse, PlugUiStyles, SocketPlugSources } from 'bungie-api-ts/destiny2';
+import type { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import { PlugUiStyles, SocketPlugSources } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { BucketHashes, PlugCategoryHashes } from 'data/d2/generated-enums';
 import { memo, useMemo, useState } from 'react';

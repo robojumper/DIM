@@ -1,10 +1,10 @@
 import { createItemContextSelector } from 'app/inventory/selectors';
 import { useD2Definitions } from 'app/manifest/selectors';
-import { ItemFilter } from 'app/search/filter-types';
-import { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { ItemFilter } from 'app/search/filter-types';
+import type { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { InventoryBuckets } from '../inventory/inventory-buckets';
+import type { InventoryBuckets } from '../inventory/inventory-buckets';
 import PlugSet from './PlugSet';
 import PresentationNode from './PresentationNode';
 import styles from './PresentationNodeRoot.m.scss';

@@ -1,19 +1,19 @@
 import { D2Categories } from 'app/destiny2/d2-bucket-categories';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimItem } from 'app/inventory/item-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimItem } from 'app/inventory/item-types';
 import { allItemsSelector, createItemContextSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
-import { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
+import type { DimStore } from 'app/inventory/store-types';
+import type { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
 import { applySocketOverrides } from 'app/inventory/store/override-sockets';
 import { spaceLeftForItem } from 'app/inventory/stores-helpers';
 import { convertInGameLoadoutPlugItemHashesToSocketOverrides } from 'app/loadout-drawer/loadout-type-converters';
-import {
+import type {
   InGameLoadout,
   ResolvedLoadoutItem,
   ResolvedLoadoutMod,
 } from 'app/loadout-drawer/loadout-types';
 import { potentialLoadoutItemsByItemId } from 'app/loadout-drawer/loadout-utils';
-import { DestinyLoadoutItemComponent } from 'bungie-api-ts/destiny2';
+import type { DestinyLoadoutItemComponent } from 'bungie-api-ts/destiny2';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { useMemo } from 'react';

@@ -1,4 +1,4 @@
-import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import { getPlatforms, setActivePlatform } from 'app/accounts/platforms';
 import {
   accountsLoadedSelector,
@@ -21,7 +21,7 @@ import ItemFeedPage from 'app/item-feed/ItemFeedPage';
 import LoadoutDrawerContainer from 'app/loadout-drawer/LoadoutDrawerContainer';
 import { totalPostmasterItems } from 'app/loadout-drawer/postmaster';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import StripSockets from 'app/strip-sockets/StripSockets';
 import { setAppBadge } from 'app/utils/app-badge';
 import { fetchWishList } from 'app/wishlists/wishlist-fetch';
@@ -29,7 +29,7 @@ import _ from 'lodash';
 import { lazy, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router';
-import { Hotkey } from '../hotkeys/hotkeys';
+import type { Hotkey } from '../hotkeys/hotkeys';
 import { itemTagList } from '../inventory/dim-item-info';
 import ItemPickerContainer from '../item-picker/ItemPickerContainer';
 import ItemPopupContainer from '../item-popup/ItemPopupContainer';

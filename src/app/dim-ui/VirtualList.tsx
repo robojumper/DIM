@@ -1,6 +1,8 @@
-import { Virtualizer, useVirtualizer, useWindowVirtualizer } from '@tanstack/react-virtual';
+import type { Virtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer, useWindowVirtualizer } from '@tanstack/react-virtual';
 import { clsx } from 'clsx';
-import { Key, forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react';
+import type { Key } from 'react';
+import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react';
 import styles from './VirtualList.m.scss';
 
 interface VirtualListProps {

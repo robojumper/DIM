@@ -1,6 +1,6 @@
-import { DimItem } from 'app/inventory/item-types';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
-import React from 'react';
+import type { DimItem } from 'app/inventory/item-types';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
+import type React from 'react';
 
 export const enum SortDirection {
   ASC,

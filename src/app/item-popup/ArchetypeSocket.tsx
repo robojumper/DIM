@@ -1,8 +1,8 @@
-import { DimItem, DimSocket } from 'app/inventory/item-types';
+import type { DimItem, DimSocket } from 'app/inventory/item-types';
 import { clsx } from 'clsx';
 import React from 'react';
 import styles from './ArchetypeSocket.m.scss';
-import { PlugClickHandler } from './ItemSockets';
+import type { PlugClickHandler } from './ItemSockets';
 import Socket from './Socket';
 
 /**

@@ -1,5 +1,5 @@
 import { getCraftingTemplate } from 'app/armory/crafting-utils';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { weaponMasterworkY2SocketTypeHash } from 'app/search/d2-known-values';
 import { compareBy } from 'app/utils/comparators';
 import { emptyArray } from 'app/utils/empty';
@@ -7,7 +7,7 @@ import {
   eventArmorRerollSocketIdentifiers,
   subclassAbilitySocketCategoryHashes,
 } from 'app/utils/socket-utils';
-import {
+import type {
   DestinyInventoryItemDefinition,
   DestinyItemComponent,
   DestinyItemComponentSetOfint64,
@@ -16,10 +16,9 @@ import {
   DestinyItemSocketEntryPlugItemRandomizedDefinition,
   DestinyItemSocketState,
   DestinyObjectiveProgress,
-  DestinySocketCategoryStyle,
   DestinySocketTypeDefinition,
-  SocketPlugSources,
 } from 'bungie-api-ts/destiny2';
+import { DestinySocketCategoryStyle, SocketPlugSources } from 'bungie-api-ts/destiny2';
 import deprecatedMods from 'data/d2/deprecated-mods.json';
 import { emptyPlugHashes } from 'data/d2/empty-plug-hashes';
 import {
@@ -29,7 +28,7 @@ import {
   SocketCategoryHashes,
 } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import {
+import type {
   DimPlug,
   DimPlugSet,
   DimSocket,

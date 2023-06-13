@@ -6,7 +6,7 @@ import ItemPopup from 'app/item-popup/ItemPopup';
 import { Portal } from 'app/utils/temp-container';
 import React, { useCallback, useRef, useState } from 'react';
 import ConnectedInventoryItem from '../inventory/ConnectedInventoryItem';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 
 interface PopupState {
   item: DimItem;

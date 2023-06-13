@@ -1,4 +1,4 @@
-import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import BucketIcon from 'app/dim-ui/svgs/BucketIcon';
 import { useDefinitions } from 'app/manifest/selectors';
 import { filteredItemsSelector } from 'app/search/search-filter';

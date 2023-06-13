@@ -1,6 +1,6 @@
 import { VendorItemDisplay } from 'app/vendors/VendorItemComponent';
 import { DestinyCollectibleState } from 'bungie-api-ts/destiny2';
-import { DimCollectible } from './presentation-nodes';
+import type { DimCollectible } from './presentation-nodes';
 
 interface Props {
   collectible: DimCollectible;

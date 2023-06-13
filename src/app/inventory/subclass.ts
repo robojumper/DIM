@@ -1,6 +1,6 @@
 import { damageNamesByEnum } from 'app/search/search-filter-values';
 import { getFirstSocketByCategoryHash } from 'app/utils/socket-utils';
-import { LookupTable } from 'app/utils/util-types';
+import type { LookupTable } from 'app/utils/util-types';
 import { DamageType } from 'bungie-api-ts/destiny2';
 import { emptyPlugHashes } from 'data/d2/empty-plug-hashes';
 import { ItemCategoryHashes, SocketCategoryHashes } from 'data/d2/generated-enums';
@@ -10,7 +10,7 @@ import subclassStasis from 'images/subclass-stasis.png';
 import subclassStrand from 'images/subclass-strand.png';
 import subclassVoid from 'images/subclass-void.png';
 import _ from 'lodash';
-import { DimItem, PluggableInventoryItemDefinition } from './item-types';
+import type { DimItem, PluggableInventoryItemDefinition } from './item-types';
 
 const baseImagesByDamageType: LookupTable<DamageType, string> = {
   [DamageType.Arc]: subclassArc,

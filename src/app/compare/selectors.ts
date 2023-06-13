@@ -1,9 +1,9 @@
 import { currentAccountSelector } from 'app/accounts/selectors';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { allItemsSelector } from 'app/inventory/selectors';
 import { accountRoute } from 'app/routes';
 import { filterFactorySelector } from 'app/search/search-filter';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { emptyArray } from 'app/utils/empty';
 import { currySelector } from 'app/utils/selector-utils';
 import { nonCurriedVendorGroupsForCharacterSelector } from 'app/vendors/selectors';

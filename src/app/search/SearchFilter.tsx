@@ -7,7 +7,8 @@ import { useLocation } from 'react-router';
 import { setSearchQuery } from '../shell/actions';
 import MainSearchBarActions from './MainSearchBarActions';
 import MainSearchBarMenu from './MainSearchBarMenu';
-import SearchBar, { SearchFilterRef } from './SearchBar';
+import type { SearchFilterRef } from './SearchBar';
+import SearchBar from './SearchBar';
 import { SearchInput } from './SearchInput';
 
 /**

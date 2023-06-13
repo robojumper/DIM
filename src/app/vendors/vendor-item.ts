@@ -1,7 +1,7 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { VENDORS } from 'app/search/d2-known-values';
 import { emptyArray } from 'app/utils/empty';
-import {
+import type {
   DestinyCollectibleState,
   DestinyDisplayPropertiesDefinition,
   DestinyInventoryItemDefinition,
@@ -9,13 +9,14 @@ import {
   DestinyProfileResponse,
   DestinyVendorDefinition,
   DestinyVendorItemDefinition,
-  DestinyVendorItemState,
   DestinyVendorSaleItemComponent,
 } from 'bungie-api-ts/destiny2';
+import { DestinyVendorItemState } from 'bungie-api-ts/destiny2';
 import focusingItemOutputs from 'data/d2/focusing-item-outputs.json';
 import { BucketHashes } from 'data/d2/generated-enums';
-import { DimItem } from '../inventory/item-types';
-import { ItemCreationContext, makeFakeItem } from '../inventory/store/d2-item-factory';
+import type { DimItem } from '../inventory/item-types';
+import type { ItemCreationContext } from '../inventory/store/d2-item-factory';
+import { makeFakeItem } from '../inventory/store/d2-item-factory';
 
 /**
  * This represents an item inside a vendor.

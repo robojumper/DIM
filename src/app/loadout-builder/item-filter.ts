@@ -1,18 +1,18 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { ModMap, assignBucketSpecificMods } from 'app/loadout/mod-assignment-utils';
-import { ItemFilter } from 'app/search/filter-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { ModMap } from 'app/loadout/mod-assignment-utils';
+import { assignBucketSpecificMods } from 'app/loadout/mod-assignment-utils';
+import type { ItemFilter } from 'app/search/filter-types';
 import { warnLog } from 'app/utils/log';
 import { BucketHashes } from 'data/d2/generated-enums';
-import {
+import type {
   ArmorEnergyRules,
   ExcludedItems,
   ItemsByBucket,
-  LOCKED_EXOTIC_NO_EXOTIC,
   LockableBucketHash,
-  LockableBucketHashes,
   PinnedItems,
 } from './types';
+import { LOCKED_EXOTIC_NO_EXOTIC, LockableBucketHashes } from './types';
 
 /**
  * Contains information about whether items got filtered out for various reasons.

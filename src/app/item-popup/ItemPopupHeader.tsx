@@ -7,7 +7,7 @@ import { t } from 'app/i18next-t';
 import { D1BucketHashes } from 'app/search/d1-known-values';
 import type { ItemTierName } from 'app/search/d2-known-values';
 import { Portal } from 'app/utils/temp-container';
-import { LookupTable } from 'app/utils/util-types';
+import type { LookupTable } from 'app/utils/util-types';
 import { DestinyAmmunitionType, DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { BucketHashes } from 'data/d2/generated-enums';
@@ -15,7 +15,7 @@ import heavy from 'destiny-icons/general/ammo-heavy.svg';
 import primary from 'destiny-icons/general/ammo-primary.svg';
 import special from 'destiny-icons/general/ammo-special.svg';
 import { useState } from 'react';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import styles from './ItemPopupHeader.m.scss';
 
 const tierClassName: LookupTable<ItemTierName, string> = {

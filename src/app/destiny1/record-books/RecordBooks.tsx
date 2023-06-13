@@ -4,20 +4,20 @@ import { useLoadStores } from 'app/inventory/store/hooks';
 import { useD1Definitions } from 'app/manifest/selectors';
 import { useSetting } from 'app/settings/hooks';
 import { usePageTitle } from 'app/utils/hooks';
-import { DestinyObjectiveProgress } from 'bungie-api-ts/destiny2';
+import type { DestinyObjectiveProgress } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import _ from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { DestinyAccount } from '../../accounts/destiny-account';
+import type { DestinyAccount } from '../../accounts/destiny-account';
 import BungieImage, { bungieBackgroundStyle } from '../../dim-ui/BungieImage';
 import CollapsibleTitle from '../../dim-ui/CollapsibleTitle';
 import { storesSelector } from '../../inventory/selectors';
-import { D1Store } from '../../inventory/store-types';
+import type { D1Store } from '../../inventory/store-types';
 import Objective from '../../progress/Objective';
 import { count } from '../../utils/util';
-import { D1ManifestDefinitions } from '../d1-definitions';
-import { D1RecordBook, D1RecordComponent } from '../d1-manifest-types';
+import type { D1ManifestDefinitions } from '../d1-definitions';
+import type { D1RecordBook, D1RecordComponent } from '../d1-manifest-types';
 import './record-books.scss';
 
 interface Props {

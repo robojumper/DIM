@@ -1,5 +1,5 @@
 import BungieImage, { bungieBackgroundStyle } from 'app/dim-ui/BungieImage';
-import { InGameLoadout } from 'app/loadout-drawer/loadout-types';
+import type { InGameLoadout } from 'app/loadout-drawer/loadout-types';
 import { clsx } from 'clsx';
 import styles from './InGameLoadoutIcon.m.scss';
 

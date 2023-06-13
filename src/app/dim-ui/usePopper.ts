@@ -1,20 +1,18 @@
+import type { Instance, Options, Padding, Placement } from '@popperjs/core';
 import {
   applyStyles,
   arrow,
   computeStyles,
   flip,
-  Instance,
   offset,
-  Options,
-  Padding,
-  Placement,
   popperGenerator,
   popperOffsets,
   preventOverflow,
 } from '@popperjs/core';
 import computeSidecarPosition from 'app/item-popup/sidecar-popper-modifier';
 import _ from 'lodash';
-import React, { useLayoutEffect, useRef } from 'react';
+import type React from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 // ensure this stays in sync with '$theme-tooltip-arrow-size' in '_variables.scss'
 const popperArrowSize = 8;

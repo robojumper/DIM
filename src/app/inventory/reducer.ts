@@ -1,21 +1,24 @@
 import { warnLog } from 'app/utils/log';
-import {
+import type {
   DestinyItemChangeResponse,
   DestinyItemComponent,
   DestinyProfileResponse,
-  ItemLocation,
 } from 'bungie-api-ts/destiny2';
+import { ItemLocation } from 'bungie-api-ts/destiny2';
 import { BucketHashes } from 'data/d2/generated-enums';
-import { Draft, produce } from 'immer';
+import type { Draft } from 'immer';
+import { produce } from 'immer';
 import _ from 'lodash';
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import { setCurrentAccount } from '../accounts/actions';
 import type { AccountsAction } from '../accounts/reducer';
 import * as actions from './actions';
-import { DimItem } from './item-types';
-import { AccountCurrency, DimStore } from './store-types';
-import { ItemCreationContext, makeItem } from './store/d2-item-factory';
+import type { DimItem } from './item-types';
+import type { AccountCurrency, DimStore } from './store-types';
+import type { ItemCreationContext } from './store/d2-item-factory';
+import { makeItem } from './store/d2-item-factory';
 import { createItemIndex } from './store/item-index';
 import { findItemsByBucket, getCurrentStore, getStore, getVault } from './stores-helpers';
 

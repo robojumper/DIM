@@ -1,9 +1,9 @@
 import { AssumeArmorMasterwork } from '@destinyitemmanager/dim-api-types';
-import { DimCharacterStat } from 'app/inventory/store-types';
+import type { DimCharacterStat } from 'app/inventory/store-types';
 import { armorBuckets } from 'app/search/d2-known-values';
-import { BucketHashes, StatHashes } from 'data/d2/generated-enums';
-import { DimItem, PluggableInventoryItemDefinition } from '../inventory/item-types';
-import { ProcessItem } from './process-worker/types';
+import type { BucketHashes, StatHashes } from 'data/d2/generated-enums';
+import type { DimItem, PluggableInventoryItemDefinition } from '../inventory/item-types';
+import type { ProcessItem } from './process-worker/types';
 
 export interface MinMax {
   min: number;

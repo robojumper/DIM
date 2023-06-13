@@ -1,13 +1,14 @@
-import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd';
+import type { DropResult } from '@hello-pangea/dnd';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import BungieImage from 'app/dim-ui/BungieImage';
 import { t } from 'app/i18next-t';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { AppIcon, dragHandleIcon } from 'app/shell/icons';
-import { DestinyStatDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyStatDefinition } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import _ from 'lodash';
 import React, { memo } from 'react';
-import { ArmorStatHashes, MinMaxIgnored, StatFilters, StatRanges } from '../types';
+import type { ArmorStatHashes, MinMaxIgnored, StatFilters, StatRanges } from '../types';
 import { statTierWithHalf } from '../utils';
 import styles from './TierSelect.m.scss';
 

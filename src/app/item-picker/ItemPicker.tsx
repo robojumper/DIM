@@ -8,12 +8,12 @@ import { useCallback, useDeferredValue, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Sheet from '../dim-ui/Sheet';
 import ConnectedInventoryItem from '../inventory/ConnectedInventoryItem';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import { allItemsSelector } from '../inventory/selectors';
 import { filterFactorySelector } from '../search/search-filter';
 import { itemSorterSelector } from '../settings/item-sort';
 import './ItemPicker.scss';
-import { ItemPickerState } from './item-picker';
+import type { ItemPickerState } from './item-picker';
 
 export default function ItemPicker({
   prompt,

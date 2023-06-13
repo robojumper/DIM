@@ -14,8 +14,8 @@ import { PressTip } from '../dim-ui/PressTip';
 import FactionIcon from '../progress/FactionIcon';
 import VendorItemComponent from './VendorItemComponent';
 import styles from './VendorItems.m.scss';
-import { D2Vendor } from './d2-vendors';
-import { VendorItem } from './vendor-item';
+import type { D2Vendor } from './d2-vendors';
+import type { VendorItem } from './vendor-item';
 
 function vendorItemIndex(item: VendorItem) {
   return item.key;

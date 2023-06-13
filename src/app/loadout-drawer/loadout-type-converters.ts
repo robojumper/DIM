@@ -1,11 +1,11 @@
-import { Loadout, LoadoutItem, LoadoutParameters } from '@destinyitemmanager/dim-api-types';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimItem } from 'app/inventory/item-types';
-import { SocketOverrides } from 'app/inventory/store/override-sockets';
+import type { Loadout, LoadoutItem, LoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimItem } from 'app/inventory/item-types';
+import type { SocketOverrides } from 'app/inventory/store/override-sockets';
 import { UNSET_PLUG_HASH } from 'app/loadout/known-values';
 import { emptyObject } from 'app/utils/empty';
 import { getSocketsByCategoryHash } from 'app/utils/socket-utils';
-import {
+import type {
   DestinyClass,
   DestinyLoadoutComponent,
   DestinyProfileResponse,
@@ -13,7 +13,7 @@ import {
 import { emptyPlugHashes } from 'data/d2/empty-plug-hashes';
 import { BucketHashes, SocketCategoryHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import {
+import type {
   Loadout as DimLoadout,
   LoadoutItem as DimLoadoutItem,
   InGameLoadout,

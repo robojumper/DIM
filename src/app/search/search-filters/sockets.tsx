@@ -11,7 +11,7 @@ import {
   getSocketsByCategoryHash,
   matchesCuratedRoll,
 } from 'app/utils/socket-utils';
-import { StringLookup } from 'app/utils/util-types';
+import type { StringLookup } from 'app/utils/util-types';
 import { DestinyItemSubType, DestinyRecordState } from 'bungie-api-ts/destiny2';
 import adeptWeaponHashes from 'data/d2/adept-weapon-hashes.json';
 import craftingMementos from 'data/d2/crafting-mementos.json';
@@ -26,7 +26,7 @@ import {
   DEFAULT_SHADER,
   emptySocketHashes,
 } from '../d2-known-values';
-import { FilterDefinition } from '../filter-types';
+import type { FilterDefinition } from '../filter-types';
 import { plainString } from './freeform';
 
 export const modslotFilter: FilterDefinition = {

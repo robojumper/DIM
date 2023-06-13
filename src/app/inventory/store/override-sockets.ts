@@ -4,8 +4,8 @@ import { errorLog } from 'app/utils/log';
 import { produce } from 'immer';
 import _ from 'lodash';
 import { useCallback, useState } from 'react';
-import { DimItem, DimPlug, DimSocket } from '../item-types';
-import { ItemCreationContext } from './d2-item-factory';
+import type { DimItem, DimPlug, DimSocket } from '../item-types';
+import type { ItemCreationContext } from './d2-item-factory';
 import { buildDefinedPlug } from './sockets';
 import { buildStats } from './stats';
 

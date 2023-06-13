@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import ConnectedInventoryItem from '../inventory/ConnectedInventoryItem';
 import DraggableInventoryItem from '../inventory/DraggableInventoryItem';
 import ItemPopupTrigger from '../inventory/ItemPopupTrigger';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import { moveItemToCurrentStore } from '../inventory/move-item';
 
 interface Props {

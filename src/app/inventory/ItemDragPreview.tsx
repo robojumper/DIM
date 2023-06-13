@@ -1,6 +1,6 @@
 import { usePreview } from 'react-dnd-multi-backend';
 import ConnectedInventoryItem from './ConnectedInventoryItem';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 
 /**
  * When we are using the React DnD Touch Backend (iOS < 15 only), this will

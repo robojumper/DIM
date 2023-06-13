@@ -1,4 +1,4 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { clsx } from 'clsx';
 import styles from './ItemCategoryIcon.m.scss';
 import { PressTip } from './PressTip';

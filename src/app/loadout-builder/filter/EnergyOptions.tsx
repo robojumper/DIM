@@ -1,8 +1,10 @@
 import { AssumeArmorMasterwork } from '@destinyitemmanager/dim-api-types';
-import RadioButtons, { Option } from 'app/dim-ui/RadioButtons';
+import type { Option } from 'app/dim-ui/RadioButtons';
+import RadioButtons from 'app/dim-ui/RadioButtons';
 import { t } from 'app/i18next-t';
-import { Dispatch, useCallback, useMemo } from 'react';
-import { LoadoutBuilderAction } from '../loadout-builder-reducer';
+import type { Dispatch } from 'react';
+import { useCallback, useMemo } from 'react';
+import type { LoadoutBuilderAction } from '../loadout-builder-reducer';
 import styles from './EnergyOptions.m.scss';
 
 export default function EnergyOptions({

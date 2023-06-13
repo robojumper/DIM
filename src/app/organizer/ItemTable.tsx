@@ -1,12 +1,13 @@
 import { destinyVersionSelector } from 'app/accounts/selectors';
-import { StatInfo } from 'app/compare/Compare';
+import type { StatInfo } from 'app/compare/Compare';
+import { compareSelectedItems } from 'app/compare/actions';
 import { settingSelector } from 'app/dim-api/selectors';
 import UserGuideLink from 'app/dim-ui/UserGuideLink';
 import useBulkNote from 'app/dim-ui/useBulkNote';
 import useConfirm from 'app/dim-ui/useConfirm';
 import { t, tl } from 'app/i18next-t';
 import { bulkLockItems, bulkTagItems } from 'app/inventory/bulk-actions';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import {
   allItemsSelector,
   createItemContextSelector,
@@ -16,7 +17,7 @@ import {
   storesSelector,
 } from 'app/inventory/selectors';
 import { downloadCsvFiles, importTagsNotesFromCsv } from 'app/inventory/spreadsheets';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import {
   applySocketOverrides,
   useSocketOverridesForItems,
@@ -35,26 +36,29 @@ import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { chainComparator, compareBy, reverseComparator } from 'app/utils/comparators';
 import { emptyArray, emptyObject } from 'app/utils/empty';
 import { useSetCSSVarToHeight, useShiftHeld } from 'app/utils/hooks';
-import { LookupTable, StringLookup } from 'app/utils/util-types';
+import type { LookupTable, StringLookup } from 'app/utils/util-types';
 import { hasWishListSelector, wishListFunctionSelector } from 'app/wishlists/selectors';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { ItemCategoryHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import React, { ReactNode, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Dropzone, { DropzoneOptions } from 'react-dropzone';
+import type { ReactNode } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import type { DropzoneOptions } from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 import { useSelector } from 'react-redux';
 import { getColumnSelectionId, getColumns } from './Columns';
 import EnabledColumnsSelector from './EnabledColumnsSelector';
-import ItemActions, { TagCommandInfo } from './ItemActions';
-import { itemIncludesCategories } from './filtering-utils';
-
-import { compareSelectedItems } from 'app/compare/actions';
+import type { TagCommandInfo } from './ItemActions';
+import ItemActions from './ItemActions';
 // eslint-disable-next-line css-modules/no-unused-class
-import { createPortal } from 'react-dom';
 import styles from './ItemTable.m.scss';
-import { ItemCategoryTreeNode, armorTopLevelCatHashes } from './ItemTypeSelector';
-import { ColumnDefinition, ColumnSort, Row, SortDirection } from './table-types';
+import type { ItemCategoryTreeNode } from './ItemTypeSelector';
+import { armorTopLevelCatHashes } from './ItemTypeSelector';
+import { itemIncludesCategories } from './filtering-utils';
+import type { ColumnDefinition, ColumnSort, Row } from './table-types';
+import { SortDirection } from './table-types';
 
 const possibleStyles = styles as unknown as StringLookup<string>;
 

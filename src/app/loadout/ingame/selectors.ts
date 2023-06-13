@@ -1,5 +1,5 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimItem } from 'app/inventory/item-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimItem } from 'app/inventory/item-types';
 import {
   allItemsSelector,
   createItemContextSelector,
@@ -7,10 +7,10 @@ import {
   storesSelector,
   unlockedPlugSetItemsSelector,
 } from 'app/inventory/selectors';
-import { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
+import type { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
 import { getStore } from 'app/inventory/stores-helpers';
 import { getItemsFromLoadoutItems } from 'app/loadout-drawer/loadout-item-conversion';
-import {
+import type {
   InGameLoadout,
   Loadout,
   ResolvedLoadoutItem,
@@ -23,7 +23,7 @@ import {
 } from 'app/loadout-drawer/loadout-utils';
 import { loadoutsSelector } from 'app/loadout-drawer/loadouts-selector';
 import { d2ManifestSelector } from 'app/manifest/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { emptyArray } from 'app/utils/empty';
 import { t } from 'i18next';
 import { createSelector } from 'reselect';

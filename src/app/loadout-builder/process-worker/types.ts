@@ -1,4 +1,4 @@
-import { ArmorStatHashes, ArmorStats, LockableBucketHash } from '../types';
+import type { ArmorStatHashes, ArmorStats, LockableBucketHash } from '../types';
 
 export interface ProcessItem {
   id: string;

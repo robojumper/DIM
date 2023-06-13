@@ -1,5 +1,5 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
 import memoizeOne from 'memoize-one';
 
 const buildTemplateLookup = memoizeOne((defs: D2ManifestDefinitions) => {

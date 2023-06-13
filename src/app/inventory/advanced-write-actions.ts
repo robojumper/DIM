@@ -1,31 +1,33 @@
 import { currentAccountSelector } from 'app/accounts/selectors';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t } from 'app/i18next-t';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { unlockedItemsForCharacterOrProfilePlugSet } from 'app/records/plugset-helpers';
 import { DEFAULT_ORNAMENTS, DEFAULT_SHADER } from 'app/search/d2-known-values';
 import { get, set } from 'app/storage/idb-keyval';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { DimError } from 'app/utils/dim-error';
-import { Destiny2CoreSettings } from 'bungie-api-ts/core';
-import {
+import type { Destiny2CoreSettings } from 'bungie-api-ts/core';
+import type {
   AwaAuthorizationResult,
-  AwaType,
-  AwaUserSelection,
   DestinyInventoryItemDefinition,
   DestinyItemChangeResponse,
   DestinyProfileResponse,
+} from 'bungie-api-ts/destiny2';
+import {
+  AwaType,
+  AwaUserSelection,
   DestinySocketArrayType,
   insertSocketPlug,
   insertSocketPlugFree,
 } from 'bungie-api-ts/destiny2';
 import { ItemCategoryHashes } from 'data/d2/generated-enums';
-import { DestinyAccount } from '../accounts/destiny-account';
+import type { DestinyAccount } from '../accounts/destiny-account';
 import { authenticatedHttpClient } from '../bungie-api/bungie-service-helper';
 import { requestAdvancedWriteActionToken } from '../bungie-api/destiny2-api';
 import { showNotification } from '../notifications/notifications';
 import { awaItemChanged } from './actions';
-import { DimItem, DimSocket } from './item-types';
+import type { DimItem, DimSocket } from './item-types';
 import {
   createItemContextSelector,
   currentStoreSelector,

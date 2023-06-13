@@ -1,7 +1,7 @@
 import 'app/dim-ui/EnergyMeterIncrements.scss';
 import { t } from 'app/i18next-t';
 import { insertPlug } from 'app/inventory/advanced-write-actions';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { getEnergyUpgradeHashes, sumModCosts } from 'app/inventory/store/energy';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { showNotification } from 'app/notifications/notifications';

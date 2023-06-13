@@ -1,4 +1,5 @@
-import Dropdown, { Option } from 'app/dim-ui/Dropdown';
+import type { Option } from 'app/dim-ui/Dropdown';
+import Dropdown from 'app/dim-ui/Dropdown';
 import { PressTip } from 'app/dim-ui/PressTip';
 import { t } from 'app/i18next-t';
 import { AppIcon, clearIcon, disabledIcon, downloadIcon, helpIcon } from 'app/shell/icons';

@@ -1,10 +1,10 @@
 import { t } from 'app/i18next-t';
-import { DimItem, DimPlug, DimSocket } from 'app/inventory/item-types';
+import type { DimItem, DimPlug, DimSocket } from 'app/inventory/item-types';
 import Plug from 'app/item-popup/Plug';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { compareBy } from 'app/utils/comparators';
 import { wishListRollsForItemHashSelector } from 'app/wishlists/selectors';
-import { WishListRoll } from 'app/wishlists/types';
+import type { WishListRoll } from 'app/wishlists/types';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import styles from './AllWishlistRolls.m.scss';

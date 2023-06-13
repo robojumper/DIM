@@ -8,11 +8,8 @@ import { t } from 'app/i18next-t';
 import ItemIcon from 'app/inventory/ItemIcon';
 import { allItemsSelector, createItemContextSelector } from 'app/inventory/selectors';
 import { makeFakeItem } from 'app/inventory/store/d2-item-factory';
-import {
-  SocketOverrides,
-  applySocketOverrides,
-  useSocketOverrides,
-} from 'app/inventory/store/override-sockets';
+import type { SocketOverrides } from 'app/inventory/store/override-sockets';
+import { applySocketOverrides, useSocketOverrides } from 'app/inventory/store/override-sockets';
 import { getEvent, getSeason } from 'app/inventory/store/season';
 import EmblemPreview from 'app/item-popup/EmblemPreview';
 import { AmmoIcon, ItemTypeName } from 'app/item-popup/ItemPopupHeader';

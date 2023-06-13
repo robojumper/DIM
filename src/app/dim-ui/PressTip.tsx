@@ -1,16 +1,9 @@
-import { Placement } from '@popperjs/core';
+import type { Placement } from '@popperjs/core';
 import { tempContainer } from 'app/utils/temp-container';
 import { clsx } from 'clsx';
 import _ from 'lodash';
-import React, {
-  MutableRefObject,
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import type { MutableRefObject } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './PressTip.m.scss';
 import { usePopper } from './usePopper';

@@ -1,13 +1,11 @@
 import { trackedTriumphsSelector } from 'app/dim-api/selectors';
 import CollapsibleTitle from 'app/dim-ui/CollapsibleTitle';
 import { createItemContextSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
-import {
-  DimPresentationNode,
-  DimRecord,
-  toPresentationNodeTree,
-} from 'app/records/presentation-nodes';
-import { DestinyPresentationNodeDefinition, DestinyRecordState } from 'bungie-api-ts/destiny2';
+import type { DimStore } from 'app/inventory/store-types';
+import type { DimPresentationNode, DimRecord } from 'app/records/presentation-nodes';
+import { toPresentationNodeTree } from 'app/records/presentation-nodes';
+import type { DestinyPresentationNodeDefinition } from 'bungie-api-ts/destiny2';
+import { DestinyRecordState } from 'bungie-api-ts/destiny2';
 import seasonalChallengesInfo from 'data/d2/seasonal-challenges.json';
 import { useSelector } from 'react-redux';
 import { PursuitsGroup } from './Pursuits';

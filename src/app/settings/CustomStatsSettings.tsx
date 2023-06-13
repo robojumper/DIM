@@ -1,4 +1,4 @@
-import { CustomStatDef, CustomStatWeights } from '@destinyitemmanager/dim-api-types';
+import type { CustomStatDef, CustomStatWeights } from '@destinyitemmanager/dim-api-types';
 import { customStatsSelector } from 'app/dim-api/selectors';
 import BungieImage from 'app/dim-ui/BungieImage';
 import ClassIcon from 'app/dim-ui/ClassIcon';

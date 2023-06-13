@@ -162,6 +162,7 @@
     "eqeqeq": ["error", "always"],
     "no-return-await": "off",
     "@typescript-eslint/return-await": ["error", "in-try-catch"],
+    "@typescript-eslint/consistent-type-imports": "error",
     "prefer-regex-literals": "error",
     "prefer-promise-reject-errors": "error",
     "require-atomic-updates": "off",

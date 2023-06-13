@@ -1,10 +1,11 @@
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { reportException } from 'app/utils/exceptions';
-import { DestinyManifestComponentName } from 'bungie-api-ts/destiny2';
-import { HashLookupFailure, ManifestDefinitions } from '../destiny2/definitions';
+import type { DestinyManifestComponentName } from 'bungie-api-ts/destiny2';
+import type { ManifestDefinitions } from '../destiny2/definitions';
+import { HashLookupFailure } from '../destiny2/definitions';
 import { setD1Manifest } from '../manifest/actions';
 import { getManifest } from '../manifest/d1-manifest-service';
-import {
+import type {
   D1ActivityDefinition,
   D1ActivityTypeDefinition,
   D1ClassDefinition,

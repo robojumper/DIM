@@ -1,6 +1,6 @@
 import { factionItemAligns } from 'app/destiny1/d1-factions';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import {
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type {
   D1Item,
   DimItem,
   DimMasterwork,
@@ -8,7 +8,7 @@ import {
   DimSocket,
   PluggableInventoryItemDefinition,
 } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { getSeason } from 'app/inventory/store/season';
 import {
   EXOTIC_CATALYST_TRAIT,
@@ -18,11 +18,10 @@ import {
   modsWithConditionalStats,
 } from 'app/search/d2-known-values';
 import { damageNamesByEnum } from 'app/search/search-filter-values';
-import modSocketMetadata, {
-  ModSocketMetadata,
-  modTypeTagByPlugCategoryHash,
-} from 'app/search/specialty-modslots';
-import { DamageType, DestinyClass, DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import type { ModSocketMetadata } from 'app/search/specialty-modslots';
+import modSocketMetadata, { modTypeTagByPlugCategoryHash } from 'app/search/specialty-modslots';
+import type { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import { DamageType, DestinyClass } from 'bungie-api-ts/destiny2';
 import adeptWeaponHashes from 'data/d2/adept-weapon-hashes.json';
 import enhancedIntrinsics from 'data/d2/crafting-enhanced-intrinsics';
 import { BucketHashes, PlugCategoryHashes, StatHashes } from 'data/d2/generated-enums';

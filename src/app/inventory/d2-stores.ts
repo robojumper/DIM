@@ -1,7 +1,7 @@
 import { getCurrentHub, startTransaction } from '@sentry/browser';
-import { Transaction } from '@sentry/types';
+import type { Transaction } from '@sentry/types';
 import { handleAuthErrors } from 'app/accounts/actions';
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { getPlatforms } from 'app/accounts/platforms';
 import { currentAccountSelector } from 'app/accounts/selectors';
 import { loadClarity } from 'app/clarity/descriptions/loadDescriptions';
@@ -11,21 +11,22 @@ import { inGameLoadoutLoaded } from 'app/loadout/ingame/actions';
 import { loadCoreSettings } from 'app/manifest/actions';
 import { d2ManifestSelector, manifestSelector } from 'app/manifest/selectors';
 import { get, set } from 'app/storage/idb-keyval';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { DimError } from 'app/utils/dim-error';
 import { errorLog, infoLog, timer, warnLog } from 'app/utils/log';
-import { DestinyItemComponent, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { DestinyItemComponent, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 import { BucketHashes } from 'data/d2/generated-enums';
 import { getCharacters as d1GetCharacters } from '../bungie-api/destiny1-api';
 import { getCharacters, getStores } from '../bungie-api/destiny2-api';
 import { bungieErrorToaster } from '../bungie-api/error-toaster';
-import { D2ManifestDefinitions, getDefinitions } from '../destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from '../destiny2/d2-definitions';
+import { getDefinitions } from '../destiny2/d2-definitions';
 import { bungieNetPath } from '../dim-ui/BungieImage';
 import { showNotification } from '../notifications/notifications';
 import { loadingTracker } from '../shell/loading-tracker';
 import { reportException } from '../utils/exceptions';
+import type { CharacterInfo } from './actions';
 import {
-  CharacterInfo,
   charactersUpdated,
   error,
   loadNewItems,
@@ -35,9 +36,10 @@ import {
 } from './actions';
 import { cleanInfos } from './dim-item-info';
 import { d2BucketsSelector, storesLoadedSelector, storesSelector } from './selectors';
-import { DimStore } from './store-types';
+import type { DimStore } from './store-types';
 import { getCharacterStatsData as getD1CharacterStatsData } from './store/character-utils';
-import { ItemCreationContext, processItems } from './store/d2-item-factory';
+import type { ItemCreationContext } from './store/d2-item-factory';
+import { processItems } from './store/d2-item-factory';
 import { getCharacterStatsData, makeCharacter, makeVault } from './store/d2-store-factory';
 import { resetItemIndexGenerator } from './store/item-index';
 

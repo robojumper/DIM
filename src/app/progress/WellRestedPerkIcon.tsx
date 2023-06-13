@@ -1,6 +1,6 @@
 import { useD2Definitions } from 'app/manifest/selectors';
 import { WELL_RESTED_PERK } from 'app/search/d2-known-values';
-import {
+import type {
   DestinyCharacterProgressionComponent,
   DestinySeasonDefinition,
   DestinySeasonPassDefinition,

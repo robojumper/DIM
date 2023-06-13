@@ -1,4 +1,4 @@
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 
 /**
  * a list of plugs, plus some metadata about:

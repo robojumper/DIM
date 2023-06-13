@@ -7,7 +7,7 @@ import useConfirm from 'app/dim-ui/useConfirm';
 import { startFarming } from 'app/farming/actions';
 import { t } from 'app/i18next-t';
 import { allItemsSelector, bucketsSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { powerLevelSelector } from 'app/inventory/store/selectors';
 import {
   itemLevelingLoadout,
@@ -16,7 +16,7 @@ import {
 } from 'app/loadout-drawer/auto-loadouts';
 import { applyLoadout } from 'app/loadout-drawer/loadout-apply';
 import { editLoadout } from 'app/loadout-drawer/loadout-events';
-import { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
+import type { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
 import { isMissingItems, newLoadout } from 'app/loadout-drawer/loadout-utils';
 import { makeRoomForPostmaster, totalPostmasterItems } from 'app/loadout-drawer/postmaster';
 import { previousLoadoutSelector } from 'app/loadout-drawer/selectors';
@@ -39,7 +39,7 @@ import {
 } from 'app/shell/icons';
 import { querySelector, useIsPhonePortrait } from 'app/shell/selectors';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { queueAction } from 'app/utils/action-queue';
 import { isiOSBrowser } from 'app/utils/browsers';
 import { emptyArray } from 'app/utils/empty';

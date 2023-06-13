@@ -1,29 +1,31 @@
 import { AlertIcon } from 'app/dim-ui/AlertIcon';
 import { t, tl } from 'app/i18next-t';
+import type { LoadoutApplyState } from 'app/loadout-drawer/loadout-apply-state';
 import {
   LoadoutApplyPhase,
-  LoadoutApplyState,
   LoadoutItemState,
   LoadoutModState,
   LoadoutSocketOverrideState,
 } from 'app/loadout-drawer/loadout-apply-state';
-import { InGameLoadout, Loadout, isInGameLoadout } from 'app/loadout-drawer/loadout-types';
+import type { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
+import { isInGameLoadout } from 'app/loadout-drawer/loadout-types';
 import InGameLoadoutIcon from 'app/loadout/ingame/InGameLoadoutIcon';
 import { useD2Definitions } from 'app/manifest/selectors';
-import { NotificationError, NotifyInput } from 'app/notifications/notifications';
+import type { NotifyInput } from 'app/notifications/notifications';
+import { NotificationError } from 'app/notifications/notifications';
 import { AppIcon, faCheckCircle, faExclamationCircle, refreshIcon } from 'app/shell/icons';
 import { DimError } from 'app/utils/dim-error';
 import { useThrottledSubscription } from 'app/utils/hooks';
-import { Observable } from 'app/utils/observable';
-import { LookupTable } from 'app/utils/util-types';
+import type { Observable } from 'app/utils/observable';
+import type { LookupTable } from 'app/utils/util-types';
 import { clsx } from 'clsx';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import ConnectedInventoryItem from './ConnectedInventoryItem';
 import ItemIcon, { DefItemIcon } from './ItemIcon';
 import styles from './MoveNotifications.m.scss';
-import { DimItem } from './item-types';
-import { DimStore } from './store-types';
+import type { DimItem } from './item-types';
+import type { DimStore } from './store-types';
 
 /** How long to leave the notification up after it's done. */
 const lingerMs = 2000;

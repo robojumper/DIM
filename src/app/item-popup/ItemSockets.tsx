@@ -1,6 +1,6 @@
 import { Portal } from 'app/utils/temp-container';
 import { memo, useState } from 'react';
-import { DimItem, DimPlug, DimSocket } from '../inventory/item-types';
+import type { DimItem, DimPlug, DimSocket } from '../inventory/item-types';
 import './ItemSockets.scss';
 import ItemSocketsGeneral from './ItemSocketsGeneral';
 import ItemSocketsWeapons from './ItemSocketsWeapons';

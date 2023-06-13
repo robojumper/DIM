@@ -1,4 +1,4 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { isPluggableItem } from 'app/inventory/store/sockets';
 import { isArtifice } from 'app/item-triage/triage-utils';
 import { calculateAssumedItemEnergy } from 'app/loadout/armor-upgrade-utils';
@@ -9,17 +9,19 @@ import {
 import { MAX_ARMOR_ENERGY_CAPACITY, armorStats } from 'app/search/d2-known-values';
 import { compareBy } from 'app/utils/comparators';
 import _ from 'lodash';
-import { DimItem, PluggableInventoryItemDefinition } from '../../inventory/item-types';
+import type { DimItem, PluggableInventoryItemDefinition } from '../../inventory/item-types';
 import {
   getModTypeTagByPlugCategoryHash,
   getSpecialtySocketMetadatas,
 } from '../../utils/item-utils';
-import { AutoModData, ProcessArmorSet, ProcessItem, ProcessMod } from '../process-worker/types';
+import type {
+  AutoModData,
+  ProcessArmorSet,
+  ProcessItem,
+  ProcessMod,
+} from '../process-worker/types';
+import type { ArmorEnergyRules, ArmorSet, AutoModDefs, ItemGroup } from '../types';
 import {
-  ArmorEnergyRules,
-  ArmorSet,
-  AutoModDefs,
-  ItemGroup,
   artificeSocketReusablePlugSetHash,
   artificeStatBoost,
   generalSocketReusablePlugSetHash,

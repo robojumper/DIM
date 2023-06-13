@@ -1,6 +1,6 @@
-import { CustomStatDef, DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type { CustomStatDef, DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import { StoreIcon } from 'app/character-tile/StoreIcon';
-import { StatInfo } from 'app/compare/Compare';
+import type { StatInfo } from 'app/compare/Compare';
 import BungieImage from 'app/dim-ui/BungieImage';
 import ElementIcon from 'app/dim-ui/ElementIcon';
 import { KillTrackerInfo } from 'app/dim-ui/KillTracker';
@@ -11,8 +11,9 @@ import ItemIcon, { DefItemIcon } from 'app/inventory/ItemIcon';
 import ItemPopupTrigger from 'app/inventory/ItemPopupTrigger';
 import NewItemIndicator from 'app/inventory/NewItemIndicator';
 import TagIcon from 'app/inventory/TagIcon';
-import { TagValue, tagConfig } from 'app/inventory/dim-item-info';
-import { D1Item, DimItem, DimSocket } from 'app/inventory/item-types';
+import type { TagValue } from 'app/inventory/dim-item-info';
+import { tagConfig } from 'app/inventory/dim-item-info';
+import type { D1Item, DimItem, DimSocket } from 'app/inventory/item-types';
 import { storesSelector } from 'app/inventory/selectors';
 import { source } from 'app/inventory/spreadsheets';
 import { getEvent, getSeason } from 'app/inventory/store/season';
@@ -23,8 +24,9 @@ import NotesArea from 'app/item-popup/NotesArea';
 import { DimPlugTooltip } from 'app/item-popup/PlugTooltip';
 import { recoilValue } from 'app/item-popup/RecoilStat';
 import { editLoadout } from 'app/loadout-drawer/loadout-events';
-import { InGameLoadout, Loadout, isInGameLoadout } from 'app/loadout-drawer/loadout-types';
-import { LoadoutsByItem } from 'app/loadout-drawer/selectors';
+import type { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
+import { isInGameLoadout } from 'app/loadout-drawer/loadout-types';
+import type { LoadoutsByItem } from 'app/loadout-drawer/selectors';
 import InGameLoadoutIcon from 'app/loadout/ingame/InGameLoadoutIcon';
 import { quoteFilterString } from 'app/search/query-parser';
 import { statHashByName } from 'app/search/search-filter-values';
@@ -37,7 +39,7 @@ import {
   thumbsDownIcon,
   thumbsUpIcon,
 } from 'app/shell/icons';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { compareBy } from 'app/utils/comparators';
 import {
   getInterestingSocketMetadatas,
@@ -57,8 +59,8 @@ import {
   isEnhancedPerk,
   isUsedArmorModSocket,
 } from 'app/utils/socket-utils';
-import { LookupTable } from 'app/utils/util-types';
-import { InventoryWishListRoll } from 'app/wishlists/wishlists';
+import type { LookupTable } from 'app/utils/util-types';
+import type { InventoryWishListRoll } from 'app/wishlists/wishlists';
 import { clsx } from 'clsx';
 import { D2EventInfo } from 'data/d2/d2-event-info';
 import { StatHashes } from 'data/d2/generated-enums';
@@ -69,7 +71,8 @@ import { useSelector } from 'react-redux';
 import { createCustomStatColumns } from './CustomStatColumns';
 // eslint-disable-next-line css-modules/no-unused-class
 import styles from './ItemTable.m.scss';
-import { ColumnDefinition, ColumnGroup, SortDirection, Value } from './table-types';
+import type { ColumnDefinition, ColumnGroup, Value } from './table-types';
+import { SortDirection } from './table-types';
 
 /**
  * Get the ID used to select whether this column is shown or not.

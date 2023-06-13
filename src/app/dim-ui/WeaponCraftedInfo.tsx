@@ -1,5 +1,5 @@
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { getCraftedSocket } from 'app/inventory/store/crafted';
 import Objective from 'app/progress/Objective';
 import { percent, percentWithSingleDecimal } from 'app/shell/formatters';

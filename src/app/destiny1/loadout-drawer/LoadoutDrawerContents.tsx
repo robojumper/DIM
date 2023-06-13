@@ -1,16 +1,16 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t } from 'app/i18next-t';
 import type { InventoryBucket } from 'app/inventory/inventory-buckets';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { bucketsSelector, storesSelector } from 'app/inventory/selectors';
 import { getStore } from 'app/inventory/stores-helpers';
 import { showItemPicker } from 'app/item-picker/item-picker';
+import type { LoadoutUpdateFunction } from 'app/loadout-drawer/loadout-drawer-reducer';
 import {
-  LoadoutUpdateFunction,
   fillLoadoutFromEquipped,
   fillLoadoutFromUnequipped,
 } from 'app/loadout-drawer/loadout-drawer-reducer';
-import { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { findSameLoadoutItemIndex, fromEquippedTypes } from 'app/loadout-drawer/loadout-utils';
 import { useD1Definitions } from 'app/manifest/selectors';
 import { D1BucketHashes } from 'app/search/d1-known-values';
@@ -21,7 +21,7 @@ import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { D1ManifestDefinitions } from '../d1-definitions';
+import type { D1ManifestDefinitions } from '../d1-definitions';
 import LoadoutDrawerBucket from './LoadoutDrawerBucket';
 
 const loadoutTypes: (BucketHashes | D1BucketHashes)[] = [

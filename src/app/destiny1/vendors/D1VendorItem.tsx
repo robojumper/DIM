@@ -2,7 +2,7 @@ import { clsx } from 'clsx';
 import BungieImage from '../../dim-ui/BungieImage';
 import { VendorItemDisplay } from '../../vendors/VendorItemComponent';
 import styles from './D1VendorItem.m.scss';
-import { VendorCost, VendorSaleItem } from './vendor.service';
+import type { VendorCost, VendorSaleItem } from './vendor.service';
 
 interface Props {
   saleItem: VendorSaleItem;

@@ -1,4 +1,4 @@
-import { Search } from '@destinyitemmanager/dim-api-types';
+import type { Search } from '@destinyitemmanager/dim-api-types';
 import { saveSearch, searchDeleted } from 'app/dim-api/basic-actions';
 import { recentSearchesSelector } from 'app/dim-api/selectors';
 import { t } from 'app/i18next-t';

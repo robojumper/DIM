@@ -1,8 +1,10 @@
 import useResizeObserver from '@react-hook/resize-observer';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { Subscription, useSubscription } from 'use-subscription';
-import { EventBus, Observable } from './observable';
+import type React from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import type { Subscription } from 'use-subscription';
+import { useSubscription } from 'use-subscription';
+import type { EventBus, Observable } from './observable';
 
 /**
  * Subscribe to an EventBus. Use useCallback on the subscribeFn to prevent it

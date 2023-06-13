@@ -1,4 +1,4 @@
-import { LookupTable } from 'app/utils/util-types';
+import type { LookupTable } from 'app/utils/util-types';
 import { PlugCategoryHashes } from 'data/d2/generated-enums';
 
 export interface ModSocketMetadata {

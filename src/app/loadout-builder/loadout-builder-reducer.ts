@@ -1,20 +1,24 @@
-import {
+import type {
   AssumeArmorMasterwork,
-  defaultLoadoutParameters,
   LoadoutParameters,
   StatConstraint,
 } from '@destinyitemmanager/dim-api-types';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import { defaultLoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import {
-  savedLoadoutParametersSelector,
   savedLoStatConstraintsByClassSelector,
+  savedLoadoutParametersSelector,
 } from 'app/dim-api/selectors';
 import { t } from 'app/i18next-t';
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { isPluggableItem } from 'app/inventory/store/sockets';
 import { getCurrentStore } from 'app/inventory/stores-helpers';
-import { Loadout, ResolvedLoadoutItem, ResolvedLoadoutMod } from 'app/loadout-drawer/loadout-types';
+import type {
+  Loadout,
+  ResolvedLoadoutItem,
+  ResolvedLoadoutMod,
+} from 'app/loadout-drawer/loadout-types';
 import {
   createSubclassDefaultSocketOverrides,
   findItemForLoadout,
@@ -37,14 +41,8 @@ import _ from 'lodash';
 import { useCallback, useMemo, useReducer } from 'react';
 import { useSelector } from 'react-redux';
 import { statFiltersFromLoadoutParamaters, statOrderFromLoadoutParameters } from './loadout-params';
-import {
-  ArmorSet,
-  ArmorStatHashes,
-  ExcludedItems,
-  LockableBucketHashes,
-  PinnedItems,
-  StatFilters,
-} from './types';
+import type { ArmorSet, ArmorStatHashes, ExcludedItems, PinnedItems, StatFilters } from './types';
+import { LockableBucketHashes } from './types';
 
 interface LoadoutBuilderUI {
   modPicker: {

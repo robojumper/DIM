@@ -1,7 +1,7 @@
 import { PressTip } from 'app/dim-ui/PressTip';
-import { InventoryBucket, InventoryBuckets } from 'app/inventory/inventory-buckets';
+import type { InventoryBucket, InventoryBuckets } from 'app/inventory/inventory-buckets';
 import { bucketsSelector, currentStoreSelector, vaultSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { findItemsByBucket } from 'app/inventory/stores-helpers';
 import {
   MaterialCountsTooltip,
@@ -9,7 +9,7 @@ import {
 } from 'app/material-counts/MaterialCountsWrappers';
 import { useIsPhonePortrait } from 'app/shell/selectors';
 import { emptyObject } from 'app/utils/empty';
-import { LookupTable } from 'app/utils/util-types';
+import type { LookupTable } from 'app/utils/util-types';
 import { clsx } from 'clsx';
 import { BucketHashes } from 'data/d2/generated-enums';
 import vaultIcon from 'destiny-icons/armor_types/helmet.svg';

@@ -2,7 +2,7 @@ import BucketIcon from 'app/dim-ui/svgs/BucketIcon';
 import { clsx } from 'clsx';
 import React from 'react';
 import styles from './ItemPowerSet.m.scss';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 
 export function ItemPowerSet({ items, powerFloor }: { items: DimItem[]; powerFloor: number }) {
   let lastSort: string | undefined;

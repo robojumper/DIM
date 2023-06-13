@@ -3,10 +3,10 @@ import { itemCanBeEquippedBy } from 'app/utils/item-utils';
 import { uniqBy } from 'app/utils/util';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import { D1Item } from '../../inventory/item-types';
-import { D1Store, DimStore } from '../../inventory/store-types';
-import { Vendor } from '../vendors/vendor.service';
-import {
+import type { D1Item } from '../../inventory/item-types';
+import type { D1Store, DimStore } from '../../inventory/store-types';
+import type { Vendor } from '../vendors/vendor.service';
+import type {
   ArmorSet,
   ArmorTypes,
   D1ItemWithNormalStats,

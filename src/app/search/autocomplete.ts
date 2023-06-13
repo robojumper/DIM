@@ -1,11 +1,12 @@
-import { Search } from '@destinyitemmanager/dim-api-types';
+import type { Search } from '@destinyitemmanager/dim-api-types';
 import { t } from 'app/i18next-t';
 import { chainComparator, compareBy, reverseComparator } from 'app/utils/comparators';
 import { uniqBy } from 'app/utils/util';
 import _ from 'lodash';
-import { ArmoryEntry, getArmorySuggestions } from './armory-search';
+import type { ArmoryEntry } from './armory-search';
+import { getArmorySuggestions } from './armory-search';
 import { QueryLexerOpenQuotesError, lexer, makeCommentString, parseQuery } from './query-parser';
-import { FiltersMap, SearchConfig, Suggestion } from './search-config';
+import type { FiltersMap, SearchConfig, Suggestion } from './search-config';
 import freeformFilters, { plainString } from './search-filters/freeform';
 
 /** The autocompleter/dropdown will suggest different types of searches */

@@ -1,12 +1,12 @@
 import { SheetHorizontalScrollContainer } from 'app/dim-ui/SheetHorizontalScrollContainer';
 import { useHotkey } from 'app/hotkeys/useHotkey';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import React from 'react';
 import PlugDef from '../loadout-ui/PlugDef';
 import { createGetModRenderKey } from '../mod-utils';
 import styles from './Footer.m.scss';
-import { PlugSet } from './types';
+import type { PlugSet } from './types';
 
 interface Props {
   isPhonePortrait: boolean;

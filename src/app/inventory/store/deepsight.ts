@@ -3,7 +3,7 @@ import { socketContainsPlugWithCategory } from 'app/utils/socket-utils';
 import { DestinyRecordState } from 'bungie-api-ts/destiny2';
 import { resonantElementTagsByObjectiveHash } from 'data/d2/crafting-resonant-elements';
 import { PlugCategoryHashes } from 'data/d2/generated-enums';
-import { DimItem, DimSocket } from '../item-types';
+import type { DimItem, DimSocket } from '../item-types';
 
 export const resonantElementObjectiveHashes = Object.keys(resonantElementTagsByObjectiveHash).map(
   (objectiveHashStr) => parseInt(objectiveHashStr, 10)

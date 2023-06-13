@@ -1,16 +1,16 @@
-import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
-import {
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type {
   D1ActivityComponent,
   D1FactionDefinition,
   D1RecordBook,
 } from 'app/destiny1/d1-manifest-types';
-import {
+import type {
   DestinyClass,
   DestinyColor,
   DestinyDisplayPropertiesDefinition,
   DestinyProgression,
 } from 'bungie-api-ts/destiny2';
-import { D1Item, DimItem } from './item-types';
+import type { D1Item, DimItem } from './item-types';
 
 /**
  * A generic DIM character or vault - a "store" of items. This completely

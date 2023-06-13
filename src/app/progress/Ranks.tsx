@@ -1,6 +1,6 @@
 import { rankProgressionHashesSelector } from 'app/manifest/selectors';
-import { LookupTable } from 'app/utils/util-types';
-import { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { LookupTable } from 'app/utils/util-types';
+import type { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 import { ProgressionHashes } from 'data/d2/generated-enums';
 import { useSelector } from 'react-redux';
 import PursuitGrid from './PursuitGrid';

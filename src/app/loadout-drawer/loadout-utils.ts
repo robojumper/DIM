@@ -1,12 +1,12 @@
-import { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
-import { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { bungieNetPath } from 'app/dim-ui/BungieImage';
 import { t } from 'app/i18next-t';
-import { BucketSortType } from 'app/inventory/inventory-buckets';
+import type { BucketSortType } from 'app/inventory/inventory-buckets';
 import { allItemsSelector } from 'app/inventory/selectors';
-import { DimCharacterStat, DimStore } from 'app/inventory/store-types';
-import { SocketOverrides } from 'app/inventory/store/override-sockets';
+import type { DimCharacterStat, DimStore } from 'app/inventory/store-types';
+import type { SocketOverrides } from 'app/inventory/store/override-sockets';
 import { isPluggableItem } from 'app/inventory/store/sockets';
 import { findItemsByBucket, getCurrentStore, getStore } from 'app/inventory/stores-helpers';
 import { isLoadoutBuilderItem } from 'app/loadout/item-utils';
@@ -33,19 +33,24 @@ import {
   subclassAbilitySocketCategoryHashes,
 } from 'app/utils/socket-utils';
 import { weakMemoize } from 'app/utils/util';
-import { HashLookup, LookupTable } from 'app/utils/util-types';
-import {
-  DestinyClass,
+import type { HashLookup, LookupTable } from 'app/utils/util-types';
+import type {
   DestinyInventoryItemDefinition,
   DestinyLoadoutItemComponent,
 } from 'bungie-api-ts/destiny2';
+import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { BucketHashes, SocketCategoryHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { v4 as uuidv4 } from 'uuid';
 import { D2Categories } from '../destiny2/d2-bucket-categories';
-import { DimItem, PluggableInventoryItemDefinition } from '../inventory/item-types';
-import { Loadout, LoadoutItem, ResolvedLoadoutItem, ResolvedLoadoutMod } from './loadout-types';
+import type { DimItem, PluggableInventoryItemDefinition } from '../inventory/item-types';
+import type {
+  Loadout,
+  LoadoutItem,
+  ResolvedLoadoutItem,
+  ResolvedLoadoutMod,
+} from './loadout-types';
 
 // We don't want to prepopulate the loadout with D1 cosmetics
 export const fromEquippedTypes: (BucketHashes | D1BucketHashes)[] = [

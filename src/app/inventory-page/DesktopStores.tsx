@@ -1,8 +1,8 @@
 import { itemPop } from 'app/dim-ui/scroll';
 import { t } from 'app/i18next-t';
-import { InventoryBucket, InventoryBuckets } from 'app/inventory/inventory-buckets';
+import type { InventoryBucket, InventoryBuckets } from 'app/inventory/inventory-buckets';
 import { locateItem$ } from 'app/inventory/locate-item';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { findItemsByBucket, getCurrentStore, getVault } from 'app/inventory/stores-helpers';
 import ItemFeedSidebar from 'app/item-feed/ItemFeedSidebar';
 import { useSetSetting } from 'app/settings/hooks';

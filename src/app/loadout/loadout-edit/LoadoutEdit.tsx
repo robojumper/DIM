@@ -1,17 +1,17 @@
-import { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t } from 'app/i18next-t';
-import { InventoryBucket } from 'app/inventory/inventory-buckets';
-import { DimItem } from 'app/inventory/item-types';
+import type { InventoryBucket } from 'app/inventory/inventory-buckets';
+import type { DimItem } from 'app/inventory/item-types';
 import {
   allItemsSelector,
   artifactUnlocksSelector,
   createItemContextSelector,
   profileResponseSelector,
 } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
+import type { LoadoutUpdateFunction } from 'app/loadout-drawer/loadout-drawer-reducer';
 import {
-  LoadoutUpdateFunction,
   applySocketOverrides,
   changeClearMods,
   clearArtifactUnlocks,
@@ -31,7 +31,7 @@ import {
   updateMods,
   updateModsByBucket,
 } from 'app/loadout-drawer/loadout-drawer-reducer';
-import { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { getUnequippedItemsForLoadout } from 'app/loadout-drawer/loadout-utils';
 import { getItemsAndSubclassFromLoadout, loadoutPower } from 'app/loadout/LoadoutView';
 import { LoadoutArtifactUnlocks, LoadoutMods } from 'app/loadout/loadout-ui/LoadoutMods';

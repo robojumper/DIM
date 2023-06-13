@@ -12,7 +12,7 @@ import { useDefinitions } from 'app/manifest/selectors';
 import { ActivityModifier } from 'app/progress/ActivityModifier';
 import Objective from 'app/progress/Objective';
 import { Reward } from 'app/progress/Reward';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { getItemKillTrackerInfo, isD1Item } from 'app/utils/item-utils';
 import { ItemCategoryHashes } from 'data/d2/generated-enums';
 import helmetIcon from 'destiny-icons/armor_types/helmet.svg';
@@ -21,7 +21,7 @@ import handCannonIcon from 'destiny-icons/weapons/hand_cannon.svg';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BungieImage from '../dim-ui/BungieImage';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import { AppIcon, faCheck } from '../shell/icons';
 import ApplyPerkSelection from './ApplyPerkSelection';
 import EmblemPreview from './EmblemPreview';
@@ -33,7 +33,7 @@ import ItemSockets from './ItemSockets';
 import ItemStats from './ItemStats';
 import ItemTalentGrid from './ItemTalentGrid';
 import MetricCategories from './MetricCategories';
-import { ItemPopupExtraInfo } from './item-popup';
+import type { ItemPopupExtraInfo } from './item-popup';
 
 // TODO: probably need to load manifest. We can take a lot of properties off the item if we just load the definition here.
 export default function ItemDetails({

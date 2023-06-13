@@ -1,6 +1,6 @@
-import { DestinyVersion, ExportResponse } from '@destinyitemmanager/dim-api-types';
+import type { DestinyVersion, ExportResponse } from '@destinyitemmanager/dim-api-types';
 import { parseProfileKey } from 'app/dim-api/reducer';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { download } from 'app/utils/util';
 
 /**

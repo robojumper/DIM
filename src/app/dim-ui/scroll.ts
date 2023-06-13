@@ -1,4 +1,4 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import styles from './ItemPop.m.scss';
 
 /**

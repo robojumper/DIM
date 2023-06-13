@@ -1,11 +1,8 @@
 import { dynamicStringsSelector } from 'app/inventory/selectors';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {
-  conversionTableSelector,
-  iconPlaceholder,
-  RichTextConversionTable,
-} from './rich-destiny-text';
+import type { RichTextConversionTable } from './rich-destiny-text';
+import { conversionTableSelector, iconPlaceholder } from './rich-destiny-text';
 
 const dynamicTextFinder = /\{var:\d+\}/g;
 

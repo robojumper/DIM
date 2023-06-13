@@ -4,19 +4,23 @@ import { useLoadStores } from 'app/inventory/store/hooks';
 import { useD1Definitions } from 'app/manifest/selectors';
 import Objective from 'app/progress/Objective';
 import { usePageTitle } from 'app/utils/hooks';
-import { StringLookup } from 'app/utils/util-types';
+import type { StringLookup } from 'app/utils/util-types';
 import { clsx } from 'clsx';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
-import { DestinyAccount } from '../../accounts/destiny-account';
+import type { DestinyAccount } from '../../accounts/destiny-account';
 import CharacterTileButton from '../../character-tile/CharacterTileButton';
 import BungieImage, { bungieBackgroundStyle } from '../../dim-ui/BungieImage';
 import CollapsibleTitle from '../../dim-ui/CollapsibleTitle';
 import { sortedStoresSelector } from '../../inventory/selectors';
-import { D1Store } from '../../inventory/store-types';
+import type { D1Store } from '../../inventory/store-types';
 import { AppIcon, starIcon } from '../../shell/icons';
-import { D1ManifestDefinitions } from '../d1-definitions';
-import { D1ActivityComponent, D1ActivityTier, D1ObjectiveProgress } from '../d1-manifest-types';
+import type { D1ManifestDefinitions } from '../d1-definitions';
+import type {
+  D1ActivityComponent,
+  D1ActivityTier,
+  D1ObjectiveProgress,
+} from '../d1-manifest-types';
 import './activities.scss';
 
 interface Skull {

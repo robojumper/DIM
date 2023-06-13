@@ -1,10 +1,10 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { languageSelector } from 'app/dim-api/selectors';
 import Sheet from 'app/dim-ui/Sheet';
 import { TileGrid } from 'app/dim-ui/TileGrid';
-import { DimLanguage } from 'app/i18n';
+import type { DimLanguage } from 'app/i18n';
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { allItemsSelector } from 'app/inventory/selectors';
 import { isLoadoutBuilderItem } from 'app/loadout/item-utils';
 import { useD2Definitions } from 'app/manifest/selectors';
@@ -13,7 +13,8 @@ import { startWordRegexp } from 'app/search/search-filters/freeform';
 import { compareBy } from 'app/utils/comparators';
 import { socketContainsPlugWithCategory } from 'app/utils/socket-utils';
 import { uniqBy } from 'app/utils/util';
-import { DestinyClass, TierType } from 'bungie-api-ts/destiny2';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
+import { TierType } from 'bungie-api-ts/destiny2';
 import { PlugCategoryHashes } from 'data/d2/generated-enums';
 import anyExoticIcon from 'images/anyExotic.svg';
 import noExoticIcon from 'images/noExotic.svg';
@@ -22,7 +23,8 @@ import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LOCKED_EXOTIC_ANY_EXOTIC, LOCKED_EXOTIC_NO_EXOTIC, LockableBucketHashes } from '../types';
 import styles from './ExoticPicker.m.scss';
-import ExoticTile, { FakeExoticTile, LockedExoticWithPlugs } from './ExoticTile';
+import type { LockedExoticWithPlugs } from './ExoticTile';
+import ExoticTile, { FakeExoticTile } from './ExoticTile';
 
 interface Props {
   lockedExoticHash?: number;

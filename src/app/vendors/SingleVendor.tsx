@@ -10,7 +10,7 @@ import { clsx } from 'clsx';
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
-import { DestinyAccount } from '../accounts/destiny-account';
+import type { DestinyAccount } from '../accounts/destiny-account';
 import Countdown from '../dim-ui/Countdown';
 import ErrorBoundary from '../dim-ui/ErrorBoundary';
 import {

@@ -1,5 +1,5 @@
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import Objective from 'app/progress/Objective';
 import styles from './WeaponCatalystInfo.m.scss';
 

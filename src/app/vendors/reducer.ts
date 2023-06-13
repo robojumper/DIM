@@ -1,6 +1,7 @@
-import { DestinyVendorsResponse } from 'bungie-api-ts/destiny2';
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import type { DestinyVendorsResponse } from 'bungie-api-ts/destiny2';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import { setCurrentAccount } from '../accounts/actions';
 import type { AccountsAction } from '../accounts/reducer';
 import * as actions from './actions';

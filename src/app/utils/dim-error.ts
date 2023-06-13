@@ -1,6 +1,6 @@
 import { BungieError } from 'app/bungie-api/http-client';
 import { t } from 'app/i18next-t';
-import { PlatformErrorCodes } from 'bungie-api-ts/user';
+import type { PlatformErrorCodes } from 'bungie-api-ts/user';
 
 /**
  * An internal error that captures more error info for reporting.

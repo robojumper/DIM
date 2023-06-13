@@ -1,8 +1,9 @@
 import { generatePermutationsOfFive } from 'app/loadout/mod-permutations';
 import _ from 'lodash';
-import { ArmorStatHashes, MinMaxIgnored } from '../types';
-import { AutoModsMap, ModsPick, buildAutoModsMap, chooseAutoMods } from './auto-stat-mod-utils';
-import { AutoModData, ModAssignmentStatistics, ProcessItem, ProcessMod } from './types';
+import type { ArmorStatHashes, MinMaxIgnored } from '../types';
+import type { AutoModsMap, ModsPick } from './auto-stat-mod-utils';
+import { buildAutoModsMap, chooseAutoMods } from './auto-stat-mod-utils';
+import type { AutoModData, ModAssignmentStatistics, ProcessItem, ProcessMod } from './types';
 
 /**
  * Data that stays the same in a given LO run.

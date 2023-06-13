@@ -3,7 +3,7 @@ import {
   ARMSMASTER_ACTIVITY_MODIFIER,
   ENCOUNTERS_COMPLETED_OBJECTIVE,
 } from 'app/search/d2-known-values';
-import {
+import type {
   DestinyDisplayPropertiesDefinition,
   DestinyMilestoneChallengeActivity,
 } from 'bungie-api-ts/destiny2';

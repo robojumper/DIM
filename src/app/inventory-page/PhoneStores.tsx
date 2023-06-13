@@ -1,13 +1,14 @@
 import { itemPop, scrollToPosition } from 'app/dim-ui/scroll';
 import { t } from 'app/i18next-t';
 import { locateItem$ } from 'app/inventory/locate-item';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import StoreStats from 'app/store-stats/StoreStats';
 import { useEventBusListener } from 'app/utils/hooks';
 import { wrap } from 'app/utils/util';
-import { PanInfo, motion } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useCallback, useRef, useState } from 'react';
-import { InventoryBucket, InventoryBuckets } from '../inventory/inventory-buckets';
+import type { InventoryBucket, InventoryBuckets } from '../inventory/inventory-buckets';
 import { getCurrentStore, getStore, getVault } from '../inventory/stores-helpers';
 import CategoryStrip from './CategoryStrip';
 import HeaderShadowDiv from './HeaderShadowDiv';

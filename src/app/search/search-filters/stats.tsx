@@ -1,12 +1,12 @@
-import { CustomStatDef } from '@destinyitemmanager/dim-api-types';
+import type { CustomStatDef } from '@destinyitemmanager/dim-api-types';
 import { tl } from 'app/i18next-t';
-import { DimItem, DimStat } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimItem, DimStat } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { maxLightItemSet, maxStatLoadout } from 'app/loadout-drawer/auto-loadouts';
 import { getStatValuesByHash } from 'app/utils/item-utils';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
-import { FilterDefinition } from '../filter-types';
+import type { FilterDefinition } from '../filter-types';
 import {
   allAtomicStats,
   armorAnyStatHashes,

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { queryValidSelector, searchFilterSelector } from '../search/search-filter';
 import { wishListSelector } from '../wishlists/selectors';
 import InventoryItem from './InventoryItem';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 import { hasNotesSelector, isNewSelector, tagSelector } from './selectors';
 
 const autoLockTaggedSelector = settingSelector('autoLockTagged');

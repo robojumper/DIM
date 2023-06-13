@@ -1,4 +1,4 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import Objective from 'app/progress/Objective';
 import styles from './WeaponDeepsightInfo.m.scss';
 

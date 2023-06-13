@@ -1,10 +1,10 @@
-import { DimItem } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
-import { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
-import { RootState, ThunkResult } from 'app/store/types';
-import * as actions from 'app/stream-deck/actions';
-import { Reducer } from 'redux';
-import { ActionType } from 'typesafe-actions';
+import type { DimItem } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
+import type { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
+import type { RootState, ThunkResult } from 'app/store/types';
+import type * as actions from 'app/stream-deck/actions';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
 
 export type StreamDeckSelectionType = 'loadout' | 'item';
 

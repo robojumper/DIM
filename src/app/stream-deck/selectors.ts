@@ -1,4 +1,4 @@
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 
 export const streamDeckConnectedSelector = (state: RootState) => state.streamDeck.connected;
 

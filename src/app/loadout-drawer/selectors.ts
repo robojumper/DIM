@@ -1,13 +1,14 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { getHashtagsFromNote } from 'app/inventory/note-hashtags';
 import { allItemsSelector, storesSelector } from 'app/inventory/selectors';
 import { allInGameLoadoutsSelector } from 'app/loadout/ingame/selectors';
 import { manifestSelector } from 'app/manifest/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import { InGameLoadout, Loadout, LoadoutItem, isInGameLoadout } from './loadout-types';
+import type { InGameLoadout, Loadout, LoadoutItem } from './loadout-types';
+import { isInGameLoadout } from './loadout-types';
 import {
   getInstancedLoadoutItem,
   getResolutionInfo,

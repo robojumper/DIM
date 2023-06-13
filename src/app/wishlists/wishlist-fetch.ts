@@ -5,12 +5,12 @@ import { isValidWishListUrlDomain, wishListAllowedHosts } from 'app/settings/Wis
 import { setSettingAction } from 'app/settings/actions';
 import { settingsReady } from 'app/settings/settings';
 import { get } from 'app/storage/idb-keyval';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { errorLog, infoLog } from 'app/utils/log';
 import { loadWishLists, touchWishLists } from './actions';
 import type { WishListsState } from './reducer';
 import { wishListsSelector } from './selectors';
-import { WishListAndInfo } from './types';
+import type { WishListAndInfo } from './types';
 import { toWishList } from './wishlist-file';
 
 function hoursAgo(dateToCheck?: Date): number {

@@ -6,10 +6,10 @@ import { MAX_ARMOR_ENERGY_CAPACITY } from 'app/search/d2-known-values';
 import { AppIcon, faRandom, lockIcon } from 'app/shell/icons';
 import { clsx } from 'clsx';
 import { PlugCategoryHashes } from 'data/d2/generated-enums';
-import { Dispatch } from 'react';
-import { DimItem, PluggableInventoryItemDefinition } from '../../inventory/item-types';
+import type { Dispatch } from 'react';
+import type { DimItem, PluggableInventoryItemDefinition } from '../../inventory/item-types';
 import LoadoutBuilderItem from '../LoadoutBuilderItem';
-import { LoadoutBuilderAction } from '../loadout-builder-reducer';
+import type { LoadoutBuilderAction } from '../loadout-builder-reducer';
 import styles from './GeneratedSetItem.m.scss';
 
 /**

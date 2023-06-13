@@ -1,24 +1,31 @@
-import { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
 import { D1Categories } from 'app/destiny1/d1-bucket-categories';
-import { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
+import type { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
 import { D2Categories } from 'app/destiny2/d2-bucket-categories';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t } from 'app/i18next-t';
-import { D1BucketCategory, D2BucketCategory } from 'app/inventory/inventory-buckets';
-import { DimItem } from 'app/inventory/item-types';
+import type { D1BucketCategory, D2BucketCategory } from 'app/inventory/inventory-buckets';
+import type { DimItem } from 'app/inventory/item-types';
 import { getArtifactUnlocks } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
-import { SocketOverrides } from 'app/inventory/store/override-sockets';
+import type { DimStore } from 'app/inventory/store-types';
+import type { SocketOverrides } from 'app/inventory/store/override-sockets';
 import { mapToNonReducedModCostVariant } from 'app/loadout/mod-utils';
 import { showNotification } from 'app/notifications/notifications';
 import { itemCanBeInLoadout } from 'app/utils/item-utils';
 import { errorLog } from 'app/utils/log';
 import { getSocketsByCategoryHash } from 'app/utils/socket-utils';
-import { DestinyClass, DestinyProfileResponse, TierType } from 'bungie-api-ts/destiny2';
+import type { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import { DestinyClass, TierType } from 'bungie-api-ts/destiny2';
 import { BucketHashes, SocketCategoryHashes } from 'data/d2/generated-enums';
-import { Draft, produce } from 'immer';
+import type { Draft } from 'immer';
+import { produce } from 'immer';
 import _ from 'lodash';
-import { Loadout, LoadoutItem, ResolvedLoadoutItem, ResolvedLoadoutMod } from './loadout-types';
+import type {
+  Loadout,
+  LoadoutItem,
+  ResolvedLoadoutItem,
+  ResolvedLoadoutMod,
+} from './loadout-types';
 import {
   convertToLoadoutItem,
   createSocketOverridesFromEquipped,

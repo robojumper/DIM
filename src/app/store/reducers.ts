@@ -1,20 +1,22 @@
 import { currentAccountSelector } from 'app/accounts/selectors';
 import { clarity } from 'app/clarity/reducer';
 import { inGameLoadouts } from 'app/loadout/ingame/reducer';
-import { StreamDeckState } from 'app/stream-deck/interfaces';
+import type { StreamDeckState } from 'app/stream-deck/interfaces';
 import { lazyStreamDeck, streamDeckInitialState } from 'app/stream-deck/stream-deck';
 import { vendors } from 'app/vendors/reducer';
-import { Reducer, combineReducers } from 'redux';
+import type { Reducer } from 'redux';
+import { combineReducers } from 'redux';
 import { accounts } from '../accounts/reducer';
 import { compare } from '../compare/reducer';
-import { DimApiState, dimApi, initialState as dimApiInitialState } from '../dim-api/reducer';
+import type { DimApiState } from '../dim-api/reducer';
+import { dimApi, initialState as dimApiInitialState } from '../dim-api/reducer';
 import { farming } from '../farming/reducer';
 import { inventory } from '../inventory/reducer';
 import { loadouts } from '../loadout-drawer/reducer';
 import { manifest } from '../manifest/reducer';
 import { shell } from '../shell/reducer';
 import { wishLists } from '../wishlists/reducer';
-import { RootState } from './types';
+import type { RootState } from './types';
 
 const reducer: Reducer<RootState> = (state, action) => {
   const combinedReducers = combineReducers({

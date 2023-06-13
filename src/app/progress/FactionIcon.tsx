@@ -1,5 +1,5 @@
 import { useD2Definitions } from 'app/manifest/selectors';
-import {
+import type {
   DestinyFactionDefinition,
   DestinyProgression,
   DestinyVendorComponent,

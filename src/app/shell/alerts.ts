@@ -1,5 +1,5 @@
 import { getGlobalAlerts } from 'app/bungie-api/bungie-core-api';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { errorLog } from 'app/utils/log';
 import { updateBungieAlerts } from './actions';
 

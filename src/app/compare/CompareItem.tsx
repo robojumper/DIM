@@ -15,11 +15,11 @@ import { memo, useCallback, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import ConnectedInventoryItem from '../inventory/ConnectedInventoryItem';
-import { DimItem, DimSocket } from '../inventory/item-types';
+import type { DimItem, DimSocket } from '../inventory/item-types';
 import ItemSockets from '../item-popup/ItemSockets';
 import ItemTalentGrid from '../item-popup/ItemTalentGrid';
 import { AppIcon, faArrowCircleDown, searchIcon, shoppingCart } from '../shell/icons';
-import { StatInfo } from './Compare';
+import type { StatInfo } from './Compare';
 import styles from './CompareItem.m.scss';
 import CompareStat from './CompareStat';
 

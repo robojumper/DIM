@@ -1,5 +1,5 @@
-import { DimItem } from 'app/inventory/item-types';
-import { ItemPopupExtraInfo } from 'app/item-popup/item-popup';
+import type { DimItem } from 'app/inventory/item-types';
+import type { ItemPopupExtraInfo } from 'app/item-popup/item-popup';
 import { DestinyCollectibleState } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { ItemCategoryHashes } from 'data/d2/generated-enums';
@@ -12,7 +12,7 @@ import '../progress/milestone.scss';
 import { AppIcon, faCheck } from '../shell/icons';
 import Cost from './Cost';
 import styles from './VendorItem.m.scss';
-import { VendorItem } from './vendor-item';
+import type { VendorItem } from './vendor-item';
 
 export default function VendorItemComponent({
   item,

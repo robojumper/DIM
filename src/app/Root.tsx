@@ -1,12 +1,8 @@
 import { withProfiler } from '@sentry/react';
 import { LocationSwitcher } from 'app/shell/LocationSwitcher';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import {
-  DndProvider,
-  MultiBackendOptions,
-  PointerTransition,
-  TouchTransition,
-} from 'react-dnd-multi-backend';
+import type { MultiBackendOptions } from 'react-dnd-multi-backend';
+import { DndProvider, PointerTransition, TouchTransition } from 'react-dnd-multi-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';

@@ -17,7 +17,7 @@ import { AppIcon, faAngleLeft, faAngleRight, faList } from 'app/shell/icons';
 import { acquisitionRecencyComparator } from 'app/shell/item-comparators';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { emptyArray } from 'app/utils/empty';
-import { DestinyDisplayPropertiesDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyDisplayPropertiesDefinition } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { StatHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
@@ -25,13 +25,13 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Sheet from '../dim-ui/Sheet';
-import { DimItem, DimSocket } from '../inventory/item-types';
+import type { DimItem, DimSocket } from '../inventory/item-types';
 import { chainComparator, compareBy, reverseComparator } from '../utils/comparators';
 import styles from './Compare.m.scss';
 import CompareItem from './CompareItem';
 import CompareSuggestions from './CompareSuggestions';
 import { endCompareSession, removeCompareItem, updateCompareQuery } from './actions';
-import { CompareSession } from './reducer';
+import type { CompareSession } from './reducer';
 import { compareItemsSelector, compareOrganizerLinkSelector } from './selectors';
 
 export interface StatInfo {

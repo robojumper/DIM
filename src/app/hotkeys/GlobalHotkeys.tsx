@@ -1,4 +1,4 @@
-import { Hotkey } from './hotkeys';
+import type { Hotkey } from './hotkeys';
 import { useHotkeys } from './useHotkey';
 
 /**

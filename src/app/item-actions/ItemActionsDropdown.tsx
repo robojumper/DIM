@@ -2,14 +2,15 @@ import { destinyVersionSelector } from 'app/accounts/selectors';
 import { compareFilteredItems } from 'app/compare/actions';
 import { saveSearch } from 'app/dim-api/basic-actions';
 import { recentSearchesSelector } from 'app/dim-api/selectors';
-import Dropdown, { Option } from 'app/dim-ui/Dropdown';
+import type { Option } from 'app/dim-ui/Dropdown';
+import Dropdown from 'app/dim-ui/Dropdown';
 import { t } from 'app/i18next-t';
 import { bulkLockItems, bulkTagItems } from 'app/inventory/bulk-actions';
 import { storesSortedByImportanceSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { itemMoveLoadout } from 'app/loadout-drawer/auto-loadouts';
 import { applyLoadout } from 'app/loadout-drawer/loadout-apply';
-import { TagCommandInfo } from 'app/organizer/ItemActions';
+import type { TagCommandInfo } from 'app/organizer/ItemActions';
 import { canonicalizeQuery, parseQuery } from 'app/search/query-parser';
 import { validateQuerySelector } from 'app/search/search-filter';
 import { toggleSearchResults } from 'app/shell/actions';
@@ -20,8 +21,9 @@ import _ from 'lodash';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
-import { TagCommand, itemTagSelectorList } from '../inventory/dim-item-info';
-import { DimItem } from '../inventory/item-types';
+import type { TagCommand } from '../inventory/dim-item-info';
+import { itemTagSelectorList } from '../inventory/dim-item-info';
+import type { DimItem } from '../inventory/item-types';
 import {
   AppIcon,
   clearIcon,

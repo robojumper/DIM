@@ -1,5 +1,6 @@
-import { canonicalizeQuery, parseQuery, QueryAST } from './query-parser';
-import { FiltersMap } from './search-config';
+import type { QueryAST } from './query-parser';
+import { canonicalizeQuery, parseQuery } from './query-parser';
+import type { FiltersMap } from './search-config';
 import { matchFilter } from './search-filter';
 
 const rangeStringRegex = /^([<=>]{0,2})(\d+(?:\.\d+)?)$/;

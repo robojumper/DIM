@@ -1,8 +1,9 @@
 import { enhancedToPerk } from 'app/armory/wishlist-collapser';
 import { BucketHashes, ItemCategoryHashes, PlugCategoryHashes } from 'data/d2/generated-enums';
 import perkToEnhanced from 'data/d2/trait-to-enhanced-trait.json';
-import { DimItem, DimPlug } from '../inventory/item-types';
-import { DimWishList, WishListRoll } from './types';
+import type { DimItem, DimPlug } from '../inventory/item-types';
+import type { WishListRoll } from './types';
+import { DimWishList } from './types';
 
 export const enum UiWishListRoll {
   Good = 1,

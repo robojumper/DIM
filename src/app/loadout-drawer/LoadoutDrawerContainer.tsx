@@ -1,6 +1,6 @@
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { storesSelector } from 'app/inventory/selectors';
 import { getCurrentStore } from 'app/inventory/stores-helpers';
 import { warnMissingClass } from 'app/loadout-builder/loadout-builder-reducer';
@@ -13,7 +13,7 @@ import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 import { addItem$, editLoadout$ } from './loadout-events';
-import { Loadout } from './loadout-types';
+import type { Loadout } from './loadout-types';
 import { convertToLoadoutItem, newLoadout, pickBackingStore } from './loadout-utils';
 
 const LoadoutDrawer = lazy(

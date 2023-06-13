@@ -2,7 +2,7 @@ import { VendorIcon, VendorLocation } from 'app/vendors/Vendor';
 import CollapsibleTitle from '../../dim-ui/CollapsibleTitle';
 import Countdown from '../../dim-ui/Countdown';
 import D1VendorItems from './D1VendorItems';
-import { Vendor } from './vendor.service';
+import type { Vendor } from './vendor.service';
 
 /**
  * An individual Vendor in the "all vendors" page. Use SingleVendor for a page that only has one vendor on it.

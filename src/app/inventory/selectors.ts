@@ -1,4 +1,4 @@
-import { ItemHashTag, LoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { ItemHashTag, LoadoutParameters } from '@destinyitemmanager/dim-api-types';
 import { destinyVersionSelector } from 'app/accounts/selectors';
 import {
   currentProfileSelector,
@@ -7,10 +7,10 @@ import {
 } from 'app/dim-api/selectors';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { filterUnlockedPlugs } from 'app/records/plugset-helpers';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { emptyObject, emptySet } from 'app/utils/empty';
 import { currySelector } from 'app/utils/selector-utils';
-import { DestinyItemPlug, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { DestinyItemPlug, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 import { resonantMaterialStringVarHashes } from 'data/d2/crafting-resonant-elements';
 import { D2CalculatedSeason } from 'data/d2/d2-season-info';
 import { BucketHashes, ItemCategoryHashes } from 'data/d2/generated-enums';
@@ -18,10 +18,11 @@ import { createSelector } from 'reselect';
 import { getBuckets as getBucketsD1 } from '../destiny1/d1-buckets';
 import { getBuckets as getBucketsD2 } from '../destiny2/d2-buckets';
 import { characterSortImportanceSelector, characterSortSelector } from '../settings/character-sort';
-import { ItemInfos, getNotes, getTag } from './dim-item-info';
-import { DimItem } from './item-types';
+import type { ItemInfos } from './dim-item-info';
+import { getNotes, getTag } from './dim-item-info';
+import type { DimItem } from './item-types';
 import { collectNotesHashtags } from './note-hashtags';
-import { ItemCreationContext } from './store/d2-item-factory';
+import type { ItemCreationContext } from './store/d2-item-factory';
 import { getCurrentStore, getVault } from './stores-helpers';
 
 /** All stores, unsorted. */

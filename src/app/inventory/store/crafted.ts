@@ -1,7 +1,8 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { getFirstSocketByCategoryHash } from 'app/utils/socket-utils';
-import { DestinyObjectiveProgress, DestinyObjectiveUiStyle } from 'bungie-api-ts/destiny2';
-import { DimCrafted, DimItem, DimSocket } from '../item-types';
+import type { DestinyObjectiveProgress } from 'bungie-api-ts/destiny2';
+import { DestinyObjectiveUiStyle } from 'bungie-api-ts/destiny2';
+import type { DimCrafted, DimItem, DimSocket } from '../item-types';
 
 /** the socket category containing the single socket with weapon crafting objectives */
 export const craftedSocketCategoryHash = 3583996951;

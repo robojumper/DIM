@@ -5,7 +5,7 @@ import { ArmorSlotIcon, WeaponTypeIcon } from 'app/dim-ui/ItemCategoryIcon';
 import { PressTip } from 'app/dim-ui/PressTip';
 import { SpecialtyModSlotIcon } from 'app/dim-ui/SpecialtyModSlotIcon';
 import { DefItemIcon } from 'app/inventory/ItemIcon';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { DimPlugTooltip } from 'app/item-popup/PlugTooltip';
 import { quoteFilterString } from 'app/search/query-parser';
 import {

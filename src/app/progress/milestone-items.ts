@@ -1,13 +1,11 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t } from 'app/i18next-t';
-import { InventoryBuckets } from 'app/inventory/inventory-buckets';
-import { DimItem } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
-import { DimRecord } from 'app/records/presentation-nodes';
+import type { InventoryBuckets } from 'app/inventory/inventory-buckets';
+import type { DimItem } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
+import type { DimRecord } from 'app/records/presentation-nodes';
 import { d2MissingIcon } from 'app/search/d2-known-values';
-import {
-  DestinyAmmunitionType,
-  DestinyClass,
+import type {
   DestinyDisplayPropertiesDefinition,
   DestinyMilestone,
   DestinyMilestoneDefinition,
@@ -15,8 +13,12 @@ import {
   DestinyMilestoneRewardCategory,
   DestinyMilestoneRewardCategoryDefinition,
   DestinyMilestoneRewardEntry,
-  DestinyMilestoneType,
   DestinyObjectiveProgress,
+} from 'bungie-api-ts/destiny2';
+import {
+  DestinyAmmunitionType,
+  DestinyClass,
+  DestinyMilestoneType,
   DestinyRecordState,
 } from 'bungie-api-ts/destiny2';
 import { BucketHashes, ItemCategoryHashes } from 'data/d2/generated-enums';

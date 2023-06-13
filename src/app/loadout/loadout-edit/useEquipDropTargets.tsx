@@ -1,9 +1,10 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { singularBucketHashes } from 'app/loadout-drawer/loadout-utils';
 import { itemCanBeInLoadout } from 'app/utils/item-utils';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
-import { TargetType } from 'dnd-core';
-import { DropTargetHookSpec, useDrop } from 'react-dnd';
+import type { TargetType } from 'dnd-core';
+import type { DropTargetHookSpec } from 'react-dnd';
+import { useDrop } from 'react-dnd';
 
 /**
  * This hook is used to setup dnd for loadout editing and in particular the use of dnd to add, equip or unequip items.

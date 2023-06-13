@@ -1,6 +1,6 @@
 import { PullFromPostmaster } from 'app/inventory/PullFromPostmaster';
-import { InventoryBucket } from 'app/inventory/inventory-buckets';
-import { DimStore } from 'app/inventory/store-types';
+import type { InventoryBucket } from 'app/inventory/inventory-buckets';
+import type { DimStore } from 'app/inventory/store-types';
 import { findItemsByBucket } from 'app/inventory/stores-helpers';
 import {
   POSTMASTER_SIZE,

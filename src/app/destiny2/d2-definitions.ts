@@ -1,9 +1,9 @@
 import { UNSET_PLUG_HASH } from 'app/loadout/known-values';
 import { d2ManifestSelector } from 'app/manifest/selectors';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { reportException } from 'app/utils/exceptions';
 import { warnLogCollapsedStack } from 'app/utils/log';
-import {
+import type {
   AllDestinyManifestComponents,
   DestinyActivityDefinition,
   DestinyActivityModeDefinition,
@@ -50,7 +50,8 @@ import {
 import { ItemCategoryHashes } from 'data/d2/generated-enums';
 import { setD2Manifest } from '../manifest/actions';
 import { getManifest } from '../manifest/manifest-service-json';
-import { HashLookupFailure, ManifestDefinitions } from './definitions';
+import type { ManifestDefinitions } from './definitions';
+import { HashLookupFailure } from './definitions';
 
 type ManifestTablesShort = Exclude<keyof D2ManifestDefinitions, 'isDestiny1' | 'isDestiny2'>;
 

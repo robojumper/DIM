@@ -1,7 +1,8 @@
 import { clsx } from 'clsx';
 import { AppIcon } from '../shell/icons';
 import styles from './Account.m.scss';
-import { DestinyAccount, PLATFORM_ICONS } from './destiny-account';
+import type { DestinyAccount } from './destiny-account';
+import { PLATFORM_ICONS } from './destiny-account';
 
 /**
  * Accounts that appear in the hamburger menu.

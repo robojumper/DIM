@@ -1,6 +1,7 @@
 import { emptySet } from 'app/utils/empty';
 import { timer, warnLog } from 'app/utils/log';
-import { DimWishList, WishListAndInfo, WishListInfo, WishListRoll } from './types';
+import type { WishListAndInfo, WishListInfo, WishListRoll } from './types';
+import { DimWishList } from './types';
 
 /**
  * The title should follow the following format:

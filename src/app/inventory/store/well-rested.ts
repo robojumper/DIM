@@ -1,11 +1,11 @@
-import {
+import type {
   DestinyCharacterProgressionComponent,
   DestinyProgressionDefinition,
   DestinySeasonDefinition,
   DestinySeasonPassDefinition,
 } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
-import { D2ManifestDefinitions } from '../../destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from '../../destiny2/d2-definitions';
 
 /**
  * Figure out whether a character has the "well rested" buff, which applies a 2x XP boost

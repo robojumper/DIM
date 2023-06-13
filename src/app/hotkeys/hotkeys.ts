@@ -1,7 +1,7 @@
 import { t, tl } from 'app/i18next-t';
 import { isMac } from 'app/utils/browsers';
 import { compareBy } from 'app/utils/comparators';
-import { StringLookup } from 'app/utils/util-types';
+import type { StringLookup } from 'app/utils/util-types';
 import _ from 'lodash';
 
 /** Mapping from key name to fun symbols */

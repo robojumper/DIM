@@ -1,5 +1,5 @@
 import { destinyVersionSelector } from 'app/accounts/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { emptyArray } from 'app/utils/empty';
 import { useSelector } from 'react-redux';
 

@@ -1,9 +1,9 @@
-import {
+import type {
   Loadout as DimApiLoadout,
   LoadoutItem as DimApiLoadoutItem,
 } from '@destinyitemmanager/dim-api-types';
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { DestinyLoadoutComponent } from 'bungie-api-ts/destiny2';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DestinyLoadoutComponent } from 'bungie-api-ts/destiny2';
 
 export type LoadoutItem = DimApiLoadoutItem & {
   /**

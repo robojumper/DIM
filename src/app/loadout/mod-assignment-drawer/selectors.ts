@@ -1,4 +1,4 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import {
   allItemsSelector,
   createItemContextSelector,
@@ -8,10 +8,10 @@ import {
 import { getCurrentStore, getStore } from 'app/inventory/stores-helpers';
 import { LockableBucketHashes } from 'app/loadout-builder/types';
 import { getItemsFromLoadoutItems } from 'app/loadout-drawer/loadout-item-conversion';
-import { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { getModsFromLoadout } from 'app/loadout-drawer/loadout-utils';
 import { useD2Definitions } from 'app/manifest/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { useCallback, useMemo } from 'react';

@@ -1,5 +1,5 @@
-import { CustomStatWeights } from '@destinyitemmanager/dim-api-types';
-import { HashLookup } from 'app/utils/util-types';
+import type { CustomStatWeights } from '@destinyitemmanager/dim-api-types';
+import type { HashLookup } from 'app/utils/util-types';
 import { TierType } from 'bungie-api-ts/destiny2';
 
 import { D2CalculatedSeason, D2SeasonInfo } from 'data/d2/d2-season-info';

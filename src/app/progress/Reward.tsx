@@ -1,9 +1,9 @@
 import RichDestinyText from 'app/dim-ui/destiny-symbols/RichDestinyText';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { powerLevelSelector } from 'app/inventory/store/selectors';
 import { useD2Definitions } from 'app/manifest/selectors';
-import { RootState } from 'app/store/types';
-import { DestinyItemQuantity } from 'bungie-api-ts/destiny2';
+import type { RootState } from 'app/store/types';
+import type { DestinyItemQuantity } from 'bungie-api-ts/destiny2';
 import { useSelector } from 'react-redux';
 import BungieImage from '../dim-ui/BungieImage';
 import styles from './Reward.m.scss';

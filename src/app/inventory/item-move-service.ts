@@ -1,11 +1,11 @@
 import { getCurrentHub } from '@sentry/browser';
-import { Span } from '@sentry/tracing';
+import type { Span } from '@sentry/tracing';
 import { currentAccountSelector } from 'app/accounts/selectors';
 import { t } from 'app/i18next-t';
 import { isInInGameLoadoutForSelector } from 'app/loadout-drawer/selectors';
 import type { ItemTierName } from 'app/search/d2-known-values';
-import { RootState, ThunkResult } from 'app/store/types';
-import { CancelToken } from 'app/utils/cancel';
+import type { RootState, ThunkResult } from 'app/store/types';
+import type { CancelToken } from 'app/utils/cancel';
 import { DimError } from 'app/utils/dim-error';
 import { itemCanBeEquippedBy } from 'app/utils/item-utils';
 import { errorLog, infoLog, timer, warnLog } from 'app/utils/log';
@@ -13,10 +13,10 @@ import { count } from 'app/utils/util';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { PlatformErrorCodes } from 'bungie-api-ts/user';
 import { BucketHashes } from 'data/d2/generated-enums';
-import { Immutable } from 'immer';
+import type { Immutable } from 'immer';
 import _ from 'lodash';
-import { AnyAction } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import type { AnyAction } from 'redux';
+import type { ThunkAction } from 'redux-thunk';
 import {
   equipItems as d1EquipItems,
   setItemState as d1SetItemState,
@@ -32,16 +32,16 @@ import {
 } from '../bungie-api/destiny2-api';
 import { chainComparator, compareBy, reverseComparator } from '../utils/comparators';
 import { itemLockStateChanged, itemMoved } from './actions';
+import type { TagValue } from './dim-item-info';
 import {
-  TagValue,
   characterDisplacePriority,
   equipReplacePriority,
   vaultDisplacePriority,
 } from './dim-item-info';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 import { getLastManuallyMoved } from './manual-moves';
 import { currentStoreSelector, getTagSelector, storesSelector } from './selectors';
-import { DimStore } from './store-types';
+import type { DimStore } from './store-types';
 import {
   amountOfItem,
   findItemsByBucket,

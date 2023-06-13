@@ -1,14 +1,14 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { customStatsSelector, languageSelector } from 'app/dim-api/selectors';
-import { DimLanguage } from 'app/i18n';
-import { TagValue } from 'app/inventory/dim-item-info';
+import type { DimLanguage } from 'app/i18n';
+import type { TagValue } from 'app/inventory/dim-item-info';
 import { d2ManifestSelector } from 'app/manifest/selectors';
-import { Settings } from 'app/settings/initial-settings';
+import type { Settings } from 'app/settings/initial-settings';
 import { errorLog } from 'app/utils/log';
-import { WishListRoll } from 'app/wishlists/types';
+import type { WishListRoll } from 'app/wishlists/types';
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import {
   allItemsSelector,
   currentStoreSelector,
@@ -18,20 +18,23 @@ import {
   newItemsSelector,
   sortedStoresSelector,
 } from '../inventory/selectors';
-import { DimStore } from '../inventory/store-types';
-import { LoadoutsByItem, loadoutsByItemSelector } from '../loadout-drawer/selectors';
+import type { DimStore } from '../inventory/store-types';
+import type { LoadoutsByItem } from '../loadout-drawer/selectors';
+import { loadoutsByItemSelector } from '../loadout-drawer/selectors';
 import { querySelector } from '../shell/selectors';
 import { wishListFunctionSelector, wishListsByHashSelector } from '../wishlists/selectors';
-import { InventoryWishListRoll } from '../wishlists/wishlists';
-import {
+import type { InventoryWishListRoll } from '../wishlists/wishlists';
+import type {
   FilterContext,
   FilterDefinition,
   ItemFilter,
   SuggestionsContext,
-  canonicalFilterFormats,
 } from './filter-types';
-import { QueryAST, parseQuery } from './query-parser';
-import { SearchConfig, searchConfigSelector } from './search-config';
+import { canonicalFilterFormats } from './filter-types';
+import type { QueryAST } from './query-parser';
+import { parseQuery } from './query-parser';
+import type { SearchConfig } from './search-config';
+import { searchConfigSelector } from './search-config';
 import { parseAndValidateQuery, rangeStringToComparator } from './search-utils';
 
 //

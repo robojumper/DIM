@@ -15,10 +15,10 @@ import {
 import { getStore } from 'app/inventory/stores-helpers';
 import { itemMoveLoadout } from 'app/loadout-drawer/auto-loadouts';
 import { applyLoadout } from 'app/loadout-drawer/loadout-apply';
-import { InGameLoadout } from 'app/loadout-drawer/loadout-types';
+import type { InGameLoadout } from 'app/loadout-drawer/loadout-types';
 import { inGameLoadoutItemsFromEquipped } from 'app/loadout-drawer/loadout-utils';
 import { showNotification } from 'app/notifications/notifications';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { inGameLoadoutDeleted, inGameLoadoutUpdated } from './actions';
 import { getItemsFromInGameLoadout } from './ingame-loadout-utils';
 

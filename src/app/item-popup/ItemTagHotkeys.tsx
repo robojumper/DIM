@@ -5,10 +5,10 @@ import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { emptyArray } from 'app/utils/empty';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Hotkey } from '../hotkeys/hotkeys';
+import type { Hotkey } from '../hotkeys/hotkeys';
 import { setTag } from '../inventory/actions';
 import { itemTagList } from '../inventory/dim-item-info';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 
 interface Props {
   item: DimItem;

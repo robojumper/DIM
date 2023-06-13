@@ -1,5 +1,5 @@
 import { bungieBackgroundStyleAdvanced } from 'app/dim-ui/BungieImage';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { getInterestingSocketMetadatas, getSpecialtySocketMetadatas } from 'app/utils/item-utils';
 import { clsx } from 'clsx';

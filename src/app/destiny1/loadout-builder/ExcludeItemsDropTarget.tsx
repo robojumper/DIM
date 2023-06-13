@@ -3,7 +3,7 @@ import { clsx } from 'clsx';
 import { BucketHashes } from 'data/d2/generated-enums';
 import React from 'react';
 import { useDrop } from 'react-dnd';
-import { D1Item } from '../../inventory/item-types';
+import type { D1Item } from '../../inventory/item-types';
 
 interface Props {
   className?: string;

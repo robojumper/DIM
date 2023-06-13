@@ -1,9 +1,10 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t, tl } from 'app/i18next-t';
 import { d2ManifestSelector } from 'app/manifest/selectors';
-import { StringLookup } from 'app/utils/util-types';
+import type { StringLookup } from 'app/utils/util-types';
 import { FontGlyphs } from 'data/d2/d2-font-glyphs';
-import { TranslateManually, symbolData } from 'data/d2/symbol-name-sources';
+import type { TranslateManually } from 'data/d2/symbol-name-sources';
+import { symbolData } from 'data/d2/symbol-name-sources';
 import { createSelector } from 'reselect';
 import { conversionTableSelector } from './rich-destiny-text';
 

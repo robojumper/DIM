@@ -1,9 +1,5 @@
-import {
-  CoreSettingsConfiguration,
-  getCommonSettings,
-  getGlobalAlerts as getGlobalAlertsApi,
-  GlobalAlert,
-} from 'bungie-api-ts/core';
+import type { CoreSettingsConfiguration, GlobalAlert } from 'bungie-api-ts/core';
+import { getCommonSettings, getGlobalAlerts as getGlobalAlertsApi } from 'bungie-api-ts/core';
 import { unauthenticatedHttpClient } from './bungie-service-helper';
 
 /**

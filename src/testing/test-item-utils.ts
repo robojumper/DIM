@@ -1,4 +1,4 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { BucketHashes } from 'data/d2/generated-enums';
 
 /** a general mod, 4 energy */

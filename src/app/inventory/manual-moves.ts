@@ -1,4 +1,4 @@
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 
 /**
  * A map from item index to the last time it was manually moved in this

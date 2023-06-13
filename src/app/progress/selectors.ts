@@ -1,4 +1,4 @@
-import { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 
 /**
  * get DestinyCharacterProgressionComponent from a DestinyProfileResponse.

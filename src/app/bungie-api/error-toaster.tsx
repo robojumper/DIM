@@ -1,6 +1,6 @@
 import { t } from 'app/i18next-t';
 import ExternalLink from '../dim-ui/ExternalLink';
-import { NotifyInput } from '../notifications/notifications';
+import type { NotifyInput } from '../notifications/notifications';
 import { AppIcon, twitterIcon } from '../shell/icons';
 
 /**

@@ -1,6 +1,6 @@
 import ConnectedInventoryItem from '../inventory/ConnectedInventoryItem';
 import DraggableInventoryItem from '../inventory/DraggableInventoryItem';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import ItemPopupTrigger from '../inventory/ItemPopupTrigger';
 
 /**

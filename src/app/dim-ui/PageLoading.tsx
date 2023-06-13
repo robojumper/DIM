@@ -1,4 +1,4 @@
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { clsx } from 'clsx';
 import _ from 'lodash';
 import { useRef } from 'react';

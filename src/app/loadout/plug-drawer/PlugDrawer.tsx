@@ -1,12 +1,13 @@
 import { languageSelector } from 'app/dim-api/selectors';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { SearchInput } from 'app/search/SearchInput';
 import { createPlugSearchPredicate } from 'app/search/plug-search';
 import { useIsPhonePortrait } from 'app/shell/selectors';
 import { isiOSBrowser } from 'app/utils/browsers';
-import { Comparator, compareBy } from 'app/utils/comparators';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { Comparator } from 'app/utils/comparators';
+import { compareBy } from 'app/utils/comparators';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import { produce } from 'immer';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -14,7 +15,7 @@ import Sheet from '../../dim-ui/Sheet';
 import '../../item-picker/ItemPicker.scss';
 import Footer from './Footer';
 import PlugSection from './PlugSection';
-import { PlugSet } from './types';
+import type { PlugSet } from './types';
 
 interface Props {
   /**

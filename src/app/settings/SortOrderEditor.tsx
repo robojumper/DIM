@@ -1,4 +1,5 @@
-import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd';
+import type { DropResult } from '@hello-pangea/dnd';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import { t } from 'app/i18next-t';
 import { clsx } from 'clsx';
 import _ from 'lodash';

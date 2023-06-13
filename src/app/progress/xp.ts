@@ -1,4 +1,4 @@
-import { HashLookup } from 'app/utils/util-types';
+import type { HashLookup } from 'app/utils/util-types';
 
 /** Map inventory item ID to XP value */
 export const xpItems: HashLookup<number> = {

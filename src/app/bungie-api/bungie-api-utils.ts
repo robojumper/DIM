@@ -1,4 +1,4 @@
-import { HttpClientConfig } from 'bungie-api-ts/http';
+import type { HttpClientConfig } from 'bungie-api-ts/http';
 
 export const API_KEY =
   $DIM_FLAVOR === 'release' || $DIM_FLAVOR === 'beta' || $DIM_FLAVOR === 'test'

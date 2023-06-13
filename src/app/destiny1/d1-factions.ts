@@ -1,7 +1,7 @@
-import { D1Item } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
+import type { D1Item } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { findItemsByBucket } from 'app/inventory/stores-helpers';
-import { HashLookup } from 'app/utils/util-types';
+import type { HashLookup } from 'app/utils/util-types';
 
 // In D1 there were exotic ghosts that you could only equip if you also had a "Faction Badge" equipped
 // that matched that faction. These functions help identify what faction badge is equipped on the character

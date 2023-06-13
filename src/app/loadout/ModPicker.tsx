@@ -1,18 +1,18 @@
 import { t } from 'app/i18next-t';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import {
   allItemsSelector,
   currentStoreSelector,
   profileResponseSelector,
 } from 'app/inventory/selectors';
-import { ResolvedLoadoutMod } from 'app/loadout-drawer/loadout-types';
+import type { ResolvedLoadoutMod } from 'app/loadout-drawer/loadout-types';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { unlockedItemsForCharacterOrProfilePlugSet } from 'app/records/plugset-helpers';
 import {
   MAX_ARMOR_ENERGY_CAPACITY,
   armor2PlugCategoryHashesByName,
 } from 'app/search/d2-known-values';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { compareBy } from 'app/utils/comparators';
 import { emptyArray } from 'app/utils/empty';
 import { modMetadataByPlugCategoryHash } from 'app/utils/item-utils';
@@ -32,7 +32,7 @@ import {
 } from './known-values';
 import { getModExclusionGroup, isInsertableArmor2Mod, sortModGroups } from './mod-utils';
 import PlugDrawer from './plug-drawer/PlugDrawer';
-import { PlugSet } from './plug-drawer/types';
+import type { PlugSet } from './plug-drawer/types';
 
 /** Raid, combat and legacy mods can have up to 5 selected. */
 const MAX_SLOT_INDEPENDENT_MODS = 5;

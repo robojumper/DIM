@@ -2,12 +2,12 @@ import { settingsSelector } from 'app/dim-api/selectors';
 import { t } from 'app/i18next-t';
 import { loadingEnd, loadingStart } from 'app/shell/actions';
 import { del, get, set } from 'app/storage/idb-keyval';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { emptyArray, emptyObject } from 'app/utils/empty';
 import { errorLog, infoLog, timer } from 'app/utils/log';
 import { dedupePromise } from 'app/utils/util';
-import { LookupTable } from 'app/utils/util-types';
-import {
+import type { LookupTable } from 'app/utils/util-types';
+import type {
   AllDestinyManifestComponents,
   DestinyInventoryItemDefinition,
   DestinyItemActionBlockDefinition,
@@ -16,7 +16,7 @@ import {
   DestinyManifestComponentName,
 } from 'bungie-api-ts/destiny2';
 import { deepEqual } from 'fast-equals';
-import { Draft } from 'immer';
+import type { Draft } from 'immer';
 import _ from 'lodash';
 import { getManifest as d2GetManifest } from '../bungie-api/destiny2-api';
 import { showNotification } from '../notifications/notifications';

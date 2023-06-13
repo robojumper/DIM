@@ -4,7 +4,7 @@ import { BucketHashes } from 'data/d2/generated-enums';
 import React, { useMemo } from 'react';
 import BungieImage from '../dim-ui/BungieImage';
 import { AppIcon, lockIcon, starIcon, stickyNoteIcon } from '../shell/icons';
-import { InventoryWishListRoll } from '../wishlists/wishlists';
+import type { InventoryWishListRoll } from '../wishlists/wishlists';
 import BadgeInfo, { shouldShowBadge } from './BadgeInfo';
 import styles from './InventoryItem.m.scss';
 import ItemIcon from './ItemIcon';
@@ -12,8 +12,8 @@ import ItemIconPlaceholder from './ItemIconPlaceholder';
 import NewItemIndicator from './NewItemIndicator';
 import { canSyncLockState } from './SyncTagLock';
 import TagIcon from './TagIcon';
-import { TagValue } from './dim-item-info';
-import { DimItem } from './item-types';
+import type { TagValue } from './dim-item-info';
+import type { DimItem } from './item-types';
 import { getSubclassIconInfo } from './subclass';
 
 interface Props {

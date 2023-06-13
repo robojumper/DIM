@@ -9,20 +9,18 @@ import {
   spaceLeftForItem,
 } from 'app/inventory/stores-helpers';
 import type { ItemTierName } from 'app/search/d2-known-values';
-import { ThunkResult } from 'app/store/types';
-import { CancelToken, CanceledError, withCancel } from 'app/utils/cancel';
+import type { ThunkResult } from 'app/store/types';
+import type { CancelToken } from 'app/utils/cancel';
+import { CanceledError, withCancel } from 'app/utils/cancel';
 import { DimError } from 'app/utils/dim-error';
 import { errorLog } from 'app/utils/log';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import { InventoryBuckets } from '../inventory/inventory-buckets';
-import {
-  MoveReservations,
-  createMoveSession,
-  executeMoveItem,
-} from '../inventory/item-move-service';
-import { DimItem } from '../inventory/item-types';
-import { DimStore } from '../inventory/store-types';
+import type { InventoryBuckets } from '../inventory/inventory-buckets';
+import type { MoveReservations } from '../inventory/item-move-service';
+import { createMoveSession, executeMoveItem } from '../inventory/item-move-service';
+import type { DimItem } from '../inventory/item-types';
+import type { DimStore } from '../inventory/store-types';
 import { showNotification } from '../notifications/notifications';
 
 // weight "move an item aside" options, according to their rarity

@@ -4,12 +4,12 @@ import { D1BucketHashes } from 'app/search/d1-known-values';
 import { BucketHashes } from 'data/d2/generated-enums';
 import React, { useState } from 'react';
 import BungieImage from '../../dim-ui/BungieImage';
-import { D1GridNode, DimItem } from '../../inventory/item-types';
+import type { D1GridNode, DimItem } from '../../inventory/item-types';
 import { AppIcon, plusIcon } from '../../shell/icons';
 import LoadoutBucketDropTarget from './LoadoutBuilderDropTarget';
 import LoadoutBuilderItem from './LoadoutBuilderItem';
 import LoadoutBuilderLocksDialog from './LoadoutBuilderLocksDialog';
-import { ArmorTypes, D1ItemWithNormalStats, LockedPerkHash, PerkCombination } from './types';
+import type { ArmorTypes, D1ItemWithNormalStats, LockedPerkHash, PerkCombination } from './types';
 
 interface Props {
   type: ArmorTypes;

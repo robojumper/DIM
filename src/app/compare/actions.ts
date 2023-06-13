@@ -1,4 +1,4 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { createAction } from 'typesafe-actions';
 
 /** Add an item to the set of compared items. If there are none already, this compares duplicates. */

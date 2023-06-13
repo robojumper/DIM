@@ -1,7 +1,7 @@
-import { CustomStatWeights } from '@destinyitemmanager/dim-api-types';
-import { DestinyDisplayPropertiesDefinition } from 'bungie-api-ts/destiny2';
+import type { CustomStatWeights } from '@destinyitemmanager/dim-api-types';
+import type { DestinyDisplayPropertiesDefinition } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
-import { DimStat } from '../item-types';
+import type { DimStat } from '../item-types';
 import { getStatSortOrder } from './stats';
 
 /**

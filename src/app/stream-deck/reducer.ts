@@ -1,5 +1,5 @@
-import { StreamDeckAction, StreamDeckState } from 'app/stream-deck/interfaces';
-import { Reducer } from 'redux';
+import type { StreamDeckAction, StreamDeckState } from 'app/stream-deck/interfaces';
+import type { Reducer } from 'redux';
 import { getType } from 'typesafe-actions';
 import * as actions from './actions';
 import { streamDeckInitialState } from './stream-deck';

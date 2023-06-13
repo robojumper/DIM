@@ -1,5 +1,5 @@
 import { getPower } from '../utils';
-import { IntermediateProcessArmorSet, ProcessItem } from './types';
+import type { IntermediateProcessArmorSet, ProcessItem } from './types';
 
 interface TierSet {
   tier: number;

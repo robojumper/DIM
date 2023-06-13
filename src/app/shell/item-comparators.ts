@@ -1,13 +1,15 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { getSeason } from 'app/inventory/store/season';
 import { D1BucketHashes } from 'app/search/d1-known-values';
 import { D2ItemTiers } from 'app/search/d2-known-values';
-import { ItemSortSettings } from 'app/settings/item-sort';
+import type { ItemSortSettings } from 'app/settings/item-sort';
 import { isD1Item, isSunset } from 'app/utils/item-utils';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import { TagValue, tagConfig } from '../inventory/dim-item-info';
-import { Comparator, chainComparator, compareBy, reverseComparator } from '../utils/comparators';
+import type { TagValue } from '../inventory/dim-item-info';
+import { tagConfig } from '../inventory/dim-item-info';
+import type { Comparator } from '../utils/comparators';
+import { chainComparator, compareBy, reverseComparator } from '../utils/comparators';
 
 const INSTANCEID_PADDING = 20;
 

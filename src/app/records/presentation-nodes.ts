@@ -1,11 +1,11 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimItem } from 'app/inventory/item-types';
-import { ItemCreationContext, makeFakeItem } from 'app/inventory/store/d2-item-factory';
-import { ItemFilter } from 'app/search/filter-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimItem } from 'app/inventory/item-types';
+import type { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
+import { makeFakeItem } from 'app/inventory/store/d2-item-factory';
+import type { ItemFilter } from 'app/search/filter-types';
 import { count } from 'app/utils/util';
-import {
+import type {
   DestinyCollectibleDefinition,
-  DestinyCollectibleState,
   DestinyCraftableComponent,
   DestinyDisplayPropertiesDefinition,
   DestinyMetricComponent,
@@ -18,9 +18,8 @@ import {
   DestinyProfileResponse,
   DestinyRecordComponent,
   DestinyRecordDefinition,
-  DestinyRecordState,
-  DestinyScope,
 } from 'bungie-api-ts/destiny2';
+import { DestinyCollectibleState, DestinyRecordState, DestinyScope } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 
 export interface DimPresentationNodeLeaf {

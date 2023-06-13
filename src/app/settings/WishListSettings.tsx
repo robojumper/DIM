@@ -5,7 +5,7 @@ import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { fetchWishList, transformAndStoreWishList } from 'app/wishlists/wishlist-fetch';
 import { toWishList } from 'app/wishlists/wishlist-file';
 import React, { useEffect, useState } from 'react';
-import { DropzoneOptions } from 'react-dropzone';
+import type { DropzoneOptions } from 'react-dropzone';
 import { useSelector } from 'react-redux';
 import FileUpload from '../dim-ui/FileUpload';
 import HelpLink from '../dim-ui/HelpLink';

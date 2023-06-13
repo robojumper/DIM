@@ -1,7 +1,7 @@
 import CollapsibleTitle from 'app/dim-ui/CollapsibleTitle';
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimItem } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { findItemsByBucket } from 'app/inventory/stores-helpers';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { chainComparator, compareBy } from 'app/utils/comparators';
@@ -9,7 +9,8 @@ import { BucketHashes, ItemCategoryHashes } from 'data/d2/generated-enums';
 import pursuitsInfoFile from 'data/d2/pursuits.json';
 import _ from 'lodash';
 import { useState } from 'react';
-import BountyGuide, { BountyFilter, DefType, matchBountyFilters } from './BountyGuide';
+import type { BountyFilter, DefType } from './BountyGuide';
+import BountyGuide, { matchBountyFilters } from './BountyGuide';
 import Pursuit, { showPursuitAsExpired } from './Pursuit';
 import PursuitGrid from './PursuitGrid';
 

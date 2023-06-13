@@ -1,13 +1,10 @@
 /* Functions for dealing with the LoadoutParameters structure we save with loadouts and use to save and share LO settings. */
 
-import {
-  defaultLoadoutParameters,
-  LoadoutParameters,
-  StatConstraint,
-} from '@destinyitemmanager/dim-api-types';
+import type { LoadoutParameters, StatConstraint } from '@destinyitemmanager/dim-api-types';
+import { defaultLoadoutParameters } from '@destinyitemmanager/dim-api-types';
 import { armorStats } from 'app/search/d2-known-values';
 import _ from 'lodash';
-import { ArmorStatHashes, MinMaxIgnored, StatFilters } from './types';
+import type { ArmorStatHashes, MinMaxIgnored, StatFilters } from './types';
 
 export function buildLoadoutParams(
   loadoutParameters: LoadoutParameters,

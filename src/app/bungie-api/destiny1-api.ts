@@ -1,16 +1,16 @@
-import { Vendor } from 'app/destiny1/vendors/vendor.service';
+import type { Vendor } from 'app/destiny1/vendors/vendor.service';
 import { t } from 'app/i18next-t';
 import { DimError } from 'app/utils/dim-error';
 import { errorLog } from 'app/utils/log';
-import {
+import type {
   DestinyEquipItemResults,
   PlatformErrorCodes,
   ServerResponse,
 } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
-import { DestinyAccount } from '../accounts/destiny-account';
-import { DimItem } from '../inventory/item-types';
-import { D1Store, DimStore } from '../inventory/store-types';
+import type { DestinyAccount } from '../accounts/destiny-account';
+import type { DimItem } from '../inventory/item-types';
+import type { D1Store, DimStore } from '../inventory/store-types';
 import { bungieApiQuery, bungieApiUpdate } from './bungie-api-utils';
 import { authenticatedHttpClient, handleUniquenessViolation } from './bungie-service-helper';
 

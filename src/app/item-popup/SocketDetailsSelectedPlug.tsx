@@ -1,9 +1,9 @@
 import ClarityDescriptions from 'app/clarity/descriptions/ClarityDescriptions';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import BungieImage from 'app/dim-ui/BungieImage';
 import { t } from 'app/i18next-t';
 import { canInsertPlug, insertPlug } from 'app/inventory/advanced-write-actions';
-import {
+import type {
   DimItem,
   DimPlug,
   DimSocket,
@@ -19,8 +19,8 @@ import AppIcon from 'app/shell/icons/AppIcon';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { isPlugStatActive } from 'app/utils/item-utils';
 import { usePlugDescriptions } from 'app/utils/plug-descriptions';
-import { LookupTable } from 'app/utils/util-types';
-import { DestinyItemSocketEntryDefinition } from 'bungie-api-ts/destiny2';
+import type { LookupTable } from 'app/utils/util-types';
+import type { DestinyItemSocketEntryDefinition } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { PlugCategoryHashes, SocketCategoryHashes, StatHashes } from 'data/d2/generated-enums';
 import { motion } from 'framer-motion';

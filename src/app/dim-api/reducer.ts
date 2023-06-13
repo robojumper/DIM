@@ -1,6 +1,5 @@
-import {
+import type {
   CustomStatWeights,
-  defaultGlobalSettings,
   DestinyVersion,
   GlobalSettings,
   ItemAnnotation,
@@ -10,12 +9,13 @@ import {
   Search,
   TagValue,
 } from '@destinyitemmanager/dim-api-types';
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import { defaultGlobalSettings } from '@destinyitemmanager/dim-api-types';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { t } from 'app/i18next-t';
 import { convertDimLoadoutToApiLoadout } from 'app/loadout-drawer/loadout-type-converters';
 import { recentSearchComparator } from 'app/search/autocomplete';
 import { CUSTOM_TOTAL_STAT_HASH } from 'app/search/d2-known-values';
-import { FilterContext } from 'app/search/filter-types';
+import type { FilterContext } from 'app/search/filter-types';
 import { buildFiltersMap } from 'app/search/search-config';
 import { parseAndValidateQuery } from 'app/search/search-utils';
 import { emptyArray } from 'app/utils/empty';
@@ -24,15 +24,18 @@ import { count, uniqBy } from 'app/utils/util';
 import { clearWishLists } from 'app/wishlists/actions';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { deepEqual } from 'fast-equals';
-import { Draft, produce } from 'immer';
+import type { Draft } from 'immer';
+import { produce } from 'immer';
 import _ from 'lodash';
-import { ActionType, getType } from 'typesafe-actions';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import * as inventoryActions from '../inventory/actions';
 import * as loadoutActions from '../loadout-drawer/actions';
-import { Loadout as DimLoadout } from '../loadout-drawer/loadout-types';
+import type { Loadout as DimLoadout } from '../loadout-drawer/loadout-types';
 import * as settingsActions from '../settings/actions';
-import { initialSettingsState, Settings } from '../settings/initial-settings';
-import { DeleteLoadoutUpdateWithRollback, ProfileUpdateWithRollback } from './api-types';
+import type { Settings } from '../settings/initial-settings';
+import { initialSettingsState } from '../settings/initial-settings';
+import type { DeleteLoadoutUpdateWithRollback, ProfileUpdateWithRollback } from './api-types';
 import * as actions from './basic-actions';
 import { makeProfileKey, makeProfileKeyFromAccount } from './selectors';
 

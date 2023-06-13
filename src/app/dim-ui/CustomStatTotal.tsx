@@ -2,9 +2,11 @@ import BungieImage from 'app/dim-ui/BungieImage';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { armorStats } from 'app/search/d2-known-values';
 import { useSetting } from 'app/settings/hooks';
-import { DestinyClass, DestinyStatDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyStatDefinition } from 'bungie-api-ts/destiny2';
+import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
-import React, { ReactElement, ReactNode, cloneElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import React, { cloneElement } from 'react';
 import styles from './CustomStatTotal.m.scss';
 
 export type StatHashListsKeyedByDestinyClass = Record<number, number[]>;

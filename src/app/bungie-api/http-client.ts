@@ -1,6 +1,7 @@
 import { delay } from 'app/utils/util';
-import { PlatformErrorCodes, ServerResponse } from 'bungie-api-ts/destiny2';
-import { HttpClient, HttpClientConfig } from 'bungie-api-ts/http';
+import type { ServerResponse } from 'bungie-api-ts/destiny2';
+import { PlatformErrorCodes } from 'bungie-api-ts/destiny2';
+import type { HttpClient, HttpClientConfig } from 'bungie-api-ts/http';
 
 /**
  * an error indicating a non-200 response code

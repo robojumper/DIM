@@ -1,4 +1,4 @@
-import { StreamDeckSelectionType } from 'app/stream-deck/interfaces';
+import type { StreamDeckSelectionType } from 'app/stream-deck/interfaces';
 import { createAction } from 'typesafe-actions';
 
 /**

@@ -1,15 +1,15 @@
 import Countdown from 'app/dim-ui/Countdown';
 import { t } from 'app/i18next-t';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { useD2Definitions } from 'app/manifest/selectors';
-import {
+import type {
   DestinyCharacterProgressionComponent,
-  DestinyClass,
   DestinyProfileResponse,
   DestinyProgressionRewardItemQuantity,
   DestinySeasonDefinition,
   DestinySeasonPassDefinition,
 } from 'bungie-api-ts/destiny2';
+import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import BungieImage from '../dim-ui/BungieImage';
 import { ProgressBar, StackAmount } from './PursuitItem';

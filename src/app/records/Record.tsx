@@ -6,15 +6,15 @@ import { isBooleanObjective } from 'app/inventory/store/objectives';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { Reward } from 'app/progress/Reward';
 import { percent } from 'app/shell/formatters';
-import { RootState } from 'app/store/types';
-import { HashLookup } from 'app/utils/util-types';
-import {
+import type { RootState } from 'app/store/types';
+import type { HashLookup } from 'app/utils/util-types';
+import type {
   DestinyItemQuantity,
   DestinyObjectiveProgress,
   DestinyRecordComponent,
   DestinyRecordDefinition,
-  DestinyRecordState,
 } from 'bungie-api-ts/destiny2';
+import { DestinyRecordState } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import catalystIcons from 'data/d2/catalyst-triumph-icons.json';
 import dimTrackedIcon from 'images/dimTrackedIcon.svg';
@@ -27,7 +27,7 @@ import BungieImage from '../dim-ui/BungieImage';
 import ExternalLink from '../dim-ui/ExternalLink';
 import Objective from '../progress/Objective';
 import styles from './Record.m.scss';
-import { DimRecord } from './presentation-nodes';
+import type { DimRecord } from './presentation-nodes';
 
 interface RecordInterval {
   objective: DestinyObjectiveProgress;

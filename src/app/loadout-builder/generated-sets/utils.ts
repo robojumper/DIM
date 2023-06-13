@@ -1,7 +1,8 @@
 import { armorStats } from 'app/search/d2-known-values';
-import { chainComparator, Comparator, compareBy } from 'app/utils/comparators';
+import type { Comparator } from 'app/utils/comparators';
+import { chainComparator, compareBy } from 'app/utils/comparators';
 import _ from 'lodash';
-import { ArmorSet, ArmorStatHashes, ArmorStats } from '../types';
+import type { ArmorSet, ArmorStatHashes, ArmorStats } from '../types';
 import { statTier } from '../utils';
 
 function getComparatorsForMatchedSetSorting(

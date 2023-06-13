@@ -1,6 +1,6 @@
 import { tl } from 'app/i18next-t';
-import { TagValue } from 'app/inventory/dim-item-info';
-import { DimItem } from 'app/inventory/item-types';
+import type { TagValue } from 'app/inventory/dim-item-info';
+import type { DimItem } from 'app/inventory/item-types';
 import { getSeason } from 'app/inventory/store/season';
 import { isArtifice } from 'app/item-triage/triage-utils';
 import { StatsSet } from 'app/loadout-builder/process-worker/stats-set';
@@ -9,7 +9,7 @@ import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { chainComparator, compareBy, reverseComparator } from '../../utils/comparators';
 import { DEFAULT_SHADER, armorStats } from '../d2-known-values';
-import { FilterDefinition } from '../filter-types';
+import type { FilterDefinition } from '../filter-types';
 
 const notableTags = ['favorite', 'keep'];
 

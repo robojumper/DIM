@@ -2,11 +2,12 @@ import { hideItemPopup } from 'app/item-popup/item-popup';
 import { useIsPhonePortrait } from 'app/shell/selectors';
 import { infoLog } from 'app/utils/log';
 import { clsx } from 'clsx';
-import { animate, motion, PanInfo, Spring, useMotionValue, useTransform } from 'framer-motion';
+import type { PanInfo, Spring } from 'framer-motion';
+import { animate, motion, useMotionValue, useTransform } from 'framer-motion';
 import _ from 'lodash';
 import { useEffect, useRef } from 'react';
 import CharacterTileButton from '../character-tile/CharacterTileButton';
-import { DimStore } from '../inventory/store-types';
+import type { DimStore } from '../inventory/store-types';
 import styles from './CharacterSelect.m.scss';
 
 const spring: Spring = {

@@ -2,7 +2,8 @@ import { t } from 'app/i18next-t';
 import { infoLog, warnLog } from 'app/utils/log';
 import { PlatformErrorCodes } from 'bungie-api-ts/user';
 import { getAccessTokenFromRefreshToken } from './oauth';
-import { Tokens, getToken, hasTokenExpired, removeAccessToken } from './oauth-tokens';
+import type { Tokens } from './oauth-tokens';
+import { getToken, hasTokenExpired, removeAccessToken } from './oauth-tokens';
 
 /**
  * A fatal token error means we have to log in again.

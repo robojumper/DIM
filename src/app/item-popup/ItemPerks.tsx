@@ -1,9 +1,9 @@
 import BungieImage from 'app/dim-ui/BungieImage';
 import RichDestinyText from 'app/dim-ui/destiny-symbols/RichDestinyText';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { FISHING_BAIT_PERK } from 'app/search/d2-known-values';
-import { DestinyItemPerkEntryDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyItemPerkEntryDefinition } from 'bungie-api-ts/destiny2';
 
 export default function ItemPerks({ item }: { item: DimItem }) {
   if (!item.perks) {

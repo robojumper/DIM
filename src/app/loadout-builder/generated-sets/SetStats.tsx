@@ -1,13 +1,13 @@
 import BungieImage from 'app/dim-ui/BungieImage';
 import { PressTip } from 'app/dim-ui/PressTip';
 import { t } from 'app/i18next-t';
-import { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { AppIcon, powerIndicatorIcon } from 'app/shell/icons';
 import StatTooltip from 'app/store-stats/StatTooltip';
-import { DestinyStatDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyStatDefinition } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
-import { ArmorStatHashes, ArmorStats, ModStatChanges } from '../types';
+import type { ArmorStatHashes, ArmorStats, ModStatChanges } from '../types';
 import { remEuclid, statTierWithHalf } from '../utils';
 import styles from './SetStats.m.scss';
 import { calculateTotalTier, sumEnabledStats } from './utils';

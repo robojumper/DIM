@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './FilterHelp.m.scss';
 import { SearchInput } from './SearchInput';
-import { FilterDefinition } from './filter-types';
+import type { FilterDefinition } from './filter-types';
 import { searchConfigSelector } from './search-config';
 import { generateGroupedSuggestionsForFilter } from './suggestions-generation';
 

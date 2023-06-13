@@ -1,25 +1,26 @@
-import { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
 import Select from 'app/dim-ui/Select';
 import Sheet from 'app/dim-ui/Sheet';
 import useConfirm from 'app/dim-ui/useConfirm';
 import { t } from 'app/i18next-t';
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { allItemsSelector, createItemContextSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
-import { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
+import type { DimStore } from 'app/inventory/store-types';
+import type { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
 import { updateLoadout } from 'app/loadout-drawer/actions';
 import { getItemsFromLoadoutItems } from 'app/loadout-drawer/loadout-item-conversion';
-import { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { convertToLoadoutItem } from 'app/loadout-drawer/loadout-utils';
 import LoadoutView from 'app/loadout/LoadoutView';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { BucketHashes } from 'data/d2/generated-enums';
 import { produce } from 'immer';
 import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ArmorSet, LockableBucketHashes } from '../types';
+import type { ArmorSet } from '../types';
+import { LockableBucketHashes } from '../types';
 import styles from './CompareLoadoutsDrawer.m.scss';
 
 function chooseInitialLoadout(

@@ -1,16 +1,16 @@
-import { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
 import { t } from 'app/i18next-t';
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { applyLoadout } from 'app/loadout-drawer/loadout-apply';
-import { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { convertToLoadoutItem, newLoadout } from 'app/loadout-drawer/loadout-utils';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
-import { Dispatch } from 'react';
-import { LoadoutBuilderAction } from '../loadout-builder-reducer';
-import { ArmorSet } from '../types';
+import type { Dispatch } from 'react';
+import type { LoadoutBuilderAction } from '../loadout-builder-reducer';
+import type { ArmorSet } from '../types';
 import { statTier } from '../utils';
 import styles from './GeneratedSetButtons.m.scss';
 

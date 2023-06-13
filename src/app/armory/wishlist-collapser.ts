@@ -1,7 +1,8 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimItem } from 'app/inventory/item-types';
-import { WishListRoll } from 'app/wishlists/types';
-import { DestinyInventoryItemDefinition, TierType } from 'bungie-api-ts/destiny2';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimItem } from 'app/inventory/item-types';
+import type { WishListRoll } from 'app/wishlists/types';
+import type { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import { TierType } from 'bungie-api-ts/destiny2';
 import { ItemCategoryHashes } from 'data/d2/generated-enums';
 import perkToEnhanced from 'data/d2/trait-to-enhanced-trait.json';
 import _ from 'lodash';

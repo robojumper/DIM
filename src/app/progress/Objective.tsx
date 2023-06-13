@@ -1,4 +1,4 @@
-import { D1ObjectiveDefinition, D1ObjectiveProgress } from 'app/destiny1/d1-manifest-types';
+import type { D1ObjectiveDefinition, D1ObjectiveProgress } from 'app/destiny1/d1-manifest-types';
 import RichDestinyText from 'app/dim-ui/destiny-symbols/RichDestinyText';
 import { t } from 'app/i18next-t';
 import {
@@ -10,11 +10,8 @@ import {
 import { useDefinitions } from 'app/manifest/selectors';
 import { percent, percentWithSingleDecimal } from 'app/shell/formatters';
 import { timerDurationFromMs } from 'app/utils/time';
-import {
-  DestinyObjectiveDefinition,
-  DestinyObjectiveProgress,
-  DestinyUnlockValueUIStyle,
-} from 'bungie-api-ts/destiny2';
+import type { DestinyObjectiveDefinition, DestinyObjectiveProgress } from 'bungie-api-ts/destiny2';
+import { DestinyUnlockValueUIStyle } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import '../item-popup/ItemObjectives.scss';
 import ObjectiveDescription from './ObjectiveDescription';

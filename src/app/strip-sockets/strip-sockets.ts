@@ -1,12 +1,16 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { tl } from 'app/i18next-t';
 import { canInsertPlug, insertPlug } from 'app/inventory/advanced-write-actions';
-import { DimItem, DimSocket, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type {
+  DimItem,
+  DimSocket,
+  PluggableInventoryItemDefinition,
+} from 'app/inventory/item-types';
 import { DEFAULT_ORNAMENTS } from 'app/search/d2-known-values';
-import { ThunkResult } from 'app/store/types';
-import { CancelToken } from 'app/utils/cancel';
+import type { ThunkResult } from 'app/store/types';
+import type { CancelToken } from 'app/utils/cancel';
 import { uniqBy } from 'app/utils/util';
-import { Destiny2CoreSettings } from 'bungie-api-ts/core';
+import type { Destiny2CoreSettings } from 'bungie-api-ts/core';
 import { ItemCategoryHashes, PlugCategoryHashes } from 'data/d2/generated-enums';
 
 export interface StripAction {

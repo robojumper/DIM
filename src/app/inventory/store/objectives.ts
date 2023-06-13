@@ -1,13 +1,12 @@
-import { D1ObjectiveDefinition } from 'app/destiny1/d1-manifest-types';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { HashLookup } from 'app/utils/util-types';
-import {
+import type { D1ObjectiveDefinition } from 'app/destiny1/d1-manifest-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { HashLookup } from 'app/utils/util-types';
+import type {
   DestinyInventoryItemDefinition,
   DestinyObjectiveDefinition,
   DestinyObjectiveProgress,
-  DestinyObjectiveUiStyle,
-  DestinyUnlockValueUIStyle,
 } from 'bungie-api-ts/destiny2';
+import { DestinyObjectiveUiStyle, DestinyUnlockValueUIStyle } from 'bungie-api-ts/destiny2';
 import trialsHashes from 'data/d2/d2-trials-objectives.json';
 
 /**

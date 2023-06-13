@@ -1,4 +1,4 @@
-import { GlobalAlert } from 'bungie-api-ts/core';
+import type { GlobalAlert } from 'bungie-api-ts/core';
 import { createAction } from 'typesafe-actions';
 
 /** Set whether we're in phonePortrait view mode. */

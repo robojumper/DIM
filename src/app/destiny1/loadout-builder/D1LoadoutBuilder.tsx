@@ -6,7 +6,7 @@ import { getCurrentStore } from 'app/inventory/stores-helpers';
 import { d1ManifestSelector } from 'app/manifest/selectors';
 import { D1_StatHashes } from 'app/search/d1-known-values';
 import { getColor } from 'app/shell/formatters';
-import { RootState, ThunkDispatchProp } from 'app/store/types';
+import type { RootState, ThunkDispatchProp } from 'app/store/types';
 import { itemCanBeInLoadout } from 'app/utils/item-utils';
 import { errorLog } from 'app/utils/log';
 import { uniqBy } from 'app/utils/util';
@@ -20,20 +20,21 @@ import CharacterSelect from '../../dim-ui/CharacterSelect';
 import CollapsibleTitle from '../../dim-ui/CollapsibleTitle';
 import ErrorBoundary from '../../dim-ui/ErrorBoundary';
 import { loadStores } from '../../inventory/d1-stores';
-import { InventoryBuckets } from '../../inventory/inventory-buckets';
-import { D1GridNode, D1Item, DimItem } from '../../inventory/item-types';
+import type { InventoryBuckets } from '../../inventory/inventory-buckets';
+import type { D1GridNode, D1Item, DimItem } from '../../inventory/item-types';
 import { bucketsSelector, storesSelector } from '../../inventory/selectors';
-import { D1Store } from '../../inventory/store-types';
+import type { D1Store } from '../../inventory/store-types';
 import { AppIcon, refreshIcon } from '../../shell/icons';
-import { D1ManifestDefinitions } from '../d1-definitions';
-import { Vendor, loadVendors } from '../vendors/vendor.service';
+import type { D1ManifestDefinitions } from '../d1-definitions';
+import type { Vendor } from '../vendors/vendor.service';
+import { loadVendors } from '../vendors/vendor.service';
 import ExcludeItemsDropTarget from './ExcludeItemsDropTarget';
 import GeneratedSet from './GeneratedSet';
 import LoadoutBuilderItem from './LoadoutBuilderItem';
 import LoadoutBuilderLockPerk from './LoadoutBuilderLockPerk';
 import { getSetBucketsStep } from './calculate';
 import './loadout-builder.scss';
-import {
+import type {
   ArmorTypes,
   ClassTypes,
   D1ItemWithNormalStats,

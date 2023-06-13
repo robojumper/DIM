@@ -1,13 +1,13 @@
 import { t } from 'app/i18next-t';
 import { D1BucketHashes } from 'app/search/d1-known-values';
 import { D2ItemTiers } from 'app/search/d2-known-values';
-import { ItemFilter } from 'app/search/filter-types';
+import type { ItemFilter } from 'app/search/filter-types';
 import { isD1Item, itemCanBeEquippedBy } from 'app/utils/item-utils';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import { DimItem } from '../inventory/item-types';
-import { DimStore } from '../inventory/store-types';
-import { Loadout } from './loadout-types';
+import type { DimItem } from '../inventory/item-types';
+import type { DimStore } from '../inventory/store-types';
+import type { Loadout } from './loadout-types';
 import { convertToLoadoutItem, newLoadout, optimalItemSet, optimalLoadout } from './loadout-utils';
 
 /**

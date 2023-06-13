@@ -1,22 +1,14 @@
 import _ from 'lodash';
 import { infoLog } from '../../utils/log';
-import {
-  ArmorStatHashes,
-  ArmorStats,
-  artificeStatBoost,
-  LockableBucketHashes,
-  LockableBuckets,
-  majorStatBoost,
-  StatFilters,
-  StatRanges,
-} from '../types';
+import type { ArmorStatHashes, ArmorStats, StatFilters, StatRanges } from '../types';
+import { LockableBucketHashes, LockableBuckets, artificeStatBoost, majorStatBoost } from '../types';
 import {
   pickAndAssignSlotIndependentMods,
   pickOptimalStatMods,
   precalculateStructures,
 } from './process-utils';
 import { SetTracker } from './set-tracker';
-import {
+import type {
   AutoModData,
   LockedProcessMods,
   ProcessArmorSet,

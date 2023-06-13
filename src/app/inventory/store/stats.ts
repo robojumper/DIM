@@ -1,28 +1,30 @@
-import { CustomStatDef } from '@destinyitemmanager/dim-api-types';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { CustomStatDef } from '@destinyitemmanager/dim-api-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t } from 'app/i18next-t';
 import { D1ItemCategoryHashes } from 'app/search/d1-known-values';
 import { armorStats, evenStatWeights, TOTAL_STAT_HASH } from 'app/search/d2-known-values';
 import { compareBy } from 'app/utils/comparators';
 import { isPlugStatActive } from 'app/utils/item-utils';
 import { weakMemoize } from 'app/utils/util';
-import {
-  DestinyClass,
+import type {
   DestinyInventoryItemDefinition,
   DestinyItemInvestmentStatDefinition,
-  DestinyStatAggregationType,
-  DestinyStatCategory,
   DestinyStatDefinition,
   DestinyStatDisplayDefinition,
   DestinyStatGroupDefinition,
 } from 'bungie-api-ts/destiny2';
+import {
+  DestinyClass,
+  DestinyStatAggregationType,
+  DestinyStatCategory,
+} from 'bungie-api-ts/destiny2';
 import adeptWeaponHashes from 'data/d2/adept-weapon-hashes.json';
 import enhancedIntrinsics from 'data/d2/crafting-enhanced-intrinsics';
 import { BucketHashes, ItemCategoryHashes, StatHashes } from 'data/d2/generated-enums';
-import { Draft } from 'immer';
+import type { Draft } from 'immer';
 import _ from 'lodash';
 import { socketContainsIntrinsicPlug } from '../../utils/socket-utils';
-import {
+import type {
   DimItem,
   DimPlug,
   DimSocket,

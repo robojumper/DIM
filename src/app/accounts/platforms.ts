@@ -1,18 +1,15 @@
 import { loadDimApiData } from 'app/dim-api/actions';
 import { deleteDimApiToken } from 'app/dim-api/dim-api-helper';
 import { del, get } from 'app/storage/idb-keyval';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { errorLog } from 'app/utils/log';
 import { dedupePromise } from 'app/utils/util';
 import { removeToken } from '../bungie-api/oauth-tokens';
 import { loadingTracker } from '../shell/loading-tracker';
 import * as actions from './actions';
 import { getBungieAccount } from './bungie-account';
-import {
-  DestinyAccount,
-  compareAccounts,
-  getDestinyAccountsForBungieAccount,
-} from './destiny-account';
+import type { DestinyAccount } from './destiny-account';
+import { compareAccounts, getDestinyAccountsForBungieAccount } from './destiny-account';
 import { accountsLoadedSelector, accountsSelector, currentAccountSelector } from './selectors';
 
 const loadAccountsFromIndexedDBAction: ThunkResult = dedupePromise(async (dispatch) => {

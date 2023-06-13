@@ -1,8 +1,9 @@
-import { defaultLoadoutParameters, DestinyVersion } from '@destinyitemmanager/dim-api-types';
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import { defaultLoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { currentAccountSelector, destinyVersionSelector } from 'app/accounts/selectors';
-import { Settings } from 'app/settings/initial-settings';
-import { RootState } from 'app/store/types';
+import type { Settings } from 'app/settings/initial-settings';
+import type { RootState } from 'app/store/types';
 import { createSelector } from 'reselect';
 
 export function makeProfileKeyFromAccount(account: DestinyAccount) {

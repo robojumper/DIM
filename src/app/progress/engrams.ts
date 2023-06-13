@@ -1,4 +1,4 @@
-import { HashLookup } from 'app/utils/util-types';
+import type { HashLookup } from 'app/utils/util-types';
 import { D2CalculatedSeason, D2SeasonInfo } from 'data/d2/d2-season-info';
 import _ from 'lodash';
 

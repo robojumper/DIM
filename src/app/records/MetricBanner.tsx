@@ -1,6 +1,6 @@
 import { useD2Definitions } from 'app/manifest/selectors';
 import { ALL_TRAIT } from 'app/search/d2-known-values';
-import { DestinyObjectiveProgress } from 'bungie-api-ts/destiny2';
+import type { DestinyObjectiveProgress } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import masterworkOverlay from 'images/masterwork-metric.png';
 import BungieImage from '../dim-ui/BungieImage';

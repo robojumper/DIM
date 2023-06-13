@@ -2,10 +2,10 @@ import ClosableContainer from 'app/dim-ui/ClosableContainer';
 import { TileGridTile } from 'app/dim-ui/TileGrid';
 import RichDestinyText from 'app/dim-ui/destiny-symbols/RichDestinyText';
 import { DefItemIcon } from 'app/inventory/ItemIcon';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { PlugStats } from 'app/item-popup/PlugTooltip';
 import { getPlugDefStats, usePlugDescriptions } from 'app/utils/plug-descriptions';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import React, { useCallback, useMemo } from 'react';
 import styles from './SelectablePlug.m.scss';
 

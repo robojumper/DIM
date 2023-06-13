@@ -1,8 +1,9 @@
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import * as actions from './actions';
-import { ClarityCharacterStats } from './descriptions/character-stats';
-import { ClarityDescription } from './descriptions/descriptionInterface';
+import type { ClarityCharacterStats } from './descriptions/character-stats';
+import type { ClarityDescription } from './descriptions/descriptionInterface';
 
 export type ClarityAction = ActionType<typeof actions>;
 

@@ -1,10 +1,9 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
 import { VENDORS } from 'app/search/d2-known-values';
-import { ItemFilter } from 'app/search/filter-types';
+import type { ItemFilter } from 'app/search/filter-types';
 import { compareBy } from 'app/utils/comparators';
-import {
-  DestinyCollectibleState,
+import type {
   DestinyDestinationDefinition,
   DestinyInventoryItemDefinition,
   DestinyPlaceDefinition,
@@ -14,9 +13,11 @@ import {
   DestinyVendorSaleItemComponent,
   DestinyVendorsResponse,
 } from 'bungie-api-ts/destiny2';
+import { DestinyCollectibleState } from 'bungie-api-ts/destiny2';
 import { ItemCategoryHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import { VendorItem, vendorItemForDefinitionItem, vendorItemForSaleItem } from './vendor-item';
+import type { VendorItem } from './vendor-item';
+import { vendorItemForDefinitionItem, vendorItemForSaleItem } from './vendor-item';
 export interface D2VendorGroup {
   def: DestinyVendorGroupDefinition;
   vendors: D2Vendor[];

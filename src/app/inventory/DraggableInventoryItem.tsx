@@ -4,7 +4,7 @@ import React from 'react';
 import { useDrag } from 'react-dnd';
 import styles from './DraggableInventoryItem.m.scss';
 import { isDragging$ } from './drag-events';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 
 interface Props {
   item: DimItem;

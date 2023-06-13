@@ -9,6 +9,7 @@ declare const $DIM_API_KEY: string;
 declare const $BROWSERS: string[];
 declare const $ANALYTICS_PROPERTY: string;
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 declare const $featureFlags: ReturnType<typeof import('../config/feature-flags').makeFeatureFlags>;
 
 interface Window {

@@ -1,4 +1,4 @@
-import { DimItem } from '../item-types';
+import type { DimItem } from '../item-types';
 
 let _idTracker: { [id: string]: number } = {};
 

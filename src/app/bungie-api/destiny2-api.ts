@@ -1,19 +1,23 @@
 import { t } from 'app/i18next-t';
-import { InGameLoadout } from 'app/loadout-drawer/loadout-types';
+import type { InGameLoadout } from 'app/loadout-drawer/loadout-types';
 import { DimError } from 'app/utils/dim-error';
 import { errorLog } from 'app/utils/log';
-import {
+import type {
   AwaAuthorizationResult,
-  awaGetActionToken,
-  awaInitializeRequest,
   AwaType,
-  BungieMembershipType,
-  clearLoadout,
-  DestinyComponentType,
   DestinyLinkedProfilesResponse,
   DestinyManifest,
   DestinyProfileResponse,
   DestinyVendorsResponse,
+  PlatformErrorCodes,
+  ServerResponse,
+} from 'bungie-api-ts/destiny2';
+import {
+  BungieMembershipType,
+  DestinyComponentType,
+  awaGetActionToken,
+  awaInitializeRequest,
+  clearLoadout,
   equipItem,
   equipItems as equipItemsApi,
   equipLoadout,
@@ -21,9 +25,7 @@ import {
   getLinkedProfiles,
   getProfile as getProfileApi,
   getVendors as getVendorsApi,
-  PlatformErrorCodes,
   pullFromPostmaster,
-  ServerResponse,
   setItemLockState,
   setQuestTrackedState,
   snapshotLoadout,
@@ -31,9 +33,9 @@ import {
   updateLoadoutIdentifiers,
 } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
-import { DestinyAccount } from '../accounts/destiny-account';
-import { DimItem } from '../inventory/item-types';
-import { DimStore } from '../inventory/store-types';
+import type { DestinyAccount } from '../accounts/destiny-account';
+import type { DimItem } from '../inventory/item-types';
+import type { DimStore } from '../inventory/store-types';
 import { reportException } from '../utils/exceptions';
 import {
   authenticatedHttpClient,

@@ -3,7 +3,7 @@ import { settingSelector } from 'app/dim-api/selectors';
 import { t } from 'app/i18next-t';
 import { showItemPicker } from 'app/item-picker/item-picker';
 import { hideItemPopup } from 'app/item-popup/item-popup';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { CanceledError, neverCanceled, withCancel } from 'app/utils/cancel';
 import { DimError } from 'app/utils/dim-error';
 import { itemCanBeEquippedBy } from 'app/utils/item-utils';
@@ -16,12 +16,12 @@ import { queueAction } from '../utils/action-queue';
 import { reportException } from '../utils/exceptions';
 import { moveItemNotification } from './MoveNotifications';
 import { updateCharacters } from './d2-stores';
-import { InventoryBucket } from './inventory-buckets';
+import type { InventoryBucket } from './inventory-buckets';
 import { createMoveSession, executeMoveItem } from './item-move-service';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 import { updateManualMoveTimestamp } from './manual-moves';
 import { currentStoreSelector, storesSelector } from './selectors';
-import { DimStore } from './store-types';
+import type { DimStore } from './store-types';
 import { amountOfItem, getCurrentStore, getStore, getVault } from './stores-helpers';
 
 /**

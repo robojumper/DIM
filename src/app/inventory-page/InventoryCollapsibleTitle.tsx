@@ -1,6 +1,6 @@
 import { collapsedSelector } from 'app/dim-api/selectors';
 import { t } from 'app/i18next-t';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import {
   POSTMASTER_SIZE,
   postmasterAlmostFull,

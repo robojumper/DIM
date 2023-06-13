@@ -1,7 +1,8 @@
-import { GlobalAlert } from 'bungie-api-ts/core';
+import type { GlobalAlert } from 'bungie-api-ts/core';
 import { deepEqual } from 'fast-equals';
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import { isPhonePortraitFromMediaQuery } from '../utils/media-queries';
 import * as actions from './actions';
 

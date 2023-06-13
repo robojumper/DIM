@@ -1,10 +1,11 @@
 import { d2MissingIcon } from 'app/search/d2-known-values';
 import { clsx } from 'clsx';
-import { BucketHashes, ItemCategoryHashes } from 'data/d2/generated-enums';
+import type { BucketHashes, ItemCategoryHashes } from 'data/d2/generated-enums';
 import React from 'react';
 import BungieImage from '../BungieImage';
 import styles from './BucketIcon.m.scss';
-import { ItemCategoryIcon, getBucketSvgIcon, itemCategoryIcons } from './itemCategory';
+import type { ItemCategoryIcon } from './itemCategory';
+import { getBucketSvgIcon, itemCategoryIcons } from './itemCategory';
 
 type BucketIconProps = React.ImgHTMLAttributes<HTMLImageElement> &
   (

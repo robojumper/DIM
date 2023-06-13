@@ -1,6 +1,6 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { AppIcon, faClock } from 'app/shell/icons';
-import { DestinyItemTooltipNotification } from 'bungie-api-ts/destiny2';
+import type { DestinyItemTooltipNotification } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import shapedIcon from 'images/shaped.png';
 import styles from './DestinyTooltipText.m.scss';

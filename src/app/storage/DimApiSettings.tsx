@@ -1,4 +1,4 @@
-import { ExportResponse } from '@destinyitemmanager/dim-api-types';
+import type { ExportResponse } from '@destinyitemmanager/dim-api-types';
 import { deleteAllApiData, loadDimApiData } from 'app/dim-api/actions';
 import { setApiPermissionGranted } from 'app/dim-api/basic-actions';
 import { exportDimApiData } from 'app/dim-api/dim-api';

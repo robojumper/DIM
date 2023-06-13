@@ -1,5 +1,5 @@
 import { tl } from 'app/i18next-t';
-import { D1Item } from 'app/inventory/item-types';
+import type { D1Item } from 'app/inventory/item-types';
 import { getItemYear } from 'app/utils/item-utils';
 import {
   boosts,
@@ -8,7 +8,7 @@ import {
   supplies,
   vendorHashes,
 } from '../d1-known-values';
-import { FilterDefinition } from '../filter-types';
+import type { FilterDefinition } from '../filter-types';
 
 // these just check an attribute found on DimItem
 const d1Filters: D1FilterDefinition[] = [

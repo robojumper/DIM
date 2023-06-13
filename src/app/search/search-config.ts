@@ -1,17 +1,14 @@
-import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import { destinyVersionSelector } from 'app/accounts/selectors';
 import { languageSelector } from 'app/dim-api/selectors';
-import { DimLanguage } from 'app/i18n';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimLanguage } from 'app/i18n';
+import type { DimItem } from 'app/inventory/item-types';
 import memoizeOne from 'memoize-one';
 import { createSelector } from 'reselect';
-import { ArmoryEntry, buildArmoryIndex } from './armory-search';
-import {
-  FilterContext,
-  FilterDefinition,
-  SuggestionsContext,
-  canonicalFilterFormats,
-} from './filter-types';
+import type { ArmoryEntry } from './armory-search';
+import { buildArmoryIndex } from './armory-search';
+import type { FilterContext, FilterDefinition, SuggestionsContext } from './filter-types';
+import { canonicalFilterFormats } from './filter-types';
 import advancedFilters from './search-filters/advanced';
 import d1Filters from './search-filters/d1-filters';
 import dupeFilters from './search-filters/dupes';

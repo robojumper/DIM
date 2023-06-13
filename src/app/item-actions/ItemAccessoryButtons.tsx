@@ -1,5 +1,5 @@
-import { DimItem } from 'app/inventory/item-types';
-import { ItemActionsModel } from 'app/item-popup/item-popup-actions';
+import type { DimItem } from 'app/inventory/item-types';
+import type { ItemActionsModel } from 'app/item-popup/item-popup-actions';
 import {
   CompareActionButton,
   ConsolidateActionButton,

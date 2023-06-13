@@ -1,15 +1,19 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimItem, DimSockets, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type {
+  DimItem,
+  DimSockets,
+  PluggableInventoryItemDefinition,
+} from 'app/inventory/item-types';
 import { getEnergyUpgradePlugs } from 'app/inventory/store/energy';
 import { isArtifice } from 'app/item-triage/triage-utils';
-import { ArmorEnergyRules } from 'app/loadout-builder/types';
-import { Assignment, PluggingAction } from 'app/loadout-drawer/loadout-types';
+import type { ArmorEnergyRules } from 'app/loadout-builder/types';
+import type { Assignment, PluggingAction } from 'app/loadout-drawer/loadout-types';
+import type { ItemTierName } from 'app/search/d2-known-values';
 import {
-  ItemTierName,
   MAX_ARMOR_ENERGY_CAPACITY,
   armor2PlugCategoryHashesByName,
 } from 'app/search/d2-known-values';
-import { ModSocketMetadata } from 'app/search/specialty-modslots';
+import type { ModSocketMetadata } from 'app/search/specialty-modslots';
 import { compareBy } from 'app/utils/comparators';
 import { emptyArray } from 'app/utils/empty';
 import { getModTypeTagByPlugCategoryHash, getSpecialtySocketMetadatas } from 'app/utils/item-utils';

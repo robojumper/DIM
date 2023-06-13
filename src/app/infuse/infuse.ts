@@ -1,5 +1,5 @@
 import { EventBus } from 'app/utils/observable';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 
 export const showInfuse$ = new EventBus<DimItem>();
 

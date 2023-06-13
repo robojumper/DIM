@@ -1,16 +1,13 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import {
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type {
   DimItem,
   DimSocket,
   DimSocketCategory,
   DimSockets,
   PluggableInventoryItemDefinition,
 } from 'app/inventory/item-types';
-import {
-  DestinyItemPlugDefinition,
-  DestinySocketCategoryStyle,
-  TierType,
-} from 'bungie-api-ts/destiny2';
+import type { DestinyItemPlugDefinition, DestinySocketCategoryStyle } from 'bungie-api-ts/destiny2';
+import { TierType } from 'bungie-api-ts/destiny2';
 import { PlugCategoryHashes, SocketCategoryHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { isArmor2Mod, isKillTrackerSocket } from './item-utils';

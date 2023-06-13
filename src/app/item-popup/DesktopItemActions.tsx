@@ -2,7 +2,7 @@ import { addCompareItem } from 'app/compare/actions';
 import { useHotkey } from 'app/hotkeys/useHotkey';
 import { t } from 'app/i18next-t';
 import { showInfuse } from 'app/infuse/infuse';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { moveItemTo } from 'app/inventory/move-item';
 import { sortedStoresSelector } from 'app/inventory/selectors';
 import { getCurrentStore, getVault } from 'app/inventory/stores-helpers';
@@ -15,7 +15,7 @@ import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { clsx } from 'clsx';
 import { useSelector } from 'react-redux';
 import styles from './DesktopItemActions.m.scss';
-import { ItemActionsModel } from './item-popup-actions';
+import type { ItemActionsModel } from './item-popup-actions';
 
 export const menuClassName = styles.interaction;
 

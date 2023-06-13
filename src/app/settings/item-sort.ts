@@ -1,10 +1,10 @@
 import { settingsSelector } from 'app/dim-api/selectors';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { getTagSelector } from 'app/inventory/selectors';
 import { sortItems } from 'app/shell/item-comparators';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { createSelector } from 'reselect';
-import { Settings } from './initial-settings';
+import type { Settings } from './initial-settings';
 
 export interface ItemSortSettings {
   sortOrder: Settings['itemSortOrderCustom'];

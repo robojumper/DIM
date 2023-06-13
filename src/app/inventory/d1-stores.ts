@@ -1,26 +1,27 @@
 import { handleAuthErrors } from 'app/accounts/actions';
 import { getPlatforms } from 'app/accounts/platforms';
 import { currentAccountSelector } from 'app/accounts/selectors';
-import {
+import type {
   D1CharacterResponse,
   D1ItemComponent,
   D1VaultResponse,
 } from 'app/destiny1/d1-manifest-types';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { errorLog, infoLog } from 'app/utils/log';
-import { DestinyDisplayPropertiesDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyDisplayPropertiesDefinition } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 import { getStores } from '../bungie-api/destiny1-api';
 import { bungieErrorToaster } from '../bungie-api/error-toaster';
-import { D1ManifestDefinitions, getDefinitions } from '../destiny1/d1-definitions';
+import type { D1ManifestDefinitions } from '../destiny1/d1-definitions';
+import { getDefinitions } from '../destiny1/d1-definitions';
 import { showNotification } from '../notifications/notifications';
 import { loadingTracker } from '../shell/loading-tracker';
 import { reportException } from '../utils/exceptions';
 import { error, loadNewItems, update } from './actions';
 import { cleanInfos } from './dim-item-info';
-import { InventoryBuckets } from './inventory-buckets';
+import type { InventoryBuckets } from './inventory-buckets';
 import { d1BucketsSelector, storesSelector } from './selectors';
-import { D1Store } from './store-types';
+import type { D1Store } from './store-types';
 import { processItems } from './store/d1-item-factory';
 import { makeCharacter, makeVault } from './store/d1-store-factory';
 import { resetItemIndexGenerator } from './store/item-index';

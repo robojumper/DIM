@@ -1,11 +1,11 @@
-import { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
-import { D1CharacterResponse } from 'app/destiny1/d1-manifest-types';
+import type { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
+import type { D1CharacterResponse } from 'app/destiny1/d1-manifest-types';
 import { warnLog } from 'app/utils/log';
 import { StatHashes } from 'data/d2/generated-enums';
 import disciplineIcon from 'images/discipline.png';
 import intellectIcon from 'images/intellect.png';
 import strengthIcon from 'images/strength.png';
-import { DimCharacterStat } from '../store-types';
+import type { DimCharacterStat } from '../store-types';
 
 // Cooldowns
 const cooldownsSuperA = ['5:00', '4:46', '4:31', '4:15', '3:58', '3:40'];

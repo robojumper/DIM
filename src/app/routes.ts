@@ -1,4 +1,4 @@
-import { DestinyAccount } from './accounts/destiny-account';
+import type { DestinyAccount } from './accounts/destiny-account';
 
 /**
  * This file contains helpers for generating route paths, though generally our

@@ -5,7 +5,7 @@ import { buildStores } from 'app/inventory/d2-stores';
 import { downloadManifestComponents } from 'app/manifest/manifest-service-json';
 import { humanBytes } from 'app/storage/human-bytes';
 import { delay } from 'app/utils/util';
-import {
+import type {
   DestinyManifest,
   DestinyProfileResponse,
   DestinyVendorsResponse,

@@ -3,8 +3,8 @@ import { clsx } from 'clsx';
 import React from 'react';
 import BungieImage from '../../dim-ui/BungieImage';
 import ClickOutside from '../../dim-ui/ClickOutside';
-import { D1GridNode } from '../../inventory/item-types';
-import { ArmorTypes, LockedPerkHash, PerkCombination } from './types';
+import type { D1GridNode } from '../../inventory/item-types';
+import type { ArmorTypes, LockedPerkHash, PerkCombination } from './types';
 
 interface Props {
   activePerks: PerkCombination;

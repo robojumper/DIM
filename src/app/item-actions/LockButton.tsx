@@ -7,7 +7,7 @@ import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { clsx } from 'clsx';
 import { BucketHashes } from 'data/d2/generated-enums';
 import React, { useState } from 'react';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import {
   AppIcon,
   lockIcon,

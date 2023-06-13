@@ -6,11 +6,12 @@ import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { DestinyAccount } from '../../accounts/destiny-account';
-import { D1Store } from '../../inventory/store-types';
+import type { DestinyAccount } from '../../accounts/destiny-account';
+import type { D1Store } from '../../inventory/store-types';
 import D1Vendor from './D1Vendor';
 import styles from './D1Vendors.m.scss';
-import { Vendor, countCurrencies, loadVendors } from './vendor.service';
+import type { Vendor } from './vendor.service';
+import { countCurrencies, loadVendors } from './vendor.service';
 
 /**
  * The "All Vendors" page for D1 that shows all the rotating vendors.

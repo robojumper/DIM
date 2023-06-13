@@ -1,21 +1,22 @@
-import { DeleteAllResponse } from '@destinyitemmanager/dim-api-types';
+import type { DeleteAllResponse } from '@destinyitemmanager/dim-api-types';
 import { needsDeveloper } from 'app/accounts/actions';
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { accountsSelector, currentAccountSelector } from 'app/accounts/selectors';
 import { dimErrorToaster } from 'app/bungie-api/error-toaster';
 import { t } from 'app/i18next-t';
 import { showNotification } from 'app/notifications/notifications';
-import { Settings, initialSettingsState } from 'app/settings/initial-settings';
+import type { Settings } from 'app/settings/initial-settings';
+import { initialSettingsState } from 'app/settings/initial-settings';
 import { readyResolve } from 'app/settings/settings';
 import { refresh$ } from 'app/shell/refresh-events';
 import { get, set } from 'app/storage/idb-keyval';
-import { RootState, ThunkResult } from 'app/store/types';
+import type { RootState, ThunkResult } from 'app/store/types';
 import { errorLog, infoLog } from 'app/utils/log';
 import { delay } from 'app/utils/util';
 import { deepEqual } from 'fast-equals';
 import _ from 'lodash';
-import { AnyAction } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
+import type { AnyAction } from 'redux';
+import type { ThunkDispatch } from 'redux-thunk';
 import { getPlatforms } from '../accounts/platforms';
 import {
   deleteAllData,
@@ -25,9 +26,9 @@ import {
 } from '../dim-api/dim-api';
 import { observeStore } from '../utils/redux-utils';
 import { promptForApiPermission } from './api-permission-prompt';
-import { ProfileUpdateWithRollback } from './api-types';
+import type { ProfileUpdateWithRollback } from './api-types';
+import type { ProfileIndexedDBState } from './basic-actions';
 import {
-  ProfileIndexedDBState,
   allDataDeleted,
   finishedUpdates,
   flushUpdatesFailed,
@@ -38,7 +39,7 @@ import {
   profileLoadedFromIDB,
   setApiPermissionGranted,
 } from './basic-actions';
-import { DimApiState } from './reducer';
+import type { DimApiState } from './reducer';
 import { apiPermissionGrantedSelector, makeProfileKeyFromAccount } from './selectors';
 
 const installApiPermissionObserver = _.once(() => {

@@ -4,7 +4,7 @@ import { ALL_TRAIT } from 'app/search/d2-known-values';
 import _ from 'lodash';
 import Metric from './Metric';
 import styles from './Metrics.m.scss';
-import { DimMetric } from './presentation-nodes';
+import type { DimMetric } from './presentation-nodes';
 
 export default function Metrics({ metrics }: { metrics: DimMetric[] }) {
   const defs = useD2Definitions()!;

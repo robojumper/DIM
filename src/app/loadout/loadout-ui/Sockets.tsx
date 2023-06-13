@@ -1,9 +1,9 @@
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { isPluggableItem } from 'app/inventory/store/sockets';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { modTypeTagByPlugCategoryHash } from 'app/search/specialty-modslots';
 import { isEventArmorRerollSocket } from 'app/utils/socket-utils';
-import { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { PlugCategoryHashes } from 'data/d2/generated-enums';
 import { pickPlugPositions } from '../mod-assignment-utils';

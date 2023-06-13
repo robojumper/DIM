@@ -1,13 +1,14 @@
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { isPluggableItem } from 'app/inventory/store/sockets';
 import { armor2PlugCategoryHashesByName, armorBuckets } from 'app/search/d2-known-values';
 import { chainComparator, compareBy } from 'app/utils/comparators';
 import { isArmor2Mod } from 'app/utils/item-utils';
-import { LookupTable } from 'app/utils/util-types';
-import { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import type { LookupTable } from 'app/utils/util-types';
+import type { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
 import deprecatedMods from 'data/d2/deprecated-mods.json';
 import { emptyPlugHashes } from 'data/d2/empty-plug-hashes';
-import { BucketHashes, PlugCategoryHashes } from 'data/d2/generated-enums';
+import type { PlugCategoryHashes } from 'data/d2/generated-enums';
+import { BucketHashes } from 'data/d2/generated-enums';
 import mutuallyExclusiveMods from 'data/d2/mutually-exclusive-mods.json';
 import { normalToReducedMod, reducedToNormalMod } from 'data/d2/reduced-cost-mod-mappings';
 import _ from 'lodash';

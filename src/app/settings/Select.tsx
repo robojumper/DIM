@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings } from './initial-settings';
+import type { Settings } from './initial-settings';
 
 export default function Select({
   label,

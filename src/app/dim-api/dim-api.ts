@@ -1,4 +1,4 @@
-import {
+import type {
   DeleteAllResponse,
   DestinyVersion,
   ExportResponse,
@@ -14,7 +14,7 @@ import {
   ProfileUpdateRequest,
   ProfileUpdateResponse,
 } from '@destinyitemmanager/dim-api-types';
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { authenticatedApi, unauthenticatedApi } from './dim-api-helper';
 
 export async function getGlobalSettings() {

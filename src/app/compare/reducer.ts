@@ -1,8 +1,9 @@
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { showNotification } from 'app/notifications/notifications';
 import { getSelectionTree } from 'app/organizer/ItemTypeSelector';
-import { ActionType, getType, Reducer } from 'typesafe-actions';
+import type { ActionType, Reducer } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import * as actions from './actions';
 import { compareNameQuery } from './compare-buttons';
 

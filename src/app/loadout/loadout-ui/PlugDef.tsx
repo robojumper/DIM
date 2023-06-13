@@ -1,9 +1,9 @@
 import ClosableContainer from 'app/dim-ui/ClosableContainer';
 import { PressTip } from 'app/dim-ui/PressTip';
 import { DefItemIcon } from 'app/inventory/ItemIcon';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { PlugDefTooltip } from 'app/item-popup/PlugTooltip';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 
 /**

@@ -1,5 +1,5 @@
-import { DimItem } from 'app/inventory/item-types';
-import { LookupTable } from 'app/utils/util-types';
+import type { DimItem } from 'app/inventory/item-types';
+import type { LookupTable } from 'app/utils/util-types';
 import { BucketHashes, ItemCategoryHashes } from 'data/d2/generated-enums';
 import legs from 'destiny-icons/armor_types/boots.svg';
 import chest from 'destiny-icons/armor_types/chest.svg';

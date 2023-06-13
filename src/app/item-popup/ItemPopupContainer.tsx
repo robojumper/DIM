@@ -1,12 +1,12 @@
 import { createItemContextSelector, sortedStoresSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { applySocketOverrides } from 'app/inventory/store/override-sockets';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { useSubscription } from 'use-subscription';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import ItemPopup from './ItemPopup';
 import { hideItemPopup, showItemPopup$ } from './item-popup';
 

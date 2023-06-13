@@ -1,4 +1,4 @@
-import { TagValue } from '@destinyitemmanager/dim-api-types';
+import type { TagValue } from '@destinyitemmanager/dim-api-types';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { errorLog, infoLog } from 'app/utils/log';
 import { BucketHashes } from 'data/d2/generated-enums';
@@ -6,7 +6,7 @@ import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { setItemLockState } from './item-move-service';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 import { allItemsSelector, getTagSelector, profileErrorSelector } from './selectors';
 
 /** Whether an item's lock state can be controlled by its tag (irrespective of whether it currently is) */

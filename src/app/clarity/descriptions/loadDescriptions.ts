@@ -1,11 +1,11 @@
 import { get, set } from 'app/storage/idb-keyval';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { errorLog } from 'app/utils/log';
 import { dedupePromise } from 'app/utils/util';
 import _ from 'lodash';
 import * as actions from '../actions';
-import { ClarityCharacterStats, ClarityStatsVersion } from './character-stats';
-import { ClarityDescription, ClarityVersions } from './descriptionInterface';
+import type { ClarityCharacterStats, ClarityStatsVersion } from './character-stats';
+import type { ClarityDescription, ClarityVersions } from './descriptionInterface';
 
 const urls = {
   descriptions: 'https://database-clarity.github.io/Live-Clarity-Database/descriptions/dim.json',

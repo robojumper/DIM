@@ -1,10 +1,10 @@
-import { TagValue } from '@destinyitemmanager/dim-api-types';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { TagValue } from '@destinyitemmanager/dim-api-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { getTagSelector, unlockedPlugSetItemsSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
-import { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
-import { ModMap } from 'app/loadout/mod-assignment-utils';
+import type { DimStore } from 'app/inventory/store-types';
+import type { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { ModMap } from 'app/loadout/mod-assignment-utils';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { chainComparator, compareBy } from 'app/utils/comparators';
 import { getModTypeTagByPlugCategoryHash } from 'app/utils/item-utils';
@@ -14,8 +14,8 @@ import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ProcessItem, ProcessItemsByBucket, ProcessStatistics } from '../process-worker/types';
-import {
+import type { ProcessItem, ProcessItemsByBucket, ProcessStatistics } from '../process-worker/types';
+import type {
   ArmorEnergyRules,
   ArmorSet,
   ItemGroup,
@@ -232,6 +232,7 @@ function createWorker() {
     /* webpackChunkName: "lo-worker" */ new URL('../process-worker/ProcessWorker', import.meta.url)
   );
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const worker = wrap<import('../process-worker/ProcessWorker').ProcessWorker>(instance);
 
   const cleanup = () => {

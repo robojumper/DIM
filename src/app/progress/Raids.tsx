@@ -1,7 +1,7 @@
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { RAID_ACTIVITY_TYPE_HASH, RAID_MILESTONE_HASHES } from 'app/search/d2-known-values';
-import { DestinyMilestone, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { DestinyMilestone, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 import PursuitGrid from './PursuitGrid';
 import { Raid } from './Raid';

@@ -1,6 +1,6 @@
 import { t } from 'app/i18next-t';
 import { canInsertPlug, insertPlug } from 'app/inventory/advanced-write-actions';
-import { DimItem, DimSocket } from 'app/inventory/item-types';
+import type { DimItem, DimSocket } from 'app/inventory/item-types';
 import { destiny2CoreSettingsSelector, useD2Definitions } from 'app/manifest/selectors';
 import { showNotification } from 'app/notifications/notifications';
 import { AppIcon, faCheckCircle, refreshIcon, thumbsUpIcon } from 'app/shell/icons';

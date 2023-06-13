@@ -3,7 +3,7 @@ import { useAutocomplete } from 'app/dim-ui/text-complete/text-complete';
 import { useHotkey } from 'app/hotkeys/useHotkey';
 import { t } from 'app/i18next-t';
 import { setNote } from 'app/inventory/actions';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { allNotesHashtagsSelector, notesSelector } from 'app/inventory/selectors';
 import { AppIcon, editIcon } from 'app/shell/icons';
 import { useIsPhonePortrait } from 'app/shell/selectors';

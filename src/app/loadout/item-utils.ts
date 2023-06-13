@@ -1,9 +1,9 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t } from 'app/i18next-t';
-import { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimItem, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { isPluggableItem } from 'app/inventory/store/sockets';
 import { showItemPicker } from 'app/item-picker/item-picker';
-import { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { armorStats } from 'app/search/d2-known-values';
 import { isSunset } from 'app/utils/item-utils';
 import {

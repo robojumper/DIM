@@ -1,10 +1,11 @@
 import { currentAccountSelector } from 'app/accounts/selectors';
 import { gaEvent } from 'app/google';
 import { t } from 'app/i18next-t';
-import { LoadoutsByItem, loadoutsByItemSelector } from 'app/loadout-drawer/selectors';
+import type { LoadoutsByItem } from 'app/loadout-drawer/selectors';
+import { loadoutsByItemSelector } from 'app/loadout-drawer/selectors';
 import { D1_StatHashes } from 'app/search/d1-known-values';
 import { dimArmorStatHashByName } from 'app/search/search-filter-values';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import {
   getItemKillTrackerInfo,
   getItemYear,
@@ -19,10 +20,12 @@ import { BucketHashes, StatHashes } from 'data/d2/generated-enums';
 import D2MissingSources from 'data/d2/missing-source-info';
 import D2Sources from 'data/d2/source-info';
 import _ from 'lodash';
-import Papa, { parse, unparse } from 'papaparse';
+import type Papa from 'papaparse';
+import { parse, unparse } from 'papaparse';
 import { setItemNote, setItemTagsBulk } from './actions';
-import { TagValue, tagConfig } from './dim-item-info';
-import { D1GridNode, DimItem, DimSockets } from './item-types';
+import type { TagValue } from './dim-item-info';
+import { tagConfig } from './dim-item-info';
+import type { D1GridNode, DimItem, DimSockets } from './item-types';
 import { getNotesSelector, getTagSelector, storesSelector } from './selectors';
 import { getEvent, getSeason } from './store/season';
 

@@ -1,7 +1,7 @@
 import { PressTip } from 'app/dim-ui/PressTip';
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimItem } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { getArtifactBonus } from 'app/inventory/stores-helpers';
 import { maxLightItemSet, maxLightLoadout } from 'app/loadout-drawer/auto-loadouts';
 import { applyLoadout } from 'app/loadout-drawer/loadout-apply';

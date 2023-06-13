@@ -1,4 +1,4 @@
-import { StringLookup } from 'app/utils/util-types';
+import type { StringLookup } from 'app/utils/util-types';
 import { DamageType } from 'bungie-api-ts/destiny2';
 import { BucketHashes } from 'data/d2/generated-enums';
 import { D1BucketHashes, D1LightStats } from './d1-known-values';

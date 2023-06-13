@@ -3,7 +3,7 @@ import { powerLevelSelector } from 'app/inventory/store/selectors';
 import { AppIcon, powerActionIcon } from 'app/shell/icons';
 import { useIsPhonePortrait } from 'app/shell/selectors';
 import VaultCapacity from 'app/store-stats/VaultCapacity';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { clsx } from 'clsx';
 import { FontGlyphs } from 'data/d2/d2-font-glyphs';
 import { memo } from 'react';

@@ -1,5 +1,5 @@
 import { useD2Definitions } from 'app/manifest/selectors';
-import { DestinyMilestone } from 'bungie-api-ts/destiny2';
+import type { DestinyMilestone } from 'bungie-api-ts/destiny2';
 import { RaidActivity, RaidDisplay } from './RaidDisplay';
 import './milestone.scss';
 

@@ -1,12 +1,12 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { THE_FORBIDDEN_BUCKET } from 'app/search/d2-known-values';
-import {
+import type {
   DestinyInventoryItemDefinition,
   DestinyProfileRecordsComponent,
-  DestinyRecordToastStyle,
 } from 'bungie-api-ts/destiny2';
+import { DestinyRecordToastStyle } from 'bungie-api-ts/destiny2';
 import memoizeOne from 'memoize-one';
-import { DimItem } from '../item-types';
+import type { DimItem } from '../item-types';
 
 /**
  * Generate a table from item name to the record for their crafting pattern.

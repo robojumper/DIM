@@ -1,15 +1,16 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { bungieNetPath } from 'app/dim-ui/BungieImage';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { DimCharacterStatSource } from 'app/inventory/store-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimCharacterStatSource } from 'app/inventory/store-types';
 import { isPluggableItem } from 'app/inventory/store/sockets';
-import { ArmorStatHashes, ModStatChanges } from 'app/loadout-builder/types';
-import { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { ArmorStatHashes, ModStatChanges } from 'app/loadout-builder/types';
+import type { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { mapToOtherModCostVariant } from 'app/loadout/mod-utils';
 import { armorStats, modsWithConditionalStats } from 'app/search/d2-known-values';
 import { emptyArray } from 'app/utils/empty';
-import { HashLookup } from 'app/utils/util-types';
-import { DestinyClass, DestinyItemInvestmentStatDefinition } from 'bungie-api-ts/destiny2';
+import type { HashLookup } from 'app/utils/util-types';
+import type { DestinyItemInvestmentStatDefinition } from 'bungie-api-ts/destiny2';
+import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { StatHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 

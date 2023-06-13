@@ -1,4 +1,5 @@
-import { BrowserOptions, captureException, init, setTag, setUser, withScope } from '@sentry/react';
+import type { BrowserOptions } from '@sentry/react';
+import { captureException, init, setTag, setUser, withScope } from '@sentry/react';
 import { Integrations as TracingIntegrations } from '@sentry/tracing';
 import { BungieError } from 'app/bungie-api/http-client';
 import { getToken } from 'app/bungie-api/oauth-tokens';

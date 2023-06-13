@@ -1,23 +1,23 @@
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { currentAccountSelector } from 'app/accounts/selectors';
 import { apiPermissionGrantedSelector } from 'app/dim-api/selectors';
 import { t } from 'app/i18next-t';
 import { showNotification } from 'app/notifications/notifications';
 import { get } from 'app/storage/idb-keyval';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { infoLog, warnLog } from 'app/utils/log';
-import {
+import type {
   DestinyColor,
   DestinyItemChangeResponse,
   DestinyProfileResponse,
 } from 'bungie-api-ts/destiny2';
 import { createAction } from 'typesafe-actions';
-import { TagCommand, TagValue } from './dim-item-info';
-import { DimItem } from './item-types';
+import type { TagCommand, TagValue } from './dim-item-info';
+import type { DimItem } from './item-types';
 import { appendedToNote, removedFromNote } from './note-hashtags';
 import { notesSelector } from './selectors';
-import { AccountCurrency, DimCharacterStat, DimStore } from './store-types';
-import { ItemCreationContext } from './store/d2-item-factory';
+import type { AccountCurrency, DimCharacterStat, DimStore } from './store-types';
+import type { ItemCreationContext } from './store/d2-item-factory';
 
 /**
  * Update the computed/massaged state of inventory, plus account-wide info like currencies.

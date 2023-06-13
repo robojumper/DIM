@@ -1,15 +1,15 @@
 import { StoreIcon } from 'app/character-tile/StoreIcon';
 import { symbolize } from 'app/hotkeys/hotkeys';
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { moveItemTo } from 'app/inventory/move-item';
 import { sortedStoresSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { getStore, getVault } from 'app/inventory/stores-helpers';
 import ActionButton from 'app/item-actions/ActionButton';
 import ItemMoveAmount from 'app/item-popup/ItemMoveAmount';
 import { hideItemPopup } from 'app/item-popup/item-popup';
-import { ItemActionsModel, StoreButtonInfo } from 'app/item-popup/item-popup-actions';
+import type { ItemActionsModel, StoreButtonInfo } from 'app/item-popup/item-popup-actions';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { clsx } from 'clsx';
 import { BucketHashes } from 'data/d2/generated-enums';

@@ -1,4 +1,5 @@
-import { t as originalT, TOptions } from 'i18next';
+import type { TOptions } from 'i18next';
+import { t as originalT } from 'i18next';
 
 /**
  * Wrap the t function so we can import a properly typed version. The default library won't let you.

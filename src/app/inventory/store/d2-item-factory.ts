@@ -1,4 +1,4 @@
-import { CustomStatDef } from '@destinyitemmanager/dim-api-types';
+import type { CustomStatDef } from '@destinyitemmanager/dim-api-types';
 import { D2Categories } from 'app/destiny2/d2-bucket-categories';
 import { t } from 'app/i18next-t';
 import {
@@ -11,26 +11,28 @@ import { lightStats } from 'app/search/search-filter-values';
 import { emptyArray, emptyObject } from 'app/utils/empty';
 import { errorLog, warnLog } from 'app/utils/log';
 import { countEnhancedPerks } from 'app/utils/socket-utils';
-import {
-  BucketCategory,
-  ComponentPrivacySetting,
-  DestinyAmmunitionType,
-  DestinyClass,
+import type {
   DestinyInventoryItemDefinition,
   DestinyItemComponent,
   DestinyItemComponentSetOfint64,
   DestinyItemInstanceComponent,
   DestinyItemResponse,
-  DestinyItemSubType,
   DestinyItemTooltipNotification,
   DestinyObjectiveProgress,
   DestinyProfileResponse,
   DictionaryComponentResponse,
+  SingleComponentResponse,
+} from 'bungie-api-ts/destiny2';
+import {
+  BucketCategory,
+  ComponentPrivacySetting,
+  DestinyAmmunitionType,
+  DestinyClass,
+  DestinyItemSubType,
   ItemBindStatus,
   ItemLocation,
   ItemPerkVisibility,
   ItemState,
-  SingleComponentResponse,
   TransferStatuses,
 } from 'bungie-api-ts/destiny2';
 import enhancedIntrinsics from 'data/d2/crafting-enhanced-intrinsics';
@@ -40,12 +42,12 @@ import extendedICH from 'data/d2/extended-ich.json';
 import { BucketHashes, ItemCategoryHashes, StatHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import memoizeOne from 'memoize-one';
-import { D2ManifestDefinitions } from '../../destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from '../../destiny2/d2-definitions';
 import { warnMissingDefinition } from '../../manifest/manifest-service-json';
 import { reportException } from '../../utils/exceptions';
-import { InventoryBuckets } from '../inventory-buckets';
-import { DimItem } from '../item-types';
-import { DimStore } from '../store-types';
+import type { InventoryBuckets } from '../inventory-buckets';
+import type { DimItem } from '../item-types';
+import type { DimStore } from '../store-types';
 import { getVault } from '../stores-helpers';
 import { buildCatalystInfo } from './catalyst';
 import { buildCraftedInfo } from './crafted';

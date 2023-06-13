@@ -4,7 +4,7 @@ import { ObjectiveValue } from 'app/progress/Objective';
 import { clsx } from 'clsx';
 import styles from './Metric.m.scss';
 import MetricBanner from './MetricBanner';
-import { DimMetric } from './presentation-nodes';
+import type { DimMetric } from './presentation-nodes';
 
 interface Props {
   metric: DimMetric;

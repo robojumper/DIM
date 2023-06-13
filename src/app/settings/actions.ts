@@ -1,4 +1,5 @@
-import { createAction, PayloadAction } from 'typesafe-actions';
+import type { PayloadAction } from 'typesafe-actions';
+import { createAction } from 'typesafe-actions';
 import type { Settings } from './initial-settings';
 
 /** Bulk update settings after they've been loaded. */

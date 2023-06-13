@@ -1,15 +1,17 @@
-import { StatHashListsKeyedByDestinyClass } from 'app/dim-ui/CustomStatTotal';
-import { DimItem } from 'app/inventory/item-types';
-import { keyByStatHash, StatLookup } from 'app/inventory/store/stats';
+import type { StatHashListsKeyedByDestinyClass } from 'app/dim-ui/CustomStatTotal';
+import type { DimItem } from 'app/inventory/item-types';
+import type { StatLookup } from 'app/inventory/store/stats';
+import { keyByStatHash } from 'app/inventory/store/stats';
 import { armorStats, CUSTOM_TOTAL_STAT_HASH, TOTAL_STAT_HASH } from 'app/search/d2-known-values';
-import { ItemFilter } from 'app/search/filter-types';
+import type { ItemFilter } from 'app/search/filter-types';
 import { quoteFilterString } from 'app/search/query-parser';
 import { classFilter, itemTypeFilter } from 'app/search/search-filters/known-values';
 import { getInterestingSocketMetadatas } from 'app/utils/item-utils';
 import { getIntrinsicArmorPerkSocket } from 'app/utils/socket-utils';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
-import { Factor, factorComboCategories, FactorComboCategory, factorCombos } from './triage-factors';
+import type { Factor, FactorComboCategory } from './triage-factors';
+import { factorComboCategories, factorCombos } from './triage-factors';
 
 /** returns [dimmed, bright] variations along a 1->100  red->yellow->green line */
 export function getValueColors(value: number): [string, string] {

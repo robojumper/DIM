@@ -4,10 +4,11 @@ import { itemCanBeInLoadout } from 'app/utils/item-utils';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import React from 'react';
-import { DropTargetMonitor, useDrop } from 'react-dnd';
+import type { DropTargetMonitor } from 'react-dnd';
+import { useDrop } from 'react-dnd';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import styles from './LoadoutDrawerDropTarget.m.scss';
 
 export const bucketTypesSelector = createSelector(

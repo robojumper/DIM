@@ -1,15 +1,12 @@
 import { trackedTriumphsSelector } from 'app/dim-api/selectors';
 import { t } from 'app/i18next-t';
-import { InventoryBuckets } from 'app/inventory/inventory-buckets';
+import type { InventoryBuckets } from 'app/inventory/inventory-buckets';
 import { profileResponseSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { toRecord } from 'app/records/presentation-nodes';
-import {
-  DestinyEventCardDefinition,
-  DestinyPresentationNodeState,
-  DestinyRecordState,
-} from 'bungie-api-ts/destiny2';
+import type { DestinyEventCardDefinition } from 'bungie-api-ts/destiny2';
+import { DestinyPresentationNodeState, DestinyRecordState } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import styles from './Event.m.scss';

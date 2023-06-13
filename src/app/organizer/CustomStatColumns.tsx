@@ -1,8 +1,9 @@
-import { CustomStatDef } from '@destinyitemmanager/dim-api-types';
+import type { CustomStatDef } from '@destinyitemmanager/dim-api-types';
 import { CustomStatWeightsDisplay } from 'app/dim-ui/CustomStatWeights';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
-import { ColumnDefinition, SortDirection } from './table-types';
+import type { ColumnDefinition } from './table-types';
+import { SortDirection } from './table-types';
 
 export function createCustomStatColumns(
   customStatDefs: CustomStatDef[]

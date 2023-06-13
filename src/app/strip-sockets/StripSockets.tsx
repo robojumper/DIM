@@ -6,7 +6,7 @@ import { filterFactorySelector } from 'app/search/search-filter';
 import { AppIcon, faCheckCircle, refreshIcon } from 'app/shell/icons';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { withCancel } from 'app/utils/cancel';
-import { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import chestArmorItem from 'destiny-icons/armor_types/chest.svg';
 import ghostIcon from 'destiny-icons/general/ghost.svg';
@@ -18,7 +18,8 @@ import { useSubscription } from 'use-subscription';
 import { DefItemIcon } from '../inventory/ItemIcon';
 import { allItemsSelector } from '../inventory/selectors';
 import styles from './StripSockets.m.scss';
-import { SocketKind, StripAction, collectSocketsToStrip, doStripSockets } from './strip-sockets';
+import type { SocketKind, StripAction } from './strip-sockets';
+import { collectSocketsToStrip, doStripSockets } from './strip-sockets';
 import { stripSocketsQuery$ } from './strip-sockets-actions';
 
 /**

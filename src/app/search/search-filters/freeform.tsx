@@ -1,12 +1,13 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DIM_LANG_INFOS, DimLanguage } from 'app/i18n';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimLanguage } from 'app/i18n';
+import { DIM_LANG_INFOS } from 'app/i18n';
 import { tl } from 'app/i18next-t';
-import { DimItem, DimPlug } from 'app/inventory/item-types';
+import type { DimItem, DimPlug } from 'app/inventory/item-types';
 import { isD1Item } from 'app/utils/item-utils';
-import { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
 import { ItemCategoryHashes, PlugCategoryHashes } from 'data/d2/generated-enums';
 import memoizeOne from 'memoize-one';
-import { FilterDefinition } from '../filter-types';
+import type { FilterDefinition } from '../filter-types';
 import { quoteFilterString } from '../query-parser';
 
 /** global language bool. "latin" character sets are the main driver of string processing changes */

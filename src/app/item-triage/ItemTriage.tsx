@@ -28,11 +28,11 @@ import helmet from 'destiny-icons/armor_types/helmet.svg';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 // eslint-disable-next-line css-modules/no-unused-class
 import popupStyles from '../item-popup/ItemDescription.m.scss';
 import styles from './ItemTriage.m.scss';
-import { Factor } from './triage-factors';
+import type { Factor } from './triage-factors';
 import {
   getBetterWorseItems,
   getNotableStats,

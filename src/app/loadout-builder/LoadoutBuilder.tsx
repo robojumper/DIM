@@ -4,7 +4,7 @@ import CollapsibleTitle from 'app/dim-ui/CollapsibleTitle';
 import PageWithMenu from 'app/dim-ui/PageWithMenu';
 import UserGuideLink from 'app/dim-ui/UserGuideLink';
 import { t } from 'app/i18next-t';
-import { Loadout, ResolvedLoadoutMod } from 'app/loadout-drawer/loadout-types';
+import type { Loadout, ResolvedLoadoutMod } from 'app/loadout-drawer/loadout-types';
 import { newLoadoutFromEquipped, resolveLoadoutModHashes } from 'app/loadout-drawer/loadout-utils';
 import { loadoutsSelector } from 'app/loadout-drawer/loadouts-selector';
 import { categorizeArmorMods } from 'app/loadout/mod-assignment-utils';
@@ -19,7 +19,7 @@ import { Portal } from 'app/utils/temp-container';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { BucketHashes, PlugCategoryHashes } from 'data/d2/generated-enums';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Draft } from 'immer';
+import type { Draft } from 'immer';
 import _ from 'lodash';
 import { memo, useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
@@ -42,13 +42,8 @@ import { filterItems } from './item-filter';
 import { useLbState } from './loadout-builder-reducer';
 import { buildLoadoutParams } from './loadout-params';
 import { useAutoMods, useProcess } from './process/useProcess';
-import {
-  ArmorEnergyRules,
-  ItemsByBucket,
-  LOCKED_EXOTIC_ANY_EXOTIC,
-  LockableBucketHash,
-  loDefaultArmorEnergyRules,
-} from './types';
+import type { ArmorEnergyRules, ItemsByBucket, LockableBucketHash } from './types';
+import { LOCKED_EXOTIC_ANY_EXOTIC, loDefaultArmorEnergyRules } from './types';
 
 /** Do not allow the user to choose artifice mods manually in Loadout Optimizer since we're supposed to be doing that */
 const autoAssignmentPCHs = [PlugCategoryHashes.EnhancementsArtifice];

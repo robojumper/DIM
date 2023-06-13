@@ -3,7 +3,7 @@ import {
   getActiveToken as getBungieToken,
 } from 'app/bungie-api/authenticated-fetch';
 import { dedupePromise } from 'app/utils/util';
-import { HttpClientConfig } from 'bungie-api-ts/http';
+import type { HttpClientConfig } from 'bungie-api-ts/http';
 
 const DIM_API_HOST = 'https://api.destinyitemmanager.com';
 export const API_KEY =

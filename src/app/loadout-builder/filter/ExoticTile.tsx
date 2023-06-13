@@ -1,9 +1,9 @@
 import { TileGridTile } from 'app/dim-ui/TileGrid';
 import { t } from 'app/i18next-t';
 import { DefItemIcon } from 'app/inventory/ItemIcon';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { useD2Definitions } from 'app/manifest/selectors';
-import { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
+import type { DestinyInventoryItemDefinition } from 'bungie-api-ts/destiny2';
 import React from 'react';
 import styles from './ExoticTile.m.scss';
 

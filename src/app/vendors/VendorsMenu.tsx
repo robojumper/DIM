@@ -1,7 +1,7 @@
 import BungieImage from 'app/dim-ui/BungieImage';
 import PageWithMenu from 'app/dim-ui/PageWithMenu';
 import React from 'react';
-import { D2VendorGroup } from './d2-vendors';
+import type { D2VendorGroup } from './d2-vendors';
 
 export default function VendorsMenu({ groups }: { groups: readonly D2VendorGroup[] }) {
   return (

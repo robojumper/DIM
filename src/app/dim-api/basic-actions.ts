@@ -1,9 +1,9 @@
-import {
+import type {
   GlobalSettings,
   ProfileResponse,
   ProfileUpdateResult,
 } from '@destinyitemmanager/dim-api-types';
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { createAction } from 'typesafe-actions';
 import type { DimApiState } from './reducer';
 

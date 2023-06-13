@@ -1,7 +1,7 @@
 import ClickOutside from 'app/dim-ui/ClickOutside';
 import Sheet from 'app/dim-ui/Sheet';
 import { usePopper } from 'app/dim-ui/usePopper';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { sortedStoresSelector } from 'app/inventory/selectors';
 import ItemAccessoryButtons from 'app/item-actions/ItemAccessoryButtons';
 import ItemMoveLocations from 'app/item-actions/ItemMoveLocations';
@@ -15,7 +15,7 @@ import styles from './ItemPopup.m.scss';
 import ItemPopupBody, { ItemPopupTab } from './ItemPopupBody';
 import ItemPopupHeader from './ItemPopupHeader';
 import ItemTagHotkeys from './ItemTagHotkeys';
-import { ItemPopupExtraInfo } from './item-popup';
+import type { ItemPopupExtraInfo } from './item-popup';
 import { buildItemActionsModel } from './item-popup-actions';
 
 const tierClasses: Record<ItemTierName, string> = {

@@ -14,7 +14,7 @@ import { objectKeys } from 'app/utils/util-types';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { DestinyAccount } from '../accounts/destiny-account';
+import type { DestinyAccount } from '../accounts/destiny-account';
 import ErrorBoundary from '../dim-ui/ErrorBoundary';
 import {
   bucketsSelector,

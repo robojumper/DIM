@@ -1,12 +1,13 @@
-import { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
+import type { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
 import { makeFakeItem as makeFakeD1Item } from 'app/inventory/store/d1-item-factory';
-import { ItemCreationContext, makeFakeItem } from 'app/inventory/store/d2-item-factory';
+import type { ItemCreationContext } from 'app/inventory/store/d2-item-factory';
+import { makeFakeItem } from 'app/inventory/store/d2-item-factory';
 import { applySocketOverrides } from 'app/inventory/store/override-sockets';
 import { emptyArray } from 'app/utils/empty';
 import { warnLog } from 'app/utils/log';
 import { plugFitsIntoSocket } from 'app/utils/socket-utils';
-import { DimItem } from '../inventory/item-types';
-import { LoadoutItem, ResolvedLoadoutItem } from './loadout-types';
+import type { DimItem } from '../inventory/item-types';
+import type { LoadoutItem, ResolvedLoadoutItem } from './loadout-types';
 import { findItemForLoadout } from './loadout-utils';
 
 let missingLoadoutItemId = 1;

@@ -1,4 +1,4 @@
-import { Modifier, ModifierArguments } from '@popperjs/core';
+import type { Modifier, ModifierArguments } from '@popperjs/core';
 import getLayoutRect from '@popperjs/core/lib/dom-utils/getLayoutRect';
 import _ from 'lodash';
 

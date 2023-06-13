@@ -1,25 +1,26 @@
 import { D2Categories } from 'app/destiny2/d2-bucket-categories';
 import { bucketToType } from 'app/destiny2/d2-buckets';
 import { tl } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { getEvent } from 'app/inventory/store/season';
 import { getItemDamageShortName } from 'app/utils/item-utils';
-import { StringLookup } from 'app/utils/util-types';
+import type { StringLookup } from 'app/utils/util-types';
 import { DestinyAmmunitionType, DestinyClass, DestinyRecordState } from 'bungie-api-ts/destiny2';
-import { D2EventEnum, D2EventPredicateLookup } from 'data/d2/d2-event-info';
+import type { D2EventEnum } from 'data/d2/d2-event-info';
+import { D2EventPredicateLookup } from 'data/d2/d2-event-info';
 import focusingOutputs from 'data/d2/focusing-item-outputs.json';
-import { BreakerTypeHashes } from 'data/d2/generated-enums';
+import type { BreakerTypeHashes } from 'data/d2/generated-enums';
 import missingSources from 'data/d2/missing-source-info';
 import D2Sources from 'data/d2/source-info';
 import { D1ItemCategoryHashes } from '../d1-known-values';
+import type { ItemTierName } from '../d2-known-values';
 import {
   D2ItemCategoryHashesByName,
-  ItemTierName,
   breakerTypes,
   pinnacleSources,
   powerfulSources,
 } from '../d2-known-values';
-import { FilterDefinition } from '../filter-types';
+import type { FilterDefinition } from '../filter-types';
 import { cosmeticTypes, damageTypeNames } from '../search-filter-values';
 
 const d2EventPredicates: StringLookup<D2EventEnum> = D2EventPredicateLookup;

@@ -2,10 +2,8 @@ import { settingSelector } from 'app/dim-api/selectors';
 import { scrollToPosition } from 'app/dim-ui/scroll';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { percent } from 'app/shell/formatters';
-import {
-  DestinyDisplayPropertiesDefinition,
-  DestinyPresentationScreenStyle,
-} from 'bungie-api-ts/destiny2';
+import type { DestinyDisplayPropertiesDefinition } from 'bungie-api-ts/destiny2';
+import { DestinyPresentationScreenStyle } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { deepEqual } from 'fast-equals';
 import { useEffect, useRef } from 'react';
@@ -15,7 +13,7 @@ import { AppIcon, collapseIcon, expandIcon } from '../shell/icons';
 import styles from './PresentationNode.m.scss';
 import './PresentationNode.scss';
 import PresentationNodeLeaf from './PresentationNodeLeaf';
-import { DimPresentationNode } from './presentation-nodes';
+import type { DimPresentationNode } from './presentation-nodes';
 
 export default function PresentationNode({
   node,

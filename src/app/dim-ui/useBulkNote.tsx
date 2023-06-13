@@ -1,8 +1,8 @@
 import { calculateElementOffset } from '@textcomplete/utils';
-import { Option } from 'app/dim-ui/RadioButtons';
+import type { Option } from 'app/dim-ui/RadioButtons';
 import { t } from 'app/i18next-t';
 import { appendNote, removeFromNote, setNote } from 'app/inventory/actions';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { appendedToNote, removedFromNote } from 'app/inventory/note-hashtags';
 import { allNotesHashtagsSelector, getNotesSelector } from 'app/inventory/selectors';
 import { maxLength } from 'app/item-popup/NotesArea';

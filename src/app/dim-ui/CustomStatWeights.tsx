@@ -1,10 +1,11 @@
-import { CustomStatDef } from '@destinyitemmanager/dim-api-types';
+import type { CustomStatDef } from '@destinyitemmanager/dim-api-types';
 import { customStatsSelector } from 'app/dim-api/selectors';
 import BungieImage from 'app/dim-ui/BungieImage';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { armorStats } from 'app/search/d2-known-values';
 import { clsx } from 'clsx';
-import React, { ReactElement, ReactNode, cloneElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import React, { cloneElement } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './CustomStatWeights.m.scss';
 

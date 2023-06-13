@@ -1,6 +1,6 @@
-import { D1BucketTypes } from 'app/destiny1/d1-buckets';
+import type { D1BucketTypes } from 'app/destiny1/d1-buckets';
 import type { D2AdditionalBucketTypes, D2BucketTypes } from 'app/destiny2/d2-buckets';
-import { BucketCategory } from 'bungie-api-ts/destiny2';
+import type { BucketCategory } from 'bungie-api-ts/destiny2';
 
 /** The major toplevel sections of the inventory. "Progress" is only in D1. */
 export type D2BucketCategory = 'Postmaster' | 'Weapons' | 'Armor' | 'General' | 'Inventory';

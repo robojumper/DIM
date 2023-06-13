@@ -1,21 +1,22 @@
-import { Perk } from 'app/clarity/descriptions/descriptionInterface';
+import type { Perk } from 'app/clarity/descriptions/descriptionInterface';
 import { clarityDescriptionsSelector } from 'app/clarity/selectors';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { settingSelector } from 'app/dim-api/selectors';
-import { DimItem, DimPlug, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimItem, DimPlug, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
 import { getStatSortOrder, isAllowedItemStat, isAllowedPlugStat } from 'app/inventory/store/stats';
 import { activityModPlugCategoryHashes } from 'app/loadout/known-values';
 import { isModStatActive } from 'app/loadout/stats';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { EXOTIC_CATALYST_TRAIT } from 'app/search/d2-known-values';
-import { DestinyClass, ItemPerkVisibility } from 'bungie-api-ts/destiny2';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
+import { ItemPerkVisibility } from 'bungie-api-ts/destiny2';
 import { ItemCategoryHashes, StatHashes } from 'data/d2/generated-enums';
 import perkToEnhanced from 'data/d2/trait-to-enhanced-trait.json';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import { compareBy } from './comparators';
 import { isPlugStatActive } from './item-utils';
-import { LookupTable } from './util-types';
+import type { LookupTable } from './util-types';
 
 interface DimPlugPerkDescription {
   perkHash: number;

@@ -3,7 +3,7 @@ import { PressTip } from 'app/dim-ui/PressTip';
 import UserGuideLink from 'app/dim-ui/UserGuideLink';
 import { t } from 'app/i18next-t';
 import { AppIcon, deleteIcon, redoIcon, undoIcon } from 'app/shell/icons';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { currySelector } from 'app/utils/selector-utils';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
@@ -11,7 +11,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import styles from './LoadoutDrawerFooter.m.scss';
-import { Loadout } from './loadout-types';
+import type { Loadout } from './loadout-types';
 import { loadoutsSelector } from './loadouts-selector';
 
 /**

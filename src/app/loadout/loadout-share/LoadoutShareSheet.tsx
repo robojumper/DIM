@@ -1,10 +1,10 @@
-import { DestinyAccount } from 'app/accounts/destiny-account';
+import type { DestinyAccount } from 'app/accounts/destiny-account';
 import { createLoadoutShare } from 'app/dim-api/dim-api';
 import Sheet from 'app/dim-ui/Sheet';
 import UserGuideLink from 'app/dim-ui/UserGuideLink';
 import { t } from 'app/i18next-t';
 import { convertDimLoadoutToApiLoadout } from 'app/loadout-drawer/loadout-type-converters';
-import { Loadout } from 'app/loadout-drawer/loadout-types';
+import type { Loadout } from 'app/loadout-drawer/loadout-types';
 import { showNotification } from 'app/notifications/notifications';
 import ErrorPanel from 'app/shell/ErrorPanel';
 import { copyIcon, shareIcon } from 'app/shell/icons';

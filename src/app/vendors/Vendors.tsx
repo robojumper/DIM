@@ -10,11 +10,12 @@ import ErrorPanel from 'app/shell/ErrorPanel';
 import { querySelector, useIsPhonePortrait } from 'app/shell/selectors';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
 import { useEventBusListener, usePageTitle } from 'app/utils/hooks';
-import { DestinyCurrenciesComponent } from 'bungie-api-ts/destiny2';
-import { PanInfo, motion } from 'framer-motion';
+import type { DestinyCurrenciesComponent } from 'bungie-api-ts/destiny2';
+import type { PanInfo } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { DestinyAccount } from '../accounts/destiny-account';
+import type { DestinyAccount } from '../accounts/destiny-account';
 import CharacterSelect from '../dim-ui/CharacterSelect';
 import ErrorBoundary from '../dim-ui/ErrorBoundary';
 import { sortedStoresSelector } from '../inventory/selectors';
@@ -24,11 +25,8 @@ import Vendor from './Vendor';
 import styles from './Vendors.m.scss';
 import VendorsMenu from './VendorsMenu';
 import { loadAllVendors } from './actions';
-import {
-  D2VendorGroup,
-  filterVendorGroupsToSearch,
-  filterVendorGroupsToUnacquired,
-} from './d2-vendors';
+import type { D2VendorGroup } from './d2-vendors';
+import { filterVendorGroupsToSearch, filterVendorGroupsToUnacquired } from './d2-vendors';
 import {
   ownedVendorItemsSelector,
   vendorGroupsForCharacterSelector,

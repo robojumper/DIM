@@ -1,9 +1,9 @@
 import { currentProfileSelector } from 'app/dim-api/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { emptyArray } from 'app/utils/empty';
 import { createSelector } from 'reselect';
 import { convertDimApiLoadoutToLoadout } from './loadout-type-converters';
-import { Loadout } from './loadout-types';
+import type { Loadout } from './loadout-types';
 
 // had to pull this out to another file because things got weird :(
 

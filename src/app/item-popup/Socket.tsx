@@ -1,6 +1,6 @@
-import { DimItem, DimSocket } from 'app/inventory/item-types';
-import { InventoryWishListRoll } from 'app/wishlists/wishlists';
-import { PlugClickHandler } from './ItemSockets';
+import type { DimItem, DimSocket } from 'app/inventory/item-types';
+import type { InventoryWishListRoll } from 'app/wishlists/wishlists';
+import type { PlugClickHandler } from './ItemSockets';
 import Plug from './Plug';
 import './Socket.scss';
 

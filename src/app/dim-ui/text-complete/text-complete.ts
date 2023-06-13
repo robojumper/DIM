@@ -1,10 +1,12 @@
-import { StrategyProps, Textcomplete } from '@textcomplete/core';
+import type { StrategyProps } from '@textcomplete/core';
+import { Textcomplete } from '@textcomplete/core';
 import { TextareaEditor } from '@textcomplete/textarea';
 import { getHashtagsFromNote } from 'app/inventory/note-hashtags';
 import { clsx } from 'clsx';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { SymbolsMap, symbolsSelector } from '../destiny-symbols/destiny-symbols';
+import type { SymbolsMap } from '../destiny-symbols/destiny-symbols';
+import { symbolsSelector } from '../destiny-symbols/destiny-symbols';
 
 import { tempContainer } from 'app/utils/temp-container';
 import styles from './text-complete.m.scss';

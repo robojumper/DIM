@@ -11,7 +11,7 @@ import {
   getSocketsByIndexes,
   getWeaponArchetypeSocket,
 } from 'app/utils/socket-utils';
-import { LookupTable } from 'app/utils/util-types';
+import type { LookupTable } from 'app/utils/util-types';
 import { clsx } from 'clsx';
 import {
   ItemCategoryHashes,
@@ -21,11 +21,11 @@ import {
 } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
-import { DimItem, DimSocket } from '../inventory/item-types';
+import type { DimItem, DimSocket } from '../inventory/item-types';
 import { wishListSelector } from '../wishlists/selectors';
 import ArchetypeSocket, { ArchetypeRow } from './ArchetypeSocket';
 import ItemPerksList from './ItemPerksList';
-import { PlugClickHandler } from './ItemSockets';
+import type { PlugClickHandler } from './ItemSockets';
 import './ItemSockets.scss';
 import styles from './ItemSocketsWeapons.m.scss';
 import Socket from './Socket';

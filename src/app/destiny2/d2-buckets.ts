@@ -9,7 +9,7 @@ import type {
   InventoryBuckets,
 } from '../inventory/inventory-buckets';
 import { D2Categories } from './d2-bucket-categories';
-import { D2ManifestDefinitions } from './d2-definitions';
+import type { D2ManifestDefinitions } from './d2-definitions';
 
 // A mapping from the bucket hash to DIM item types
 const bucketToTypeRaw = {

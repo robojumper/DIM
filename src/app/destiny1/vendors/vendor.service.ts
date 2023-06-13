@@ -1,19 +1,19 @@
 import { currentAccountSelector } from 'app/accounts/selectors';
-import { InventoryBuckets } from 'app/inventory/inventory-buckets';
+import type { InventoryBuckets } from 'app/inventory/inventory-buckets';
 import { bucketsSelector, storesSelector } from 'app/inventory/selectors';
 import { amountOfItem } from 'app/inventory/stores-helpers';
 import { get, set } from 'app/storage/idb-keyval';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { errorLog } from 'app/utils/log';
 import copy from 'fast-copy';
 import _ from 'lodash';
-import { DestinyAccount } from '../../accounts/destiny-account';
+import type { DestinyAccount } from '../../accounts/destiny-account';
 import { getVendorForCharacter } from '../../bungie-api/destiny1-api';
-import { D1Item } from '../../inventory/item-types';
-import { AccountCurrency, D1Store } from '../../inventory/store-types';
+import type { D1Item } from '../../inventory/item-types';
+import type { AccountCurrency, D1Store } from '../../inventory/store-types';
 import { processItems } from '../../inventory/store/d1-item-factory';
 import { loadingTracker } from '../../shell/loading-tracker';
-import { D1ManifestDefinitions } from '../d1-definitions';
+import type { D1ManifestDefinitions } from '../d1-definitions';
 import { factionAligned } from '../d1-factions';
 
 /*

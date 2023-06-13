@@ -1,4 +1,4 @@
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { useSelector } from 'react-redux';
 
 export const isPhonePortraitSelector = (state: RootState) => state.shell.isPhonePortrait;

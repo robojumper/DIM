@@ -1,7 +1,8 @@
 import { compareBy } from 'app/utils/comparators';
-import { ArmorStatHashes, artificeStatBoost, majorStatBoost, minorStatBoost } from '../types';
-import { LoSessionInfo } from './process-utils';
-import { AutoModData } from './types';
+import type { ArmorStatHashes } from '../types';
+import { artificeStatBoost, majorStatBoost, minorStatBoost } from '../types';
+import type { LoSessionInfo } from './process-utils';
+import type { AutoModData } from './types';
 
 /**
  * A particular way of achieving a target stat value (for a single stat).

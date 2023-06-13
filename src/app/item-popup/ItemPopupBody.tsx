@@ -3,8 +3,8 @@ import { t } from 'app/i18next-t';
 import { doShowTriage, ItemTriage, TriageTabToggle } from 'app/item-triage/ItemTriage';
 import { percent } from 'app/shell/formatters';
 import { clsx } from 'clsx';
-import { DimItem } from '../inventory/item-types';
-import { ItemPopupExtraInfo } from './item-popup';
+import type { DimItem } from '../inventory/item-types';
+import type { ItemPopupExtraInfo } from './item-popup';
 import ItemDetails from './ItemDetails';
 import './ItemPopupBody.scss';
 

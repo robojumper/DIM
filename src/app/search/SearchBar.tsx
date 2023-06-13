@@ -1,4 +1,4 @@
-import { Search } from '@destinyitemmanager/dim-api-types';
+import type { Search } from '@destinyitemmanager/dim-api-types';
 import Armory from 'app/armory/Armory';
 import { saveSearch, searchDeleted, searchUsed } from 'app/dim-api/basic-actions';
 import { recentSearchesSelector } from 'app/dim-api/selectors';
@@ -11,11 +11,12 @@ import UserGuideLink from 'app/dim-ui/UserGuideLink';
 import { t } from 'app/i18next-t';
 import { toggleSearchResults } from 'app/shell/actions';
 import { useIsPhonePortrait } from 'app/shell/selectors';
-import { RootState, ThunkDispatchProp } from 'app/store/types';
+import type { RootState, ThunkDispatchProp } from 'app/store/types';
 import { isiOSBrowser } from 'app/utils/browsers';
 import { Portal } from 'app/utils/temp-container';
 import { clsx } from 'clsx';
-import { UseComboboxState, UseComboboxStateChangeOptions, useCombobox } from 'downshift';
+import type { UseComboboxState, UseComboboxStateChangeOptions } from 'downshift';
+import { useCombobox } from 'downshift';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import _ from 'lodash';
 import React, {
@@ -48,7 +49,8 @@ import {
 } from '../shell/icons';
 import HighlightedText from './HighlightedText';
 import styles from './SearchBar.m.scss';
-import createAutocompleter, { SearchItem, SearchItemType } from './autocomplete';
+import type { SearchItem } from './autocomplete';
+import createAutocompleter, { SearchItemType } from './autocomplete';
 import { canonicalizeQuery, parseQuery } from './query-parser';
 import { searchConfigSelector } from './search-config';
 import { validateQuerySelector } from './search-filter';

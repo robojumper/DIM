@@ -1,6 +1,6 @@
 import BungieImage from 'app/dim-ui/BungieImage';
 import NewItemIndicator from 'app/inventory/NewItemIndicator';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import {
   isBooleanObjective,
   isFlawlessPassage,
@@ -9,7 +9,7 @@ import {
 import { useD2Definitions } from 'app/manifest/selectors';
 import { percent } from 'app/shell/formatters';
 import { count } from 'app/utils/util';
-import { DestinyObjectiveProgress } from 'bungie-api-ts/destiny2';
+import type { DestinyObjectiveProgress } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import dimTrackedIcon from 'images/dimTrackedIcon.svg';
 import pursuitComplete from 'images/pursuitComplete.svg';

@@ -1,5 +1,6 @@
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import * as actions from './basic-actions';
 
 export interface FarmingState {

@@ -7,23 +7,25 @@ import { t } from 'app/i18next-t';
 import { loadoutNotification } from 'app/inventory/MoveNotifications';
 import { canInsertPlug, insertPlug } from 'app/inventory/advanced-write-actions';
 import { updateCharacters } from 'app/inventory/d2-stores';
+import type { Exclusion, MoveReservations, MoveSession } from 'app/inventory/item-move-service';
 import {
-  Exclusion,
-  MoveReservations,
-  MoveSession,
   createMoveSession,
   equipItems,
   executeMoveItem,
   getSimilarItem,
 } from 'app/inventory/item-move-service';
-import { DimItem, DimSocket, PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type {
+  DimItem,
+  DimSocket,
+  PluggableInventoryItemDefinition,
+} from 'app/inventory/item-types';
 import { updateManualMoveTimestamp } from 'app/inventory/manual-moves';
 import {
   allItemsSelector,
   storesSelector,
   unlockedPlugSetItemsSelector,
 } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { isPluggableItem } from 'app/inventory/store/sockets';
 import {
   amountOfItem,
@@ -45,12 +47,13 @@ import {
   manifestSelector,
 } from 'app/manifest/selectors';
 import { showNotification } from 'app/notifications/notifications';
-import { D1BucketHashes } from 'app/search/d1-known-values';
+import type { D1BucketHashes } from 'app/search/d1-known-values';
 import { DEFAULT_ORNAMENTS, DEFAULT_SHADER } from 'app/search/d2-known-values';
 import { loadingTracker } from 'app/shell/loading-tracker';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { queueAction } from 'app/utils/action-queue';
-import { CancelToken, CanceledError, withCancel } from 'app/utils/cancel';
+import type { CancelToken } from 'app/utils/cancel';
+import { CanceledError, withCancel } from 'app/utils/cancel';
 import { DimError } from 'app/utils/dim-error';
 import { emptyArray } from 'app/utils/empty';
 import { itemCanBeEquippedBy } from 'app/utils/item-utils';
@@ -66,26 +69,26 @@ import {
   subclassAbilitySocketCategoryHashes,
 } from 'app/utils/socket-utils';
 import { count } from 'app/utils/util';
-import { HashLookup } from 'app/utils/util-types';
+import type { HashLookup } from 'app/utils/util-types';
 import { DestinyClass, PlatformErrorCodes } from 'bungie-api-ts/destiny2';
 import { BucketHashes } from 'data/d2/generated-enums';
-import { Draft, produce } from 'immer';
+import type { Draft } from 'immer';
+import { produce } from 'immer';
 import _ from 'lodash';
 import { savePreviousLoadout } from './actions';
+import type { LoadoutStateGetter, LoadoutStateUpdater } from './loadout-apply-state';
 import {
   LoadoutApplyPhase,
   LoadoutItemState,
   LoadoutModState,
   LoadoutSocketOverrideState,
-  LoadoutStateGetter,
-  LoadoutStateUpdater,
   anyActionFailed,
   makeLoadoutApplyState,
   setLoadoutApplyPhase,
   setModResult,
   setSocketOverrideResult,
 } from './loadout-apply-state';
-import { Assignment, InGameLoadout, Loadout, LoadoutItem } from './loadout-types';
+import type { Assignment, InGameLoadout, Loadout, LoadoutItem } from './loadout-types';
 import {
   backupLoadout,
   findItemForLoadout,

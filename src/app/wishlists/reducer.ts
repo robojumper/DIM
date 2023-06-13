@@ -1,7 +1,8 @@
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import * as actions from './actions';
-import { WishListAndInfo } from './types';
+import type { WishListAndInfo } from './types';
 
 export interface WishListsState {
   loaded: boolean;

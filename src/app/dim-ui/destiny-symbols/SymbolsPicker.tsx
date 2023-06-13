@@ -3,15 +3,8 @@ import { SearchInput } from 'app/search/SearchInput';
 import { tempContainer } from 'app/utils/temp-container';
 import { clsx } from 'clsx';
 import { FontGlyphs } from 'data/d2/d2-font-glyphs';
-import React, {
-  HTMLProps,
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import type { HTMLProps } from 'react';
+import React, { memo, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import ClickOutside from '../ClickOutside';

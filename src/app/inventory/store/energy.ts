@@ -1,13 +1,10 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { getFirstSocketByCategoryHash } from 'app/utils/socket-utils';
-import {
-  DestinyInventoryItemDefinition,
-  DestinyItemQuantity,
-  PlugAvailabilityMode,
-} from 'bungie-api-ts/destiny2';
+import type { DestinyInventoryItemDefinition, DestinyItemQuantity } from 'bungie-api-ts/destiny2';
+import { PlugAvailabilityMode } from 'bungie-api-ts/destiny2';
 import { PlugCategoryHashes, SocketCategoryHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
-import { DimItem, PluggableInventoryItemDefinition } from '../item-types';
+import type { DimItem, PluggableInventoryItemDefinition } from '../item-types';
 
 /**
  * OK, the rules are worse than this. An item gets a few options it can choose from -

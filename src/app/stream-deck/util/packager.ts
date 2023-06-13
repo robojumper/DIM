@@ -1,20 +1,25 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import {
   allItemsSelector,
   currenciesSelector,
   profileResponseSelector,
   vaultSelector,
 } from 'app/inventory/selectors';
-import { AccountCurrency, DimStore } from 'app/inventory/store-types';
+import type { AccountCurrency, DimStore } from 'app/inventory/store-types';
 import { findItemsByBucket, getArtifactBonus } from 'app/inventory/stores-helpers';
 import { maxLightItemSet } from 'app/loadout-drawer/auto-loadouts';
 import { getLight } from 'app/loadout-drawer/loadout-utils';
 import { totalPostmasterItems } from 'app/loadout-drawer/postmaster';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { getCharacterProgressions } from 'app/progress/selectors';
-import { RootState } from 'app/store/types';
-import { MaxPowerArgs, MetricsArgs, PostmasterArgs, VaultArgs } from 'app/stream-deck/interfaces';
-import { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { RootState } from 'app/store/types';
+import type {
+  MaxPowerArgs,
+  MetricsArgs,
+  PostmasterArgs,
+  VaultArgs,
+} from 'app/stream-deck/interfaces';
+import type { DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 import { BucketHashes } from 'data/d2/generated-enums';
 
 // find and get the quantity of a specif item type

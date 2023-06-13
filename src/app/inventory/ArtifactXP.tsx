@@ -1,5 +1,5 @@
 import { percent } from 'app/shell/formatters';
-import { DestinyCharacterProgressionComponent } from 'bungie-api-ts/destiny2';
+import type { DestinyCharacterProgressionComponent } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import xpIcon from '../../images/xpIcon.svg';
 import styles from './ArtifactXP.m.scss';

@@ -1,10 +1,12 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import Dropdown, { Option } from 'app/dim-ui/Dropdown';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import type { Option } from 'app/dim-ui/Dropdown';
+import Dropdown from 'app/dim-ui/Dropdown';
 import KeyHelp from 'app/dim-ui/KeyHelp';
 import { useHotkey, useHotkeys } from 'app/hotkeys/useHotkey';
 import { t } from 'app/i18next-t';
-import { TagCommand, itemTagList } from 'app/inventory/dim-item-info';
-import { DimStore } from 'app/inventory/store-types';
+import type { TagCommand } from 'app/inventory/dim-item-info';
+import { itemTagList } from 'app/inventory/dim-item-info';
+import type { DimStore } from 'app/inventory/store-types';
 import { getCurrentStore, getVault } from 'app/inventory/stores-helpers';
 import {
   AppIcon,

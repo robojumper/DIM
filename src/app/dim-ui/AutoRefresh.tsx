@@ -1,7 +1,7 @@
 import { autoRefreshEnabledSelector } from 'app/inventory/selectors';
 import { dimNeedsUpdate$, reloadDIM } from 'app/register-service-worker';
 import { hasSearchQuerySelector } from 'app/shell/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { useEventBusListener } from 'app/utils/hooks';
 import { EventBus } from 'app/utils/observable';
 import { useCallback, useEffect, useRef } from 'react';

@@ -1,7 +1,8 @@
 import { TOTAL_STAT_HASH } from 'app/search/d2-known-values';
 import { getColor } from 'app/shell/formatters';
 import { isD1Item } from 'app/utils/item-utils';
-import { InventoryWishListRoll, toUiWishListRoll } from 'app/wishlists/wishlists';
+import type { InventoryWishListRoll } from 'app/wishlists/wishlists';
+import { toUiWishListRoll } from 'app/wishlists/wishlists';
 import { DamageType } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { BucketHashes } from 'data/d2/generated-enums';
@@ -10,7 +11,7 @@ import { useSelector } from 'react-redux';
 import ElementIcon from '../dim-ui/ElementIcon';
 import styles from './BadgeInfo.m.scss';
 import RatingIcon from './RatingIcon';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 import { notesSelector } from './selectors';
 
 interface Props {

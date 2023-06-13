@@ -1,7 +1,7 @@
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { DimError } from 'app/utils/dim-error';
 import { createAction } from 'typesafe-actions';
-import { DestinyAccount } from './destiny-account';
+import type { DestinyAccount } from './destiny-account';
 
 export const accountsLoaded = createAction('accounts/ACCOUNTS_LOADED')<DestinyAccount[]>();
 export const setCurrentAccount = createAction('accounts/SET_CURRENT_ACCOUNT')<DestinyAccount>();

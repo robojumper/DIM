@@ -1,5 +1,5 @@
 import { settingSelector } from 'app/dim-api/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { clsx } from 'clsx';
 import { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';

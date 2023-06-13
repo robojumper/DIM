@@ -1,16 +1,13 @@
 import { addCompareItem } from 'app/compare/actions';
 import { compareOpenSelector } from 'app/compare/selectors';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
-import { ThunkResult } from 'app/store/types';
-import React, { useCallback, useEffect, useRef } from 'react';
-import {
-  ItemPopupExtraInfo,
-  hideItemPopup,
-  showItemPopup,
-  showItemPopup$,
-} from '../item-popup/item-popup';
+import type { ThunkResult } from 'app/store/types';
+import type React from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import type { ItemPopupExtraInfo } from '../item-popup/item-popup';
+import { hideItemPopup, showItemPopup, showItemPopup$ } from '../item-popup/item-popup';
 import { clearNewItem } from './actions';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 
 interface Props {
   item: DimItem;

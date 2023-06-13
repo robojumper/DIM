@@ -1,13 +1,13 @@
-import { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { apiPermissionGrantedSelector } from 'app/dim-api/selectors';
 import { AlertIcon } from 'app/dim-ui/AlertIcon';
 import CheckButton from 'app/dim-ui/CheckButton';
 import { WithSymbolsPicker } from 'app/dim-ui/destiny-symbols/SymbolsPicker';
 import { useAutocomplete } from 'app/dim-ui/text-complete/text-complete';
 import { t } from 'app/i18next-t';
-import { InventoryBucket } from 'app/inventory/inventory-buckets';
-import { DimStore } from 'app/inventory/store-types';
+import type { InventoryBucket } from 'app/inventory/inventory-buckets';
+import type { DimStore } from 'app/inventory/store-types';
 import { getStore } from 'app/inventory/stores-helpers';
 import { showItemPicker } from 'app/item-picker/item-picker';
 import { pickSubclass } from 'app/loadout/item-utils';
@@ -26,16 +26,16 @@ import { useSelector } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
 import { v4 as uuidv4 } from 'uuid';
 import Sheet from '../dim-ui/Sheet';
-import { DimItem } from '../inventory/item-types';
+import type { DimItem } from '../inventory/item-types';
 import { artifactUnlocksSelector, storesSelector } from '../inventory/selectors';
 import LoadoutEdit from '../loadout/loadout-edit/LoadoutEdit';
 import { deleteLoadout, updateLoadout } from './actions';
+import type { LoadoutUpdateFunction } from './loadout-drawer-reducer';
 import {
   addItem,
   dropItem,
   fillLoadoutFromEquipped,
   fillLoadoutFromUnequipped,
-  LoadoutUpdateFunction,
   removeItem,
   setClassType,
   setClearSpace,
@@ -43,7 +43,7 @@ import {
   setNotes,
 } from './loadout-drawer-reducer';
 import { addItem$ } from './loadout-events';
-import { Loadout, ResolvedLoadoutItem } from './loadout-types';
+import type { Loadout, ResolvedLoadoutItem } from './loadout-types';
 import { findSameLoadoutItemIndex } from './loadout-utils';
 import styles from './LoadoutDrawer.m.scss';
 import LoadoutDrawerDropTarget from './LoadoutDrawerDropTarget';

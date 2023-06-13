@@ -1,5 +1,5 @@
 import { storesSelector } from 'app/inventory/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { createSelector } from 'reselect';
 
 export const farmingStoreSelector = createSelector(

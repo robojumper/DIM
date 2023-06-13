@@ -1,11 +1,11 @@
-import { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
+import type { LoadoutParameters } from '@destinyitemmanager/dim-api-types';
 import { WindowVirtualList } from 'app/dim-ui/VirtualList';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
-import { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
-import { Dispatch } from 'react';
-import { LoadoutBuilderAction } from '../loadout-builder-reducer';
-import { ArmorEnergyRules, ArmorSet, ModStatChanges, PinnedItems } from '../types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
+import type { Loadout, ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { Dispatch } from 'react';
+import type { LoadoutBuilderAction } from '../loadout-builder-reducer';
+import type { ArmorEnergyRules, ArmorSet, ModStatChanges, PinnedItems } from '../types';
 import GeneratedSet, { containerClass } from './GeneratedSet';
 
 /**

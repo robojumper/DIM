@@ -1,7 +1,8 @@
 import { tl } from 'app/i18next-t';
 import { getHashtagsFromNote } from 'app/inventory/note-hashtags';
-import { InGameLoadout, isInGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
-import { FilterDefinition } from '../filter-types';
+import type { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
+import { isInGameLoadout } from 'app/loadout-drawer/loadout-types';
+import type { FilterDefinition } from '../filter-types';
 import { quoteFilterString } from '../query-parser';
 
 export function loadoutToSearchString(loadout: Loadout | InGameLoadout) {

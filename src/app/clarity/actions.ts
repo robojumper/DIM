@@ -1,6 +1,6 @@
 import { createAction } from 'typesafe-actions';
-import { ClarityCharacterStats } from './descriptions/character-stats';
-import { ClarityDescription } from './descriptions/descriptionInterface';
+import type { ClarityCharacterStats } from './descriptions/character-stats';
+import type { ClarityDescription } from './descriptions/descriptionInterface';
 
 export const loadDescriptions = createAction('CLARITY/LOAD_DESCRIPTIONS')<
   ClarityDescription | undefined

@@ -1,7 +1,8 @@
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { hideItemPopup } from 'app/item-popup/item-popup';
 import { wrap } from 'app/utils/util';
-import { animate, motion, PanInfo, Spring, useMotionValue, useTransform } from 'framer-motion';
+import type { PanInfo, Spring } from 'framer-motion';
+import { animate, motion, useMotionValue, useTransform } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
 import StoreHeading from '../character-tile/StoreHeading';
 import styles from './PhoneStoresHeader.m.scss';

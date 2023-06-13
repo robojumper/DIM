@@ -1,6 +1,6 @@
 import HelpLink from 'app/dim-ui/HelpLink';
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { showNotification } from 'app/notifications/notifications';
 import { isKillTrackerSocket } from 'app/utils/item-utils';
 import { getSocketsWithStyle } from 'app/utils/socket-utils';

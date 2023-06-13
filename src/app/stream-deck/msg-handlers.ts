@@ -23,11 +23,11 @@ import { accountRoute } from 'app/routes';
 import { filteredItemsSelector } from 'app/search/search-filter';
 import { setRouterLocation, setSearchQuery } from 'app/shell/actions';
 import { refresh } from 'app/shell/refresh-events';
-import { RootState, ThunkResult } from 'app/store/types';
+import type { RootState, ThunkResult } from 'app/store/types';
 import { streamDeckClearSelection, streamDeckWaitSelection } from 'app/stream-deck/actions';
 import { sendToStreamDeck } from 'app/stream-deck/async-module';
 import { showStreamDeckAuthorizationNotification } from 'app/stream-deck/AuthorizationNotification/AuthorizationNotification';
-import {
+import type {
   AuthorizationInitAction,
   CollectPostmasterAction,
   EquipLoadoutAction,

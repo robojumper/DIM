@@ -1,9 +1,9 @@
 import { maxLightItemSet } from 'app/loadout-drawer/auto-loadouts';
 import { getLight } from 'app/loadout-drawer/loadout-utils';
 import { powerLevelByKeyword } from 'app/search/d2-known-values';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { createSelector } from 'reselect';
-import { DimItem } from '../item-types';
+import type { DimItem } from '../item-types';
 import { allItemsSelector, storesSelector } from '../selectors';
 import { getArtifactBonus } from '../stores-helpers';
 

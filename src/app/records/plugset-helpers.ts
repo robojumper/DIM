@@ -1,4 +1,4 @@
-import { DestinyItemPlug, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { DestinyItemPlug, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 import universalOrnamentPlugSetHashes from 'data/d2/universal-ornament-plugset-hashes.json';
 
 /**

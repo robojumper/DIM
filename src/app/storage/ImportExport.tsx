@@ -1,10 +1,10 @@
-import { ExportResponse } from '@destinyitemmanager/dim-api-types';
+import type { ExportResponse } from '@destinyitemmanager/dim-api-types';
 import FileUpload from 'app/dim-ui/FileUpload';
 import { t } from 'app/i18next-t';
 import { showNotification } from 'app/notifications/notifications';
 import { AppIcon, downloadIcon } from 'app/shell/icons';
 import React from 'react';
-import { DropzoneOptions } from 'react-dropzone';
+import type { DropzoneOptions } from 'react-dropzone';
 import './storage.scss';
 
 export default function ImportExport({

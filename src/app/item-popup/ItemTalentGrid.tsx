@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { memo } from 'react';
 import { bungieNetPath } from '../dim-ui/BungieImage';
 import { PressTip, Tooltip } from '../dim-ui/PressTip';
-import { D1GridNode, D1Item } from '../inventory/item-types';
+import type { D1GridNode, D1Item } from '../inventory/item-types';
 import './ItemTalentGrid.scss';
 
 /**

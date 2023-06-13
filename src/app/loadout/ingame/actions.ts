@@ -1,4 +1,4 @@
-import { InGameLoadout } from 'app/loadout-drawer/loadout-types';
+import type { InGameLoadout } from 'app/loadout-drawer/loadout-types';
 import { createAction } from 'typesafe-actions';
 
 /**

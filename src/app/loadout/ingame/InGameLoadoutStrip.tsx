@@ -1,15 +1,16 @@
-import Dropdown, { Option } from 'app/dim-ui/Dropdown';
+import type { Option } from 'app/dim-ui/Dropdown';
+import Dropdown from 'app/dim-ui/Dropdown';
 import { PressTip, Tooltip } from 'app/dim-ui/PressTip';
 import ColorDestinySymbols from 'app/dim-ui/destiny-symbols/ColorDestinySymbols';
 import { t } from 'app/i18next-t';
 import { allItemsSelector } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { editLoadout } from 'app/loadout-drawer/loadout-events';
 import { convertInGameLoadoutToDimLoadout } from 'app/loadout-drawer/loadout-type-converters';
-import { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
+import type { InGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
 import { AppIcon, faCheckCircle, faExclamationCircle, saveIcon } from 'app/shell/icons';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { clsx } from 'clsx';
 import _ from 'lodash';
 import React from 'react';
@@ -17,7 +18,8 @@ import { useSelector } from 'react-redux';
 import { InGameLoadoutIconWithIndex } from './InGameLoadoutIcon';
 import styles from './InGameLoadoutStrip.m.scss';
 import { applyInGameLoadout, deleteInGameLoadout } from './ingame-loadout-apply';
-import { FullyResolvedLoadout, inGameLoadoutsWithMetadataSelector } from './selectors';
+import type { FullyResolvedLoadout } from './selectors';
+import { inGameLoadoutsWithMetadataSelector } from './selectors';
 
 export function InGameLoadoutStrip({
   store,

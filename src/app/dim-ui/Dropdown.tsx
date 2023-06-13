@@ -1,9 +1,10 @@
-import { Placement } from '@popperjs/core';
+import type { Placement } from '@popperjs/core';
 import { kebabIcon, moveDownIcon } from 'app/shell/icons';
 import AppIcon from 'app/shell/icons/AppIcon';
 import { clsx } from 'clsx';
 import { useSelect } from 'downshift';
-import { ReactNode, useRef } from 'react';
+import type { ReactNode } from 'react';
+import { useRef } from 'react';
 import styles from './Dropdown.m.scss';
 import { usePopper } from './usePopper';
 

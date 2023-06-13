@@ -1,6 +1,6 @@
 import { uniqBy } from 'app/utils/util';
 import _ from 'lodash';
-import { ItemInfos } from './dim-item-info';
+import type { ItemInfos } from './dim-item-info';
 
 /**
  * collects all hashtags from item notes

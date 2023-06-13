@@ -5,7 +5,7 @@ import { clsx } from 'clsx';
 import React, { useCallback, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import ClickOutside from '../dim-ui/ClickOutside';
-import { DimStore } from '../inventory/store-types';
+import type { DimStore } from '../inventory/store-types';
 import { AppIcon, kebabIcon } from '../shell/icons';
 import CharacterHeaderXPBar from './CharacterHeaderXP';
 import CharacterTile from './CharacterTile';

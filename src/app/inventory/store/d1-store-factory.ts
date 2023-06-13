@@ -1,16 +1,16 @@
-import {
+import type {
   D1CharacterResponse,
   D1ItemComponent,
   D1VaultResponse,
 } from 'app/destiny1/d1-manifest-types';
 import { t } from 'app/i18next-t';
-import { HashLookup } from 'app/utils/util-types';
+import type { HashLookup } from 'app/utils/util-types';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import vaultBackground from 'images/vault-background.svg';
 import vaultIcon from 'images/vault.svg';
 import _ from 'lodash';
-import { D1ManifestDefinitions } from '../../destiny1/d1-definitions';
-import { D1Progression, D1Store, DimStore } from '../store-types';
+import type { D1ManifestDefinitions } from '../../destiny1/d1-definitions';
+import type { D1Progression, D1Store, DimStore } from '../store-types';
 import { getCharacterStatsData } from './character-utils';
 
 // Label isn't used, but it helps us understand what each one is

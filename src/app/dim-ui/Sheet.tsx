@@ -3,14 +3,8 @@ import { t } from 'app/i18next-t';
 import { isiOSBrowser } from 'app/utils/browsers';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { clsx } from 'clsx';
-import {
-  PanInfo,
-  Spring,
-  motion,
-  useAnimation,
-  useDragControls,
-  useReducedMotion,
-} from 'framer-motion';
+import type { PanInfo, Spring } from 'framer-motion';
+import { motion, useAnimation, useDragControls, useReducedMotion } from 'framer-motion';
 import _ from 'lodash';
 import React, {
   createContext,

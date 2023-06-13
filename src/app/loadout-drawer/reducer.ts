@@ -1,8 +1,9 @@
 import _ from 'lodash';
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import * as actions from './actions';
-import { Loadout } from './loadout-types';
+import type { Loadout } from './loadout-types';
 
 export interface LoadoutsState {
   /** A stack of previous loadouts by character ID, for undo loadout. */

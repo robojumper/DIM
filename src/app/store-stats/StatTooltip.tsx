@@ -1,7 +1,7 @@
 import { settingSelector } from 'app/dim-api/selectors';
 import { Tooltip } from 'app/dim-ui/PressTip';
 import { t } from 'app/i18next-t';
-import { DimCharacterStatChange } from 'app/inventory/store-types';
+import type { DimCharacterStatChange } from 'app/inventory/store-types';
 import { statTier } from 'app/loadout-builder/utils';
 import { clsx } from 'clsx';
 import { useSelector } from 'react-redux';

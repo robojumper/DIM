@@ -2,7 +2,7 @@ import { settingSelector } from 'app/dim-api/selectors';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSettingAction } from './actions';
-import { Settings } from './initial-settings';
+import type { Settings } from './initial-settings';
 
 export function useSetSetting() {
   const dispatch = useDispatch();

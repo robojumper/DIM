@@ -4,7 +4,7 @@ import CollapsibleTitle from '../dim-ui/CollapsibleTitle';
 import Countdown from '../dim-ui/Countdown';
 import styles from './Vendor.m.scss';
 import VendorItems from './VendorItems';
-import { D2Vendor } from './d2-vendors';
+import type { D2Vendor } from './d2-vendors';
 
 export function VendorLocation({ children }: { children: React.ReactNode }) {
   return <span className={styles.location}>{children}</span>;

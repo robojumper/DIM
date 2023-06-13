@@ -1,5 +1,5 @@
 import ClassIcon from 'app/dim-ui/ClassIcon';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { clsx } from 'clsx';
 import styles from './StoreIcon.m.scss';
 

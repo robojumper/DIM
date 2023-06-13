@@ -1,4 +1,4 @@
-import { DimPlug } from 'app/inventory/item-types';
+import type { DimPlug } from 'app/inventory/item-types';
 
 export interface DimAdjustedItemPlug {
   /** A plug selected for stat comparison */

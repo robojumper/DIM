@@ -5,9 +5,9 @@ import { t } from 'app/i18next-t';
 import { setMockProfileResponse } from 'app/inventory/actions';
 import { loadStores } from 'app/inventory/d2-stores';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { download } from 'app/utils/util';
-import { DropzoneOptions } from 'react-dropzone';
+import type { DropzoneOptions } from 'react-dropzone';
 import { useSelector } from 'react-redux';
 import './settings.scss';
 

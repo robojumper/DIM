@@ -1,6 +1,6 @@
 import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import type { ItemTierName } from 'app/search/d2-known-values';
-import {
+import type {
   DestinyAmmunitionType,
   DestinyBreakerTypeDefinition,
   DestinyClass,
@@ -20,7 +20,7 @@ import {
   DestinySocketCategoryDefinition,
   DestinyStat,
 } from 'bungie-api-ts/destiny2';
-import { DimBucketType, InventoryBucket } from './inventory-buckets';
+import type { DimBucketType, InventoryBucket } from './inventory-buckets';
 
 /**
  * A generic DIM item, representing almost anything. This completely represents any D2 item, and most D1 items,

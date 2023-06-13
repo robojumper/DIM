@@ -1,11 +1,11 @@
-import {
+import type {
   DestinyCharacterRecordsComponent,
   DestinyProfileRecordsComponent,
-  DestinyRecordState,
 } from 'bungie-api-ts/destiny2';
+import { DestinyRecordState } from 'bungie-api-ts/destiny2';
 import exoticToCatalystRecordHash from 'data/d2/exotic-to-catalyst-record.json';
 import exoticsWithCatalysts from 'data/d2/exotics-with-catalysts';
-import { DimCatalyst } from '../item-types';
+import type { DimCatalyst } from '../item-types';
 
 export function buildCatalystInfo(
   itemHash: number,

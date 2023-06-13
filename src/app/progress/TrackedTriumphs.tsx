@@ -4,7 +4,10 @@ import { profileResponseSelector } from 'app/inventory/selectors';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { RecordGrid } from 'app/records/Record';
 import { searchDisplayProperties, toRecord } from 'app/records/presentation-nodes';
-import { DestinyPresentationNodeDefinition, DestinyRecordDefinition } from 'bungie-api-ts/destiny2';
+import type {
+  DestinyPresentationNodeDefinition,
+  DestinyRecordDefinition,
+} from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import styles from './TrackedTriumphs.m.scss';

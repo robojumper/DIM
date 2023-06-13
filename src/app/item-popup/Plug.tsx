@@ -6,8 +6,9 @@ import { isEnhancedPerk, isWeaponMasterworkSocket } from 'app/utils/socket-utils
 import WishListPerkThumb from 'app/wishlists/WishListPerkThumb';
 import { clsx } from 'clsx';
 import { PressTip } from '../dim-ui/PressTip';
-import { DimItem, DimPlug, DimSocket } from '../inventory/item-types';
-import { InventoryWishListRoll, isWishListPlug } from '../wishlists/wishlists';
+import type { DimItem, DimPlug, DimSocket } from '../inventory/item-types';
+import type { InventoryWishListRoll } from '../wishlists/wishlists';
+import { isWishListPlug } from '../wishlists/wishlists';
 import './ItemSockets.scss';
 import styles from './Plug.m.scss';
 import { DimPlugTooltip } from './PlugTooltip';

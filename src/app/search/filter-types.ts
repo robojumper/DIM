@@ -1,15 +1,15 @@
-import { CustomStatDef } from '@destinyitemmanager/dim-api-types';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimLanguage } from 'app/i18n';
-import { t } from 'app/i18next-t';
-import { TagValue } from 'app/inventory/dim-item-info';
-import { DimItem } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
-import { Loadout } from 'app/loadout-drawer/loadout-types';
-import { LoadoutsByItem } from 'app/loadout-drawer/selectors';
-import { Settings } from 'app/settings/initial-settings';
-import { WishListRoll } from 'app/wishlists/types';
-import { InventoryWishListRoll } from 'app/wishlists/wishlists';
+import type { CustomStatDef } from '@destinyitemmanager/dim-api-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimLanguage } from 'app/i18n';
+import type { t } from 'app/i18next-t';
+import type { TagValue } from 'app/inventory/dim-item-info';
+import type { DimItem } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
+import type { Loadout } from 'app/loadout-drawer/loadout-types';
+import type { LoadoutsByItem } from 'app/loadout-drawer/selectors';
+import type { Settings } from 'app/settings/initial-settings';
+import type { WishListRoll } from 'app/wishlists/types';
+import type { InventoryWishListRoll } from 'app/wishlists/wishlists';
 type I18nInput = Parameters<typeof t>;
 
 // a filter can return various bool-ish values

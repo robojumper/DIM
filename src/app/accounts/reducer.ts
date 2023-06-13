@@ -1,12 +1,13 @@
-import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import { API_KEY as BUNGIE_API_KEY } from 'app/bungie-api/bungie-api-utils';
 import { hasValidAuthTokens } from 'app/bungie-api/oauth-tokens';
 import { API_KEY as DIM_API_KEY } from 'app/dim-api/dim-api-helper';
 import { deepEqual } from 'fast-equals';
-import { Reducer } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
+import type { Reducer } from 'redux';
+import type { ActionType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 import * as actions from './actions';
-import { DestinyAccount } from './destiny-account';
+import type { DestinyAccount } from './destiny-account';
 
 export interface AccountsState {
   /**

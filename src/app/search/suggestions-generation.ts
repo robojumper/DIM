@@ -1,9 +1,9 @@
-import { CustomStatDef } from '@destinyitemmanager/dim-api-types';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { CustomStatDef } from '@destinyitemmanager/dim-api-types';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { customStatsSelector } from 'app/dim-api/selectors';
-import { TagValue } from 'app/inventory/dim-item-info';
-import { DimItem } from 'app/inventory/item-types';
-import { Loadout } from 'app/loadout-drawer/loadout-types';
+import type { TagValue } from 'app/inventory/dim-item-info';
+import type { DimItem } from 'app/inventory/item-types';
+import type { Loadout } from 'app/loadout-drawer/loadout-types';
 import { loadoutsSelector } from 'app/loadout-drawer/loadouts-selector';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { createSelector } from 'reselect';
@@ -14,7 +14,8 @@ import {
   getTagSelector,
 } from '../inventory/selectors';
 
-import { FilterDefinition, SuggestionsContext, canonicalFilterFormats } from './filter-types';
+import type { FilterDefinition, SuggestionsContext } from './filter-types';
+import { canonicalFilterFormats } from './filter-types';
 
 //
 // Selectors

@@ -1,13 +1,13 @@
 import RichDestinyText from 'app/dim-ui/destiny-symbols/RichDestinyText';
 import ItemPopupTrigger from 'app/inventory/ItemPopupTrigger';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { isNewSelector } from 'app/inventory/selectors';
 import { isBooleanObjective } from 'app/inventory/store/objectives';
 import ItemExpiration from 'app/item-popup/ItemExpiration';
 import { useD2Definitions } from 'app/manifest/selectors';
 import { searchFilterSelector } from 'app/search/search-filter';
 import { percent } from 'app/shell/formatters';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { clsx } from 'clsx';
 import { useSelector } from 'react-redux';
 import { ObjectiveValue } from './Objective';

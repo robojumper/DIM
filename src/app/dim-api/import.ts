@@ -1,4 +1,4 @@
-import {
+import type {
   DestinyVersion,
   ExportResponse,
   ItemAnnotation,
@@ -6,8 +6,9 @@ import {
 } from '@destinyitemmanager/dim-api-types';
 import { t } from 'app/i18next-t';
 import { showNotification } from 'app/notifications/notifications';
-import { Settings, initialSettingsState } from 'app/settings/initial-settings';
-import { ThunkResult } from 'app/store/types';
+import type { Settings } from 'app/settings/initial-settings';
+import { initialSettingsState } from 'app/settings/initial-settings';
+import type { ThunkResult } from 'app/store/types';
 import { errorLog, infoLog } from 'app/utils/log';
 import { observeStore } from 'app/utils/redux-utils';
 import _ from 'lodash';

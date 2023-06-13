@@ -5,8 +5,8 @@ import _ from 'lodash';
 /**
  * Generic helpers for working with whole stores (character inventories) or lists of stores.
  */
-import { DimItem } from './item-types';
-import { D1Store, DimStore } from './store-types';
+import type { DimItem } from './item-types';
+import type { D1Store, DimStore } from './store-types';
 
 /**
  * Get whichever character was last played.

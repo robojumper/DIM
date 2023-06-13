@@ -1,4 +1,4 @@
-import { D1Store } from 'app/inventory/store-types';
+import type { D1Store } from 'app/inventory/store-types';
 import _ from 'lodash';
 import { bungieNetPath } from '../dim-ui/BungieImage';
 import DiamondProgress from '../dim-ui/DiamondProgress';

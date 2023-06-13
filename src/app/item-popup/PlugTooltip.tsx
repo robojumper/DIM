@@ -13,19 +13,17 @@ import { EXOTIC_CATALYST_TRAIT } from 'app/search/d2-known-values';
 import { getDimPlugStats, getPlugDefStats, usePlugDescriptions } from 'app/utils/plug-descriptions';
 import { isEnhancedPerk, isModCostVisible } from 'app/utils/socket-utils';
 import WishListPerkThumb from 'app/wishlists/WishListPerkThumb';
-import { InventoryWishListRoll } from 'app/wishlists/wishlists';
-import {
-  DamageType,
+import type { InventoryWishListRoll } from 'app/wishlists/wishlists';
+import type {
   DestinyClass,
   DestinyObjectiveProgress,
   DestinyPlugItemCraftingRequirements,
-  DestinyUnlockValueUIStyle,
-  TierType,
 } from 'bungie-api-ts/destiny2';
+import { DamageType, DestinyUnlockValueUIStyle, TierType } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import enhancedIntrinsics from 'data/d2/crafting-enhanced-intrinsics';
 import { useCallback } from 'react';
-import { DimItem, DimPlug, PluggableInventoryItemDefinition } from '../inventory/item-types';
+import type { DimItem, DimPlug, PluggableInventoryItemDefinition } from '../inventory/item-types';
 import Objective from '../progress/Objective';
 import './ItemSockets.scss';
 import styles from './PlugTooltip.m.scss';

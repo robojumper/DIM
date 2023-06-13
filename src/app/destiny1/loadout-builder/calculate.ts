@@ -3,9 +3,9 @@ import disciplineIcon from 'images/discipline.png';
 import intellectIcon from 'images/intellect.png';
 import strengthIcon from 'images/strength.png';
 import _ from 'lodash';
-import { D1Item } from '../../inventory/item-types';
-import { D1Store } from '../../inventory/store-types';
-import {
+import type { D1Item } from '../../inventory/item-types';
+import type { D1Store } from '../../inventory/store-types';
+import type {
   ArmorSet,
   ArmorTypes,
   D1ItemWithNormalStats,

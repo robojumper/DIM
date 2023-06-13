@@ -1,13 +1,13 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { t } from 'app/i18next-t';
-import { InventoryBuckets } from 'app/inventory/inventory-buckets';
-import { DimStore } from 'app/inventory/store-types';
+import type { InventoryBuckets } from 'app/inventory/inventory-buckets';
+import type { DimStore } from 'app/inventory/store-types';
 import { powerLevelSelector } from 'app/inventory/store/selectors';
 import { useD2Definitions } from 'app/manifest/selectors';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { compareBy } from 'app/utils/comparators';
 import { uniqBy } from 'app/utils/util';
-import { DestinyMilestone, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
+import type { DestinyMilestone, DestinyProfileResponse } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
 import styles from './Milestones.m.scss';

@@ -1,4 +1,4 @@
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { filterFactorySelector } from 'app/search/search-filter';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';

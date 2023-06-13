@@ -1,12 +1,12 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import ClosableContainer from 'app/dim-ui/ClosableContainer';
 import { t } from 'app/i18next-t';
 import ConnectedInventoryItem from 'app/inventory/ConnectedInventoryItem';
 import ItemPopupTrigger from 'app/inventory/ItemPopupTrigger';
 import { storesSelector } from 'app/inventory/selectors';
-import { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
+import type { ResolvedLoadoutItem } from 'app/loadout-drawer/loadout-types';
 import { AppIcon, powerActionIcon } from 'app/shell/icons';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
 import { BucketHashes } from 'data/d2/generated-enums';
 import { useMemo } from 'react';

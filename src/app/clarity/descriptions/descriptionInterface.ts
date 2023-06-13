@@ -1,4 +1,4 @@
-import { DimLanguage } from 'app/i18n';
+import type { DimLanguage } from 'app/i18n';
 
 export type DescriptionClassNames =
   | 'background'

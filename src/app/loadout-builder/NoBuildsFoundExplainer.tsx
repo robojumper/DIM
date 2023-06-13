@@ -1,23 +1,24 @@
 import { AssumeArmorMasterwork } from '@destinyitemmanager/dim-api-types';
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { AlertIcon } from 'app/dim-ui/AlertIcon';
 import { t } from 'app/i18next-t';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { ResolvedLoadoutMod } from 'app/loadout-drawer/loadout-types';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { ResolvedLoadoutMod } from 'app/loadout-drawer/loadout-types';
 import PlugDef from 'app/loadout/loadout-ui/PlugDef';
-import { ModMap } from 'app/loadout/mod-assignment-utils';
+import type { ModMap } from 'app/loadout/mod-assignment-utils';
 import { AppIcon, banIcon } from 'app/shell/icons';
 import { uniqBy } from 'app/utils/util';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
-import { Dispatch } from 'react';
+import type { Dispatch } from 'react';
 import styles from './NoBuildsFoundExplainer.m.scss';
 import ExoticArmorChoice from './filter/ExoticArmorChoice';
 import LockedItem from './filter/LockedItem';
-import { FilterInfo } from './item-filter';
-import { LoadoutBuilderAction } from './loadout-builder-reducer';
-import { ProcessStatistics, RejectionRate } from './process-worker/types';
-import { ArmorEnergyRules, LockableBucketHashes, PinnedItems, StatFilters } from './types';
+import type { FilterInfo } from './item-filter';
+import type { LoadoutBuilderAction } from './loadout-builder-reducer';
+import type { ProcessStatistics, RejectionRate } from './process-worker/types';
+import type { ArmorEnergyRules, PinnedItems, StatFilters } from './types';
+import { LockableBucketHashes } from './types';
 
 interface ActionableSuggestion {
   id: string;

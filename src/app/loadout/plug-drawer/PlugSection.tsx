@@ -1,11 +1,11 @@
 import { TileGrid } from 'app/dim-ui/TileGrid';
-import { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
-import { DestinyClass } from 'bungie-api-ts/destiny2';
+import type { PluggableInventoryItemDefinition } from 'app/inventory/item-types';
+import type { DestinyClass } from 'bungie-api-ts/destiny2';
 import { useCallback } from 'react';
 import { groupModsByModType } from '../mod-utils';
 import styles from './PlugSection.m.scss';
 import SelectablePlug from './SelectablePlug';
-import { PlugSet } from './types';
+import type { PlugSet } from './types';
 
 /**
  * A section of plugs in the PlugDrawer component, corresponding to a PlugSet. These will be further

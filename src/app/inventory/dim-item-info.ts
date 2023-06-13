@@ -1,13 +1,13 @@
-import { ItemAnnotation, ItemHashTag } from '@destinyitemmanager/dim-api-types';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import type { ItemAnnotation, ItemHashTag } from '@destinyitemmanager/dim-api-types';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { tl } from 'app/i18next-t';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import _ from 'lodash';
 import { archiveIcon, banIcon, boltIcon, heartIcon, tagIcon } from '../shell/icons';
 import { setItemNote, setItemTag, tagCleanup } from './actions';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 import { itemInfosSelector } from './selectors';
-import { DimStore } from './store-types';
+import type { DimStore } from './store-types';
 
 // sortOrder: orders items within a bucket, ascending
 export const tagConfig = {

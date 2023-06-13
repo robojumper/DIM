@@ -1,9 +1,10 @@
-import { DimItem } from 'app/inventory/item-types';
-import { RootState } from 'app/store/types';
+import type { DimItem } from 'app/inventory/item-types';
+import type { RootState } from 'app/store/types';
 import { emptyArray } from 'app/utils/empty';
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import { getInventoryWishListRoll, InventoryWishListRoll } from './wishlists';
+import type { InventoryWishListRoll } from './wishlists';
+import { getInventoryWishListRoll } from './wishlists';
 
 export const wishListsSelector = (state: RootState) => state.wishLists;
 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { Hotkey, registerHotkeys } from './hotkeys';
+import type { Hotkey } from './hotkeys';
+import { registerHotkeys } from './hotkeys';
 
 /**
  * A hook for registering a single global hotkey that will appear in the hotkey

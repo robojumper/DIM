@@ -1,4 +1,4 @@
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 
 // Note: Separate file (even from redux-utils) so that there are no non-type imports,
 // as it's otherwise prone to circular import dependencies that break selectors

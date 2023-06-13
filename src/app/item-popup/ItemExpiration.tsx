@@ -1,6 +1,6 @@
 import Countdown from 'app/dim-ui/Countdown';
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { AppIcon, faClock } from 'app/shell/icons';
 import { clsx } from 'clsx';
 

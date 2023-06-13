@@ -1,4 +1,4 @@
-import {
+import type {
   D1DamageTypeDefinition,
   D1InventoryItemDefinition,
   D1ItemComponent,
@@ -12,13 +12,15 @@ import { lightStats } from 'app/search/search-filter-values';
 import { getItemYear } from 'app/utils/item-utils';
 import { errorLog, warnLog } from 'app/utils/log';
 import { uniqBy } from 'app/utils/util';
+import type {
+  DestinyClass,
+  DestinyDamageTypeDefinition,
+  DestinyDisplayPropertiesDefinition,
+} from 'bungie-api-ts/destiny2';
 import {
   BucketCategory,
   DamageType,
   DestinyAmmunitionType,
-  DestinyClass,
-  DestinyDamageTypeDefinition,
-  DestinyDisplayPropertiesDefinition,
   ItemBindStatus,
   ItemLocation,
   ItemState,
@@ -28,11 +30,11 @@ import missingSources from 'data/d1/missing_sources.json';
 import { BucketHashes, ItemCategoryHashes, StatHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { vaultTypes } from '../../destiny1/d1-buckets';
-import { D1ManifestDefinitions, DefinitionTable } from '../../destiny1/d1-definitions';
+import type { D1ManifestDefinitions, DefinitionTable } from '../../destiny1/d1-definitions';
 import { reportException } from '../../utils/exceptions';
-import { InventoryBuckets } from '../inventory-buckets';
-import { D1GridNode, D1Item, D1Stat, D1TalentGrid } from '../item-types';
-import { D1Store, DimStore } from '../store-types';
+import type { InventoryBuckets } from '../inventory-buckets';
+import type { D1GridNode, D1Item, D1Stat, D1TalentGrid } from '../item-types';
+import type { D1Store, DimStore } from '../store-types';
 import { getQualityRating } from './armor-quality';
 import { getBonus } from './character-utils';
 import { createItemIndex } from './item-index';

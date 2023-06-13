@@ -3,13 +3,14 @@ import { t } from 'app/i18next-t';
 import NotificationButton from 'app/notifications/NotificationButton';
 import { showNotification } from 'app/notifications/notifications';
 import { AppIcon, undoIcon } from 'app/shell/icons';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import _ from 'lodash';
 import { canSyncLockState } from './SyncTagLock';
 import { setItemHashTag, setItemTagsBulk } from './actions';
-import { TagCommand, TagValue, tagConfig } from './dim-item-info';
+import type { TagCommand, TagValue } from './dim-item-info';
+import { tagConfig } from './dim-item-info';
 import { setItemLockState } from './item-move-service';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 import { getTagSelector, tagSelector } from './selectors';
 
 /**

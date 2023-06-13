@@ -1,11 +1,13 @@
 import { LoadoutSort } from '@destinyitemmanager/dim-api-types';
 import { AlertIcon } from 'app/dim-ui/AlertIcon';
 import ColorDestinySymbols from 'app/dim-ui/destiny-symbols/ColorDestinySymbols';
-import FilterPills, { Option } from 'app/dim-ui/FilterPills';
-import { DimLanguage } from 'app/i18n';
+import type { Option } from 'app/dim-ui/FilterPills';
+import FilterPills from 'app/dim-ui/FilterPills';
+import type { DimLanguage } from 'app/i18n';
 import { t } from 'app/i18next-t';
 import { getHashtagsFromNote } from 'app/inventory/note-hashtags';
-import { isInGameLoadout, Loadout } from 'app/loadout-drawer/loadout-types';
+import type { Loadout } from 'app/loadout-drawer/loadout-types';
+import { isInGameLoadout } from 'app/loadout-drawer/loadout-types';
 import {
   FragmentProblem,
   getFragmentProblemsSelector,

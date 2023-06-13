@@ -5,7 +5,7 @@ import { t } from 'app/i18next-t';
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './LoadoutDrawerHeader.m.scss';
-import { Loadout } from './loadout-types';
+import type { Loadout } from './loadout-types';
 import { loadoutsHashtagsSelector } from './selectors';
 
 export default function LoadoutDrawerHeader({

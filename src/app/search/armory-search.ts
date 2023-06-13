@@ -1,5 +1,5 @@
-import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { DimLanguage } from 'app/i18n';
+import type { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
+import type { DimLanguage } from 'app/i18n';
 import { getSeason } from 'app/inventory/store/season';
 import { chainComparator, compareBy } from 'app/utils/comparators';
 import { emptyArray } from 'app/utils/empty';
@@ -7,7 +7,8 @@ import { getItemYear } from 'app/utils/item-utils';
 import { BucketHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import memoizeOne from 'memoize-one';
-import { ArmorySearchItem, SearchItemType } from './autocomplete';
+import type { ArmorySearchItem } from './autocomplete';
+import { SearchItemType } from './autocomplete';
 import { plainString } from './search-filters/freeform';
 
 export interface ArmoryEntry {

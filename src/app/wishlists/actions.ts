@@ -1,5 +1,5 @@
 import { createAction } from 'typesafe-actions';
-import { WishListAndInfo } from './types';
+import type { WishListAndInfo } from './types';
 
 export const loadWishLists = createAction('wishlists/LOAD')<{
   wishListAndInfo: WishListAndInfo;

@@ -1,21 +1,21 @@
-import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import ClassIcon from 'app/dim-ui/ClassIcon';
 import { t } from 'app/i18next-t';
-import { InventoryBucket } from 'app/inventory/inventory-buckets';
-import { DimItem } from 'app/inventory/item-types';
+import type { InventoryBucket } from 'app/inventory/inventory-buckets';
+import type { DimItem } from 'app/inventory/item-types';
 import { pullItem } from 'app/inventory/move-item';
 import {
   currentStoreSelector,
   sortedStoresSelector,
   storesSelector,
 } from 'app/inventory/selectors';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { findItemsByBucket } from 'app/inventory/stores-helpers';
 import { characterOrderSelector } from 'app/settings/character-sort';
 import { itemSorterSelector } from 'app/settings/item-sort';
 import { AppIcon, addIcon } from 'app/shell/icons';
 import { useThunkDispatch } from 'app/store/thunk-dispatch';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { emptyArray } from 'app/utils/empty';
 import { DestinyClass } from 'bungie-api-ts/destiny2';
 import { clsx } from 'clsx';
@@ -24,7 +24,8 @@ import emptyEngram from 'destiny-icons/general/empty-engram.svg';
 import { shallowEqual } from 'fast-equals';
 import _ from 'lodash';
 import React, { useCallback } from 'react';
-import { ConnectedComponent, connect } from 'react-redux';
+import type { ConnectedComponent } from 'react-redux';
+import { connect } from 'react-redux';
 import './StoreBucket.scss';
 import StoreBucketDropTarget from './StoreBucketDropTarget';
 import StoreInventoryItem from './StoreInventoryItem';

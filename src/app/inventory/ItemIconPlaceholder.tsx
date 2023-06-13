@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { getItemImageStyles } from './ItemIcon';
 import styles from './ItemIconPlaceholder.m.scss';
-import { DimItem } from './item-types';
+import type { DimItem } from './item-types';
 
 // We'll use a single intersection observer instead of one per item, roughly following the strategy
 // from https://github.com/thebuilder/react-intersection-observer/blob/master/src/observe.ts

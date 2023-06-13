@@ -1,4 +1,4 @@
-import { IconDefinition, IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
+import type { IconDefinition, IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 
 export const makeCustomIcon = (
   name: string,

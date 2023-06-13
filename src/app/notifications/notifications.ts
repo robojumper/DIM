@@ -1,5 +1,5 @@
 import { EventBus } from 'app/utils/observable';
-import React from 'react';
+import type React from 'react';
 
 export type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'progress';
 

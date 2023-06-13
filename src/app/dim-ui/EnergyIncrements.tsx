@@ -1,6 +1,6 @@
 import 'app/dim-ui/EnergyMeterIncrements.scss';
 import { t } from 'app/i18next-t';
-import { DimItem } from 'app/inventory/item-types';
+import type { DimItem } from 'app/inventory/item-types';
 import { EnergySwap } from 'app/loadout-builder/generated-sets/GeneratedSetItem';
 import { MAX_ARMOR_ENERGY_CAPACITY } from 'app/search/d2-known-values';
 import { clsx } from 'clsx';

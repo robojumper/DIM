@@ -5,11 +5,12 @@ import {
   sortedStoresSelector,
 } from 'app/inventory/selectors';
 import { getCurrentStore } from 'app/inventory/stores-helpers';
-import { RootState } from 'app/store/types';
+import type { RootState } from 'app/store/types';
 import { emptyArray } from 'app/utils/empty';
 import { currySelector } from 'app/utils/selector-utils';
 import { createSelector } from 'reselect';
-import { D2VendorGroup, toVendorGroups } from './d2-vendors';
+import type { D2VendorGroup } from './d2-vendors';
+import { toVendorGroups } from './d2-vendors';
 
 export const vendorsByCharacterSelector = (state: RootState) => state.vendors.vendorsByCharacter;
 

@@ -1,5 +1,5 @@
-import { DimItem } from 'app/inventory/item-types';
-import { DimStore } from 'app/inventory/store-types';
+import type { DimItem } from 'app/inventory/item-types';
+import type { DimStore } from 'app/inventory/store-types';
 import { amountOfItem, getCurrentStore, getStore } from 'app/inventory/stores-helpers';
 import { pullFromPostmasterAmount } from 'app/loadout-drawer/postmaster';
 import { itemCanBeEquippedBy, itemCanBeInLoadout } from 'app/utils/item-utils';

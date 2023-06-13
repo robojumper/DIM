@@ -1,5 +1,5 @@
-import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import type { DestinyVersion } from '@destinyitemmanager/dim-api-types';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { t } from 'app/i18next-t';
 import {
   battleNetIcon,
@@ -9,16 +9,15 @@ import {
   faXbox,
   stadiaIcon,
 } from 'app/shell/icons';
-import { ThunkResult } from 'app/store/types';
+import type { ThunkResult } from 'app/store/types';
 import { DimError } from 'app/utils/dim-error';
 import { errorLog } from 'app/utils/log';
-import {
-  BungieMembershipType,
+import type {
   DestinyLinkedProfilesResponse,
   DestinyProfileUserInfoCard,
-  PlatformErrorCodes,
 } from 'bungie-api-ts/destiny2';
-import { UserInfoCard } from 'bungie-api-ts/user';
+import { BungieMembershipType, PlatformErrorCodes } from 'bungie-api-ts/destiny2';
+import type { UserInfoCard } from 'bungie-api-ts/user';
 import _ from 'lodash';
 import { getCharacters } from '../bungie-api/destiny1-api';
 import { getLinkedAccounts } from '../bungie-api/destiny2-api';

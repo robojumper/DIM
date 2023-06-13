@@ -1,6 +1,6 @@
 import Switch from 'app/dim-ui/Switch';
 import HelpLink from '../dim-ui/HelpLink';
-import { Settings } from './initial-settings';
+import type { Settings } from './initial-settings';
 
 export default function Checkbox({
   label,

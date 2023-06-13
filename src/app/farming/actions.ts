@@ -9,21 +9,19 @@ import {
 import { isInInGameLoadoutForSelector } from 'app/loadout-drawer/selectors';
 import { D1BucketHashes, supplies } from 'app/search/d1-known-values';
 import { refresh } from 'app/shell/refresh-events';
-import { ThunkResult } from 'app/store/types';
-import { CancelToken, withCancel } from 'app/utils/cancel';
+import type { ThunkResult } from 'app/store/types';
+import type { CancelToken } from 'app/utils/cancel';
+import { withCancel } from 'app/utils/cancel';
 import { infoLog } from 'app/utils/log';
 import { observeStore } from 'app/utils/redux-utils';
 import { dedupePromise } from 'app/utils/util';
 import { BucketCategory } from 'bungie-api-ts/destiny2';
 import { BucketHashes } from 'data/d2/generated-enums';
-import { InventoryBucket } from '../inventory/inventory-buckets';
-import {
-  MoveReservations,
-  createMoveSession,
-  sortMoveAsideCandidatesForStore,
-} from '../inventory/item-move-service';
-import { DimItem } from '../inventory/item-types';
-import { D1Store, DimStore } from '../inventory/store-types';
+import type { InventoryBucket } from '../inventory/inventory-buckets';
+import type { MoveReservations } from '../inventory/item-move-service';
+import { createMoveSession, sortMoveAsideCandidatesForStore } from '../inventory/item-move-service';
+import type { DimItem } from '../inventory/item-types';
+import type { D1Store, DimStore } from '../inventory/store-types';
 import { clearItemsOffCharacter } from '../loadout-drawer/loadout-apply';
 import * as actions from './basic-actions';
 import { farmingInterruptedSelector, farmingStoreSelector } from './selectors';

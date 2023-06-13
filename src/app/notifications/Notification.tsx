@@ -1,11 +1,12 @@
 import { t } from 'app/i18next-t';
 import { CanceledError } from 'app/utils/cancel';
 import { clsx } from 'clsx';
-import { motion, MotionProps, Transition } from 'framer-motion';
+import type { MotionProps, Transition } from 'framer-motion';
+import { motion } from 'framer-motion';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Notification.m.scss';
 import NotificationButton from './NotificationButton';
-import { NotificationError, NotificationType, Notify } from './notifications';
+import type { NotificationError, NotificationType, Notify } from './notifications';
 
 const typeStyles: { [type in NotificationType]: string } = {
   success: styles.success,

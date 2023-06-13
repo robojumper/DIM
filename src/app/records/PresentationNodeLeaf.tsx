@@ -3,7 +3,7 @@ import CollectiblesGrid from './CollectiblesGrid';
 import Craftable from './Craftable';
 import Metrics from './Metrics';
 import { RecordGrid } from './Record';
-import { DimPresentationNodeLeaf } from './presentation-nodes';
+import type { DimPresentationNodeLeaf } from './presentation-nodes';
 
 /**
  * Displays "leaf node" contents for presentation nodes (collectibles, triumphs, metrics)
