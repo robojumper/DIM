@@ -1,6 +1,8 @@
-import { canonicalFilterFormats } from './filter-types';
+import { DestinyClass } from 'node_modules/bungie-api-ts/destiny2/interfaces';
+import { armorStats } from './d2-known-values';
+import { ItemFilterDomain, canonicalFilterFormats } from './filter-types';
 import { buildFiltersMap } from './search-config';
-import { parseAndValidateQuery } from './search-utils';
+import { ParseValidationBundle, parseAndValidateQuery } from './search-utils';
 
 describe('buildSearchConfig', () => {
   const searchConfig = buildFiltersMap(2);
@@ -46,7 +48,21 @@ describe('buildSearchConfig', () => {
  * exhaustively is not a goal of this test.
  */
 describe('validateQuery', () => {
-  const searchConfig = buildFiltersMap(2);
+  const searchConfig: ParseValidationBundle<ItemFilterDomain> = {
+    filtersMap: buildFiltersMap(2),
+    label: 'item',
+    validationContext: {
+      customStats: [
+        {
+          class: DestinyClass.Hunter,
+          label: 'My Custom',
+          shortLabel: 'mycustom',
+          statHash: -1234,
+          weights: Object.fromEntries(armorStats.map((s) => [s, s % 2])),
+        },
+      ],
+    },
+  };
 
   const simpleCases: [filterString: string, valid: boolean][] = [
     ['is:crafted', true],
@@ -113,6 +129,9 @@ describe('validateQuery', () => {
     ['is:stat', false],
     ['stat:recovery', false],
     ['stat:=5', false],
+
+    ['stat:mycustom:>30', true],
+    ['stat:unknowncustom:>30', false],
   ];
 
   test.each(statCases)('stat filter %s - validity %s', (filterString, valid) =>

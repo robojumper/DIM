@@ -71,8 +71,8 @@ const searchItemIcons: { [key in SearchItemType]: string } = {
 const armoryIndexSelector = createSelector(d2ManifestSelector, languageSelector, buildArmoryIndex);
 
 const autoCompleterSelector = createSelector(
-  searchConfigSelector,
   armoryIndexSelector,
+  searchConfigSelector,
   createAutocompleter
 );
 

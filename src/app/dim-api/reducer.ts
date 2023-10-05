@@ -15,9 +15,9 @@ import { t } from 'app/i18next-t';
 import { convertDimLoadoutToApiLoadout } from 'app/loadout-drawer/loadout-type-converters';
 import { recentSearchComparator } from 'app/search/autocomplete';
 import { CUSTOM_TOTAL_STAT_HASH } from 'app/search/d2-known-values';
-import { FilterContext } from 'app/search/filter-types';
+import { ItemFilterDomain } from 'app/search/filter-types';
 import { buildFiltersMap } from 'app/search/search-config';
-import { parseAndValidateQuery } from 'app/search/search-utils';
+import { parseAndValidateQuery, ParseValidationBundle } from 'app/search/search-utils';
 import { emptyArray } from 'app/utils/empty';
 import { errorLog, timer } from 'app/utils/log';
 import { count, uniqBy } from 'app/utils/util';
@@ -1130,9 +1130,16 @@ function searchUsed(draft: Draft<DimApiState>, account: DestinyAccount, query: s
   const filtersMap = buildFiltersMap(destinyVersion);
 
   // Canonicalize the query so we always save it the same way
-  const { canonical, saveInHistory } = parseAndValidateQuery(query, filtersMap, {
-    customStats: draft.settings.customStats ?? [],
-  } as FilterContext);
+  // TODO: We basically need all bundles here?
+  const itemBundle: ParseValidationBundle<ItemFilterDomain> = {
+    filtersMap,
+    label: 'item',
+    validationContext: {
+      customStats: draft.settings.customStats ?? [],
+    },
+  };
+  // Canonicalize the query so we always save it the same way
+  const { canonical, saveInHistory } = parseAndValidateQuery<[ItemFilterDomain]>(query, itemBundle);
   if (!saveInHistory) {
     errorLog('searchUsed', 'Query not eligible to be saved in history', query);
     return;
@@ -1191,9 +1198,15 @@ function saveSearch(
   const filtersMap = buildFiltersMap(destinyVersion);
 
   // Canonicalize the query so we always save it the same way
-  const { canonical, saveable } = parseAndValidateQuery(query, filtersMap, {
-    customStats: draft.settings.customStats ?? [],
-  } as FilterContext);
+  // TODO: We basically need all bundles here?
+  const itemBundle: ParseValidationBundle<ItemFilterDomain> = {
+    filtersMap,
+    label: 'item',
+    validationContext: {
+      customStats: draft.settings.customStats ?? [],
+    },
+  };
+  const { canonical, saveable } = parseAndValidateQuery<[ItemFilterDomain]>(query, itemBundle);
   if (!saveable && saved) {
     errorLog('searchUsed', 'Query not eligible to be saved', query);
     return;
@@ -1266,9 +1279,17 @@ function cleanupInvalidSearches(draft: Draft<DimApiState>, account: DestinyAccou
       continue;
     }
 
-    const { saveInHistory } = parseAndValidateQuery(search.query, filtersMap, {
-      customStats: draft.settings.customStats ?? [],
-    } as FilterContext);
+    // Canonicalize the query so we always save it the same way
+    // TODO: We basically need all bundles here?
+    const itemBundle: ParseValidationBundle<ItemFilterDomain> = {
+      filtersMap,
+      label: 'item',
+      validationContext: {
+        customStats: draft.settings.customStats ?? [],
+      },
+    };
+
+    const { saveInHistory } = parseAndValidateQuery<[ItemFilterDomain]>(search.query, itemBundle);
     if (!saveInHistory) {
       deleteSearch(draft, account.destinyVersion, search.query);
     }

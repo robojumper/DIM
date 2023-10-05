@@ -61,12 +61,15 @@ export interface NotOp extends QueryASTCommon {
 export interface FilterOp extends QueryASTCommon {
   op: 'filter';
   /**
-   * The name of the filter function, without any trailing :. The only weird case is
-   * stats, which will appear like "stat:strength".
+   * The domain of the filter function if specified, e.g. `item` in `item>is:solar`
+   */
+  domain: string | undefined;
+  /**
+   * The name of the filter function, without any trailing.
    */
   type: string;
   /**
-   * Any arguments to the filter function as a single string. e.g: haspower, arrivals, >=1000
+   * Any arguments to the filter function as a single string. e.g: haspower, arrivals, recovery:>=1000
    */
   args: string;
 }
@@ -170,6 +173,7 @@ export function parseQuery(query: string): QueryAST {
             op: 'not',
             operand: {
               op: 'filter',
+              domain: token.domain,
               type: 'is',
               args: token.args,
               startIndex: token.startIndex,
@@ -181,6 +185,7 @@ export function parseQuery(query: string): QueryAST {
         } else {
           return {
             op: 'filter',
+            domain: token.domain,
             type: keyword,
             args: token.args,
             startIndex: token.startIndex,
@@ -299,7 +304,7 @@ function isSameOp<T extends 'and' | 'or'>(binOp: T, op: QueryAST): op is AndOp |
 type NoArgTokenType = '(' | ')' | 'not' | 'or' | 'and' | 'implicit_and';
 export type Token = { startIndex: number; length: number; quoted?: boolean } & (
   | { type: NoArgTokenType }
-  | { type: 'filter'; keyword: string; args: string }
+  | { type: 'filter'; domain: string | undefined; keyword: string; args: string }
   | { type: 'comment'; content: string }
 );
 
@@ -311,7 +316,7 @@ const negation = /-\s*/y;
 // `not` can't be preceded by whitespace because that whitespace is an implicit `and`.
 const booleanKeywords = /(not|\s+or|\s+and)\s+/y;
 // Filter names like is:, stat:, etc
-const filterName = /[a-z]+:/y;
+const filterName = /(?:[a-z]+>)?[a-z]+:/y;
 // Arguments to filters are pretty unconstrained
 const filterArgs = /[^\s()]+/y;
 // Words without quotes are basically any non-whitespace that doesn't terminate a group
@@ -450,6 +455,7 @@ export function* lexer(query: string): Generator<Token> {
       yield {
         startIndex,
         length: i - startIndex,
+        domain: undefined,
         type: 'filter',
         keyword: 'keyword',
         args: quotedString,
@@ -470,7 +476,9 @@ export function* lexer(query: string): Generator<Token> {
       };
     } else if ((match = extract(filterName)) !== undefined) {
       // Keyword searches - is:, stat:discipline:, etc
-      const keyword = match.slice(0, match.length - 1);
+      const lhs = match.slice(0, match.length - 1);
+      const split = lhs.split('>');
+      const [domain, keyword] = split.length === 2 ? split : [undefined, split[0]];
       const nextChar = query[i];
 
       let args = '';
@@ -502,6 +510,7 @@ export function* lexer(query: string): Generator<Token> {
         startIndex,
         length: i - startIndex,
         type: 'filter',
+        domain,
         keyword,
         args,
         quoted,
@@ -511,6 +520,7 @@ export function* lexer(query: string): Generator<Token> {
       yield {
         startIndex,
         length: i - startIndex,
+        domain: undefined,
         type: 'filter',
         keyword: 'keyword',
         args: match,

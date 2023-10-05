@@ -1,20 +1,20 @@
 import { CustomStatDef } from '@destinyitemmanager/dim-api-types';
 import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
-import { customStatsSelector } from 'app/dim-api/selectors';
-import { TagValue } from 'app/inventory/dim-item-info';
+import { customStatsSelector, languageSelector } from 'app/dim-api/selectors';
 import { DimItem } from 'app/inventory/item-types';
 import { Loadout } from 'app/loadout-drawer/loadout-types';
 import { loadoutsSelector } from 'app/loadout-drawer/loadouts-selector';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { createSelector } from 'reselect';
-import {
-  allItemsSelector,
-  allNotesHashtagsSelector,
-  getNotesSelector,
-  getTagSelector,
-} from '../inventory/selectors';
+import { allItemsSelector, allNotesHashtagsSelector } from '../inventory/selectors';
 
-import { FilterDefinition, SuggestionsContext, canonicalFilterFormats } from './filter-types';
+import {
+  FilterDefinition,
+  FilterDomain,
+  LoadoutFilterContext,
+  SuggestionsContext,
+  canonicalFilterFormats,
+} from './filter-types';
 
 //
 // Selectors
@@ -29,19 +29,21 @@ export const suggestionsContextSelector = createSelector(
   allItemsSelector,
   loadoutsSelector,
   d2ManifestSelector,
-  getTagSelector,
-  getNotesSelector,
   allNotesHashtagsSelector,
   customStatsSelector,
   makeSuggestionsContext
+);
+
+export const loadoutSuggestionsContextSelector = createSelector(
+  languageSelector,
+  loadoutsSelector,
+  (language, loadouts): LoadoutFilterContext => ({ language, loadouts })
 );
 
 function makeSuggestionsContext(
   allItems: DimItem[],
   loadouts: Loadout[],
   d2Manifest: D2ManifestDefinitions | undefined,
-  getTag: (item: DimItem) => TagValue | undefined,
-  getNotes: (item: DimItem) => string | undefined,
   allNotesHashtags: string[],
   customStats: CustomStatDef[]
 ): SuggestionsContext {
@@ -49,8 +51,6 @@ function makeSuggestionsContext(
     allItems,
     loadouts,
     d2Manifest,
-    getTag,
-    getNotes,
     allNotesHashtags,
     customStats,
   };
@@ -64,14 +64,14 @@ const operators = ['<', '>', '<=', '>=']; // TODO: add "none"? remove >=, <=?
  * Accepts partial filters with as little as just a "keywords" property,
  * if you want to generate some keywords without a full valid filter
  */
-export function generateSuggestionsForFilter(
+export function generateSuggestionsForFilter<D extends FilterDomain>(
   filterDefinition: Pick<
-    FilterDefinition,
+    FilterDefinition<D>,
     'keywords' | 'suggestions' | 'format' | 'overload' | 'deprecated' | 'suggestionsGenerator'
   >,
-  suggestionsContext: SuggestionsContext = {}
+  suggestionsContext: D['SuggestionsContext'] | undefined
 ) {
-  return generateGroupedSuggestionsForFilter(filterDefinition, false, suggestionsContext).flatMap(
+  return generateGroupedSuggestionsForFilter(filterDefinition, suggestionsContext, false).flatMap(
     ({ keyword, ops }) => {
       if (ops) {
         return [keyword].concat(ops.map((op) => `${keyword}${op}`));
@@ -82,13 +82,13 @@ export function generateSuggestionsForFilter(
   );
 }
 
-export function generateGroupedSuggestionsForFilter(
+export function generateGroupedSuggestionsForFilter<D extends FilterDomain>(
   filterDefinition: Pick<
-    FilterDefinition,
+    FilterDefinition<D>,
     'keywords' | 'suggestions' | 'format' | 'overload' | 'deprecated' | 'suggestionsGenerator'
   >,
-  forHelp?: boolean,
-  suggestionsContext: SuggestionsContext = {}
+  suggestionsContext: D['SuggestionsContext'] | undefined,
+  forHelp?: boolean
 ): { keyword: string; ops?: string[] }[] {
   if (filterDefinition.deprecated) {
     return [];

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import { FilterDomain } from './filter-types';
 import { canonicalizeQuery, parseQuery, QueryAST } from './query-parser';
 import { FiltersMap } from './search-config';
 import { matchFilter } from './search-filter';
@@ -47,10 +49,15 @@ function extractOpAndValue(rangeString: string, overloads?: { [key: string]: num
   throw new Error("Doesn't match our range comparison syntax, or invalid overload");
 }
 
-export function parseAndValidateQuery<I, FilterCtx, SuggestionsCtx>(
+export interface ParseValidationBundle<D extends FilterDomain> {
+  label: D['Label'];
+  filtersMap: FiltersMap<D>;
+  validationContext: D['ValidationContext'];
+}
+
+export function parseAndValidateQuery<D extends FilterDomain[]>(
   query: string,
-  filtersMap: FiltersMap<I, FilterCtx, SuggestionsCtx>,
-  filterContext?: FilterCtx
+  ...bundles: { [Index in keyof D]: ParseValidationBundle<D[Index]> }
 ): {
   /** Is the query valid at all? */
   valid: boolean;
@@ -67,7 +74,7 @@ export function parseAndValidateQuery<I, FilterCtx, SuggestionsCtx>(
   let canonical = query;
   try {
     const ast = parseQuery(query);
-    if (!validateQuery(ast, filtersMap, filterContext)) {
+    if (!validateQuery(ast, bundles)) {
       valid = false;
     } else {
       if (ast.op === 'noop' || (ast.op === 'filter' && ast.type === 'keyword')) {
@@ -96,10 +103,9 @@ export function parseAndValidateQuery<I, FilterCtx, SuggestionsCtx>(
  * Return whether the query is completely valid - syntactically, and where every term matches a known filter
  * and every filter RHS matches the declared format and options for the filter syntax.
  */
-function validateQuery<I, FilterCtx, SuggestionsCtx>(
+function validateQuery<D extends FilterDomain[]>(
   query: QueryAST,
-  filtersMap: FiltersMap<I, FilterCtx, SuggestionsCtx>,
-  filterContext?: FilterCtx
+  bundles: { [Index in keyof D]: ParseValidationBundle<D[Index]> }
 ): boolean {
   if (query.error) {
     return false;
@@ -108,20 +114,30 @@ function validateQuery<I, FilterCtx, SuggestionsCtx>(
     case 'filter': {
       const filterName = query.type;
       const filterValue = query.args;
+      const targetBundles = query.domain
+        ? _.compact([bundles.find((b) => b.label === query.domain)])
+        : bundles;
+      if (!bundles.length) {
+        return false;
+      }
 
       // "is:" filters are slightly special cased
       if (filterName === 'is') {
-        return Boolean(filtersMap.isFilters[filterValue]);
+        return Boolean(targetBundles.some((bundle) => bundle.filtersMap.isFilters[filterValue]));
       } else {
-        const filterDef = filtersMap.kvFilters[filterName];
-        return Boolean(filterDef && matchFilter(filterDef, filterName, filterValue, filterContext));
+        return targetBundles.some((bundle) => {
+          const filterDef = bundle.filtersMap.kvFilters[filterName];
+          return Boolean(
+            filterDef && matchFilter(filterDef, filterName, filterValue, bundle.validationContext)
+          );
+        });
       }
     }
     case 'not':
-      return validateQuery(query.operand, filtersMap, filterContext);
+      return validateQuery(query.operand, bundles);
     case 'and':
     case 'or': {
-      return query.operands.every((q) => validateQuery(q, filtersMap, filterContext));
+      return query.operands.every((q) => validateQuery(q, bundles));
     }
     case 'noop':
       return true;

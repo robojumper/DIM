@@ -2,6 +2,9 @@ import { D2ManifestDefinitions } from 'app/destiny2/d2-definitions';
 import { customStatsSelector, languageSelector } from 'app/dim-api/selectors';
 import { DimLanguage } from 'app/i18n';
 import { TagValue } from 'app/inventory/dim-item-info';
+import { Loadout } from 'app/loadout-drawer/loadout-types';
+import { loadoutsSelector } from 'app/loadout-drawer/loadouts-selector';
+import { fullyResolvedLoadoutsSelector } from 'app/loadout/ingame/selectors';
 import { d2ManifestSelector } from 'app/manifest/selectors';
 import { Settings } from 'app/settings/initial-settings';
 import { errorLog } from 'app/utils/log';
@@ -27,13 +30,19 @@ import { InventoryWishListRoll } from '../wishlists/wishlists';
 import {
   FilterContext,
   FilterDefinition,
+  FilterDomain,
   ItemFilter,
-  SuggestionsContext,
+  ItemFilterDomain,
+  LoadoutFilterDomain,
   canonicalFilterFormats,
 } from './filter-types';
 import { QueryAST, parseQuery } from './query-parser';
-import { SearchConfig, searchConfigSelector } from './search-config';
-import { parseAndValidateQuery, rangeStringToComparator } from './search-utils';
+import { SearchConfig, loadoutSearchConfigSelector, searchConfigSelector } from './search-config';
+import {
+  ParseValidationBundle,
+  parseAndValidateQuery,
+  rangeStringToComparator,
+} from './search-utils';
 
 //
 // Selectors
@@ -90,6 +99,26 @@ function makeFilterContext(
   };
 }
 
+const itemFilterBundleSelector = createSelector(
+  searchConfigSelector,
+  filterContextSelector,
+  (config, filterContext): SearchFilterFactoryBundle<ItemFilterDomain> => ({
+    domain: 'item',
+    config,
+    filterContext,
+  })
+);
+const loadoutFilterBundleSelector = createSelector(
+  loadoutSearchConfigSelector,
+  languageSelector,
+  loadoutsSelector,
+  (config, language, loadouts): SearchFilterFactoryBundle<LoadoutFilterDomain> => ({
+    domain: 'loadout',
+    config,
+    filterContext: { language, loadouts },
+  })
+);
+
 /**
  * A selector for the search config for a particular destiny version.
  * Combines the searchConfig (list of filters),
@@ -97,9 +126,8 @@ function makeFilterContext(
  * into a filter factory (for converting parsed strings into filter functions)
  */
 export const filterFactorySelector = createSelector(
-  searchConfigSelector,
-  filterContextSelector,
-  makeSearchFilterFactory<DimItem, FilterContext, SuggestionsContext>
+  itemFilterBundleSelector,
+  makeSearchFilterFactory<ItemFilterDomain, []>
 );
 
 /** A selector for a function for searching items, given the current search query. */
@@ -107,6 +135,20 @@ export const searchFilterSelector = createSelector(
   querySelector,
   filterFactorySelector,
   (query, filterFactory) => filterFactory(query)
+);
+
+export const loadoutFilterFactorySelector = createSelector(
+  itemFilterBundleSelector,
+  loadoutFilterBundleSelector,
+  fullyResolvedLoadoutsSelector,
+  (itemBundle, loadoutBundle, fullyResolvedLoadouts) => {
+    const frLoadoutsById = _.keyBy(fullyResolvedLoadouts.loadouts, (l) => l.loadout.id);
+
+    return makeSearchFilterFactory<LoadoutFilterDomain, [ItemFilterDomain]>(loadoutBundle, {
+      ...itemBundle,
+      mapItems: (item: Loadout) => frLoadoutsById[item.id].resolvedLoadoutItems.map((l) => l.item),
+    });
+  }
 );
 
 /** A selector for all items filtered by whatever's currently in the search box. */
@@ -118,12 +160,32 @@ export const filteredItemsSelector = createSelector(
     allItems.filter((i) => displayableBuckets.has(i.location.hash) && searchFilter(i))
 );
 
-/** A selector for a function for validating a query. */
-export const validateQuerySelector = createSelector(
+const itemQueryValidationBundleSelector = createSelector(
   searchConfigSelector,
   filterContextSelector,
-  (searchConfig, filterContext) => (query: string) =>
-    parseAndValidateQuery(query, searchConfig.filtersMap, filterContext)
+  (searchConfig, filterContext): ParseValidationBundle<ItemFilterDomain> => ({
+    label: 'item',
+    filtersMap: searchConfig.filtersMap,
+    validationContext: filterContext,
+  })
+);
+
+const loadoutValidationBundleSelector = createSelector(
+  searchConfigSelector,
+  filterContextSelector,
+  (_searchConfig, filterContext): ParseValidationBundle<LoadoutFilterDomain> => ({
+    label: 'loadout',
+    filtersMap: { allFilters: [], isFilters: {}, kvFilters: {} },
+    validationContext: { language: filterContext.language, loadouts: [] },
+  })
+);
+
+/** A selector for a function for validating a query. */
+export const validateQuerySelector = createSelector(
+  itemQueryValidationBundleSelector,
+  loadoutValidationBundleSelector,
+  (itemBundle, loadoutBundle) => (query: string) =>
+    parseAndValidateQuery(query, itemBundle, loadoutBundle)
 );
 
 /** Whether the current search query is valid. */
@@ -133,11 +195,33 @@ export const queryValidSelector = createSelector(
   (query, validateQuery) => validateQuery(query).valid
 );
 
-function makeSearchFilterFactory<I, FilterCtx, SuggestionsCtx>(
-  { filtersMap: { isFilters, kvFilters } }: SearchConfig<I, FilterCtx, SuggestionsCtx>,
-  filterContext: FilterCtx
+interface SearchFilterFactoryBundle<D extends FilterDomain> {
+  domain: D['Label'];
+  config: SearchConfig<D>;
+  filterContext: D['FilterContext'];
+}
+
+interface AdditionalBundle<P extends FilterDomain, D extends FilterDomain>
+  extends SearchFilterFactoryBundle<D> {
+  mapItems: (item: P['Item']) => D['Item'][];
+}
+
+function makeSearchFilterFactory<D extends FilterDomain, A extends FilterDomain[]>(
+  /** The primary bundle contains the data for the thing we want to filter, i.e. what we put into the resulting filter function. */
+  primaryBundle: SearchFilterFactoryBundle<D>,
+  /** Additional bundles can turn things for our primary filter item into more things to be filtered, i.e. Loadout -> DimItem[] */
+  ...additionalBundles: { [Index in keyof A]: AdditionalBundle<D, A[Index]> }
 ) {
-  return (query: string): ItemFilter<I> => {
+  const bundlesForDomain = (domain: string | undefined) => {
+    const primary =
+      domain === undefined || domain === primaryBundle.domain ? primaryBundle : undefined;
+    const additional =
+      domain === undefined
+        ? additionalBundles
+        : additionalBundles.filter((b) => b.domain === domain);
+    return { primary, additional };
+  };
+  return (query: string): ItemFilter<D['Item']> => {
     query = query.trim().toLowerCase();
     if (!query.length) {
       // By default, show anything that doesn't have the archive tag
@@ -147,7 +231,7 @@ function makeSearchFilterFactory<I, FilterCtx, SuggestionsCtx>(
     const parsedQuery = parseQuery(query);
 
     // Transform our query syntax tree into a filter function by recursion.
-    const transformAST = (ast: QueryAST): ItemFilter<I> | undefined => {
+    const transformAST = (ast: QueryAST): ItemFilter<D['Item']> | undefined => {
       switch (ast.op) {
         case 'and': {
           const fns = filterMap(ast.operands, transformAST);
@@ -185,43 +269,93 @@ function makeSearchFilterFactory<I, FilterCtx, SuggestionsCtx>(
           const filterName = ast.type;
           const filterValue = ast.args;
 
+          const { primary, additional } = bundlesForDomain(ast.domain);
+
           if (filterName === 'is') {
-            // "is:" filters are slightly special cased
-            const filterDef = isFilters[filterValue];
-            if (filterDef) {
-              try {
-                return filterDef.filter({ lhs: filterName, filterValue, ...filterContext });
-              } catch (e) {
-                // An `is` filter really shouldn't throw an error on filter construction...
-                errorLog(
-                  'search',
-                  'internal error: filter construction threw exception',
-                  filterName,
+            try {
+              // "is:" filters are slightly special cased and are accessed using the filterValue
+              const primaryFilter =
+                primary &&
+                primaryBundle.config.filtersMap.isFilters[filterValue]?.filter({
+                  lhs: filterName,
                   filterValue,
-                  e
+                  ...primaryBundle.filterContext,
+                });
+              const additionalFilters = filterMap(additional, (a) => {
+                const filter = a.config.filtersMap.isFilters[filterValue];
+                return (
+                  filter &&
+                  ([
+                    a.config.filtersMap.isFilters[filterValue]?.filter({
+                      lhs: filterName,
+                      filterValue,
+                      ...a.filterContext,
+                    }),
+                    a.mapItems,
+                  ] as const)
                 );
-              }
+              });
+              return (item: D['Item']) => {
+                if (primaryFilter?.(item)) {
+                  return true;
+                } else {
+                  for (const [filter, mapper] of additionalFilters) {
+                    const items = mapper(item);
+                    if (items.some(filter)) {
+                      return true;
+                    }
+                  }
+                }
+              };
+            } catch (e) {
+              // An `is` filter really shouldn't throw an error on filter construction...
+              errorLog(
+                'search',
+                'internal error: filter construction threw exception',
+                filterName,
+                filterValue,
+                e
+              );
             }
             return undefined;
           } else {
-            const filterDef = kvFilters[filterName];
-            const matchedFilter =
-              filterDef && matchFilter(filterDef, filterName, filterValue, filterContext);
-            if (matchedFilter) {
-              try {
-                return matchedFilter(filterContext);
-              } catch (e) {
-                // If this happens, a filter declares more syntax valid than it actually accepts, which
-                // is a bug in the filter declaration.
-                errorLog(
-                  'search',
-                  'internal error: filter construction threw exception',
-                  filterName,
+            try {
+              const primaryFilter =
+                primary &&
+                primaryBundle.config.filtersMap.kvFilters[filterName]?.filter({
+                  lhs: filterName,
                   filterValue,
-                  e
-                );
-              }
+                  ...primaryBundle.filterContext,
+                });
+              const additionalFilters = filterMap(additional, (a) => {
+                const filterDef = a.config.filtersMap.kvFilters[filterName];
+                const filter = matchFilter(filterDef, filterName, filterValue, a.filterContext);
+                return filter && ([filter(a.filterContext), a.mapItems] as const);
+              });
+              return (item: D['Item']) => {
+                if (primaryFilter?.(item)) {
+                  return true;
+                } else {
+                  for (const [filter, mapper] of additionalFilters) {
+                    const items = mapper(item);
+                    if (items.some(filter)) {
+                      return true;
+                    }
+                  }
+                }
+              };
+            } catch (e) {
+              // If this happens, a filter declares more syntax valid than it actually accepts, which
+              // is a bug in the filter declaration.
+              errorLog(
+                'search',
+                'internal error: filter construction threw exception',
+                filterName,
+                filterValue,
+                e
+              );
             }
+
             return undefined;
           }
         }
@@ -236,12 +370,12 @@ function makeSearchFilterFactory<I, FilterCtx, SuggestionsCtx>(
 }
 
 /** Matches a non-`is` filter syntax and returns a way to actually create the matched filter function. */
-export function matchFilter<I, FilterCtx, SuggestionsCtx>(
-  filterDef: FilterDefinition<I, FilterCtx, SuggestionsCtx>,
+export function matchFilter<D extends FilterDomain>(
+  filterDef: FilterDefinition<D>,
   lhs: string,
   filterValue: string,
-  currentFilterContext?: FilterCtx
-): ((args: FilterCtx) => ItemFilter<I>) | undefined {
+  validationContext: D['ValidationContext']
+): ((args: D['FilterContext']) => ItemFilter<D['Item']>) | undefined {
   for (const format of canonicalFilterFormats(filterDef.format)) {
     switch (format) {
       case 'simple': {
@@ -280,7 +414,7 @@ export function matchFilter<I, FilterCtx, SuggestionsCtx>(
         const [stat, rangeString] = filterValue.split(':', 2);
         try {
           const compare = rangeStringToComparator(rangeString, filterDef.overload);
-          const validator = filterDef.validateStat?.(currentFilterContext);
+          const validator = filterDef.validateStat?.(validationContext);
           if (!validator || validator(stat)) {
             return (filterContext) =>
               filterDef.filter({

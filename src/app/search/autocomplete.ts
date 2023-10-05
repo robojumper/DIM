@@ -1,11 +1,11 @@
 import { Search } from '@destinyitemmanager/dim-api-types';
-import { t } from 'app/i18next-t';
 import { chainComparator, compareBy, reverseComparator } from 'app/utils/comparators';
 import { uniqBy } from 'app/utils/util';
 import _ from 'lodash';
 import { ArmoryEntry, getArmorySuggestions } from './armory-search';
+import { FilterDomain } from './filter-types';
 import { QueryLexerOpenQuotesError, lexer, makeCommentString, parseQuery } from './query-parser';
-import { FiltersMap, SearchConfig, Suggestion } from './search-config';
+import { SearchConfig, Suggestion } from './search-config';
 import freeformFilters, { plainString } from './search-filters/freeform';
 
 /** The autocompleter/dropdown will suggest different types of searches */
@@ -85,11 +85,11 @@ const filterNames = [
  * Produce a memoized autocompleter function that takes search text plus a list of recent/saved searches
  * and produces the contents of the autocomplete list.
  */
-export default function createAutocompleter<I, FilterCtx, SuggestionsCtx>(
-  searchConfig: SearchConfig<I, FilterCtx, SuggestionsCtx>,
-  armoryEntries: ArmoryEntry[] | undefined
+export default function createAutocompleter<D extends FilterDomain[]>(
+  armoryEntries: ArmoryEntry[] | undefined,
+  ...searchConfig: { [Index in keyof D]: SearchConfig<D[Index]> }
 ) {
-  const filterComplete = makeFilterComplete(searchConfig);
+  const filterComplete = makeFilterComplete(...searchConfig);
 
   return (
     query: string,
@@ -108,12 +108,7 @@ export default function createAutocompleter<I, FilterCtx, SuggestionsCtx>(
         }
       : undefined;
     // Generate completions of the current search
-    const filterSuggestions = autocompleteTermSuggestions(
-      query,
-      caretIndex,
-      filterComplete,
-      searchConfig
-    );
+    const filterSuggestions = autocompleteTermSuggestions(query, caretIndex, filterComplete);
 
     // Recent/saved searches
     const recentSearchItems = filterSortRecentSearches(query, recentSearches);
@@ -130,7 +125,7 @@ export default function createAutocompleter<I, FilterCtx, SuggestionsCtx>(
     };
 
     const armorySuggestions = includeArmory
-      ? getArmorySuggestions(armoryEntries, query, searchConfig.language)
+      ? getArmorySuggestions(armoryEntries, query, searchConfig[0].language)
       : [];
 
     // mix them together
@@ -295,11 +290,10 @@ function findLastFilter(queryUpToCaret: string): number[] | null {
  * Given a query and a cursor position, isolate the term that's being typed and offer reformulated queries
  * that replace that term with one from our filterComplete function.
  */
-export function autocompleteTermSuggestions<I, FilterCtx, SuggestionsCtx>(
+export function autocompleteTermSuggestions(
   query: string,
   caretIndex: number,
-  filterComplete: (term: string) => string[],
-  searchConfig: SearchConfig<I, FilterCtx, SuggestionsCtx>
+  filterComplete: (term: string) => string[]
 ): SearchItem[] {
   if (!query) {
     return [];
@@ -322,18 +316,11 @@ export function autocompleteTermSuggestions<I, FilterCtx, SuggestionsCtx>(
 
     // new query is existing query minus match plus suggestion
     const result = candidates.map((word): SearchItem => {
-      const filterDef = findFilter(word, searchConfig.filtersMap);
       const newQuery = base + word + query.slice(caretIndex);
-      const helpText: string | undefined = filterDef
-        ? Array.isArray(filterDef.description)
-          ? t(...filterDef.description)
-          : t(filterDef.description)
-        : undefined;
       return {
         query: {
           fullText: newQuery,
           body: newQuery,
-          helpText: helpText?.replace(/\.$/, ''),
         },
         type: SearchItemType.Autocomplete,
         highlightRange: {
@@ -349,17 +336,6 @@ export function autocompleteTermSuggestions<I, FilterCtx, SuggestionsCtx>(
   return [];
 }
 
-function findFilter<I, FilterCtx, SuggestionsCtx>(
-  term: string,
-  filtersMap: FiltersMap<I, FilterCtx, SuggestionsCtx>
-) {
-  const parts = term.split(':');
-  const filterName = parts[0];
-  const filterValue = parts[1];
-  // "is:" filters are slightly special cased
-  return filterName === 'is' ? filtersMap.isFilters[filterValue] : filtersMap.kvFilters[filterName];
-}
-
 // these filters might include quotes, so we search for two text segments to ignore quotes & colon
 // i.e. `name:test` can find `name:"test item"`
 const freeformTerms = freeformFilters.flatMap((f) => f.keywords).map((s) => `${s}:`);
@@ -368,8 +344,8 @@ const freeformTerms = freeformFilters.flatMap((f) => f.keywords).map((s) => `${s
  * This builds a filter-complete function that uses the given search config's keywords to
  * offer autocomplete suggestions for a partially typed term.
  */
-export function makeFilterComplete<I, FilterCtx, SuggestionsCtx>(
-  searchConfig: SearchConfig<I, FilterCtx, SuggestionsCtx>
+export function makeFilterComplete<D extends FilterDomain[]>(
+  ...searchConfigs: { [Index in keyof D]: SearchConfig<D[Index]> }
 ) {
   // TODO: also search filter descriptions
   return (typed: string): string[] => {
@@ -378,7 +354,7 @@ export function makeFilterComplete<I, FilterCtx, SuggestionsCtx>(
     }
 
     const typedToLower = typed.toLowerCase();
-    let typedPlain = plainString(typedToLower, searchConfig.language);
+    let typedPlain = plainString(typedToLower, searchConfigs[0].language);
 
     // because we are fighting against other elements for space in the suggestion dropdown,
     // we will entirely skip "not" and "<" and ">" and "<=" and ">=" suggestions,
@@ -405,7 +381,8 @@ export function makeFilterComplete<I, FilterCtx, SuggestionsCtx>(
     // and "stat" matches "stat:" and "basestat:"
     const matchType = !mustStartWith && typedPlain.includes(':') ? 'startsWith' : 'includes';
 
-    let suggestions = searchConfig.suggestions
+    let suggestions = searchConfigs
+      .flatMap((c) => c.suggestions)
       .filter(
         (word) => word.plainText.startsWith(mustStartWith) && word.plainText[matchType](typedPlain)
       )

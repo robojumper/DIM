@@ -2,13 +2,13 @@ import { DestinyVersion } from '@destinyitemmanager/dim-api-types';
 import { destinyVersionSelector } from 'app/accounts/selectors';
 import { languageSelector } from 'app/dim-api/selectors';
 import { DimLanguage } from 'app/i18n';
-import { DimItem } from 'app/inventory/item-types';
+import { loadoutNameFilter } from 'app/loadout/loadout-filters';
 import memoizeOne from 'memoize-one';
 import { createSelector } from 'reselect';
 import {
-  FilterContext,
   FilterDefinition,
-  SuggestionsContext,
+  FilterDomain,
+  ItemFilterDomain,
   canonicalFilterFormats,
 } from './filter-types';
 import advancedFilters from './search-filters/advanced';
@@ -25,7 +25,11 @@ import socketFilters from './search-filters/sockets';
 import statFilters from './search-filters/stats';
 import locationFilters from './search-filters/stores';
 import wishlistFilters from './search-filters/wishlist';
-import { generateSuggestionsForFilter, suggestionsContextSelector } from './suggestions-generation';
+import {
+  generateSuggestionsForFilter,
+  loadoutSuggestionsContextSelector,
+  suggestionsContextSelector,
+} from './suggestions-generation';
 
 const allFilters = [
   ...dupeFilters,
@@ -44,23 +48,16 @@ const allFilters = [
   ...advancedFilters,
 ];
 
-export const searchConfigSelector = createSelector(
-  destinyVersionSelector,
-  languageSelector,
-  suggestionsContextSelector,
-  buildSearchConfig
-);
-
 //
 // SearchConfig
 //
 
-export interface FiltersMap<I, FilterCtx, SuggestionsCtx> {
-  allFilters: FilterDefinition<I, FilterCtx, SuggestionsCtx>[];
+export interface FiltersMap<D extends FilterDomain> {
+  allFilters: FilterDefinition<D>[];
   /* `is:keyword` filters */
-  isFilters: Record<string, FilterDefinition<I, FilterCtx, SuggestionsCtx>>;
+  isFilters: Record<string, FilterDefinition<D>>;
   /* `keyword:value` filters */
-  kvFilters: Record<string, FilterDefinition<I, FilterCtx, SuggestionsCtx>>;
+  kvFilters: Record<string, FilterDefinition<D>>;
 }
 
 export interface Suggestion {
@@ -70,18 +67,18 @@ export interface Suggestion {
   plainText: string;
 }
 
-export interface SearchConfig<I, FilterCtx, SuggestionsCtx> {
-  filtersMap: FiltersMap<I, FilterCtx, SuggestionsCtx>;
+export interface SearchConfig<D extends FilterDomain> {
+  filtersMap: FiltersMap<D>;
   language: DimLanguage;
   suggestions: Suggestion[];
 }
 
-export const buildFiltersMap = memoizeOne(
-  (destinyVersion: DestinyVersion): FiltersMap<DimItem, FilterContext, SuggestionsContext> => {
-    const isFilters: Record<string, FilterDefinition> = {};
-    const kvFilters: Record<string, FilterDefinition> = {};
-    const allApplicableFilters: FilterDefinition[] = [];
-    for (const filter of allFilters) {
+const buildFiltersMapInternal = <D extends FilterDomain>(filters: FilterDefinition<D>[]) =>
+  memoizeOne((destinyVersion: DestinyVersion): FiltersMap<D> => {
+    const isFilters: Record<string, FilterDefinition<D>> = {};
+    const kvFilters: Record<string, FilterDefinition<D>> = {};
+    const allApplicableFilters: FilterDefinition<D>[] = [];
+    for (const filter of filters) {
       if (!filter.destinyVersion || filter.destinyVersion === destinyVersion) {
         allApplicableFilters.push(filter);
         const filterKeywords = Array.isArray(filter.keywords) ? filter.keywords : [filter.keywords];
@@ -115,29 +112,53 @@ export const buildFiltersMap = memoizeOne(
       kvFilters,
       allFilters: allApplicableFilters,
     };
-  }
-);
+  });
+
+export const buildFiltersMap = buildFiltersMapInternal(allFilters);
+export const buildLoadoutFiltersMap = buildFiltersMapInternal([loadoutNameFilter]);
 
 /** Builds an object that describes the available search keywords and filter definitions. */
-export function buildSearchConfig(
-  destinyVersion: DestinyVersion,
-  language: DimLanguage,
-  suggestionsContext: SuggestionsContext = {}
-): SearchConfig<DimItem, FilterContext, SuggestionsContext> {
-  const suggestions = new Set<string>();
-  const filtersMap = buildFiltersMap(destinyVersion);
-  for (const filter of filtersMap.allFilters) {
-    for (const suggestion of generateSuggestionsForFilter(filter, suggestionsContext)) {
-      suggestions.add(suggestion);
+const buildSearchConfigInternal =
+  <D extends FilterDomain>(filtersMapBuilder: (destinyVersion: DestinyVersion) => FiltersMap<D>) =>
+  (
+    destinyVersion: DestinyVersion,
+    language: DimLanguage,
+    suggestionsContext: D['SuggestionsContext']
+  ) => {
+    const suggestions = new Set<string>();
+    const filtersMap = filtersMapBuilder(destinyVersion);
+    for (const filter of filtersMap.allFilters) {
+      for (const suggestion of generateSuggestionsForFilter<ItemFilterDomain>(
+        filter,
+        suggestionsContext
+      )) {
+        suggestions.add(suggestion);
+      }
     }
-  }
 
-  return {
-    filtersMap,
-    suggestions: Array.from(suggestions, (rawText) => ({
-      rawText,
-      plainText: plainString(rawText, language),
-    })),
-    language,
+    return {
+      filtersMap,
+      suggestions: Array.from(suggestions, (rawText) => ({
+        rawText,
+        plainText: plainString(rawText, language),
+      })),
+      language,
+    };
   };
-}
+
+export const buildSearchConfig = buildSearchConfigInternal(buildFiltersMap);
+export const buildLoadoutSearchConfig = buildSearchConfigInternal(buildLoadoutFiltersMap);
+
+export const searchConfigSelector = createSelector(
+  destinyVersionSelector,
+  languageSelector,
+  suggestionsContextSelector,
+  buildSearchConfig
+);
+
+export const loadoutSearchConfigSelector = createSelector(
+  destinyVersionSelector,
+  languageSelector,
+  loadoutSuggestionsContextSelector,
+  buildLoadoutSearchConfig
+);

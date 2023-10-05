@@ -18,6 +18,50 @@ type ValidFilterOutput = boolean | null | undefined;
 export type ItemFilter<I = DimItem> = (item: I) => ValidFilterOutput;
 
 /**
+ * A filter domain describes the type of things to be filtered and the
+ * various contexts needed to instantiate the filtering function, validate
+ * the query, and suggest autocompletion. This is a compile-time only interface
+ * emulating associated types/typeclasses (https://github.com/microsoft/TypeScript/issues/17588)
+ * that helps reducing the number of generic parameters we need to thread down; instead
+ * most functions can simply take a generic argument `D extends FilterDomain` and access
+ * these various types through D['Item'].
+ */
+export interface FilterDomain {
+  /** This type cannot be instantiated. */
+  _PreventInstantiation: never;
+  /** Domain label, used to cast filters concretely. */
+  Label: string;
+  /** The type of thing being filtered. */
+  Item: DimItem | Loadout;
+  /** The context for building a filter function. */
+  FilterContext: FilterContext | LoadoutFilterContext;
+  /** The context for validating  */
+  ValidationContext: Partial<FilterContext | LoadoutFilterContext>;
+  SuggestionsContext: SuggestionsContext | LoadoutFilterContext | undefined;
+}
+
+export interface ItemFilterDomain extends FilterDomain {
+  Label: 'item';
+  Item: DimItem;
+  FilterContext: FilterContext;
+  ValidationContext: Pick<FilterContext, 'customStats'>;
+  SuggestionsContext: SuggestionsContext;
+}
+
+export interface LoadoutFilterDomain extends FilterDomain {
+  Label: 'loadout';
+  Item: Loadout;
+  FilterContext: LoadoutFilterContext;
+  ValidationContext: LoadoutFilterContext;
+  SuggestionsContext: LoadoutFilterContext;
+}
+
+export interface LoadoutFilterContext {
+  language: DimLanguage;
+  loadouts: Loadout[];
+}
+
+/**
  * A slice of data that could be used by filter functions to
  * initialize some data required by particular filters. If a new filter needs
  * context that isn't here, add it to this interface and makeSearchFilterFactory
@@ -45,8 +89,6 @@ export interface FilterContext {
 export interface SuggestionsContext {
   allItems?: DimItem[];
   loadouts?: Loadout[];
-  getTag?: (item: DimItem) => TagValue | undefined;
-  getNotes?: (item: DimItem) => string | undefined;
   d2Manifest?: D2ManifestDefinitions;
   allNotesHashtags?: string[];
   customStats?: CustomStatDef[];
@@ -97,11 +139,7 @@ export interface FilterArgs {
  * filter expression itself. We can also use it to drive filter help and filter
  * editor.
  */
-export interface FilterDefinition<
-  I = DimItem,
-  FilterCtx = FilterContext,
-  SuggestionsCtx = SuggestionsContext,
-> {
+export interface FilterDefinition<D extends FilterDomain = ItemFilterDomain> {
   /**
    * One or more keywords which trigger the filter when typed into search bar.
    * What this means depends on what "format" this filter is.
@@ -140,7 +178,7 @@ export interface FilterDefinition<
    * filter function will be generated once, at the point where the overall
    * query is parsed.
    */
-  filter: (args: FilterArgs & FilterCtx) => ItemFilter<I>;
+  filter: (args: FilterArgs & D['FilterContext']) => ItemFilter<D['Item']>;
 
   /**
    * A list of suggested keywords, for `query` and `stat` formats.
@@ -155,20 +193,20 @@ export interface FilterDefinition<
   /**
    * For stat filters, check whether this is a valid stat name or combination.
    */
-  validateStat?: (filterContext?: FilterCtx) => (stat: string) => boolean;
+  validateStat?: (filterContext: D['ValidationContext']) => (stat: string) => boolean;
 
   /**
    * A custom function used to generate (additional) suggestions.
    * This should only be necessary for freeform or custom formats.
    */
   suggestionsGenerator?: (
-    args: SuggestionsCtx
+    args: D['SuggestionsContext']
   ) => string[] | { keyword: string; ops?: string[] }[] | undefined;
 
   /**
    * given an item, this generates a filter that should match that item
    */
-  fromItem?: (item: I) => string;
+  fromItem?: (item: D['Item']) => string;
 }
 
 export const enum FilterDeprecation {
