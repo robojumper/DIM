@@ -1,7 +1,7 @@
 import { D1ManifestDefinitions } from 'app/destiny1/d1-definitions';
 import { D1Character, D1StatLabel } from 'app/destiny1/d1-manifest-types';
+import { D1_StatHashes } from 'app/search/d1-known-values';
 import { warnLog } from 'app/utils/log';
-import { StatHashes } from 'data/d2/generated-enums';
 import { DimCharacterStat } from '../store-types';
 
 // Cooldowns
@@ -77,7 +77,11 @@ export function getBonus(light: number, type: string): number {
   return 0;
 }
 
-export const statsWithTiers = [StatHashes.Discipline, StatHashes.Intellect, StatHashes.Strength];
+export const statsWithTiers = [
+  D1_StatHashes.Discipline,
+  D1_StatHashes.Intellect,
+  D1_StatHashes.Strength,
+];
 export function getD1CharacterStatTiers(stat: DimCharacterStat) {
   if (!statsWithTiers.includes(stat.hash)) {
     return [];
@@ -124,15 +128,15 @@ export function getCharacterStatsData(
     switch (statId) {
       case 'STAT_INTELLECT':
         stat.effect = 'Super';
-        stat.icon = defs.Stat.get(StatHashes.Intellect).icon;
+        stat.icon = defs.Stat.get(D1_StatHashes.Intellect).icon;
         break;
       case 'STAT_DISCIPLINE':
         stat.effect = 'Grenade';
-        stat.icon = defs.Stat.get(StatHashes.Discipline).icon;
+        stat.icon = defs.Stat.get(D1_StatHashes.Discipline).icon;
         break;
       case 'STAT_STRENGTH':
         stat.effect = 'Melee';
-        stat.icon = defs.Stat.get(StatHashes.Strength).icon;
+        stat.icon = defs.Stat.get(D1_StatHashes.Strength).icon;
         break;
       default:
         break;

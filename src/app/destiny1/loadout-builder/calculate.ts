@@ -1,6 +1,6 @@
+import { D1_StatHashes } from 'app/search/d1-known-values';
 import { infoLog } from 'app/utils/log';
 import { delay } from 'app/utils/util';
-import { StatHashes } from 'data/d2/generated-enums';
 import _ from 'lodash';
 import { D1Item } from '../../inventory/item-types';
 import { D1ManifestDefinitions } from '../d1-definitions';
@@ -90,9 +90,9 @@ export async function getSetBucketsStep(
   }
 
   let processedCount = 0;
-  const intellectIcon = defs.Stat.get(StatHashes.Intellect).icon;
-  const strengthIcon = defs.Stat.get(StatHashes.Strength).icon;
-  const disciplineIcon = defs.Stat.get(StatHashes.Discipline).icon;
+  const intellectIcon = defs.Stat.get(D1_StatHashes.Intellect).icon;
+  const strengthIcon = defs.Stat.get(D1_StatHashes.Strength).icon;
+  const disciplineIcon = defs.Stat.get(D1_StatHashes.Discipline).icon;
 
   for (const helm of helms) {
     for (const gauntlet of gauntlets) {
@@ -120,22 +120,22 @@ export async function getSetBucketsStep(
                       Ghost: ghost,
                     },
                     stats: {
-                      [144602215]: {
-                        hash: 144602215,
+                      [D1_StatHashes.Intellect]: {
+                        hash: D1_StatHashes.Intellect,
                         value: 0,
                         name: 'Intellect',
                         description: '',
                         icon: intellectIcon,
                       },
-                      1735777505: {
-                        hash: 1735777505,
+                      [D1_StatHashes.Discipline]: {
+                        hash: D1_StatHashes.Discipline,
                         value: 0,
                         name: 'Discipline',
                         description: '',
                         icon: disciplineIcon,
                       },
-                      4244567218: {
-                        hash: 4244567218,
+                      [D1_StatHashes.Strength]: {
+                        hash: D1_StatHashes.Strength,
                         value: 0,
                         name: 'Strength',
                         description: '',
@@ -149,9 +149,11 @@ export async function getSetBucketsStep(
                   const pieces = Object.values(set.armor);
                   set.setHash = genSetHash(pieces);
                   calcArmorStats(pieces, set.stats, scaleType);
-                  const tiersString = `${tierValue(set.stats[144602215].value)}/${tierValue(
-                    set.stats[1735777505].value
-                  )}/${tierValue(set.stats[4244567218].value)}`;
+                  const tiersString = `${tierValue(
+                    set.stats[D1_StatHashes.Intellect].value
+                  )}/${tierValue(set.stats[D1_StatHashes.Discipline].value)}/${tierValue(
+                    set.stats[D1_StatHashes.Strength].value
+                  )}`;
 
                   tiersSet.add(tiersString);
 

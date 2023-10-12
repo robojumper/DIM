@@ -218,11 +218,17 @@ function makeItem(
   // fix itemDef for defense items with missing nodes
   if (item.primaryStat?.statHash === D1_StatHashes.Defense && numStats > 0 && numStats !== 5) {
     const defaultMinMax = _.find(itemDef.stats, (stat) =>
-      [StatHashes.Intellect, StatHashes.Discipline, StatHashes.Strength].includes(stat.statHash)
+      [D1_StatHashes.Intellect, D1_StatHashes.Discipline, D1_StatHashes.Strength].includes(
+        stat.statHash
+      )
     );
 
     if (defaultMinMax) {
-      for (const val of [StatHashes.Intellect, StatHashes.Discipline, StatHashes.Strength]) {
+      for (const val of [
+        D1_StatHashes.Intellect,
+        D1_StatHashes.Discipline,
+        D1_StatHashes.Strength,
+      ]) {
         if (!itemDef.stats[val]) {
           itemDef.stats[val] = {
             maximum: defaultMinMax.maximum,
